@@ -28,7 +28,7 @@ public class Constant {
     }*/
 
    //Customer
-   public static final String Idcus = "id_customer";
+   public static String Idcus = "";
 
    //type OTP
     public static final String Register = "register";
@@ -67,6 +67,9 @@ public class Constant {
     public static final String URL_KIRIM_NO = baseURL + "auth/phone_validation/";
     public static final String URL_KIRIM_OTP = baseURL + "auth/otp_validation/";
     public static final String URL_RESETPASS = baseURL + "auth/kirim_ulang_otp/";
+    public static final String URL_UBAH_PASS = baseURL + "auth/change_password";
+    public static final String URL_UBAH_PIN = baseURL + "auth/change_pin";
+
 
     /*public static String getPathfromDrawable(int res_int){
         return Uri.parse("android.resource://"+ R.class.getPackage().getName()+"/" + res_int).toString();*/

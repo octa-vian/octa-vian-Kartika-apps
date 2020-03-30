@@ -6,19 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize"
+        app:defaultNavHost="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="bottom"
+        android:background="#fff"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/merk_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:background="#fff"
             android:src="@drawable/merk_icon"
-            app:maxImageSize="40dp"
+            app:maxImageSize="35dp"
             android:clickable="true"
             android:focusable="true"
             app:layout_anchor="@id/bar" />
@@ -26,7 +39,7 @@
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bar"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_height="55dp"
             android:layout_gravity="bottom"
             android:backgroundTint="#fff" />
 
@@ -35,9 +48,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            app:elevation="20dp"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
 
+
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

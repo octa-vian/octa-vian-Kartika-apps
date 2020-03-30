@@ -60,8 +60,6 @@ public class ApiVolley {
         token1  = session.getId();
         token2  = iv.getCurrentDate("SSSHHyyyyssMMddmm");
         token3  = iv.sha256(token1+"&"+token2,token1+"die");
-        token4  = session.getNik();
-        token5  = session.getNik();
         //token3  = iv.encodeMD5(token3);
         //token3  = iv.encodeBase64(token3);
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -33,7 +35,13 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnNext;
     private ProgressBar proses;
     private static String TAG = "RegisterActivity";
-    private String time="";
+    private String times="";
+
+    private TextView time;
+    TextView tvRequest;
+
+    private Handler handler;
+    private Runnable runnable;
 
 
     @Override
@@ -72,16 +80,17 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     JSONObject response = new JSONObject(result);
                     response.put("nohp",txt_phone.getText().toString());
-                    response.put("timer",time);
+                    response.put("timer",times);
 
                     String message = response.getJSONObject("metadata").getString("message");
                     String status = response.getJSONObject("metadata").getString("status");
                     if(status.equals("200")){
-
                     Dialog dialog = new Dialog(RegisterActivity.this);
                     dialog.setContentView(R.layout.popup_otp_register);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.setCanceledOnTouchOutside(false);
                     Button nextPopup;
+                    time = dialog.findViewById(R.id.txt_time);
                     txt_otp = dialog.findViewById(R.id.txt_otp);
                     nextPopup = dialog.findViewById(R.id.btn_next_otp);
                     nextPopup.setOnClickListener(new View.OnClickListener() {
@@ -135,16 +144,17 @@ public class RegisterActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 try {
                     JSONObject response = new JSONObject(result);
-                    response.put("id_customer",Constant.Idcus);
-                    response.put("nohp",txt_phone.getText().toString());
-
                     String message = response.getJSONObject("metadata").getString("message");
                     String status = response.getJSONObject("metadata").getString("status");
                     if(status.equals("200")){
 
+                        //response.put("id_customer",Constant.Idcus);
+                        Constant.Idcus = response.getJSONObject("response").getString("id_customer");
+                       // response.put("nohp",txt_phone.getText().toString());
                         Dialog dialog = new Dialog(RegisterActivity.this);
                         dialog.setContentView(R.layout.popup_form_regis);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.setCanceledOnTouchOutside(false);
                         txt_username = dialog.findViewById(R.id.txt_username);
                         txt_password = dialog.findViewById(R.id.txt_pass);
                         re_password = dialog.findViewById(R.id.txt_ulang_pass);
@@ -173,8 +183,6 @@ public class RegisterActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
-
 
             @Override
             public void onError(String result) {

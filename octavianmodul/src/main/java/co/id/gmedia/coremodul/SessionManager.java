@@ -19,19 +19,14 @@ public class SessionManager {
     int PRIVATE_MODE = 0;
 
     // Sharedpref file name
-    private static final String PREF_NAME = "GmediaPerkasaApp";
+    private static final String PREF_NAME = "GmediaKartikaRS";
 
     // All Shared Preferences Keys
     public static final String TAG_USERNAME = "username";
-    public static final String TAG_PASSWORD= "password";
-    public static final String TAG_NIK = "nik";
+    public static final String TAG_ID = "id_customer";
     public static final String TAG_NAMA = "nama";
-    public static final String TAG_LEVEL = "level";
-    public static final String TAG_LEVELNAMA = "level_nama";
-    public static final String TAG_EMAIL = "email";
-    public static final String TAG_FOTO = "foto";
-    public static final String TAG_KONTAK = "kontak";
-    public static final String TAG_ID = "id_record";
+    public static final String TAG_TOKEN = "token";
+    public static final String TAG_EXP = "expired_at";
 
     // Constructor
     public SessionManager(Context context){
@@ -43,48 +38,22 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String id, String username, String nik, String nama, String level, String levelNama, String email, String foto, String kontak){
+    public void createLoginSession(String id, String username, String token, String expired_at, String nama){
 
         editor.putString(TAG_ID, id);
 
         editor.putString(TAG_USERNAME, username);
 
-        editor.putString(TAG_NIK, nik);
+        editor.putString(TAG_TOKEN, token);
+
+        editor.putString(TAG_EXP, expired_at);
 
         editor.putString(TAG_NAMA, nama);
-
-        editor.putString(TAG_LEVEL, level);
-
-        editor.putString(TAG_LEVELNAMA, levelNama);
-
-        editor.putString(TAG_EMAIL, email);
-
-        editor.putString(TAG_FOTO, foto);
-
-        editor.putString(TAG_KONTAK, kontak);
 
         // commit changes
         editor.commit();
     }
 
-    public void saveSession(String nama, String kontak, String foto){
-
-        editor.putString(TAG_NAMA, nama);
-
-        editor.putString(TAG_FOTO, foto);
-
-        editor.putString(TAG_KONTAK, kontak);
-
-        // commit changes
-        editor.commit();
-    }
-
-    public void savePassword(String password){
-
-        editor.putString(TAG_PASSWORD, password);
-
-        editor.commit();
-    }
 
     /**
      * Get stored session data
@@ -102,33 +71,19 @@ public class SessionManager {
         return pref.getString(TAG_USERNAME, "");
     }
 
-    public String getNik(){
-        return pref.getString(TAG_NIK, "");
+    public String getToken(){
+        return pref.getString(TAG_TOKEN, "");
     }
 
     public String getNama(){
         return pref.getString(TAG_NAMA, "");
     }
 
-    public String getLevel(){
-        return pref.getString(TAG_LEVEL, "");
+    public String getExp(){
+        return pref.getString(TAG_EXP, "");
     }
 
-    public String getLevelNama(){
-        return pref.getString(TAG_LEVELNAMA, "");
-    }
 
-    public String getEmail(){
-        return pref.getString(TAG_EMAIL, "");
-    }
-
-    public String getFoto(){
-        return pref.getString(TAG_FOTO, "");
-    }
-
-    public String getKontak(){
-        return pref.getString(TAG_KONTAK, "");
-    }
 
     /**
      * Clear session details

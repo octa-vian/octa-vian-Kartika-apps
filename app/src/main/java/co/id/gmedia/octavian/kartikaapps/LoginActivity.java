@@ -19,6 +19,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
     private static String TAG = "RegisterActivity";
     private String time= "";
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //Init View
+        session = new SessionManager(this);
         toregis = findViewById(R.id.register);
         txt_nama = findViewById(R.id.txt_nama);
         txt_pass = findViewById(R.id.txt_pass);
@@ -56,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 Dialog popup = new Dialog(LoginActivity.this);
                 popup.setContentView(R.layout.popup_resetpass);
                 popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popup.setCanceledOnTouchOutside(false);
                 txt_notelp = popup.findViewById(R.id.txt_notelp);
                 Button btnNext;
                 btnNext = popup.findViewById(R.id.btn_next);
@@ -114,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                         Button nextPopup;
                         txt_otp = dialog.findViewById(R.id.txt_otp);
                         nextPopup = dialog.findViewById(R.id.btn_next_otp);
+                        dialog.setCanceledOnTouchOutside(false);
                         nextPopup.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -167,10 +172,9 @@ public class LoginActivity extends AppCompatActivity {
                     String message = response.getJSONObject("metadata").getString("message");
                     String status = response.getJSONObject("metadata").getString("status");
                     if(status.equals("200")){
-
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
-                        Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Log.d(TAG, "Kesalahan Jaringan" +message);
@@ -216,10 +220,13 @@ public class LoginActivity extends AppCompatActivity {
                     String message = response.getJSONObject("metadata").getString("message");
                     String status = response.getJSONObject("metadata").getString("status");
                     if(status.equals("200")){
-                        AppSharedPreferences.Login(LoginActivity.this, response.getString("id_customer"),
-                                response.getString("token"));
-                        response.getString("expired_at");
-                        response.getString("nama");
+
+                        session.createLoginSession(response.getJSONObject("response").getString("id_customer")
+                                ,txt_nama.getText().toString()
+                                ,response.getJSONObject("response").getString("token")
+                                ,response.getJSONObject("response").getString("expired_at")
+                                ,response.getJSONObject("response").getString("nama"));
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
