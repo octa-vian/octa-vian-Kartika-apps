@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_apps_dasboard"
+        android:title="Beranda" />
+
+    <item
+        android:id="@+id/nav_promo"
+        android:icon="@drawable/ic_business_produk"
+        android:title="Produk" />
+
+    <item
+        android:id="@+id/nav_menu"
+        android:title="Merk" />
+
+    <item
+        android:id="@+id/nav_activity"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:title="Info" />
+
+    <item
+        android:id="@+id/nav_account"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="Akun" />
+
+</menu>
