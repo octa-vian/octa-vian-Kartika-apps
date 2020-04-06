@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
     private void InitOtp() {
         JSONObject body = new JSONObject();
         try {
-            body.put("type", Constant.Register);
+            body.put("type", Constant.ResetPass);
             body.put("nohp", txt_notelp.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -177,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
                     String message = response.getJSONObject("metadata").getString("message");
                     String status = response.getJSONObject("metadata").getString("status");
                     if(status.equals("200")){
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
                         startActivity(intent);
                         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                     }

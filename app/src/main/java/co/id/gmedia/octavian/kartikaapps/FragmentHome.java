@@ -408,8 +408,9 @@ public class FragmentHome extends Fragment {
                     String message = response.getJSONObject("metadata").getString("message");
                     String status = response.getJSONObject("metadata").getString("status");
                     if(status.equals("200")){
-                        Intent intent = new Intent(context, FragmentHome.class);
-                        startActivity(intent);
+                        Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
+                        context.finish();
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     }
                     else {
@@ -510,11 +511,13 @@ public class FragmentHome extends Fragment {
                     String message = response.getJSONObject("metadata").getString("message");
                     String status = response.getJSONObject("metadata").getString("status");
                     if(status.equals("200")){
-                        response.getJSONObject("response").getString("id_customer");
-                        response.getJSONObject("response").getString("nohp");
 
-                        Intent intent = new Intent(context, FragmentHome.class);
-                        startActivity(intent);
+                       // response.getJSONObject("response").getString("id_customer");
+                       // response.getJSONObject("response").getString("nohp");
+                        Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
+                        context.finish();
+
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     }
                     else {
