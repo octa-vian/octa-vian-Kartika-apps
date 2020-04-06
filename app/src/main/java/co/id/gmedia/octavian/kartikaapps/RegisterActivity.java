@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Log.d(TAG, "Kesalahan Jaringan" +message);
+                        Log.d(TAG, "Kesalahan Koneksi" +message);
                         Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     }
@@ -121,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(RegisterActivity.this, "koneksi bermasalah", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Kesalahan Koneksi", Toast.LENGTH_SHORT).show();
 
             }
         }) ;
@@ -175,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Log.d(TAG, "Kesalahan Jaringan" +message);
+                        Log.d(TAG, "Kesalahan Koneksi" +message);
                         Toast.makeText(RegisterActivity.this,message, Toast.LENGTH_SHORT).show();
 
                     }
@@ -186,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Kesalahan Koneksi", Toast.LENGTH_SHORT).show();
 
             }
         }) ;
@@ -232,7 +232,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(RegisterActivity.this, "koneksi bermasalah", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Kesalahan Koneksi", Toast.LENGTH_SHORT).show();
 
             }
         }) ;

@@ -3,21 +3,21 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_apps_dasboard"
+        android:icon="@drawable/homegrey"
         android:title="Beranda" />
 
     <item
-        android:id="@+id/nav_promo"
-        android:icon="@drawable/ic_business_produk"
+        android:id="@+id/nav_produk"
+        android:icon="@drawable/produkgrey"
         android:title="Produk" />
 
     <item
-        android:id="@+id/nav_menu"
+        android:id="@+id/nav_merk"
         android:title="Merk" />
 
     <item
-        android:id="@+id/nav_activity"
-        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:id="@+id/nav_info"
+        android:icon="@drawable/infogrey"
         android:title="Info" />
 
     <item

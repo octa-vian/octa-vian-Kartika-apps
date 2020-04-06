@@ -9,7 +9,7 @@ public class AppSharedPreferences {
     private static final String STATUS_PREF = "user_status";
     private static final String FCM_PREF = "fcm_id";
     private static final String TOKEN_PREF = "token";
-    private static final String UID_PREF = "id_customer";
+    private static final String UID_PREF = "User-id";
     private static final String EMAIL_PREF = "email";
     private static final String REGISTER_PREF = "registered";
 
@@ -67,7 +67,6 @@ public class AppSharedPreferences {
         editor.putBoolean(LOGIN_PREF, false);
         editor.putString(UID_PREF, "");
         editor.putString(TOKEN_PREF, "");
-        editor.putString(EMAIL_PREF, "");
         editor.apply();
     }
 

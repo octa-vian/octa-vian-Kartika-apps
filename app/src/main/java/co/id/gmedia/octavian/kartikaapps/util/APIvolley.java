@@ -40,6 +40,7 @@ public class APIvolley {
 
     public APIvolley(final Context context, JSONObject jsonBody, String requestMethod, String REST_URL, final VolleyCallback callback){
 
+
     /*
     NOTE: you have to customize this class before you use it (haeder, etc)
     context : Application context
@@ -71,8 +72,11 @@ public class APIvolley {
                 method = Request.Method.DELETE;
                 break;
             default: method = Request.Method.GET;
+
                 break;
         }
+
+        token3 = AppSharedPreferences.getUid(context);
 
         //region initial of stringRequest
         trustAllCertivicate();
@@ -118,7 +122,7 @@ public class APIvolley {
                 params.put("Content-Type", "application/json");
                 params.put("Client-Service", "front_end_client");
                 params.put("Auth-Key", "gmedia_kartikars");
-                params.put("Userid", token3);
+                params.put("User-id", token3);
                 params.put("Token", token4);
                 /*params.put("Userid", AppSharedPreferences.getUserName(context));
                 params.put("Token", AppSharedPreferences.getToken(context));*/

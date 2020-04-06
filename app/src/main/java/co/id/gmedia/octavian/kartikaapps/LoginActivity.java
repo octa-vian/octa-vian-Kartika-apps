@@ -43,6 +43,11 @@ public class LoginActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
+        if(AppSharedPreferences.isLoggedIn(this)){
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+
         //Init View
         session = new SessionManager(this);
         toregis = findViewById(R.id.register);
@@ -221,13 +226,16 @@ public class LoginActivity extends AppCompatActivity {
                     String status = response.getJSONObject("metadata").getString("status");
                     if(status.equals("200")){
 
-                        session.createLoginSession(response.getJSONObject("response").getString("id_customer")
-                                ,txt_nama.getText().toString()
-                                ,response.getJSONObject("response").getString("token")
-                                ,response.getJSONObject("response").getString("expired_at")
-                                ,response.getJSONObject("response").getString("nama"));
 
+                        AppSharedPreferences.Login(LoginActivity.this
+                                , response.getJSONObject("response").getString("id_customer")
+                                , response.getJSONObject("response").getString("token"));
+
+                                response.getJSONObject("response").getString("expired_at");
+                                response.getJSONObject("response").getString("nama");
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                     }

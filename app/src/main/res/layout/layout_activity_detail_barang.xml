@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_above="@id/ln_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cons1"
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/layout_category"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:cardCornerRadius="@dimen/size_10dp"
+            app:layout_constraintDimensionRatio="4:4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_gambar_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/gambarpromo"
+                    android:scaleType="centerCrop" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_below="@id/cons1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nama_brg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    android:text="Nama Barang"/>
+
+                <TextView
+                    android:id="@+id/harga"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/orange"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:text="Rp. 20.000.00"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:background="@color/colorGreyAccent"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    android:text="Status:"/>
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tersedia"
+                    android:layout_marginRight="@dimen/size_10dp"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:background="@color/colorGreyAccent"/>
+
+           <!-- <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_gambar_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10dp">
+
+            </androidx.recyclerview.widget.RecyclerView>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginRight="@dimen/size_20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    android:text="Deskripsi:"/>
+
+                <TextView
+                    android:id="@+id/txt_deskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="textStart"
+                    android:textSize="@dimen/size_12dp"
+                    android:textColor="@color/color_text_blue"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:text="is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchangedis simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ln_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:background="@drawable/border_white"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Chat Sales"/>
+
+        <Button
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:background="@drawable/border_btn_lanjut"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:text="beli Sekarang"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -24,20 +24,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // remove title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.menu_home_baru);
-
-        session = new SessionManager(this);
-
-        if(!session.isLoggedIn()){
-            session.logoutUser(new Intent(this, LoginActivity.class));
-        }
-        session.getId();
-
 
         //ketika set default Home Fragment
         loadfragment (new FragmentHome());
@@ -53,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
             trans.replace(R.id.nav_host_fragment, fragment);
             trans.commitAllowingStateLoss();
-        }
 
+        }
         return false;
     }
 
@@ -68,27 +58,28 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new FragmentHome();
                 loadfragment(fragment);
                 break;
-            case R.id.nav_promo:
-                fragment = new FragmentHome();
+            case R.id.nav_produk:
+                fragment = new FragmentProduk();
                 loadfragment(fragment);
                 break;
-            case R.id.nav_menu:
-                fragment = new FragmentHome();
+            case R.id.nav_merk:
+                fragment = new FragmentMerk();
                 loadfragment(fragment);
                 break;
-            case R.id.nav_activity:
-                fragment = new FragmentHome();
+            case R.id.nav_info:
+                fragment = new FragmentInfo();
                 loadfragment(fragment);
                 break;
             case R.id.nav_account:
-                fragment = new FragmentHome();
+                fragment = new FragmentAkun();
                 loadfragment(fragment);
                 break;
             case R.id.merk_fab:
-                fragment = new FragmentHome();
+                fragment = new FragmentMerk();
                 loadfragment(fragment);
                 break;
         }
         return true;
     }
+
 }

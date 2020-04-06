@@ -16,16 +16,14 @@ public class Constant {
         }
     };
 
-   /* //Token heaader dengan enkripsi
+    //Token heaader dengan enkripsi
     public static Map<String, String> getTokenHeader(Context context){
         Map<String, String> header = new HashMap<>();
-        header.put("Auth-Key", "gmedia_semargress");
-        header.put("Client-Service", "frontend-client");
-        header.put("Username", AppSharedPreferences.getEmail(context));
-        header.put("Uid", AppSharedPreferences.getUid(context));
-        header.put("Token", AppSharedPreferences.getToken(context));
+        header.put("Auth-Key", "gmedia_kartikars");
+        header.put("Client-Service", "front_end_client");
+        header.put("User-id", AppSharedPreferences.getUid(context));
         return header;
-    }*/
+    }
 
    //Customer
    public static String Idcus = "";
@@ -56,7 +54,7 @@ public class Constant {
     public static final String EXTRA_PROMO_ID = "id_promo";
     public static final String EXTRA_EVENT = "event";
     public static final String EXTRA_WISATA = "wisata";
-    public static final String EXTRA_DENAH = "denah";
+    public static final String EXTRA_BARANG = "barang";
 
     //URL
     private static final String baseURL = "http://gmedia.bz/kartika/api/reseller/";
@@ -69,6 +67,20 @@ public class Constant {
     public static final String URL_RESETPASS = baseURL + "auth/kirim_ulang_otp/";
     public static final String URL_UBAH_PASS = baseURL + "auth/change_password";
     public static final String URL_UBAH_PIN = baseURL + "auth/change_pin";
+    public static final String URL_PROMO = baseURL + "promo/slider_promo";
+    public static final String URL_PRODUK = baseURL + "product/list_hot_product";
+    public static final String URL_HOT_PRODUK = baseURL + "product/filter_product";
+    public static final String URL_MERK = baseURL + "merk/list_merk?start=0&limit=15";
+    public static final String URL_CATEGORY = baseURL + "category/list_category?start=0&limit=10";
+    public static final String URL_DETAIL_PRODUK = baseURL + "product/detail_product";
+    public static final String URL_TOTAL_POINT = baseURL + "poin/total_poin";
+    public static final String URL_LIST_CATEGORY = baseURL + "product/filter_product";
+    public static final String URL_DETAIL_PROMO = baseURL + "promo/list_promo";
+
+
+ // http://gmedia.bz/kartika/api/reseller/product/
+ // filter_product?start=0&limit=12&keyword=eter&sort_by=terlaris&category=4&merk=2002&stock_status=null
+ //inimas Fan yg bawah
 
 
     /*public static String getPathfromDrawable(int res_int){
