@@ -2,6 +2,7 @@ package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,15 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
         templateViewHolder.txt_nama.setText(item.getItem3());
         templateViewHolder.txt_harga.setText(item.getItem4());
         templateViewHolder.txt_status.setText(item.getItem5());
+
+        final ModelProduk itemSelected = listItem.get(i);
+        if(itemSelected.getItem5().toLowerCase().trim().equals("available")  || itemSelected.getItem5().toLowerCase().trim().equals("tersedia")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_green_dialog));
+        }
+        else{
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
+        }
+
 
         final Gson gson = new Gson();
         templateViewHolder.cardView.setOnClickListener(new View.OnClickListener() {

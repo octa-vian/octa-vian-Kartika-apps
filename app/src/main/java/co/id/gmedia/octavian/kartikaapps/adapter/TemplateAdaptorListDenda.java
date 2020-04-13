@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
@@ -18,18 +17,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import co.id.gmedia.octavian.kartikaapps.merchant.DetailActivityBarang;
 import co.id.gmedia.octavian.kartikaapps.R;
+import co.id.gmedia.octavian.kartikaapps.merchant.DetailActivityBarang;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
 
-public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdaptorHotProduk.TemplateViewHolder> {
+public class TemplateAdaptorListDenda extends RecyclerView.Adapter<TemplateAdaptorListDenda.TemplateViewHolder> {
 
     private Activity activity;
     private List<ModelProduk> listItem;
 
-    public TemplateAdaptorHotProduk(Activity activity, List<ModelProduk> listItem){
+    public TemplateAdaptorListDenda(Activity activity, List<ModelProduk> listItem){
         this.activity = activity;
         this.listItem = listItem ;
     }
@@ -38,27 +37,27 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
     @Override
     public TemplateViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new TemplateViewHolder(LayoutInflater.from(activity).
-                inflate(R.layout.layout_adapter_hotproduk_baru, viewGroup, false));
+                inflate(R.layout.adapter_item_denda, viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull TemplateViewHolder templateViewHolder, int i) {
         final ModelProduk item = listItem.get(i);
         final int final_position = i;
-        Picasso.get().load(item.getItem2()).into(templateViewHolder.iv_cardview);
-        templateViewHolder.txt_nama.setText(item.getItem3());
-        templateViewHolder.txt_harga.setText(item.getItem4());
-        templateViewHolder.txt_status.setText(item.getItem5());
+        templateViewHolder.txt_nota.setText("Nomor Nota: "+item.getItem2());
+        templateViewHolder.txt_harga.setText(item.getItem3());
+        templateViewHolder.txt_tanggal.setText(item.getItem1());
 
-        final ModelProduk itemSelected = listItem.get(i);
-        if(itemSelected.getItem5().toUpperCase().trim().equals("available ")){
+        /*final ModelProduk itemSelected = listItem.get(i);
+        if(itemSelected.getItem5().toUpperCase().trim().equals("available")){
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_green_dialog));
         }
         else if(itemSelected.getItem5().toUpperCase().trim().equals("preorder")){
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
+        }*/
 
-        final Gson gson = new Gson();
+
+       /* final Gson gson = new Gson();
         templateViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +66,7 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
                 activity.startActivity(i);
 
             }
-        });
+        });*/
 
     }
 
@@ -78,17 +77,16 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
 
     public static class TemplateViewHolder extends RecyclerView.ViewHolder{
 
-        private MaterialCardView cardView;
+
         private ImageView iv_cardview;
-        private TextView txt_nama, txt_harga, txt_status;
+        private TextView txt_nota, txt_harga, txt_tanggal;
+        private MaterialCardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
-           iv_cardview = (ImageView) itemView.findViewById(R.id.iv_cardview);
-           txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_brg);
-           txt_harga =  (TextView) itemView.findViewById(R.id.txt_harga);
-           txt_status =  (TextView) itemView.findViewById(R.id.status);
-           cardView = (MaterialCardView) itemView.findViewById(R.id.card_produk);
+           txt_nota = (TextView) itemView.findViewById(R.id.txt_noNota);
+           txt_harga =  (TextView) itemView.findViewById(R.id.txt_nominal);
+           txt_tanggal =  (TextView) itemView.findViewById(R.id.txt_tanggal);
         }
     }
 }

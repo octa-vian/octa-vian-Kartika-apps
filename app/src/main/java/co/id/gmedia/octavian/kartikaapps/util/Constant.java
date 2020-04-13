@@ -70,12 +70,22 @@ public class Constant {
     public static final String URL_PROMO = baseURL + "promo/slider_promo";
     public static final String URL_PRODUK = baseURL + "product/list_hot_product";
     public static final String URL_HOT_PRODUK = baseURL + "product/filter_product";
-    public static final String URL_MERK = baseURL + "merk/list_merk?start=0&limit=15";
-    public static final String URL_CATEGORY = baseURL + "category/list_category?start=0&limit=10";
+    public static final String URL_MERK = baseURL + "merk/list_merk";
+    public static final String URL_SEARCH_MERK = baseURL + "merk/search_merk";
+    public static final String URL_CATEGORY = baseURL + "category/list_category";
+    public static final String URL_SEARCH_CATEGORY = baseURL + "category/search_category";
     public static final String URL_DETAIL_PRODUK = baseURL + "product/detail_product";
     public static final String URL_TOTAL_POINT = baseURL + "poin/total_poin";
-    public static final String URL_LIST_CATEGORY = baseURL + "product/filter_product";
+    public static final String URL_LIST_PRODUK = baseURL + "product/filter_product";
     public static final String URL_DETAIL_PROMO = baseURL + "promo/list_promo";
+    public static final String URL_DETAIL_ORDER = baseURL + "shop/detail_order_product";
+    public static final String URL_GET_HARGA = baseURL + "shop/get_harga_barang";
+    public static final String URL_GET_AKUN = baseURL + "account/profile";
+    public static final String URL_GET_DENDA = baseURL + "denda/list_denda";
+    public static final String URL_GET_DROPDOWN = baseURL + "shop/list_satuan_barang";
+    public static final String URL_KIRIM_ORDER = baseURL + "shop/add_to_cart";
+    public static final String URL_LIST_CART = baseURL + "shop/list_cart";
+    public static final String URL_HAPUS_BARANG = baseURL + "shop/delete_cart_item";
 
 
  // http://gmedia.bz/kartika/api/reseller/product/

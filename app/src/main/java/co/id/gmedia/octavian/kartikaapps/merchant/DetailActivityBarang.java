@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +45,7 @@ public class DetailActivityBarang extends AppCompatActivity {
     private TemplateAdaptorProdukDetail adepterproduk;
     private static String TAG = "Produk";
     private String id= "";
+    private Button btn_beli;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +73,16 @@ public class DetailActivityBarang extends AppCompatActivity {
             Gson gson = new Gson();
             nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelProduk.class);
         }
+
+        btn_beli = (Button) findViewById(R.id.btn_beli);
+        btn_beli.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivityBarang.this, ActivityPesanan.class);
+                intent.putExtra(Constant.EXTRA_BARANG,nota.getItem1());
+                startActivity(intent);
+            }
+        });
 
         InitData();
     }

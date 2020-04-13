@@ -33,13 +33,14 @@
             android:id="@+id/merk_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_white"
-            android:src="@drawable/merkgrey"
-            android:elevation="30dp"
-            app:maxImageSize="35dp"
+            android:background="@color/color_white"
             android:clickable="true"
+            android:elevation="30dp"
             android:focusable="true"
-            app:layout_anchor="@id/bar" />
+            android:src="@drawable/merkgrey"
+            app:backgroundTint="@color/color_white"
+            app:layout_anchor="@id/bar"
+            app:maxImageSize="35dp" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bar"

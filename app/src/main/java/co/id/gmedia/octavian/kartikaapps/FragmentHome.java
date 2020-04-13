@@ -36,6 +36,7 @@ import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorHotProduk;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorpromo;
+import co.id.gmedia.octavian.kartikaapps.merchant.ActivityAddToCart;
 import co.id.gmedia.octavian.kartikaapps.merchant.ActivityListDetailProduk;
 import co.id.gmedia.octavian.kartikaapps.merchant.ActivityListDetailPromo;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
@@ -102,6 +103,14 @@ public class FragmentHome extends Fragment {
             LoadHomePromo();
             LoadProduk();
             loadPoit();
+
+            v.findViewById(R.id.cart).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ActivityAddToCart.class);
+                    startActivity(intent);
+                }
+            });
 
             v.findViewById(R.id.text1).setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    tools:context=".merchant.ActivityAddToCart">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tocart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ln_2">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/ln_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/size_4dp"
+            app:cardElevation="@dimen/size_4dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:layout_marginLeft="@dimen/size_10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_10dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="Total Belanja"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_4dp"
+                    android:background="@color/colorGreyAccent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txt_totalHarga"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/orange"
+                        android:gravity="right"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/btn_ln1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:layout_marginRight="@dimen/size_10dp"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:layout_marginBottom="@dimen/size_10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:background="@drawable/border_btn_white"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:textSize="@dimen/size_12dp"
+            android:gravity="center"
+            android:text="Tambah Barang"/>
+
+        <Button
+            android:id="@+id/btn_beli"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:background="@drawable/border_btn_lanjut"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:textSize="@dimen/size_12dp"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:text="beli Sekarang"/>
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

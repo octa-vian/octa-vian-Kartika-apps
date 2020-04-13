@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_10dp"
-        app:cardCornerRadius="@dimen/size_10dp"
+        app:cardCornerRadius="@dimen/size_4dp"
         android:elevation="@dimen/size_20dp">
 
         <LinearLayout
@@ -29,11 +29,12 @@
                 android:id="@+id/txt_nama_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
                 android:text="Lampu Hias"
-                android:textSize="28sp"
-                android:gravity="center"
+                android:textSize="20sp"
+                android:gravity="left"
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:layout_gravity="center"/>
 
         </LinearLayout>
