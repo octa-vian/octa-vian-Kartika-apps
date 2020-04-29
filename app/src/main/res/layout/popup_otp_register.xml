@@ -70,10 +70,11 @@
 
                 <Button
                     android:id="@+id/btn_next_otp"
-                    android:layout_width="140dp"
+                    android:layout_width="150dp"
                     android:background="@drawable/border_btn_lanjut"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_margin="20dp"
+                    android:textSize="@dimen/size_12dp"
                     android:foregroundGravity="center"
                     android:gravity="center"
                     android:textColor="#fff"

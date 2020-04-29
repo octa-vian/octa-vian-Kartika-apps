@@ -3,6 +3,7 @@
     package="co.id.gmedia.octavian.kartikaapps">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -14,33 +15,70 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.ActivityRiwayatPenukaranPoint"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
-            android:name=".merchant.ActivityCheckOutPesanan"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+            android:name=".activity.ActivityDetailReturn"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
-            android:name=".merchant.ActivityAddToCart"
+            android:name=".activity.ActivityReturn"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".merchant.ActivityDenda"
+            android:name=".activity.ActivityDetailPoint"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".merchant.ActivityPesanan"
+            android:name=".activity.ActivityGambar"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".merchant.DetailActivityBarang"
+            android:name=".activity.ActivityCekPesanan"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".merchant.ActivityListDetailPromo"
+            android:name=".activity.ActivityDetailDaftarPesanan"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".merchant.ActivityListDetailMerk"
+            android:name=".activity.ActivityDaftarPemesanan"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".merchant.ActivityListDetailProduk"
+            android:name=".activity.ActivityInputNominalPiutang"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".merchant.ActivityListDetailCategory"
+            android:name=".activity.ActivityCeklistBayarPiutang"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityBayarPiutang"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityDetailPiutang"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityPiutang"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityCheckOutPesanan"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityAddToCart"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityDenda"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityPesanan"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.DetailActivityBarang"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityListDetailPromo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityListDetailMerk"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityListDetailProduk"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityListDetailCategory"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <meta-data

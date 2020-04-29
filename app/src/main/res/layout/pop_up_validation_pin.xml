@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="@dimen/size_10dp"
+        android:elevation="@dimen/size_10dp"
+        android:layout_margin="@dimen/size_20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:layout_marginBottom="@dimen/size_20dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Masukan Pin"/>
+
+            <RelativeLayout
+                android:layout_marginRight="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_10dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginBottom="@dimen/size_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/inPutpin"
+                    android:layout_margin="@dimen/size_10dp"
+                    android:layout_width="260dp"
+                    android:layout_height="35dp"
+                    android:inputType="number"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/border_white_black"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_masuk"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:textSize="@dimen/size_12dp"
+                android:layout_gravity="center"
+                android:text="Masuk"
+                android:textColor="@color/color_white"
+                android:background="@drawable/border_btn_lanjut"
+                android:layout_margin="@dimen/size_20dp"/>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

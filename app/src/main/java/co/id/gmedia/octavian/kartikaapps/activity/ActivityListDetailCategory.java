@@ -1,13 +1,16 @@
-package co.id.gmedia.octavian.kartikaapps.merchant;
+package co.id.gmedia.octavian.kartikaapps.activity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,21 +41,24 @@ import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
-public class ActivityListDetailMerk extends AppCompatActivity {
+public class ActivityListDetailCategory extends AppCompatActivity {
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
     private TemplateAdaptorProduk adepterproduk;
-    private static String TAG = "Merk";
+    private static String TAG = "Produk";
     private TextView txt_judul;
     private EditText txt_search;
-    private String search = "";
+    private ProgressDialog proses;
+    private String search="";
+    private ModelOneForAll nota;
     private ImageView img_filter;
     private String termurah = "termurah";
     private String termahal = "termahal";
     private String terlaris = "terlaris";
+    private String priorder = "preorder";
+    private String available = "available ";
+    private String Status = "";
     private String Filter="";
-
-    private ModelOneForAll nota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,27 +67,43 @@ public class ActivityListDetailMerk extends AppCompatActivity {
 
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
-        homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailMerk.this,2));
+        homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailCategory.this,2));
         //homeProduk.setLayoutManager(new LinearLayoutManager(ActivityListDetailProduk.this, LinearLayoutManager.VERTICAL,false));
-        adepterproduk = new TemplateAdaptorProduk(ActivityListDetailMerk.this, viewproduk) ;
+        adepterproduk = new TemplateAdaptorProduk(ActivityListDetailCategory.this, viewproduk) ;
         homeProduk.setAdapter(adepterproduk);
+
         txt_judul = findViewById(R.id.txt_judul);
         txt_search = findViewById(R.id.txt_search);
         img_filter = findViewById(R.id.filter);
 
+        txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == EditorInfo.IME_ACTION_SEARCH){
+                    search = textView.getText().toString();
+                    LoadProduk();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         txt_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                LoadProduk();
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                search = editable.toString();
+                //search = editable.toString();
+                if (editable.toString().length() == 0){
+                    LoadProduk();
+                }
                 Log.d("search",search);
             }
         });
@@ -94,15 +116,17 @@ public class ActivityListDetailMerk extends AppCompatActivity {
         img_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(ActivityListDetailMerk.this);
+                final Dialog dialog = new Dialog(ActivityListDetailCategory.this);
                 dialog.setContentView(R.layout.popup_filter);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                final RadioButton btn_terlaris, btn_termahal, btn_termurah;
+                final RadioButton btn_terlaris, btn_termahal, btn_termurah, btn_tersedia, btn_preorder;
                 final RadioGroup group;
                 group = dialog.findViewById(R.id.radio_grup);
                 btn_terlaris = dialog.findViewById(R.id.txt_terlaris);
                 btn_termahal = dialog.findViewById(R.id.txt_termahal);
                 btn_termurah = dialog.findViewById(R.id.txt_termurah);
+                btn_tersedia = dialog.findViewById(R.id.txt_tersedia);
+                btn_preorder = dialog.findViewById(R.id.txt_preorder);
                 Button btn_simpan;
                 btn_simpan = dialog.findViewById(R.id.btn_simpan);
                 btn_simpan.setOnClickListener(new View.OnClickListener() {
@@ -117,24 +141,15 @@ public class ActivityListDetailMerk extends AppCompatActivity {
                             Filter = termurah.toString();
                         } else if (Id == btn_termahal.getId()){
                             Filter = termahal.toString();
+                        } else if (Id == btn_tersedia.getId()) {
+                            Status = available.toString();
+                        } else if (Id == btn_preorder.getId()) {
+                            Status = priorder.toString();
                         }
                         Log.d("filter",Filter);
-                        /*switch (Id){
-                            case R.id.txt_terlaris:
-                                String a = "terlaris ";
-                                Filter = a.toString();
-                                Log.d("filter",Filter);
-                                break;
-                            case R.id.txt_termurah:
-                                String b = "termurah ";
-                                Filter = "termurah";
-                                break;
-                            case  R.id.txt_termahal:
-                                break;
 
-                        }*/
-                        LoadProduk();
-                        dialog.dismiss();
+                    LoadProduk();
+                    dialog.dismiss();
                     }
                 });
                 dialog.show();
@@ -145,9 +160,9 @@ public class ActivityListDetailMerk extends AppCompatActivity {
     }
 
     private void LoadProduk() {
-        txt_judul.setText(nota.getItem3());
-        String parameter = String.format(Locale.getDefault(), "?start=0&limit=12&merk=%s&keyword=%s&sort_by=%s",nota.getItem1(),search,Filter);
-        new APIvolley(ActivityListDetailMerk.this, new JSONObject(), "GET", Constant.URL_LIST_PRODUK+parameter,
+        txt_judul.setText(nota.getItem2());
+        String parameter = String.format(Locale.getDefault(), "?start=0&limit=20&category=%s&keyword=%s&sort_by=%s&stock_status=%s",nota.getItem1(),search,Filter,Status);
+        new APIvolley(ActivityListDetailCategory.this, new JSONObject(), "GET", Constant.URL_LIST_PRODUK+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
@@ -166,10 +181,8 @@ public class ActivityListDetailMerk extends AppCompatActivity {
                                         ,objt.getString("stok")));
                             }
 
-                            adepterproduk.notifyDataSetChanged();
-
                         } catch (JSONException e) {
-                            Toast.makeText(ActivityListDetailMerk.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityListDetailCategory.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -185,7 +198,6 @@ public class ActivityListDetailMerk extends AppCompatActivity {
 
                     }
                 });
-
     }
 
 }

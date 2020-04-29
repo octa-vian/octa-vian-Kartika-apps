@@ -18,8 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
-import co.id.gmedia.octavian.kartikaapps.merchant.ActivityListDetailCategory;
-import co.id.gmedia.octavian.kartikaapps.merchant.DetailActivityBarang;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityListDetailCategory;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 

@@ -12,10 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -27,13 +31,10 @@ import java.util.List;
 import java.util.Locale;
 
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorMerk;
-import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
-import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorpromo;
-import co.id.gmedia.octavian.kartikaapps.merchant.ActivityListDetailProduk;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
-import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
+import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 
 
 /**
@@ -49,6 +50,8 @@ public class FragmentMerk extends Fragment {
     private static String TAG = "Merk";
     private String search ="";
     private EditText txt_search;
+    private LoadMoreScrollListener loadMoreScrollListener;
+    private ProgressBar loading;
 
 
     public FragmentMerk() {
@@ -68,12 +71,32 @@ public class FragmentMerk extends Fragment {
         homeProduk.setLayoutManager(new GridLayoutManager(context,3));
         adaptorMerk = new TemplateAdaptorMerk(context, viewMerk) ;
         homeProduk.setAdapter(adaptorMerk);
+        loadMoreScrollListener = new LoadMoreScrollListener() {
+            @Override
+            public void onLoadMore() {
+                LoadProduk(false);
+            }
+        };
+        homeProduk.addOnScrollListener(loadMoreScrollListener);
 
         txt_search = v.findViewById(R.id.txt_search);
+        loading = v.findViewById(R.id.loading);
+
+        txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == EditorInfo.IME_ACTION_SEARCH){
+                    search = textView.getText().toString();
+                    LoadProduk(true);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         txt_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                LoadSearch();
             }
 
             @Override
@@ -82,18 +105,20 @@ public class FragmentMerk extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                search = editable.toString();
+                if (editable.toString().length() == 0){
+                    LoadProduk(true);
+                }
                 Log.d("search",search);
             }
         });
-        LoadProduk();
+        LoadProduk(true);
         //LoadSearch();
 
         return v;
 
     }
 
-    private void LoadProduk() {
+    private void LoadSearch() {
         String parameter = String.format(Locale.getDefault(), "?start=0&limit=20");
         new APIvolley(context, new JSONObject(), "GET", Constant.URL_MERK+parameter,
                 new APIvolley.VolleyCallback() {
@@ -132,14 +157,21 @@ public class FragmentMerk extends Fragment {
 
     }
 
-    private void LoadSearch() {
-        String parameter = String.format(Locale.getDefault(), "?start=0&limit=20&keyword="+search);
+    private void LoadProduk(final boolean init) {
+        loading.setVisibility(View.VISIBLE);
+        if (init){
+            loadMoreScrollListener.initLoad();
+        }
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s", loadMoreScrollListener.getLoaded(), 20, search);
         new APIvolley(context, new JSONObject(), "GET", Constant.URL_SEARCH_MERK+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        viewMerk.clear();
+                        loading.setVisibility(View.GONE);
                         try {
+                            if (init){
+                                viewMerk.clear();
+                            }
                             JSONObject obj= new JSONObject(result);
                             JSONArray meal= obj.getJSONArray("response");
                             for (int i=0; i < meal.length(); i++){
@@ -150,8 +182,12 @@ public class FragmentMerk extends Fragment {
                                         ,objt.getString("img_url")
                                         ,objt.getString("merk")));
                             }
+                            loadMoreScrollListener.finishLoad(meal.length());
+                            adaptorMerk.notifyDataSetChanged();
 
                         } catch (JSONException e) {
+                            loading.setVisibility(View.GONE);
+                            loadMoreScrollListener.finishLoad(0);
                             Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
@@ -162,6 +198,8 @@ public class FragmentMerk extends Fragment {
 
                     @Override
                     public void onError(String result) {
+                        loading.setVisibility(View.GONE);
+                        loadMoreScrollListener.finishLoad(0);
                         Log.e(TAG,result);
                         viewMerk.clear();
                         adaptorMerk.notifyDataSetChanged();

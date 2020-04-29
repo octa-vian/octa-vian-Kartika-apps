@@ -1,4 +1,4 @@
-package co.id.gmedia.octavian.kartikaapps.merchant;
+package co.id.gmedia.octavian.kartikaapps.activity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -8,13 +8,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -56,6 +55,9 @@ public class ActivityListDetailProduk extends AppCompatActivity {
     private String termurah = "termurah";
     private String termahal = "termahal";
     private String terlaris = "terlaris";
+    private String priorder = "preorder";
+    private String available = "available ";
+    private String Status = "";
     private String Filter="";
 
     @Override
@@ -66,26 +68,42 @@ public class ActivityListDetailProduk extends AppCompatActivity {
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
         homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailProduk.this,2));
-        //homeProduk.setLayoutManager(new LinearLayoutManager(ActivityListDetailProduk.this, LinearLayoutManager.VERTICAL,false));
         adepterproduk = new TemplateAdaptorProduk(ActivityListDetailProduk.this, viewproduk) ;
         homeProduk.setAdapter(adepterproduk);
+
+
         txt_judul = findViewById(R.id.txt_judul);
         txt_search = findViewById(R.id.txt_search);
         img_filter = findViewById(R.id.filter);
 
+        txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == EditorInfo.IME_ACTION_SEARCH){
+                    search = textView.getText().toString();
+                    LoadProduk();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         txt_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                LoadProduk();
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                search = editable.toString();
+                //search = editable.toString();
+                if (editable.toString().length() == 0){
+                    LoadProduk();
+                }
                 Log.d("search",search);
             }
         });
@@ -101,12 +119,14 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                 final Dialog dialog = new Dialog(ActivityListDetailProduk.this);
                 dialog.setContentView(R.layout.popup_filter);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                final RadioButton btn_terlaris, btn_termahal, btn_termurah;
+                final RadioButton btn_terlaris, btn_termahal, btn_termurah, btn_tersedia, btn_preorder;
                 final RadioGroup group;
                 group = dialog.findViewById(R.id.radio_grup);
                 btn_terlaris = dialog.findViewById(R.id.txt_terlaris);
                 btn_termahal = dialog.findViewById(R.id.txt_termahal);
                 btn_termurah = dialog.findViewById(R.id.txt_termurah);
+                btn_tersedia = dialog.findViewById(R.id.txt_tersedia);
+                btn_preorder = dialog.findViewById(R.id.txt_preorder);
                 Button btn_simpan;
                 btn_simpan = dialog.findViewById(R.id.btn_simpan);
                 btn_simpan.setOnClickListener(new View.OnClickListener() {
@@ -121,8 +141,13 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                             Filter = termurah.toString();
                         } else if (Id == btn_termahal.getId()){
                             Filter = termahal.toString();
+                        } else if (Id == btn_tersedia.getId()) {
+                            Status = available.toString();
+                        } else if (Id == btn_preorder.getId()) {
+                            Status = priorder.toString();
                         }
                         Log.d("filter",Filter);
+                        Log.d("status",Status);
                         /*switch (Id){
                             case R.id.txt_terlaris:
                                 String a = "terlaris ";
@@ -145,13 +170,12 @@ public class ActivityListDetailProduk extends AppCompatActivity {
             }
         });
 
-
         LoadProduk();
     }
 
 
     private void LoadProduk() {
-        String parameter = String.format(Locale.getDefault(), "?start=0&limit=20&keyword=%s&sort_by=%s",search,Filter);
+        String parameter = String.format(Locale.getDefault(), "?start=0&limit=20&keyword=%s&sort_by=%s&stock_status=%s",search,Filter,Status);
         new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override

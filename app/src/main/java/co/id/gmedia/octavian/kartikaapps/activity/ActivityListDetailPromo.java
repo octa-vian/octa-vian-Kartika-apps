@@ -1,4 +1,4 @@
-package co.id.gmedia.octavian.kartikaapps.merchant;
+package co.id.gmedia.octavian.kartikaapps.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import org.json.JSONArray;

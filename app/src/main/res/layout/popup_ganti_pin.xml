@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/color_red_drag"
         app:cardCornerRadius="20dp"
         android:layout_margin="30dp"
         android:elevation="20dp"
@@ -24,7 +25,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:text="Ubah Pin"
-                android:textColor="@color/black"
+                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:textSize="28sp"
                 android:textStyle="bold"/>
@@ -39,11 +40,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Pin Lama:"
+                    android:textColor="@color/color_white"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
+
                 <EditText
                     android:id="@+id/txt_pin_lama"
                     android:inputType="number"
+                    android:textColor="@color/color_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"/>
@@ -51,6 +55,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
                     android:text="Pin Baru"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
@@ -59,6 +64,7 @@
                     android:id="@+id/txt_pin_baru"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
                     android:inputType="number"
                     android:textStyle="bold"/>
 
@@ -66,12 +72,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ketik Ulang Pin:"
+                    android:textColor="@color/color_white"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/txt_ulang_pin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
                     android:inputType="number"
                     android:textStyle="bold"/>
 
@@ -79,16 +87,17 @@
 
             <Button
                 android:id="@+id/btn_simpan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:textSize="@dimen/size_12dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="68dp"
                 android:layout_marginLeft="68dp"
                 android:layout_marginBottom="40dp"
+                android:layout_gravity="center"
                 android:text="Simpan"
                 android:textColor="#fff"
-                android:background="@drawable/border_login"/>
+                android:background="@drawable/border_btn_lanjut"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

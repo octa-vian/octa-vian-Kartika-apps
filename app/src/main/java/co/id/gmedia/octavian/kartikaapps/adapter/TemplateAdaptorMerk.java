@@ -9,19 +9,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
-import co.id.gmedia.octavian.kartikaapps.merchant.ActivityListDetailMerk;
-import co.id.gmedia.octavian.kartikaapps.merchant.DetailActivityBarang;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityListDetailMerk;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
-import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
 
@@ -72,13 +70,13 @@ public class TemplateAdaptorMerk extends RecyclerView.Adapter<TemplateAdaptorMer
 
         private ImageView iv_cardview;
         private TextView txt_nama;
-        private MaterialCardView cardView;
+        private CardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
            iv_cardview = (ImageView) itemView.findViewById(R.id.iv_cardview);
            txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_merk);
-           cardView = (MaterialCardView) itemView.findViewById(R.id.layout_category);
+           cardView = (CardView) itemView.findViewById(R.id.layout_category);
         }
     }
 }

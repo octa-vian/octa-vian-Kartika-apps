@@ -12,9 +12,14 @@ public class AppSharedPreferences {
     private static final String UID_PREF = "User-id";
     private static final String EMAIL_PREF = "email";
     private static final String REGISTER_PREF = "registered";
+    private static final String NILAI_PIUTANG = "piutang";
 
     private static SharedPreferences getPreferences(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public static String getNilaiPiutang (Context context){
+        return getPreferences(context).getString(NILAI_PIUTANG, "");
     }
 
     public static String getFcmId(Context context){

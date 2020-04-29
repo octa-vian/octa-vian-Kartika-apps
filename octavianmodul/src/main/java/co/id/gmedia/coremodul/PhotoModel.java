@@ -23,6 +23,10 @@ public class PhotoModel {
         this.keterangan = keterangan;
     }
 
+    public PhotoModel(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
     public String getUrl() {
         return url;
     }

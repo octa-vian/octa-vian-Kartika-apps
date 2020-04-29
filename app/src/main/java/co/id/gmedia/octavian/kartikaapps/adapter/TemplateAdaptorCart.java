@@ -1,7 +1,8 @@
 package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import co.id.gmedia.coremodul.Converter;
 import co.id.gmedia.octavian.kartikaapps.R;
-import co.id.gmedia.octavian.kartikaapps.merchant.ActivityAddToCart;
-import co.id.gmedia.octavian.kartikaapps.merchant.ActivityListDetailMerk;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
 import co.id.gmedia.octavian.kartikaapps.model.ModelAddToCart;
-import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
-import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
 
 public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCart.TemplateViewHolder> {
@@ -57,23 +54,28 @@ public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCar
         templateViewHolder.txt_harga.setText(item.getItem8());
         templateViewHolder.txt_tempo.setText(item.getItem6());
 
-        final Gson gson = new Gson();
         templateViewHolder.btn_hapus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(activity, ActivityAddToCart.class);
-                i.putExtra(Constant.EXTRA_BARANG, gson.toJson(item));
-                activity.startActivity(i);
+                AlertDialog dialog = new AlertDialog.Builder(activity)
+                        .setTitle("Konfirmasi")
+                        .setMessage("Apakah anda yakin ingin mengahpus data?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ((ActivityAddToCart)activity).HapusData(item.getItem1());
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
 
             }
         });
-
-
-        if (item.isSelected()){
-            templateViewHolder.cb_btn.setChecked(true);
-        }else {
-            templateViewHolder.cb_btn.setChecked(false);
-        }
 
         templateViewHolder.cb_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -82,7 +84,7 @@ public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCar
                 ((ActivityAddToCart)activity).updateJumlah();
             }
         });
-
+        templateViewHolder.cb_btn.setChecked(listItem.get(i).isSelected());
     }
 
     @Override
@@ -95,7 +97,7 @@ public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCar
 
         private ImageView iv_cardview, btn_hapus;
         private TextView txt_nama, txt_harga, txt_tempo, txt_status, txt_jumlah;
-        private MaterialCardView cardView;
+        private CardView cardView;
         private CheckBox cb_btn;
 
         public TemplateViewHolder(@NonNull View itemView) {

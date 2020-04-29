@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +18,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,15 +30,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorHotProduk;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorpromo;
-import co.id.gmedia.octavian.kartikaapps.merchant.ActivityAddToCart;
-import co.id.gmedia.octavian.kartikaapps.merchant.ActivityListDetailProduk;
-import co.id.gmedia.octavian.kartikaapps.merchant.ActivityListDetailPromo;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityDetailPoint;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityListDetailProduk;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityListDetailPromo;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
@@ -62,6 +62,8 @@ public class FragmentHome extends Fragment {
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
     private TemplateAdaptorHotProduk adepterproduk;
+    private EditText txt_search;
+    private CardView point;
 
     private static String TAG = "Home";
     private SessionManager session;
@@ -86,6 +88,8 @@ public class FragmentHome extends Fragment {
             v = inflater.inflate(R.layout.layout_fragment_home, container, false);
 
             txt_point = v.findViewById(R.id.txt_point);
+            txt_search = v.findViewById(R.id.txt_search_btn);
+            point = v.findViewById(R.id.cr_point);
 
             RecyclerView homeview = v.findViewById(R.id.ll_recyclerView1);
             homeview.setItemAnimator(new DefaultItemAnimator());
@@ -103,6 +107,23 @@ public class FragmentHome extends Fragment {
             LoadHomePromo();
             LoadProduk();
             loadPoit();
+
+            point.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ActivityDetailPoint.class);
+                    context.startActivity(intent);
+                }
+            });
+
+            v.findViewById(R.id.txt_search_btn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ActivityListDetailProduk.class);
+                    startActivity(intent);
+                    context.startActivity(intent);
+                }
+            });
 
             v.findViewById(R.id.cart).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -244,7 +265,6 @@ public class FragmentHome extends Fragment {
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        viewproduk.clear();
                         try {
                             JSONObject obj= new JSONObject(result);
                             String message = obj.getJSONObject("metadata").getString("message");
@@ -531,7 +551,6 @@ public class FragmentHome extends Fragment {
                     }
                     else {
                         Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -543,7 +562,6 @@ public class FragmentHome extends Fragment {
             @Override
             public void onError(String result) {
                 Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-
             }
         }) ;
 

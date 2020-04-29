@@ -15,15 +15,16 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
+import co.id.gmedia.octavian.kartikaapps.model.ModelCartPreorder;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 
 
 public class TemplateAdaptorListPreOrder extends RecyclerView.Adapter<TemplateAdaptorListPreOrder.TemplateViewHolder> {
 
     private Activity activity;
-    private List<ModelProduk> listItem;
+    private List<ModelCartPreorder> listItem;
 
-    public TemplateAdaptorListPreOrder(Activity activity, List<ModelProduk> listItem){
+    public TemplateAdaptorListPreOrder(Activity activity, List<ModelCartPreorder> listItem){
         this.activity = activity;
         this.listItem = listItem ;
     }
@@ -37,11 +38,11 @@ public class TemplateAdaptorListPreOrder extends RecyclerView.Adapter<TemplateAd
 
     @Override
     public void onBindViewHolder(@NonNull TemplateViewHolder templateViewHolder, int i) {
-        final ModelProduk item = listItem.get(i);
+        final ModelCartPreorder item = listItem.get(i);
         final int final_position = i;
-        templateViewHolder.txt_nota.setText("Nomor Nota: "+item.getItem2());
-        templateViewHolder.txt_harga.setText(item.getItem3());
-        templateViewHolder.txt_tanggal.setText(item.getItem1());
+        templateViewHolder.txt_nama.setText(item.getItem2());
+        templateViewHolder.txt_jumlah.setText(item.getItem3());
+        //templateViewHolder.status.setText(item.getItem4());
 
         /*final ModelProduk itemSelected = listItem.get(i);
         if(itemSelected.getItem5().toUpperCase().trim().equals("available")){
@@ -74,14 +75,14 @@ public class TemplateAdaptorListPreOrder extends RecyclerView.Adapter<TemplateAd
 
 
         private ImageView iv_cardview;
-        private TextView txt_nota, txt_harga, txt_tanggal;
+        private TextView txt_nama, txt_jumlah, status;
         private MaterialCardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
-           txt_nota = (TextView) itemView.findViewById(R.id.txt_noNota);
-           txt_harga =  (TextView) itemView.findViewById(R.id.txt_nominal);
-           txt_tanggal =  (TextView) itemView.findViewById(R.id.txt_tanggal);
+            txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_brg);
+            txt_jumlah =  (TextView) itemView.findViewById(R.id.txt_jumlah);
+            //status = (TextView) itemView.findViewById(R.id.txt_status);
         }
     }
 }

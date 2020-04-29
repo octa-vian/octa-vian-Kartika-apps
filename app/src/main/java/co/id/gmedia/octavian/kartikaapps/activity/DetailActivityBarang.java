@@ -1,8 +1,7 @@
-package co.id.gmedia.octavian.kartikaapps.merchant;
+package co.id.gmedia.octavian.kartikaapps.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 
 import co.id.gmedia.octavian.kartikaapps.R;
-import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukDetail;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;

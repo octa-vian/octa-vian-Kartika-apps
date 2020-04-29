@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".merchant.ActivityListDetailPromo">
+    tools:context=".activity.ActivityListDetailPromo">
 
 
     <LinearLayout
@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/cart"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="center"
@@ -25,20 +25,26 @@
 
         <EditText
             android:id="@+id/txt_search"
-            android:layout_weight="4"
             android:layout_width="match_parent"
+            android:layout_below="@id/paddingTop"
+            android:inputType="textPersonName"
+            android:imeOptions="actionSearch"
             android:layout_height="35dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_10dp"
             android:layout_marginBottom="@dimen/size_10dp"
-            android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_weight="4"
             android:background="@drawable/border_white"
-            android:hint="Cari disini"/>
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:hint="Cari disini"
+            android:padding="@dimen/size_4dp"
+            android:textSize="@dimen/size_12dp" />
 
         <ImageView
             android:id="@+id/filter"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="center"
             android:src="@drawable/filter"/>

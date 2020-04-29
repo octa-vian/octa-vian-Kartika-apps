@@ -2,8 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@drawable/bglogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/imagelogin"
+        android:layout_above="@id/ln_login"/>
+
     <LinearLayout
         android:id="@+id/ln_login"
         android:layout_width="match_parent"
@@ -17,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/color_white"
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="32sp"
@@ -36,20 +44,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/color_white"
             android:text="Username"
             android:textSize="12sp"
             android:textStyle="bold"/>
+
         <EditText
             android:id="@+id/txt_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_white"
             android:textStyle="bold"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/color_white"
             android:text="Password:"
             android:textSize="12sp"
             android:textStyle="bold"/>
@@ -57,6 +67,7 @@
             android:id="@+id/txt_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_white"
             android:textStyle="bold"/>
 
         <TextView
@@ -65,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Lupa Password? "
-            android:textColor="@color/red_color"
+            android:textColor="@color/color_yellow_dialog"
             android:textSize="12sp"
             android:textStyle="bold"/>
 
@@ -80,10 +91,10 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="150dp"
-        android:background="@drawable/border_login"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_width="165dp"
+        android:background="@drawable/border_btn_lanjut"
+        android:layout_height="40dp"
+        android:layout_margin="17dp"
         android:foregroundGravity="center"
         android:gravity="center"
         android:textColor="#fff"
@@ -109,7 +120,7 @@
         <TextView
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/color_white"
             android:gravity="right"
             android:text="Belum Memiliki akun?"/>
 
@@ -118,7 +129,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/color_yellow_dialog"
             android:text="Register Disini"/>
 
         </LinearLayout>

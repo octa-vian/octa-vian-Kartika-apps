@@ -42,19 +42,10 @@ public class Constant {
     public static final int LAYOUT_KATEGORI = 125;
 
     //EXTRA
-    public static final String EXTRA_MERCHANT_ID = "id_merchant";
-    public static final String EXTRA_LATITUDE = "latitude";
-    public static final String EXTRA_LONGITUDE = "longitude";
-    public static final String EXTRA_KATEGORI_ID = "id_kategori";
-    public static final String EXTRA_KATEGORI_NAMA = "nama_kategori";
-    public static final String EXTRA_ID_KUIS = "id_kuis";
-    public static final String EXTRA_START_KUIS = "kuis_start";
-    public static final String EXTRA_NOTIF = "notif_flag";
-    public static final String EXTRA_PROMO = "promo";
-    public static final String EXTRA_PROMO_ID = "id_promo";
-    public static final String EXTRA_EVENT = "event";
-    public static final String EXTRA_WISATA = "wisata";
+
     public static final String EXTRA_BARANG = "barang";
+    public static final String EXTRA_NOBUKTI = "nobukti";
+    public static final String EXTRA_NILAI_PIUTANG = "nilaipiutang";
 
     //URL
     private static final String baseURL = "http://gmedia.bz/kartika/api/reseller/";
@@ -86,6 +77,22 @@ public class Constant {
     public static final String URL_KIRIM_ORDER = baseURL + "shop/add_to_cart";
     public static final String URL_LIST_CART = baseURL + "shop/list_cart";
     public static final String URL_HAPUS_BARANG = baseURL + "shop/delete_cart_item";
+    public static final String URL_LIST_CHECK_OUT = baseURL + "shop/list_konfirmasi_order";
+    public static final String URL_GET_PIUTANG = baseURL + "piutang/list_piutang";
+    public static final String URL_POST_TOTAL_PIUTANG = baseURL + "piutang/total_piutang";
+    public static final String URL_POST_KIRIM_BARANG = baseURL + "shop/get_nobukti_order";
+    public static final String URL_GET_DETAIL_PIUTANG = baseURL + "piutang/detail_piutang";
+    public static final String URL_GET_BAYAR_PIUTANG = baseURL + "piutang/list_pembayaran_piutang";
+    public static final String URL_GET_CEKLIST_BAYAR = baseURL + "piutang/checklist_nota_piutang?start=0&limit=10";
+    public static final String URL_GET_LIST_DAFTAR_PEMESANAN = baseURL + "order_info/list_order?start=0&limit=10";
+    public static final String URL_GET_LIST_CEK_PESANAN = baseURL + "order_info/list_pengiriman";
+    public static final String URL_POST_INPUT_PIN = baseURL + "auth/pin_validation";
+    public static final String URL_GET_RETURN = baseURL + "retur/list_retur?start=0&limit=10";
+    public static final String URL_GET_DETAIL_RETURN = baseURL + "retur/detail_retur";
+    public static final String URL_GET_RIWAYAT_PENUKARAN_POINT = baseURL + "poin/list_penukaran_poin";
+    public static final String URL_POST_FOTO = baseURL + "account/change_profile_pics";
+    public static final String URL_GET_SEARCH_RIWAYAT = baseURL + "poin/search_penukaran_poin";
+    public static final String URL_POST_DETAIL_DAFTAR_PESANAN = baseURL + "order_info/detail_order";
 
 
  // http://gmedia.bz/kartika/api/reseller/product/

@@ -1,4 +1,4 @@
-package co.id.gmedia.octavian.kartikaapps.merchant;
+package co.id.gmedia.octavian.kartikaapps.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -28,13 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import co.id.gmedia.octavian.kartikaapps.FragmentHome;
-import co.id.gmedia.octavian.kartikaapps.MainActivity;
 import co.id.gmedia.octavian.kartikaapps.R;
-import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
-import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.model.ModelSpinner;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
@@ -317,11 +311,14 @@ public class ActivityPesanan extends AppCompatActivity {
 
                             if (status.equals("200")){
                                 //obj.put("txt_jumlah",txt_jumlah.getText().toString());
-                                Intent intent = new Intent(ActivityPesanan.this, MainActivity.class);
+                                Intent intent = new Intent(ActivityPesanan.this, ActivityAddToCart.class);
                                 startActivity(intent);
                                 finish();
                                 obj.getJSONObject("response").getString("jumlah");
-                                obj.getJSONObject("response").getString("limit");
+                                obj.getJSONObject("response").getString("harga_satuan_rp");
+                                obj.getJSONObject("response").getString("total_harga_rp");
+                                obj.getJSONObject("response").getString("harga_satuan");
+                                obj.getJSONObject("response").getString("total_harga");
                                 Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
                             }else {
                                 Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();

@@ -5,8 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    tools:context=".merchant.ActivityAddToCart">
+    tools:context=".activity.ActivityAddToCart">
 
+    <LinearLayout
+        android:id="@+id/ln_keranjang_kosong"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ln_2"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/size_20dp">
+
+    <ImageView
+        android:id="@+id/gmbr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/size_10dp"
+        android:src="@drawable/keranjang"
+        android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="@dimen/size_12dp"
+            android:textStyle="bold"
+            android:text="Oops..."/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="@dimen/size_12dp"
+            android:textStyle="bold"
+            android:text="Keranjangmu Kosong Isi Dulu Yuks..."/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tocart"
@@ -22,23 +61,23 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-
-        <androidx.cardview.widget.CardView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/size_4dp"
-            app:cardElevation="@dimen/size_4dp"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:layout_marginRight="@dimen/size_10dp"
-            android:layout_marginLeft="@dimen/size_10dp">
+            android:layout_height="1dp"
+            android:background="@color/colorGreyAccent"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size_10dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/size_4dp"
+                android:layout_marginLeft="@dimen/size_12dp"
+                android:layout_marginRight="@dimen/size_12dp"
+                android:layout_marginTop="@dimen/size_4dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+               <!-- <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -51,18 +90,20 @@
                         android:textStyle="bold"
                         android:text="Total Belanja"/>
 
-                </LinearLayout>
+                </LinearLayout>-->
 
-                <View
+                <!--<View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/size_4dp"
                     android:layout_marginBottom="@dimen/size_4dp"
-                    android:background="@color/colorGreyAccent" />
+                    android:background="@color/colorGreyAccent" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
@@ -77,7 +118,7 @@
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=""
+                        android:text="Rp 0"
                         android:textColor="@color/orange"
                         android:gravity="right"
                         android:layout_gravity="center"
@@ -85,7 +126,11 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGreyAccent"/>
 
     <LinearLayout
         android:id="@+id/btn_ln1"
@@ -98,6 +143,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_tambahkeranjang"
             android:layout_weight="1"
             android:layout_margin="@dimen/size_10dp"
             android:background="@drawable/border_btn_white"

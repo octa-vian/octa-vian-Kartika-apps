@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorTransparants"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="220dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="@dimen/size_4dp"
+        android:elevation="@dimen/size_10dp"
+        android:layout_margin="@dimen/size_20dp">
+
+    <RelativeLayout
+        android:id="@+id/rr_1"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cs_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/layout_category"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:cardCornerRadius="@dimen/size_10dp"
+            app:layout_constraintDimensionRatio="4:4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/akungrey" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="140dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/size_10dp"
+            android:layout_below="@id/cs_1"
+            android:background="@drawable/border_btn_lanjut"
+            android:text="Upload"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/size_12dp"/>
+
+    </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

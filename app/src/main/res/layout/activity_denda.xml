@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".merchant.ActivityDenda">
+    tools:context=".activity.ActivityDenda">
 
     <RelativeLayout
         android:id="@+id/rl_1"
@@ -39,6 +39,7 @@
                     android:layout_weight="1"
                     android:gravity="left"
                     android:text="Total Denda"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -64,10 +65,5 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/size_10dp">
     </androidx.recyclerview.widget.RecyclerView>
-
-
-
-
-
 
 </RelativeLayout>

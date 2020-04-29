@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/red_color"
+        app:cardBackgroundColor="@color/red_Dark"
         app:cardCornerRadius="20dp"
         android:layout_margin="40dp"
         android:elevation="20dp"
@@ -68,13 +68,14 @@
 
             <Button
                 android:id="@+id/btn_proses"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:textSize="@dimen/size_12dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="68dp"
                 android:layout_marginLeft="68dp"
                 android:layout_marginBottom="40dp"
+                android:layout_gravity="center"
                 android:text="Kirim"
                 android:textColor="#fff"
                 android:background="@drawable/border_btn_lanjut"/>

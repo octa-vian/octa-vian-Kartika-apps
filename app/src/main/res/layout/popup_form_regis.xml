@@ -49,6 +49,7 @@
                     android:id="@+id/txt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_12dp"
                     android:hint="Username tidak boleh mengandung spasi"
                     android:textStyle="bold"/>
 
@@ -62,6 +63,7 @@
                     android:id="@+id/txt_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_12dp"
                     android:hint="Password minimal 5 digit"
                     android:inputType="textPassword"
                     android:textStyle="bold"/>
@@ -76,6 +78,7 @@
                     android:id="@+id/txt_ulang_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_12dp"
                     android:hint="Password minimal 5 digit"
                     android:inputType="textPassword"
                     android:textStyle="bold"/>
@@ -91,6 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberPassword"
+                    android:textSize="@dimen/size_12dp"
                     android:hint="Pin harus 4 digit"
                     android:textStyle="bold"/>
 
@@ -104,6 +108,7 @@
                     android:id="@+id/txt_repin"
                     android:inputType="numberPassword"
                     android:hint="Pin harus 4 digit"
+                    android:textSize="@dimen/size_12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"/>
@@ -112,13 +117,14 @@
 
             <Button
                 android:id="@+id/btn_register"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:textSize="@dimen/size_12dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="68dp"
                 android:layout_marginLeft="68dp"
                 android:layout_marginBottom="40dp"
+                android:layout_gravity="center"
                 android:text="Register"
                 android:textColor="#fff"
                 android:background="@drawable/border_login"/>

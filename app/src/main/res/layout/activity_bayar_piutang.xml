@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ActivityBayarPiutang">
+
+    <RelativeLayout
+        android:id="@+id/paddingTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red_Dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/cart"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/backarrow"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="List Pembayaran"
+                android:textColor="@color/color_white"
+                android:layout_gravity="center"
+                android:textSize="@dimen/size_16dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_piutang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/paddingTop"
+        android:layout_above="@id/ln_1"
+        android:layout_margin="@dimen/size_10dp">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/ln_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_bayar"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/size_12dp"
+            android:textStyle="bold"
+            android:text="Bayar"
+            android:background="@drawable/border_btn_lanjut"
+            android:layout_margin="@dimen/size_20dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

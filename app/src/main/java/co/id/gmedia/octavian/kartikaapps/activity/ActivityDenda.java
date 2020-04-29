@@ -1,4 +1,4 @@
-package co.id.gmedia.octavian.kartikaapps.merchant;
+package co.id.gmedia.octavian.kartikaapps.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -16,12 +16,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import co.id.gmedia.octavian.kartikaapps.R;
-import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorCategory;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorListDenda;
-import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;

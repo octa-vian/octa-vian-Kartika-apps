@@ -12,13 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import co.id.gmedia.octavian.kartikaapps.merchant.DetailActivityBarang;
+import co.id.gmedia.octavian.kartikaapps.activity.DetailActivityBarang;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
@@ -78,7 +77,7 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
 
     public static class TemplateViewHolder extends RecyclerView.ViewHolder{
 
-        private MaterialCardView cardView;
+        private CardView cardView;
         private ImageView iv_cardview;
         private TextView txt_nama, txt_harga, txt_status;
 
@@ -88,7 +87,7 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
            txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_brg);
            txt_harga =  (TextView) itemView.findViewById(R.id.txt_harga);
            txt_status =  (TextView) itemView.findViewById(R.id.status);
-           cardView = (MaterialCardView) itemView.findViewById(R.id.card_produk);
+           cardView = (CardView) itemView.findViewById(R.id.card_produk);
         }
     }
 }

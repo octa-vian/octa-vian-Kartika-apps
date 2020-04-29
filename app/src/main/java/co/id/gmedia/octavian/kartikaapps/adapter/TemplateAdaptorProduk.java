@@ -2,7 +2,6 @@ package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
-import co.id.gmedia.octavian.kartikaapps.merchant.DetailActivityBarang;
+import co.id.gmedia.octavian.kartikaapps.activity.DetailActivityBarang;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
@@ -82,7 +81,7 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
 
         private ImageView iv_cardview;
         private TextView txt_nama, txt_harga, txt_status;
-        private MaterialCardView cardView;
+        private CardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,7 +89,7 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
            txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_brg);
            txt_harga =  (TextView) itemView.findViewById(R.id.txt_harga);
            txt_status =  (TextView) itemView.findViewById(R.id.status);
-           cardView = (MaterialCardView) itemView.findViewById(R.id.layout_category);
+           cardView = (CardView) itemView.findViewById(R.id.layout_category);
         }
     }
 }

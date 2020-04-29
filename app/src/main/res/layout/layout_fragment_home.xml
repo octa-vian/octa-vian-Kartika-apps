@@ -42,32 +42,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/red_color"
+                android:background="@color/colorPrimary"
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/txt_search_btn"
                     android:layout_weight="4"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="@dimen/size_10dp"
                     android:layout_marginRight="10dp"
+                    android:padding="@dimen/size_4dp"
                     android:drawableLeft="@drawable/ic_search_black_24dp"
                     android:background="@drawable/border_white"
+                    android:textSize="@dimen/size_12dp"
                     android:hint="Cari disini"/>
 
                 <ImageView
                     android:id="@+id/pesan"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_message"/>
 
                 <ImageView
                     android:id="@+id/cart"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_gravity="center"
@@ -75,8 +78,8 @@
 
                 <ImageView
                     android:id="@+id/setting"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginRight="10dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_settings"/>
@@ -125,7 +128,7 @@
                     android:id="@+id/text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_yellow_dialog"
+                    android:textColor="@color/orange"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="right"
@@ -141,6 +144,7 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cr_point"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/size_10dp"
@@ -156,8 +160,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/poin"
                     android:layout_margin="10dp"/>
 
@@ -167,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Poin Anda"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:layout_gravity="center"
                     android:gravity="left"/>
 
@@ -177,7 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_gravity="center"
@@ -216,7 +220,7 @@
                         android:id="@+id/lihat_semua"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_yellow_dialog"
+                        android:textColor="@color/orange"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:gravity="right"
