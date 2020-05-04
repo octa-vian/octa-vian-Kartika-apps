@@ -110,6 +110,7 @@ public class FragmentProduk extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable.toString().length() == 0){
+                    search = editable.toString();
                     LoadProduk(true);
                 }
                 Log.d("search",search);
@@ -118,7 +119,6 @@ public class FragmentProduk extends Fragment {
 
         LoadProduk(true);
         //LoadSearch();
-
         return v;
     }
 

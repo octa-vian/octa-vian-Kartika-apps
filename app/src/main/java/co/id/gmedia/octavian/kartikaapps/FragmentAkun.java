@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +76,7 @@ private static ImageView img_btn;
 private String gambar;
 private static PhotoModel upload;
 private int bitmap_size = 60; // range 1 - 100
+private static ProgressBar loading;
 
 
     public FragmentAkun() {
@@ -90,6 +92,8 @@ private int bitmap_size = 60; // range 1 - 100
         activity = getContext();
         v = inflater.inflate(R.layout.layout_fragment_akun, container, false);
 
+        //View
+        loading = v.findViewById(R.id.loading);
         txt_nama  = v.findViewById(R.id.txt_nama);
         txt_namaOtlet = v.findViewById(R.id.txt_namaOutlet);
         txt_no = v.findViewById(R.id.txt_notelp);
@@ -159,6 +163,7 @@ private int bitmap_size = 60; // range 1 - 100
                     @Override
                     public void onClick(View view) {
                         InputPin1();
+                        dialog.dismiss();
                     }
                 });
                 dialog.show();
@@ -179,6 +184,7 @@ private int bitmap_size = 60; // range 1 - 100
                     @Override
                     public void onClick(View view) {
                         InputPin2();
+                        dialog.dismiss();
                     }
                 });
                 dialog.show();
@@ -262,18 +268,6 @@ private int bitmap_size = 60; // range 1 - 100
         });
     }
 
-    private void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALERRY_REQUEST);
-    }
-
-
-    private ContentResolver getContentResolver() {
-        return null;
-    }
-
     public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, baos);
@@ -282,10 +276,6 @@ private int bitmap_size = 60; // range 1 - 100
         return encodedImage;
     }
 
-    private void kosong() {
-        img_btn.setImageResource(0);
-        //txt_name.setText(null);
-    }
 
     private void setToImageView(Bitmap bmp) {
         //compress image
@@ -314,7 +304,6 @@ private int bitmap_size = 60; // range 1 - 100
 
 
     private static void InitData() {
-
         new APIvolley(context, new JSONObject(), "POST", Constant.URL_GET_AKUN, new APIvolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
@@ -373,6 +362,7 @@ private int bitmap_size = 60; // range 1 - 100
     }
 
     private static void LoadPhoto(String base64) {
+        loading.setVisibility(View.VISIBLE);
         JSONObject object = new JSONObject();
 
         try {
@@ -384,6 +374,7 @@ private int bitmap_size = 60; // range 1 - 100
         new APIvolley(context, object, "POST", Constant.URL_POST_FOTO, new APIvolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
+                loading.setVisibility(View.GONE);
                 try {
                     JSONObject yuhu = new JSONObject(result);
                     String message = yuhu.getJSONObject("metadata").getString("message");
@@ -392,6 +383,7 @@ private int bitmap_size = 60; // range 1 - 100
                         InitData();
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     } else {
+                        loading.setVisibility(View.GONE);
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
@@ -401,6 +393,7 @@ private int bitmap_size = 60; // range 1 - 100
 
             @Override
             public void onError(String result) {
+            loading.setVisibility(View.GONE);
             Toast.makeText(context, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
             }
         });

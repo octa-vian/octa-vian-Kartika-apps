@@ -93,6 +93,10 @@ public class Constant {
     public static final String URL_POST_FOTO = baseURL + "account/change_profile_pics";
     public static final String URL_GET_SEARCH_RIWAYAT = baseURL + "poin/search_penukaran_poin";
     public static final String URL_POST_DETAIL_DAFTAR_PESANAN = baseURL + "order_info/detail_order";
+    public static final String URL_GET_LIST_HADIAH = baseURL + "hadiah/filter_hadiah";
+    public static final String URL_GET_DETAIL_HADIAH = baseURL + "hadiah/detail_hadiah";
+    public static final String URL_POST_TUKAR_POINT = baseURL + "poin/tukar_poin";
+    public static final String URL_GET_NOTIF = baseURL + "notification/list_notif";
 
 
  // http://gmedia.bz/kartika/api/reseller/product/

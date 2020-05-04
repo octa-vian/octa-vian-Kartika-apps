@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -32,6 +33,14 @@ public class ActivityDetailPoint extends AppCompatActivity {
         txt_point = findViewById(R.id.txt_point);
         btn_tukar = findViewById(R.id.cv_tukar);
         btn_riwayat = findViewById(R.id.cv_riwayat);
+
+        btn_tukar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityDetailPoint.this, ActivityListTukarPoint.class);
+                startActivity(intent);
+            }
+        });
 
         btn_riwayat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +85,18 @@ public class ActivityDetailPoint extends AppCompatActivity {
 
                     }
                 });
-
+        refresh(5000);
     }
+
+    private void refresh(int i) {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                loadPoit();
+            }
+        };
+        handler.postDelayed(runnable, i);
+    }
+
 }

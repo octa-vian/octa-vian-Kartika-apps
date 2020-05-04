@@ -1,7 +1,6 @@
 package co.id.gmedia.octavian.kartikaapps.activity;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -37,43 +36,41 @@ import java.util.Locale;
 
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
+import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukTukarPoint;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 
-public class ActivityListDetailCategory extends AppCompatActivity {
+public class ActivityListTukarPoint extends AppCompatActivity {
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
-    private TemplateAdaptorProduk adepterproduk;
-    private static String TAG = "Produk";
+    private TemplateAdaptorProdukTukarPoint adepterproduk;
+    private static String TAG = "Merk";
     private TextView txt_judul;
     private EditText txt_search;
-    private ProgressDialog proses;
-    private String search="";
-    private ModelOneForAll nota;
-    private ImageView img_filter;
-    private String termurah = "termurah";
-    private String termahal = "termahal";
-    private String terlaris = "terlaris";
-    private String priorder = "preorder";
-    private String available = "available ";
+    private String search = "";
+    private ImageView btn_filter;
+    private String Terendah = "terendah";
+    private String Tertinggi = "tertinggi";
     private String Status = "";
     private String Filter="";
     private ProgressBar loading;
     private LoadMoreScrollListener loadMoreScrollListener;
 
+    private ModelOneForAll nota;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_detail_produk);
+        setContentView(R.layout.activity_list_detail_produk_no_title);
 
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
-        homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailCategory.this,2));
+        homeProduk.setLayoutManager(new GridLayoutManager(ActivityListTukarPoint.this,2));
         //homeProduk.setLayoutManager(new LinearLayoutManager(ActivityListDetailProduk.this, LinearLayoutManager.VERTICAL,false));
-        adepterproduk = new TemplateAdaptorProduk(ActivityListDetailCategory.this, viewproduk) ;
+        adepterproduk = new TemplateAdaptorProdukTukarPoint(ActivityListTukarPoint.this, viewproduk) ;
         homeProduk.setAdapter(adepterproduk);
         loadMoreScrollListener = new LoadMoreScrollListener() {
             @Override
@@ -83,9 +80,10 @@ public class ActivityListDetailCategory extends AppCompatActivity {
         };
         homeProduk.addOnScrollListener(loadMoreScrollListener);
 
-        txt_judul = findViewById(R.id.txt_judul);
+        //View
+       // txt_judul = findViewById(R.id.txt_judul);
         txt_search = findViewById(R.id.txt_search);
-        img_filter = findViewById(R.id.filter);
+        btn_filter = findViewById(R.id.filter);
         loading = findViewById(R.id.loading);
 
         txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -121,51 +119,43 @@ public class ActivityListDetailCategory extends AppCompatActivity {
             }
         });
 
-        if(getIntent().hasExtra(Constant.EXTRA_BARANG)){
+        /*if(getIntent().hasExtra(Constant.EXTRA_BARANG)){
             Gson gson = new Gson();
             nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelOneForAll.class);
-        }
+        }*/
 
-        img_filter.setOnClickListener(new View.OnClickListener() {
+         btn_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(ActivityListDetailCategory.this);
-                dialog.setContentView(R.layout.popup_filter);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                final RadioButton btn_terlaris, btn_termahal, btn_termurah, btn_tersedia, btn_preorder;
-                final RadioGroup group;
-                group = dialog.findViewById(R.id.radio_grup);
-                btn_terlaris = dialog.findViewById(R.id.txt_terlaris);
-                btn_termahal = dialog.findViewById(R.id.txt_termahal);
-                btn_termurah = dialog.findViewById(R.id.txt_termurah);
-                btn_tersedia = dialog.findViewById(R.id.txt_tersedia);
-                btn_preorder = dialog.findViewById(R.id.txt_preorder);
-                Button btn_simpan;
-                btn_simpan = dialog.findViewById(R.id.btn_simpan);
-                btn_simpan.setOnClickListener(new View.OnClickListener() {
+                Dialog filter = new Dialog(ActivityListTukarPoint.this);
+                filter.setContentView(R.layout.popup_filter_small);
+                filter.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                final RadioButton btn_terendah, btn_tertinggi;
+                RadioGroup grup;
+                grup = filter.findViewById(R.id.radio_grup);
+                btn_terendah = filter.findViewById(R.id.txt_terendah);
+                btn_tertinggi = filter.findViewById(R.id.txt_tertinggi);
+                Button simpan;
+                simpan = filter.findViewById(R.id.btn_simpan);
+
+                simpan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        int Id = group.getCheckedRadioButtonId();
+                        int Id = grup.getCheckedRadioButtonId();
 
-                        if (Id == btn_terlaris.getId()){
-                            Filter = terlaris.toString();
-                        } else if (Id == btn_termurah.getId()){
-                            Filter = termurah.toString();
-                        } else if (Id == btn_termahal.getId()){
-                            Filter = termahal.toString();
-                        } else if (Id == btn_tersedia.getId()) {
-                            Status = available.toString();
-                        } else if (Id == btn_preorder.getId()) {
-                            Status = priorder.toString();
+                        if (Id == btn_terendah.getId()){
+                            Filter = Terendah.toString();
+                        } else if (Id == btn_tertinggi.getId()){
+                            Filter = Tertinggi.toString();
                         }
-                        Log.d("filter",Filter);
+                        Log.d("filter", Filter);
 
-                    LoadProduk(true);
-                    dialog.dismiss();
+                        LoadProduk(true);
+                        filter.dismiss();
                     }
                 });
-                dialog.show();
+                filter.show();
             }
         });
 
@@ -177,13 +167,13 @@ public class ActivityListDetailCategory extends AppCompatActivity {
         if (init){
             loadMoreScrollListener.initLoad();
         }
-        txt_judul.setText(nota.getItem2());
-        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&category=%s&keyword=%s&sort_by=%s&stock_status=%s",loadMoreScrollListener.getLoaded(), 20, nota.getItem1(),search,Filter,Status);
-        new APIvolley(ActivityListDetailCategory.this, new JSONObject(), "GET", Constant.URL_LIST_PRODUK+parameter,
+        //txt_judul.setText(nota.getItem3());
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=%s",loadMoreScrollListener.getLoaded(), 10, search, Filter);
+        new APIvolley(ActivityListTukarPoint.this, new JSONObject(), "GET", Constant.URL_GET_LIST_HADIAH+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        loading.setVisibility(View.GONE);
+                       loading.setVisibility(View.GONE);
                         try {
                             if (init){
                                 viewproduk.clear();
@@ -194,18 +184,19 @@ public class ActivityListDetailCategory extends AppCompatActivity {
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
                                 viewproduk.add(new ModelProduk(
-                                        objt.getString("kodebrg")
-                                        ,objt.getString("img_url")
+                                        objt.getString("img_url")
+                                        ,objt.getString("kodebrg")
                                         ,objt.getString("namabrg")
-                                        ,objt.getString("harga")
-                                        ,objt.getString("stok")));
+                                        ,objt.getString("poin")
+
+                                ));
                             }
                             loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             loadMoreScrollListener.finishLoad(0);
-                            Toast.makeText(ActivityListDetailCategory.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityListTukarPoint.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -215,6 +206,7 @@ public class ActivityListDetailCategory extends AppCompatActivity {
 
                     @Override
                     public void onError(String result) {
+                        loading.setVisibility(View.GONE);
                         loadMoreScrollListener.finishLoad(0);
                         Log.e(TAG,result);
                         viewproduk.clear();
@@ -222,6 +214,7 @@ public class ActivityListDetailCategory extends AppCompatActivity {
 
                     }
                 });
+
     }
 
 }

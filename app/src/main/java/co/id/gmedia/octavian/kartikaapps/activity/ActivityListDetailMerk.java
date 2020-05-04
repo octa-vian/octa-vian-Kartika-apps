@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -53,7 +54,11 @@ public class ActivityListDetailMerk extends AppCompatActivity {
     private String termurah = "termurah";
     private String termahal = "termahal";
     private String terlaris = "terlaris";
+    private String priorder = "preorder";
+    private String available = "available ";
+    private String Status = "";
     private String Filter="";
+    private ProgressBar loading;
     private LoadMoreScrollListener loadMoreScrollListener;
 
     private ModelOneForAll nota;
@@ -69,18 +74,26 @@ public class ActivityListDetailMerk extends AppCompatActivity {
         //homeProduk.setLayoutManager(new LinearLayoutManager(ActivityListDetailProduk.this, LinearLayoutManager.VERTICAL,false));
         adepterproduk = new TemplateAdaptorProduk(ActivityListDetailMerk.this, viewproduk) ;
         homeProduk.setAdapter(adepterproduk);
+        loadMoreScrollListener = new LoadMoreScrollListener() {
+            @Override
+            public void onLoadMore() {
+                LoadProduk(false);
+            }
+        };
+        homeProduk.addOnScrollListener(loadMoreScrollListener);
 
         //View
         txt_judul = findViewById(R.id.txt_judul);
         txt_search = findViewById(R.id.txt_search);
         img_filter = findViewById(R.id.filter);
+        loading = findViewById(R.id.loading);
 
         txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(i == EditorInfo.IME_ACTION_SEARCH){
                     search = textView.getText().toString();
-                    LoadProduk();
+                    LoadProduk(true);
                     return true;
                 }
                 return false;
@@ -101,7 +114,8 @@ public class ActivityListDetailMerk extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 //search = editable.toString();
                 if (editable.toString().length() == 0){
-                    LoadProduk();
+                    search = editable.toString();
+                    LoadProduk(true);
                 }
                 Log.d("search",search);
             }
@@ -118,12 +132,14 @@ public class ActivityListDetailMerk extends AppCompatActivity {
                 final Dialog dialog = new Dialog(ActivityListDetailMerk.this);
                 dialog.setContentView(R.layout.popup_filter);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                final RadioButton btn_terlaris, btn_termahal, btn_termurah;
+                final RadioButton btn_terlaris, btn_termahal, btn_termurah, btn_tersedia, btn_preorder;
                 final RadioGroup group;
                 group = dialog.findViewById(R.id.radio_grup);
                 btn_terlaris = dialog.findViewById(R.id.txt_terlaris);
                 btn_termahal = dialog.findViewById(R.id.txt_termahal);
                 btn_termurah = dialog.findViewById(R.id.txt_termurah);
+                btn_tersedia = dialog.findViewById(R.id.txt_tersedia);
+                btn_preorder = dialog.findViewById(R.id.txt_preorder);
                 Button btn_simpan;
                 btn_simpan = dialog.findViewById(R.id.btn_simpan);
                 btn_simpan.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +154,10 @@ public class ActivityListDetailMerk extends AppCompatActivity {
                             Filter = termurah.toString();
                         } else if (Id == btn_termahal.getId()){
                             Filter = termahal.toString();
+                        } else if (Id == btn_tersedia.getId()) {
+                            Status = available.toString();
+                        } else if (Id == btn_preorder.getId()){
+                            Status = priorder.toString();
                         }
                         Log.d("filter",Filter);
                         /*switch (Id){
@@ -154,7 +174,7 @@ public class ActivityListDetailMerk extends AppCompatActivity {
                                 break;
 
                         }*/
-                        LoadProduk();
+                        LoadProduk(true);
                         dialog.dismiss();
                     }
                 });
@@ -162,18 +182,25 @@ public class ActivityListDetailMerk extends AppCompatActivity {
             }
         });
 
-        LoadProduk();
+        LoadProduk(true);
     }
 
-    private void LoadProduk() {
+    private void LoadProduk(boolean init) {
+        loading.setVisibility(View.VISIBLE);
+        if (init){
+            loadMoreScrollListener.initLoad();
+        }
         txt_judul.setText(nota.getItem3());
-        String parameter = String.format(Locale.getDefault(), "?start=0&limit=12&merk=%s&keyword=%s&sort_by=%s",nota.getItem1(),search,Filter);
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&merk=%s&keyword=%s&sort_by=%s&stock_status=%s",loadMoreScrollListener.getLoaded(), 20, nota.getItem1(),search,Filter,Status);
         new APIvolley(ActivityListDetailMerk.this, new JSONObject(), "GET", Constant.URL_LIST_PRODUK+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        viewproduk.clear();
+                       loading.setVisibility(View.GONE);
                         try {
+                            if (init){
+                                viewproduk.clear();
+                            }
                             JSONObject obj= new JSONObject(result);
                             JSONArray meal= obj.getJSONArray("response");
                             for (int i=0; i < meal.length(); i++){
@@ -186,10 +213,11 @@ public class ActivityListDetailMerk extends AppCompatActivity {
                                         ,objt.getString("harga")
                                         ,objt.getString("stok")));
                             }
-
+                            loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();
 
                         } catch (JSONException e) {
+                            loadMoreScrollListener.finishLoad(0);
                             Toast.makeText(ActivityListDetailMerk.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
@@ -200,6 +228,8 @@ public class ActivityListDetailMerk extends AppCompatActivity {
 
                     @Override
                     public void onError(String result) {
+                        loading.setVisibility(View.GONE);
+                        loadMoreScrollListener.finishLoad(0);
                         Log.e(TAG,result);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();

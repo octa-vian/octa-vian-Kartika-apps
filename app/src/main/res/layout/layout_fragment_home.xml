@@ -45,7 +45,7 @@
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal">
 
-                <EditText
+                <TextView
                     android:id="@+id/txt_search_btn"
                     android:layout_weight="4"
                     android:layout_width="match_parent"
@@ -54,11 +54,13 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="@dimen/size_10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:padding="@dimen/size_4dp"
                     android:drawableLeft="@drawable/ic_search_black_24dp"
                     android:background="@drawable/border_white"
                     android:textSize="@dimen/size_12dp"
-                    android:hint="Cari disini"/>
+                    android:hint="Cari produk disini"/>
 
                 <ImageView
                     android:id="@+id/pesan"
@@ -230,10 +232,20 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ll_recyclerView3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+    <!--<TextView
+        android:id="@+id/tv_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_gravity="right"
+        android:text="refresh:"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp" />-->
 </RelativeLayout>

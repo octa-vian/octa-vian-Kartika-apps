@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1021203356691",
+    "firebase_url": "https://kartikaapps-58a09.firebaseio.com",
+    "project_id": "kartikaapps-58a09",
+    "storage_bucket": "kartikaapps-58a09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021203356691:android:18faf971f5c2fd64ca33e6",
+        "android_client_info": {
+          "package_name": "co.id.gmedia.octavian.kartikaapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021203356691-opa37n6rni6p8svse3ejfbkac0hk589s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.id.gmedia.octavian.kartikaapps",
+            "certificate_hash": "5e2df275064cd212d3934b82905224a3a64a6eef"
+          }
+        },
+        {
+          "client_id": "1021203356691-33evuu5pfjbnp61ub8i8jh7438eq05ot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtl6_5rgUpDEggDzidbn3DC642B14ImOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021203356691-33evuu5pfjbnp61ub8i8jh7438eq05ot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

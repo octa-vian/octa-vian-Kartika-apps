@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
+import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 
 public class ActivityListDetailProduk extends AppCompatActivity {
 
@@ -59,29 +61,39 @@ public class ActivityListDetailProduk extends AppCompatActivity {
     private String available = "available ";
     private String Status = "";
     private String Filter="";
+    private ProgressBar loading;
+    private LoadMoreScrollListener loadMoreScrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_detail_produk);
+        setContentView(R.layout.activity_list_detail_produk_no_title);
 
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
         homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailProduk.this,2));
         adepterproduk = new TemplateAdaptorProduk(ActivityListDetailProduk.this, viewproduk) ;
         homeProduk.setAdapter(adepterproduk);
+        loadMoreScrollListener = new LoadMoreScrollListener() {
+            @Override
+            public void onLoadMore() {
+                LoadProduk(false);
+            }
+        };
+        homeProduk.addOnScrollListener(loadMoreScrollListener);
 
 
         txt_judul = findViewById(R.id.txt_judul);
         txt_search = findViewById(R.id.txt_search);
         img_filter = findViewById(R.id.filter);
+        loading = findViewById(R.id.loading);
 
         txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(i == EditorInfo.IME_ACTION_SEARCH){
                     search = textView.getText().toString();
-                    LoadProduk();
+                    LoadProduk(true);
                     return true;
                 }
                 return false;
@@ -102,7 +114,8 @@ public class ActivityListDetailProduk extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 //search = editable.toString();
                 if (editable.toString().length() == 0){
-                    LoadProduk();
+                    search = editable.toString();
+                    LoadProduk(true);
                 }
                 Log.d("search",search);
             }
@@ -162,7 +175,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                                 break;
 
                         }*/
-                        LoadProduk();
+                        LoadProduk(true);
                         dialog.dismiss();
                     }
                 });
@@ -170,18 +183,26 @@ public class ActivityListDetailProduk extends AppCompatActivity {
             }
         });
 
-        LoadProduk();
+        LoadHotProduk(true);
+        //LoadProduk(true);
     }
 
 
-    private void LoadProduk() {
-        String parameter = String.format(Locale.getDefault(), "?start=0&limit=20&keyword=%s&sort_by=%s&stock_status=%s",search,Filter,Status);
+    private void LoadProduk(boolean init) {
+        loading.setVisibility(View.VISIBLE);
+        if (init){
+            loadMoreScrollListener.initLoad();
+        }
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=%s&stock_status=%s",loadMoreScrollListener.getLoaded(), 20, search, Filter, Status);
         new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        viewproduk.clear();
+                        loading.setVisibility(View.GONE);
                         try {
+                            if (init){
+                                viewproduk.clear();
+                            }
                             JSONObject obj= new JSONObject(result);
                             JSONArray meal= obj.getJSONArray("response");
                             for (int i=0; i < meal.length(); i++){
@@ -194,10 +215,11 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                                         ,objt.getString("harga")
                                         ,objt.getString("stok")));
                             }
-
+                            loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();
 
                         } catch (JSONException e) {
+                            loadMoreScrollListener.finishLoad(0);
                             Toast.makeText(ActivityListDetailProduk.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
@@ -208,6 +230,8 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
                     @Override
                     public void onError(String result) {
+                        loading.setVisibility(View.GONE);
+                        loadMoreScrollListener.finishLoad(0);
                         Log.e(TAG,result);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
@@ -217,14 +241,21 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
     }
 
-    private void LoadSearch() {
-        String parameter = String.format(Locale.getDefault(), "?start=0&limit=12&sort_by=terlaris");
+    private void LoadHotProduk(boolean init) {
+        loading.setVisibility(View.VISIBLE);
+        if (init){
+            loadMoreScrollListener.initLoad();
+        }
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=terlaris",loadMoreScrollListener.getLoaded(), 20, search);
         new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        viewproduk.clear();
+                        loading.setVisibility(View.GONE);
                         try {
+                            if (init){
+                                viewproduk.clear();
+                            }
                             JSONObject obj= new JSONObject(result);
                             JSONArray meal= obj.getJSONArray("response");
                             for (int i=0; i < meal.length(); i++){
@@ -237,8 +268,11 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                                         ,objt.getString("harga")
                                         ,objt.getString("stok")));
                             }
+                            loadMoreScrollListener.finishLoad(meal.length());
+                            adepterproduk.notifyDataSetChanged();
 
                         } catch (JSONException e) {
+                            loadMoreScrollListener.finishLoad(0);
                             Toast.makeText(ActivityListDetailProduk.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
@@ -249,6 +283,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
                     @Override
                     public void onError(String result) {
+                        loadMoreScrollListener.finishLoad(0);
                         Log.e(TAG,result);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
@@ -257,5 +292,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                 });
 
     }
+
+
 
 }

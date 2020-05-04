@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="@dimen/size_16dp"
+        android:elevation="@dimen/size_10dp"
+        android:layout_margin="@dimen/size_20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_4dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_20dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="Apakah anda yakin ingin menukar Poin dengan Produk ini?"/>
+
+            <LinearLayout
+                android:id="@+id/ln_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_tidak"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:layout_marginRight="@dimen/size_10dp"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:layout_marginBottom="@dimen/size_10dp"
+                    android:background="@drawable/border_btn_white"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/size_12dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="Batal"/>
+
+                <Button
+                    android:id="@+id/btn_tukar"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:layout_marginRight="@dimen/size_10dp"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:layout_marginBottom="@dimen/size_10dp"
+                    android:background="@drawable/border_btn_lanjut"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/size_12dp"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:text="Tukar"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

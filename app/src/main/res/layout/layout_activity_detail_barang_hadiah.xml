@@ -72,24 +72,19 @@
                     android:text="Nama Barang"/>
 
                 <TextView
-                    android:id="@+id/harga"
+                    android:id="@+id/point"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/orange"
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/size_4dp"
-                    android:text="Rp. 20.000.00"/>
+                    android:text=""/>
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/size_20dp"
-                android:background="@color/colorGreyAccent"/>
 
-            <LinearLayout
+           <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -112,7 +107,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/grey"/>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"
@@ -180,12 +175,13 @@
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:textSize="@dimen/size_12dp"
+            android:textColor="@color/orange"
             android:textStyle="bold"
             android:gravity="center"
             android:text="Chat Sales"/>
 
         <Button
-            android:id="@+id/btn_beli"
+            android:id="@+id/btn_tukar"
             android:layout_weight="1"
             android:layout_marginTop="@dimen/size_10dp"
             android:layout_marginRight="@dimen/size_10dp"
@@ -198,7 +194,7 @@
             android:textSize="@dimen/size_12dp"
             android:textColor="#fff"
             android:gravity="center"
-            android:text="beli Sekarang"/>
+            android:text="Tukar"/>
 
     </LinearLayout>
 

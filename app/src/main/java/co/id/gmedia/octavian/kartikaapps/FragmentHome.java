@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,15 +55,17 @@ public class FragmentHome extends Fragment {
     private View v;
     private static EditText old_pass, new_pass, re_pass, old_pin, new_pin, re_pin, txt_phone, txt_otp, txt_Logout;
     private String times= "";
-    private TextView txt_point;
+    private TextView txt_point, tvRefresh;
     private ItemValidation iv = new ItemValidation();
+    private int count = 0;
+    private boolean loadingTime;
 
     private List<ModelOneForAll> viewmenubaru = new ArrayList<>();
     private TemplateAdaptorpromo kategorimenu;
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
     private TemplateAdaptorHotProduk adepterproduk;
-    private EditText txt_search;
+    private TextView txt_search;
     private CardView point;
 
     private static String TAG = "Home";
@@ -89,6 +92,7 @@ public class FragmentHome extends Fragment {
 
             txt_point = v.findViewById(R.id.txt_point);
             txt_search = v.findViewById(R.id.txt_search_btn);
+            //txt_search.setEnabled(false);
             point = v.findViewById(R.id.cr_point);
 
             RecyclerView homeview = v.findViewById(R.id.ll_recyclerView1);
@@ -116,14 +120,22 @@ public class FragmentHome extends Fragment {
                 }
             });
 
-            v.findViewById(R.id.txt_search_btn).setOnClickListener(new View.OnClickListener() {
+            txt_search.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ActivityListDetailProduk.class);
+                    startActivity(intent);
+                }
+            });
+
+           /* v.findViewById(R.id.txt_search_btn).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ActivityListDetailProduk.class);
                     startActivity(intent);
                     context.startActivity(intent);
                 }
-            });
+            });*/
 
             v.findViewById(R.id.cart).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -292,7 +304,18 @@ public class FragmentHome extends Fragment {
 
                     }
                 });
+        refresh(5000);
+    }
 
+    private void refresh(int i) {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                loadPoit();
+            }
+        };
+        handler.postDelayed(runnable, i);
     }
 
     private void LoadProduk() {
