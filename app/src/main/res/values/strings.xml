@@ -11,4 +11,6 @@
     <string name="api_error">Something bad happened, please try later</string>
     <string name="barcode">*********</string>
     <string name="api_unauthorized">You don\'t have permission to access this app</string>
+
+    <string name="notification_channel_id">"channel_id_01"</string>
 </resources>

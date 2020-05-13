@@ -104,7 +104,6 @@ public class APIvolley {
                     Toast.makeText(context, context.getResources().getString(R.string.api_error), Toast.LENGTH_LONG).show();
                     callback.onError(e.toString());
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override

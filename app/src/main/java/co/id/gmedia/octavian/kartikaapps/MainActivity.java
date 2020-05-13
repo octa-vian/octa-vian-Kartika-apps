@@ -11,12 +11,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import co.id.gmedia.coremodul.SessionManager;
+import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
+import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -76,6 +82,42 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         //memberi listener pada saat item bottom terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
+        UpdateFcmId();
+
+    }
+
+    private void UpdateFcmId() {
+        JSONObject object = new JSONObject();
+        try {
+
+            object.put("fcm_id", AppSharedPreferences.getFcmId(this));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new APIvolley(MainActivity.this, object, "POST", Constant.URL_POST_UPDATE_FCM_ID, new APIvolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    JSONObject obj = new JSONObject(result);
+                    String message = obj.getJSONObject("metadata").getString("message");
+                    String status = obj.getJSONObject("metadata").getString("status");
+                    if (status.equals("200")){
+                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(MainActivity.this, "Fcm ID Error", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private boolean loadfragment(Fragment fragment) {

@@ -47,8 +47,9 @@ public class Constant {
     public static final String EXTRA_NOBUKTI = "nobukti";
     public static final String EXTRA_NILAI_PIUTANG = "nilaipiutang";
 
+
     //URL
-    private static final String baseURL = "http://gmedia.bz/kartika/api/reseller/";
+    private static final String baseURL = "http://gmedia.bz/kartikars/api/reseller/";
     //http://gmedia.bz/kartika/api/reseller/auth/phone_validation
 
     public static final String URL_LOGIN = baseURL + "auth/login/";
@@ -83,7 +84,7 @@ public class Constant {
     public static final String URL_POST_KIRIM_BARANG = baseURL + "shop/get_nobukti_order";
     public static final String URL_GET_DETAIL_PIUTANG = baseURL + "piutang/detail_piutang";
     public static final String URL_GET_BAYAR_PIUTANG = baseURL + "piutang/list_pembayaran_piutang";
-    public static final String URL_GET_CEKLIST_BAYAR = baseURL + "piutang/checklist_nota_piutang?start=0&limit=10";
+    public static final String URL_GET_CEKLIST_BAYAR = baseURL + "piutang/checklist_nota_piutang";
     public static final String URL_GET_LIST_DAFTAR_PEMESANAN = baseURL + "order_info/list_order?start=0&limit=10";
     public static final String URL_GET_LIST_CEK_PESANAN = baseURL + "order_info/list_pengiriman";
     public static final String URL_POST_INPUT_PIN = baseURL + "auth/pin_validation";
@@ -97,6 +98,11 @@ public class Constant {
     public static final String URL_GET_DETAIL_HADIAH = baseURL + "hadiah/detail_hadiah";
     public static final String URL_POST_TUKAR_POINT = baseURL + "poin/tukar_poin";
     public static final String URL_GET_NOTIF = baseURL + "notification/list_notif";
+    public static final String URL_POST_SEND_CHAT = baseURL + "chat/send_text";
+    public static final String URL_POST_COUNT_CART = baseURL + "shop/get_cart_badge";
+    public static final String URL_POST_BAYAR_KEDOKU = baseURL + "piutang/get_nobukti_pembayaran_piutang";
+    public static final String URL_POST_UPDATE_FCM_ID = baseURL + "account/update_fcm_id";
+
 
 
  // http://gmedia.bz/kartika/api/reseller/product/

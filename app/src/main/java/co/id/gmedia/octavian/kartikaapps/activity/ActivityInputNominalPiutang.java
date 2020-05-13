@@ -23,7 +23,8 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
     private TextView txt_total;
     private EditText txt_inputPiutang;
     private Button btn_lanjut;
-    private ItemValidation iv;
+    private ItemValidation iv = new ItemValidation();
+    private String total="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,14 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
                 if (txt_inputPiutang.getText().toString().length()==0) {
                     Toast.makeText(ActivityInputNominalPiutang.this, "Input Nominal Terlebih Dahulu", Toast.LENGTH_LONG).show();
                     txt_inputPiutang.requestFocus();
-                } else {
+                    return;
+                }
+
+                if (iv.parseNullDouble(txt_inputPiutang.getText().toString()) > iv.parseNullDouble(total) ){
+                    Toast.makeText(ActivityInputNominalPiutang.this, "Nominal tidak boleh lebih dari Total!", Toast.LENGTH_LONG).show();
+                }
+
+                else {
                     Intent intent = new Intent(ActivityInputNominalPiutang.this, ActivityCeklistBayarPiutang.class);
                     intent.putExtra(Constant.EXTRA_NILAI_PIUTANG, txt_inputPiutang.getText().toString());
                     startActivity(intent);
@@ -65,7 +73,8 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
 
                             if (status.equals("200")){
                                 txt_total.setText(object.getJSONObject("response").getString("total"));
-                                object.getJSONObject("response").getString("total_new");
+                                total = object.getJSONObject("response").getString("total_new");
+
                             } else {
                                 Toast.makeText(ActivityInputNominalPiutang.this, message, Toast.LENGTH_LONG).show();
                             }

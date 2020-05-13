@@ -15,4 +15,22 @@
     <dimen name="size_20dp">20dp</dimen>
     <dimen name="size_icon">24dp</dimen>
     <dimen name="corner_home">3dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="margin_super">24dp</dimen>
+    <dimen name="margin_biger">20dp</dimen>
+    <dimen name="margin_big">16dp</dimen>
+    <dimen name="margin_menu">12dp</dimen>
+    <dimen name="margin_default">8dp</dimen>
+    <dimen name="margin_medium">6dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_tanggung">6dp</dimen>
+    <dimen name="margin_tiny">2dp</dimen>
+    <dimen name="margin_cute">1dp</dimen>
+    <dimen name="default_scrollbar">2dp</dimen>
+    <dimen name="default_line">0.7dp</dimen>
+    <dimen name="default_line_medium">1.3dp</dimen>
+    <dimen name="default_line_big">3dp</dimen>
 </resources>

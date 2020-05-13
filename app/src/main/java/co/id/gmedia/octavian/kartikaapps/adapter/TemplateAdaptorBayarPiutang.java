@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
+import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityCeklistBayarPiutang;
 import co.id.gmedia.octavian.kartikaapps.model.ModelAddToCart;
@@ -25,8 +27,11 @@ public class TemplateAdaptorBayarPiutang extends RecyclerView.Adapter<TemplateAd
 
     private Activity activity;
     private List<ModelAddToCart> listItem;
+    private ItemValidation iv = new ItemValidation();
+    private RecyclerView recyclerView;
 
-    public TemplateAdaptorBayarPiutang(Activity activity, List<ModelAddToCart> listItem){
+    public TemplateAdaptorBayarPiutang(Activity activity, List<ModelAddToCart> listItem, RecyclerView recyclerView){
+        this.recyclerView = recyclerView;
         this.activity = activity;
         this.listItem = listItem ;
     }
@@ -48,20 +53,67 @@ public class TemplateAdaptorBayarPiutang extends RecyclerView.Adapter<TemplateAd
         templateViewHolder.txt_tgl.setText(item.getItem3());
         templateViewHolder.txt_Tgltempo.setText(item.getItem4());
         templateViewHolder.txt_Totalharga.setText(item.getItem5());
-        templateViewHolder.txt_Dibayar.setText(item.getItem6());
+        templateViewHolder.txt_Dibayar.setText(iv.ChangeToRupiahFormat(item.getItem8()));
+
+        if(item.isSelected()){
+            templateViewHolder.cb_btn.setChecked(true);
+        }else{
+            templateViewHolder.cb_btn.setChecked(false);
+        }
+
 
 
         templateViewHolder.cb_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                listItem.get(i).setSelected(b);
-                ((ActivityCeklistBayarPiutang)activity).updateJumlah();
-               /* if (Constant.EXTRA_NILAI_PIUTANG.length()>=0){
-                    cb_btn.isSelected();
-                }*/
+
+                //items.get(position).setSelected(b);
+
+                if(b){ // ditambahkan ke list
+
+                    if(ActivityCeklistBayarPiutang.sisa > 0){
+
+                        if(ActivityCeklistBayarPiutang.sisa - iv.parseNullDouble(item.getItem7()) >= 0){
+
+                            listItem.get(i).setItem8(item.getItem7());
+                            ActivityCeklistBayarPiutang.sisa -= iv.parseNullDouble(item.getItem7());
+
+                        }else{ // disisakan
+
+                            double sisa = iv.parseNullDouble(item.getItem7()) - ActivityCeklistBayarPiutang.sisa;
+                            listItem.get(i).setItem8(iv.doubleToStringFull(iv.parseNullDouble(item.getItem7())-sisa));
+                            ActivityCeklistBayarPiutang.sisa = 0;
+                        }
+
+                        listItem.get(i).setSelected(true);
+
+                    }else{
+
+                        templateViewHolder.cb_btn.setChecked(false);
+                        listItem.get(i).setSelected(false);
+                        Toast.makeText(activity, "Total masih kosong ataus sisa pembayaran sudah habis", Toast.LENGTH_LONG).show();
+                    }
+
+                    //items.get(position).setAtt2(itemSelected.getAtt1());
+
+
+                }else{ // dikurangi dari list
+
+                    ActivityCeklistBayarPiutang.sisa += (iv.parseNullDouble(item.getItem8()));
+                    listItem.get(i).setItem8("0");
+                    listItem.get(i).setSelected(false);
+                }
+
+                ActivityCeklistBayarPiutang.updateSisa();
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((ActivityCeklistBayarPiutang)activity).updateJumlah();
+                        notifyDataSetChanged();
+                    }
+                });
             }
         });
-        templateViewHolder.cb_btn.setChecked(listItem.get(i).isSelected());
     }
 
     @Override

@@ -46,7 +46,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.fxn769:pix:1.5.3'
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    //implementation 'com.google.firebase:firebase-analytics:17.2.2'
+
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-messaging:18.0.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //implementation 'com.google.firebase:firebase-messaging:20.0.0'

@@ -16,6 +16,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private static String TAG = "RegisterActivity";
     private String time= "";
     private SessionManager session;
+    private String fcm_id ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,17 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
+
+        FirebaseApp.initializeApp(this);
+        FirebaseInstanceId.getInstance().getInstanceId().
+                addOnSuccessListener( LoginActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+                    @Override
+                    public void onSuccess(InstanceIdResult instanceIdResult) {
+                        fcm_id = instanceIdResult.getToken();
+                        AppSharedPreferences.setFcmId(LoginActivity.this, fcm_id);
+                        //System.out.println("FCM " + fcm_id);
+                    }
+                });
 
         //Init View
         session = new SessionManager(this);
@@ -210,6 +227,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             body.put("username",txt_nama.getText().toString());
             body.put("password",txt_pass.getText().toString());
+            body.put("fcm_id", fcm_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -259,5 +277,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
 
 }

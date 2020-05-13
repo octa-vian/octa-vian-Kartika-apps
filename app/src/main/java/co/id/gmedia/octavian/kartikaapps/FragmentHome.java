@@ -34,6 +34,7 @@ import java.util.List;
 
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorHotProduk;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorpromo;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
@@ -55,7 +56,7 @@ public class FragmentHome extends Fragment {
     private View v;
     private static EditText old_pass, new_pass, re_pass, old_pin, new_pin, re_pin, txt_phone, txt_otp, txt_Logout;
     private String times= "";
-    private TextView txt_point, tvRefresh;
+    private TextView txt_point, tvRefresh, txt_count;
     private ItemValidation iv = new ItemValidation();
     private int count = 0;
     private boolean loadingTime;
@@ -88,10 +89,12 @@ public class FragmentHome extends Fragment {
         context = getActivity();
 
         if (v == null) {
-            v = inflater.inflate(R.layout.layout_fragment_home, container, false);
+            v = inflater.inflate(R.layout.layout_fragment_home_new, container, false);
 
             txt_point = v.findViewById(R.id.txt_point);
             txt_search = v.findViewById(R.id.txt_search_btn);
+            txt_count = v.findViewById(R.id.txt_count);
+            txt_count.setVisibility(View.GONE);
             //txt_search.setEnabled(false);
             point = v.findViewById(R.id.cr_point);
 
@@ -111,6 +114,15 @@ public class FragmentHome extends Fragment {
             LoadHomePromo();
             LoadProduk();
             loadPoit();
+            loadCount();
+
+            /*if (iv.parseNullDouble(txt_count.getText().toString()) ==null){
+                refresh(5000);
+                txt_count.setVisibility(View.VISIBLE);
+            } else {
+                refresh(5000);
+                txt_count.setVisibility(View.GONE);
+            }*/
 
             point.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -141,6 +153,14 @@ public class FragmentHome extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ActivityAddToCart.class);
+                    startActivity(intent);
+                }
+            });
+
+            v.findViewById(R.id.pesan).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ActivityChat.class);
                     startActivity(intent);
                 }
             });
@@ -271,6 +291,39 @@ public class FragmentHome extends Fragment {
 
         return v;
     }
+
+    private void loadCount() {
+        txt_count.setVisibility(View.GONE);
+        new APIvolley(context, new JSONObject(), "POST", Constant.URL_POST_COUNT_CART, new APIvolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                txt_count.setVisibility(View.VISIBLE);
+                try {
+                    JSONObject object = new JSONObject(result);
+                    String message = object.getJSONObject("metadata").getString("message");
+                    String status = object.getJSONObject("metadata").getString("status");
+
+                    if (status.equals("200")){
+                        txt_count.setVisibility(View.VISIBLE);
+                        object.getJSONObject("response").getString("badge");
+                        txt_count.setText(object.getJSONObject("response").getString("value"));
+                    } else {
+                        txt_count.setVisibility(View.GONE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+                txt_count.setVisibility(View.GONE);
+                Toast.makeText(context, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     private void loadPoit() {
         new APIvolley(context, new JSONObject(), "POST", Constant.URL_TOTAL_POINT,
