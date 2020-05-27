@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class ActivityPiutang extends AppCompatActivity {
     private TextView txt_total;
     private ProgressBar mProses;
     private static String TAG = "Denda";
+    private ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,14 @@ public class ActivityPiutang extends AppCompatActivity {
         setContentView(R.layout.activity_piutang);
         txt_total = findViewById(R.id.txt_total);
         mProses = findViewById(R.id.loading);
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         RecyclerView piutang = findViewById(R.id.rv_piutang);
         piutang.setItemAnimator(new DefaultItemAnimator());

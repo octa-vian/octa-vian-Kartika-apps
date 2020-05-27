@@ -6,10 +6,46 @@
     android:background="#fff"
     tools:context=".FragmentMerk">
 
+    <RelativeLayout
+        android:id="@+id/paddingTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red_Dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <!--<ImageView
+                android:id="@+id/cart"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/backarrow"/>-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/size_8dp"
+                android:text="MERK"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:layout_gravity="center"
+                android:textSize="@dimen/size_16dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/ln1"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
+        android:layout_below="@id/paddingTop"
+        android:paddingBottom="@dimen/size_10dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -28,7 +64,7 @@
             android:layout_below="@id/paddingTop"
             android:inputType="textPersonName"
             android:imeOptions="actionSearch"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:layout_marginTop="@dimen/size_10dp"
             android:layout_marginRight="@dimen/size_20dp"
             android:layout_marginBottom="@dimen/size_10dp"
@@ -36,7 +72,7 @@
             android:layout_weight="4"
             android:background="@drawable/border_white"
             android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:hint="Cari disini"
+            android:hint="Mau cari merk apa"
             android:padding="@dimen/size_4dp"
             android:textSize="@dimen/size_12dp" />
 

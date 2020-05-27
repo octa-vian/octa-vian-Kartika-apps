@@ -51,6 +51,7 @@ public class ActivityRiwayatPenukaranPoint extends AppCompatActivity {
     private String Terendah = "terendah";
     private String Tertinggi = "tertinggi";
     private String Filter = "";
+    private ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class ActivityRiwayatPenukaranPoint extends AppCompatActivity {
         //View
         txt_search = findViewById(R.id.txt_search);
         loading = findViewById(R.id.loading);
+        img_back = findViewById(R.id.back);
 
         RecyclerView point = findViewById(R.id.rc_point);
         point.setItemAnimator(new DefaultItemAnimator());
@@ -109,6 +111,13 @@ public class ActivityRiwayatPenukaranPoint extends AppCompatActivity {
                 filter.show();
             }
         });*/
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

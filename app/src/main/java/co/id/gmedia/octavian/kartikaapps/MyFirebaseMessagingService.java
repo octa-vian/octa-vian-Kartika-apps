@@ -73,7 +73,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationBuilder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.logokartika)
                 .setTicker(title)
                 .setContentTitle(title)
                 .setContentText(body);
@@ -95,7 +95,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     break;
                 }
                 default:{
-                    notificationIntent = new Intent(this, MainActivity.class);
+                    notificationIntent = new Intent(this, FragmentInfo.class);
                     break;
                 }
             }
@@ -104,7 +104,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationIntent = new Intent(this, ActivityDetailPiutang.class);
         }
         else{
-            notificationIntent = new Intent(this, MainActivity.class);
+            notificationIntent = new Intent(this, FragmentInfo.class);
         }
 
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

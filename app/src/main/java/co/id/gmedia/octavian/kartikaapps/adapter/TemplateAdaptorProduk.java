@@ -51,10 +51,10 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
 
         final ModelProduk itemSelected = listItem.get(i);
         if(itemSelected.getItem5().toLowerCase().trim().equals("available")  || itemSelected.getItem5().toLowerCase().trim().equals("tersedia")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_green_dialog));
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
         }
         else{
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_red_drak));
         }
 
 

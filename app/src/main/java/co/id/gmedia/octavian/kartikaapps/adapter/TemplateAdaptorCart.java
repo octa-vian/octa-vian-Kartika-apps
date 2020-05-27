@@ -23,6 +23,7 @@ import java.util.List;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
 import co.id.gmedia.octavian.kartikaapps.model.ModelAddToCart;
+import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 
 
 public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCart.TemplateViewHolder> {
@@ -53,6 +54,14 @@ public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCar
         templateViewHolder.txt_status.setText(item.getItem11());
         templateViewHolder.txt_harga.setText(item.getItem8());
         templateViewHolder.txt_tempo.setText(item.getItem6());
+
+        final ModelAddToCart itemSelected = listItem.get(i);
+        if(itemSelected.getItem11().toLowerCase().trim().equals("available")  || itemSelected.getItem11().toLowerCase().trim().equals("tersedia")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
+        }
+        else{
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_red_drak));
+        }
 
         templateViewHolder.btn_hapus.setOnClickListener(new View.OnClickListener() {
             @Override

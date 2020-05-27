@@ -15,6 +15,7 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
+import co.id.gmedia.octavian.kartikaapps.model.ModelAddToCart;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 
 
@@ -44,6 +45,14 @@ public class TemplateAdaptorListBayarPiutang extends RecyclerView.Adapter<Templa
         templateViewHolder.txt_tgl.setText(item.getItem2());
         templateViewHolder.txt_status.setText(item.getItem5());
         templateViewHolder.txt_total.setText(item.getItem3());
+
+        final ModelProduk itemSelected = listItem.get(i);
+        if(itemSelected.getItem5().toLowerCase().trim().equals("Terbayar")  || itemSelected.getItem5().toLowerCase().trim().equals("terbayar")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
+        }
+        else{
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_red_drak));
+        }
 
         /*final ModelProduk itemSelected = listItem.get(i);
         if(itemSelected.getItem5().toUpperCase().trim().equals("available")){

@@ -24,8 +24,9 @@
 
         <LinearLayout
             android:id="@+id/ln1"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="@dimen/size_20dp"
+            android:layout_marginLeft="@dimen/size_20dp"
+            android:layout_marginBottom="@dimen/size_10dp"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,15 +34,14 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="@dimen/size_10dp">
+                android:layout_height="100dp">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/layout_category"
                     android:layout_width="match_parent"
-                    android:layout_margin="@dimen/size_10dp"
+                    android:layout_margin="@dimen/size_4dp"
                     android:layout_height="0dp"
-                    app:cardCornerRadius="@dimen/size_20dp"
+                    app:cardCornerRadius="@dimen/size_10dp"
                     app:layout_constraintDimensionRatio="3:3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +56,7 @@
                             android:id="@+id/iv_cardview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/akungrey" />
 
 
@@ -67,9 +68,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_10dp"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/size_10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -85,6 +85,7 @@
                     android:id="@+id/txt_notelp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="14sp"
                     android:textColor="@color/color_white"
                     android:text="No. Telp"/>
 
@@ -94,25 +95,23 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_weight="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/size_10dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color_white"
                         android:textStyle="bold"
                         android:text="Username: "/>
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:id="@+id/txt_nama"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/size_10dp"
-                        android:textColor="@color/color_white"
-                        android:textStyle="bold"
-                        android:text="User"/>
-
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_12dp"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"
+                    android:text="User"/>
 
 
             </LinearLayout>

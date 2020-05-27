@@ -43,6 +43,11 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
                     return;
                 }
 
+                if (txt_inputPiutang.getText().toString().equals("0")){
+                    Toast.makeText(ActivityInputNominalPiutang.this, "Nominal tidak boleh 0", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if (iv.parseNullDouble(txt_inputPiutang.getText().toString()) > iv.parseNullDouble(total) ){
                     Toast.makeText(ActivityInputNominalPiutang.this, "Nominal tidak boleh lebih dari Total!", Toast.LENGTH_LONG).show();
                 }

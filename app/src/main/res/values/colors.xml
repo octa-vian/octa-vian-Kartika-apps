@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#CE2949</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#CE2949</color>
     <color name="colorAccent">#CE2949</color>
+    <color name="color_red_drak">#Ab0325 </color>
     <color name="colorGreyAccent">#D8D8D8</color>
     <color name="red_color">#FA0D0D</color>
     <color name="red_Dark">#CE2949</color>
@@ -10,8 +11,10 @@
     <color name="black_overlay">#66000000</color>
     <color name="black">#000000</color>
     <color name="grey">#8EF81B</color>
+    <color name="grey_dark">#16AB44</color>
     <color name="transparant"> #ffffffff</color>
     <color name="colorTransparant">#00ffffff</color>
     <color name="colorTransparants">#80ffffff</color>
     <color name="orange">#F78D10</color>
+    <color name="anggur">#582841</color>
 </resources>

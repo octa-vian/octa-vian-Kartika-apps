@@ -57,6 +57,7 @@ public class ActivityListTukarPoint extends AppCompatActivity {
     private String Status = "";
     private String Filter="";
     private ProgressBar loading;
+    private ImageView img_back;
     private LoadMoreScrollListener loadMoreScrollListener;
 
     private ModelOneForAll nota;
@@ -85,6 +86,14 @@ public class ActivityListTukarPoint extends AppCompatActivity {
         txt_search = findViewById(R.id.txt_search);
         btn_filter = findViewById(R.id.filter);
         loading = findViewById(R.id.loading);
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

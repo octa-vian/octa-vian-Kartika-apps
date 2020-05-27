@@ -123,7 +123,7 @@ public class TemplateAdapterBayarPiutang extends ArrayAdapter {
 
                         holder.cb_btn.setChecked(false);
                         listItem.get(position).setSelected(false);
-                        Toast.makeText(activity, "Total masih kosong ataus sisa pembayaran sudah habis", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "Sisa terbayar sudah habis", Toast.LENGTH_LONG).show();
                     }
 
                     //items.get(position).setAtt2(itemSelected.getAtt1());

@@ -40,7 +40,7 @@
                             android:id="@+id/img_gambar_detail"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/gambarpromo"
+                            android:src="@drawable/logokartika"
                             android:scaleType="centerCrop" />
 
                     </RelativeLayout>

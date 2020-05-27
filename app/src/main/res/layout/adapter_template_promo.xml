@@ -8,18 +8,22 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
-        android:layout_width="match_parent"
+        android:layout_width="318dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_4dp"
+        android:layout_marginBottom="@dimen/size_4dp"
+        android:layout_marginRight="@dimen/size_4dp"
         android:layout_centerInParent="true"
-        app:cardCornerRadius="@dimen/corner_home"
-        android:elevation="@dimen/size_1dp">
+        app:cardCornerRadius="@dimen/size_12dp"
+        android:elevation="@dimen/size_20dp">
+
         <ImageView
             android:id="@+id/iv_cardview"
-            android:layout_width="320dp"
+            android:layout_width="318dp"
             android:layout_height="140dp"
             android:layout_gravity="center"
+            android:scaleType="centerCrop"
             android:background="@drawable/corner_bg"/>
+
     </androidx.cardview.widget.CardView>
-
-
 </RelativeLayout>

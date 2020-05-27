@@ -8,12 +8,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
@@ -60,6 +63,9 @@ public class FragmentHome extends Fragment {
     private ItemValidation iv = new ItemValidation();
     private int count = 0;
     private boolean loadingTime;
+    private Button btn_register, btn_request, btn_kirim;
+    CountDownTimer countDownTimer;
+    private TextView time;
 
     private List<ModelOneForAll> viewmenubaru = new ArrayList<>();
     private TemplateAdaptorpromo kategorimenu;
@@ -255,6 +261,7 @@ public class FragmentHome extends Fragment {
                                 @Override
                                 public void onClick(View view) {
                                     InitOtp();
+                                    dialog.dismiss();
                                 }
                             });
                             dialog.show();
@@ -293,7 +300,6 @@ public class FragmentHome extends Fragment {
     }
 
     private void loadCount() {
-        txt_count.setVisibility(View.GONE);
         new APIvolley(context, new JSONObject(), "POST", Constant.URL_POST_COUNT_CART, new APIvolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
@@ -304,8 +310,12 @@ public class FragmentHome extends Fragment {
                     String status = object.getJSONObject("metadata").getString("status");
 
                     if (status.equals("200")){
-                        txt_count.setVisibility(View.VISIBLE);
-                        object.getJSONObject("response").getString("badge");
+                        String kondisi = object.getJSONObject("response").getString("badge");
+                        if (kondisi.equals("show")){
+                            txt_count.setVisibility(View.VISIBLE);
+                        }else {
+                            txt_count.setVisibility(View.GONE);
+                        }
                         txt_count.setText(object.getJSONObject("response").getString("value"));
                     } else {
                         txt_count.setVisibility(View.GONE);
@@ -340,11 +350,10 @@ public class FragmentHome extends Fragment {
                                 txt_point.setText(iv.ChangeToCurrencyFormat(total) + " Point ");
 
                             }else {
-                                Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
-                            Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -366,6 +375,7 @@ public class FragmentHome extends Fragment {
             @Override
             public void run() {
                 loadPoit();
+                //loadCount();
             }
         };
         handler.postDelayed(runnable, i);
@@ -402,6 +412,7 @@ public class FragmentHome extends Fragment {
 
                     @Override
                     public void onError(String result) {
+                        Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                         Log.e(TAG,result);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
@@ -430,7 +441,7 @@ public class FragmentHome extends Fragment {
                             }
 
                         } catch (JSONException e) {
-                            Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"Kesalahan jaringan", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -536,7 +547,36 @@ public class FragmentHome extends Fragment {
 
     }
 
+    //Stop Countdown method
+    private void stopCountdown() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
+    }
+
+    //Start Countodwn method
+    private void startTimer(int noOfMinutes) {
+        countDownTimer = new CountDownTimer(noOfMinutes, 1000) {
+            public void onTick(long millisUntilFinished) {
+                long millis = millisUntilFinished;
+                //Convert milliseconds into hour,minute and seconds
+                String hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                time.setText(hms);//set text
+            }
+
+            public void onFinish() {
+                time.setText(""); //On finish change timer text
+                countDownTimer = null;//set CountDownTimer to null
+                btn_request.setVisibility(View.VISIBLE);
+                btn_kirim.setVisibility(View.GONE);
+            }
+        }.start();
+
+    }
+
     private void InitOtp() {
+        stopCountdown();
         JSONObject body = new JSONObject();
         try {
             body.put("type", Constant.ResetPin);
@@ -559,12 +599,24 @@ public class FragmentHome extends Fragment {
                         Dialog dialog = new Dialog(context);
                         dialog.setContentView(R.layout.popup_otp_register);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        time = dialog.findViewById(R.id.txt_time);
+                        btn_request = dialog.findViewById(R.id.btn_request);
+                        btn_request.setVisibility(View.GONE);
+                        btn_kirim = dialog.findViewById(R.id.btn_next_otp);
+                        btn_kirim.setVisibility(View.VISIBLE);
                         dialog.setCanceledOnTouchOutside(false);
                         Button nextPopup;
                         //time = dialog.findViewById(R.id.txt_time);
                         txt_otp = dialog.findViewById(R.id.txt_otp);
-                        nextPopup = dialog.findViewById(R.id.btn_next_otp);
-                        nextPopup.setOnClickListener(new View.OnClickListener() {
+                        btn_kirim = dialog.findViewById(R.id.btn_next_otp);
+                        btn_request.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                InitOtp();
+                            }
+                        });
+                        startTimer(120000);
+                        btn_kirim.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                     KirimOTP();
@@ -585,8 +637,6 @@ public class FragmentHome extends Fragment {
                     e.printStackTrace();
                 }
             }
-
-
 
             @Override
             public void onError(String result) {
@@ -642,7 +692,5 @@ public class FragmentHome extends Fragment {
         }) ;
 
     }
-
-
 
 }

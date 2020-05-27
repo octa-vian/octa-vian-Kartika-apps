@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -25,6 +27,7 @@ public class ActivityDaftarPemesanan extends AppCompatActivity {
 
     private TemplateAdaptorListDaftarPesanan adapterDaftarPesanana;
     private List<ModelProduk> listDaftarPesanan = new ArrayList<>();
+    private ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,16 @@ public class ActivityDaftarPemesanan extends AppCompatActivity {
         daftarPesanan.setLayoutManager(new LinearLayoutManager(ActivityDaftarPemesanan.this, LinearLayoutManager.VERTICAL, false));
         adapterDaftarPesanana = new TemplateAdaptorListDaftarPesanan(ActivityDaftarPemesanan.this, listDaftarPesanan);
         daftarPesanan.setAdapter(adapterDaftarPesanana);
+
+        //View
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         LoadPesanan();
 

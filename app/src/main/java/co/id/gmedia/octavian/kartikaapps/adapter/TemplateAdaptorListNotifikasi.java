@@ -39,6 +39,7 @@ public class TemplateAdaptorListNotifikasi extends RecyclerView.Adapter<Template
     public void onBindViewHolder(@NonNull TemplateViewHolder templateViewHolder, int i) {
         final ModelProduk item = listItem.get(i);
         final int final_position = i;
+        templateViewHolder.judul.setText(item.getItem2());
         templateViewHolder.txt_isi.setText(item.getItem3());
         templateViewHolder.txt_jam.setText(item.getItem5());
         templateViewHolder.txt_tanggal.setText(item.getItem4());
@@ -74,12 +75,13 @@ public class TemplateAdaptorListNotifikasi extends RecyclerView.Adapter<Template
 
 
         private ImageView iv_cardview;
-        private TextView txt_isi, txt_jam, txt_tanggal;
+        private TextView txt_isi, txt_jam, txt_tanggal, judul;
         private MaterialCardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
            txt_isi = (TextView) itemView.findViewById(R.id.txt_isi);
+           judul = (TextView) itemView.findViewById(R.id.txt_judul);
            txt_jam =  (TextView) itemView.findViewById(R.id.txt_jam);
            txt_tanggal =  (TextView) itemView.findViewById(R.id.txt_tanggal);
         }

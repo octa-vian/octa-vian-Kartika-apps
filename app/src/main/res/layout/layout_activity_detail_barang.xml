@@ -171,6 +171,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_chat"
             android:layout_weight="1"
             android:layout_marginTop="@dimen/size_10dp"
             android:layout_marginRight="@dimen/size_10dp"

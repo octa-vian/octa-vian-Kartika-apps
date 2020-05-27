@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
@@ -36,7 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressBar proses;
     private static String TAG = "RegisterActivity";
     private String times="";
-
+    private Button btn_register, btn_request, btn_kirim;
+    CountDownTimer countDownTimer;
     private TextView time;
     TextView tvRequest;
 
@@ -65,7 +68,36 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    //Stop Countdown method
+    private void stopCountdown() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
+    }
+
+    //Start Countodwn method
+    private void startTimer(int noOfMinutes) {
+        countDownTimer = new CountDownTimer(noOfMinutes, 1000) {
+            public void onTick(long millisUntilFinished) {
+                long millis = millisUntilFinished;
+                //Convert milliseconds into hour,minute and seconds
+                String hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                time.setText(hms);//set text
+            }
+
+            public void onFinish() {
+                time.setText(""); //On finish change timer text
+                countDownTimer = null;//set CountDownTimer to null
+                btn_request.setVisibility(View.VISIBLE);
+                btn_kirim.setVisibility(View.GONE);
+            }
+        }.start();
+
+    }
+
     private void InitOtp() {
+        stopCountdown();
         JSONObject body = new JSONObject();
         try {
             body.put("type", Constant.Register);
@@ -92,8 +124,21 @@ public class RegisterActivity extends AppCompatActivity {
                     Button nextPopup;
                     time = dialog.findViewById(R.id.txt_time);
                     txt_otp = dialog.findViewById(R.id.txt_otp);
-                    nextPopup = dialog.findViewById(R.id.btn_next_otp);
-                    nextPopup.setOnClickListener(new View.OnClickListener() {
+                    btn_request = dialog.findViewById(R.id.btn_request);
+                    btn_request.setVisibility(View.GONE);
+                    btn_kirim = dialog.findViewById(R.id.btn_next_otp);
+                    btn_kirim.setVisibility(View.VISIBLE);
+
+
+                    btn_request.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            InitOtp();
+                        }
+                    });
+                    startTimer(120000);
+
+                    btn_kirim.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             if (validate())
@@ -108,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Log.d(TAG, "Kesalahan Koneksi" +message);
+                        Log.d(TAG, "Kesalahan jaringan" +message);
                         Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     }
@@ -121,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(RegisterActivity.this, "Kesalahan Koneksi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Kesalahan jaringan", Toast.LENGTH_SHORT).show();
 
             }
         }) ;
@@ -186,7 +231,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(RegisterActivity.this, "Kesalahan Koneksi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Kesalahan jaringan", Toast.LENGTH_SHORT).show();
 
             }
         }) ;
@@ -232,7 +277,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(RegisterActivity.this, "Kesalahan Koneksi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Kesalahan jaringan", Toast.LENGTH_SHORT).show();
 
             }
         }) ;

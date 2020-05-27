@@ -179,6 +179,7 @@ public class APIvolley {
                 public boolean verify(String hostname, SSLSession session) {
                     if (hostname.equalsIgnoreCase( "indonesiatraveloc.com") ||
                             hostname.equalsIgnoreCase("talam.gmedia.net.id") ||
+                            hostname.equalsIgnoreCase("ipv4-10-27-68.as55666.net") ||
                             hostname.equalsIgnoreCase("gmedia.bz") ||
                             hostname.equalsIgnoreCase("app.midtrans.com") ||
                             hostname.equalsIgnoreCase("office.putmasaripratama.co.id") ||

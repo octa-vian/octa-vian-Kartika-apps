@@ -32,7 +32,7 @@
                 android:layout_marginLeft="@dimen/margin_default"
                 android:layout_marginTop="@dimen/margin_default"
                 android:layout_marginBottom="@dimen/margin_default"
-                android:background="@drawable/border_chat"
+                android:background="@drawable/border_chat_edt"
                 android:gravity="top"
                 android:weightSum="1">
 
@@ -41,6 +41,13 @@
                     android:layout_weight="0.12"
                     android:layout_height="match_parent">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="?attr/selectableItemBackground"
+                        android:id="@+id/iv_attach"
+                        android:src="@drawable/ic_attachment_black_24dp"/>
 
                 </RelativeLayout>
 
@@ -52,6 +59,7 @@
                     android:id="@+id/edt_chat"
                     android:paddingLeft="@dimen/margin_tiny"
                     android:paddingRight="@dimen/margin_tiny"
+                    android:hint="Ketik Pesan"
                     android:paddingTop="@dimen/margin_default"
                     android:paddingBottom="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_tiny"
@@ -63,14 +71,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.12"
                     android:layout_height="match_parent">
-
-                    <!--<ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="24dp"
-                        android:layout_centerInParent="true"
-                        android:background="?attr/selectableItemBackground"
-                        android:id="@+id/iv_attach"
-                        android:src="@drawable/ic_pin"/>-->
 
                 </RelativeLayout>
 
@@ -129,7 +129,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/cart"
+                android:id="@+id/back"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginLeft="10dp"
@@ -148,12 +148,94 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rc_chat"
+    <ListView
+        android:id="@+id/lv_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/paddingTop"
+        android:divider="@null"
         android:layout_above="@id/footer">
-    </androidx.recyclerview.widget.RecyclerView>
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:id="@+id/rll_container"
+        android:layout_above="@id/footer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginRight="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_default"
+            android:background="@drawable/border_chat"
+            android:weightSum="3"
+            android:gravity="center"
+            android:id="@+id/ll_photo"
+            android:padding="@dimen/margin_default">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_default"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small"
+                    android:drawableTop="@drawable/ic_folder_open"
+                    android:background="@color/color_white"
+                    android:id="@+id/btn_buka_dokument"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:text="Buka Dokumen"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_default"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small"
+                    android:drawableTop="@drawable/ic_galery_24dp"
+                    android:background="@color/color_white"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/btn_buka_gallery"
+                    android:text="Buka Gallery"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_default"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small"
+                    android:drawableTop="@drawable/ic_photos"
+                    android:background="@color/color_white"
+                    android:id="@+id/btn_buka_kamera"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:text="Buka Kamera"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

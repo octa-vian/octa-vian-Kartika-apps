@@ -88,7 +88,8 @@ public class TemplateAdaptorProdukTukarPoint extends RecyclerView.Adapter<Templa
            iv_cardview = (ImageView) itemView.findViewById(R.id.iv_cardview);
            txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_brg);
            txt_harga =  (TextView) itemView.findViewById(R.id.txt_harga);
-           //txt_status =  (TextView) itemView.findViewById(R.id.status);
+           txt_status =  (TextView) itemView.findViewById(R.id.status);
+           txt_status.setVisibility(View.GONE);
            cardView = (CardView) itemView.findViewById(R.id.layout_category);
         }
     }

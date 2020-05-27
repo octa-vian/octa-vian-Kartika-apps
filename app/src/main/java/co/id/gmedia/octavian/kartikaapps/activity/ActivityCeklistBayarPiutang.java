@@ -78,7 +78,7 @@ public class ActivityCeklistBayarPiutang extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (sisa >0){
-                    Toast.makeText(ActivityCeklistBayarPiutang.this, "Sisa pembayaran harus 0", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityCeklistBayarPiutang.this, "Sisa terbayar harus 0", Toast.LENGTH_LONG).show();
                 } else {
                     GetDoku();
                 }

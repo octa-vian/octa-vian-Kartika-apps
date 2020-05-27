@@ -110,7 +110,7 @@ public class FragmentInfo extends Fragment {
                         }
                     } else {
                         loading.setVisibility(View.GONE);
-                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     loadMoreScrollListener.finishLoad(0);

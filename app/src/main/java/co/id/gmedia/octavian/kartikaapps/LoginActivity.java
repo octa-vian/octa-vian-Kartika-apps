@@ -1,12 +1,14 @@
 package co.id.gmedia.octavian.kartikaapps;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -24,6 +26,8 @@ import com.google.firebase.iid.InstanceIdResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeUnit;
+
 import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
@@ -34,11 +38,15 @@ public class LoginActivity extends AppCompatActivity {
     private TextView toregis, toresetpass;
     private Dialog dialogView;
     private EditText txt_nama, txt_pass, txt_notelp, txt_otp;
-    private Button btn_login;
+    private Button btn_login, btn_request, btn_kirim;
+    CountDownTimer countDownTimer;
+    private RecyclerView rc_timer;
     private static String TAG = "RegisterActivity";
     private String time= "";
+    private TextView timer;
     private SessionManager session;
     private String fcm_id ="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_pass = findViewById(R.id.txt_pass);
         btn_login = findViewById(R.id.btn_login);
         toresetpass = findViewById(R.id.btn_resetPass);
+        timer = findViewById(R.id.txt_time);
 
 
 
@@ -90,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         InitOtp();
+                        popup.dismiss();
                     }
                 });
                 popup.show();
@@ -114,7 +124,37 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    //Stop Countdown method
+    private void stopCountdown() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
+    }
+
+    //Start Countodwn method
+    private void startTimer(int noOfMinutes) {
+        countDownTimer = new CountDownTimer(noOfMinutes, 1000) {
+            public void onTick(long millisUntilFinished) {
+                long millis = millisUntilFinished;
+                //Convert milliseconds into hour,minute and seconds
+                String hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                timer.setText(hms);//set text
+            }
+
+            public void onFinish() {
+                timer.setText(""); //On finish change timer text
+                countDownTimer = null;//set CountDownTimer to null
+                btn_request.setVisibility(View.VISIBLE);
+                btn_kirim.setVisibility(View.GONE);
+            }
+        }.start();
+
+    }
+
+
     private void InitOtp() {
+        stopCountdown();
         JSONObject body = new JSONObject();
         try {
             body.put("type", Constant.ResetPass);
@@ -140,9 +180,22 @@ public class LoginActivity extends AppCompatActivity {
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         Button nextPopup;
                         txt_otp = dialog.findViewById(R.id.txt_otp);
-                        nextPopup = dialog.findViewById(R.id.btn_next_otp);
+                        btn_request = dialog.findViewById(R.id.btn_request);
+                        timer = dialog.findViewById(R.id.txt_time);
+                        btn_request.setVisibility(View.GONE);
+                        btn_kirim = dialog.findViewById(R.id.btn_next_otp);
+                        btn_kirim.setVisibility(View.VISIBLE);
                         dialog.setCanceledOnTouchOutside(false);
-                        nextPopup.setOnClickListener(new View.OnClickListener() {
+
+                        btn_request.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                InitOtp();
+                            }
+                        });
+                        startTimer(120000);
+
+                        btn_kirim.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 KirimOTP();

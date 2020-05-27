@@ -59,6 +59,7 @@ public class ActivityListDetailMerk extends AppCompatActivity {
     private String Status = "";
     private String Filter="";
     private ProgressBar loading;
+    private ImageView img_back;
     private LoadMoreScrollListener loadMoreScrollListener;
 
     private ModelOneForAll nota;
@@ -87,6 +88,14 @@ public class ActivityListDetailMerk extends AppCompatActivity {
         txt_search = findViewById(R.id.txt_search);
         img_filter = findViewById(R.id.filter);
         loading = findViewById(R.id.loading);
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -133,8 +142,9 @@ public class ActivityListDetailMerk extends AppCompatActivity {
                 dialog.setContentView(R.layout.popup_filter);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 final RadioButton btn_terlaris, btn_termahal, btn_termurah, btn_tersedia, btn_preorder;
-                final RadioGroup group;
+                final RadioGroup group, group2;
                 group = dialog.findViewById(R.id.radio_grup);
+                group2 = dialog.findViewById(R.id.radio_grup1);
                 btn_terlaris = dialog.findViewById(R.id.txt_terlaris);
                 btn_termahal = dialog.findViewById(R.id.txt_termahal);
                 btn_termurah = dialog.findViewById(R.id.txt_termurah);
@@ -142,22 +152,42 @@ public class ActivityListDetailMerk extends AppCompatActivity {
                 btn_preorder = dialog.findViewById(R.id.txt_preorder);
                 Button btn_simpan;
                 btn_simpan = dialog.findViewById(R.id.btn_simpan);
+
+                //mengisi value dari radio button
+                //kondisi cek list
+                if (Filter.equals(terlaris)){
+                    group.check(btn_terlaris.getId());
+                } else if (Filter.equals(termurah)){
+                    group.check(btn_termurah.getId());
+                } else if (Filter.equals(termahal)){
+                    group.check(btn_termahal.getId());
+                }
+
+                if (Status.equals(available)) {
+                    group2.check(btn_tersedia.getId());
+                } else if (Status.equals(priorder)) {
+                    group2.check(btn_preorder.getId());
+                }
+
                 btn_simpan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        int Id = group.getCheckedRadioButtonId();
+                        int idharga = group.getCheckedRadioButtonId();
+                        int idstatus = group2.getCheckedRadioButtonId();
 
-                        if (Id == btn_terlaris.getId()){
-                            Filter = terlaris.toString();
-                        } else if (Id == btn_termurah.getId()){
-                            Filter = termurah.toString();
-                        } else if (Id == btn_termahal.getId()){
-                            Filter = termahal.toString();
-                        } else if (Id == btn_tersedia.getId()) {
-                            Status = available.toString();
-                        } else if (Id == btn_preorder.getId()){
-                            Status = priorder.toString();
+                        if (idharga == btn_terlaris.getId()){
+                            Filter = terlaris;
+                        } else if (idharga == btn_termurah.getId()){
+                            Filter = termurah;
+                        } else if (idharga == btn_termahal.getId()){
+                            Filter = termahal;
+                        }
+
+                        if (idstatus == btn_tersedia.getId()) {
+                            Status = available;
+                        } else if (idstatus == btn_preorder.getId()) {
+                            Status = priorder;
                         }
                         Log.d("filter",Filter);
                         /*switch (Id){

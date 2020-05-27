@@ -8,23 +8,23 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/size_4dp"
+        app:cardCornerRadius="@dimen/size_10dp"
         android:elevation="@dimen/size_10dp"
         android:layout_margin="@dimen/size_10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_4dp"
+            android:layout_margin="@dimen/size_10dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txt_nama_brg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_10dp"
                 android:text="Nama Barang"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
@@ -40,7 +40,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Jumlah Pemesanan"
-                    android:textColor="@color/black"
                     android:textSize="@dimen/size_12dp"
                     android:textStyle="bold"/>
 
@@ -49,6 +48,7 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="0"
                     android:gravity="right"
                     android:textSize="@dimen/size_12dp"/>
@@ -66,13 +66,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Status"
-                    android:textColor="@color/black"
                     android:textSize="@dimen/size_12dp"
                     android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_status"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
@@ -88,17 +88,17 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:text="Total Harga"
-                    android:textColor="@color/black"
                     android:textSize="@dimen/size_12dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_totalHarga"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"

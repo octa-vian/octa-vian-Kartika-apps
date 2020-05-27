@@ -60,20 +60,21 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_below="@id/txt_phone"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:gravity="center">
 
                 <Button
                     android:id="@+id/btn_next_otp"
                     android:layout_width="150dp"
+                    android:visibility="gone"
                     android:background="@drawable/border_btn_lanjut"
                     android:layout_height="35dp"
                     android:layout_margin="20dp"
+                    android:layout_centerInParent="true"
                     android:textSize="@dimen/size_12dp"
                     android:foregroundGravity="center"
                     android:gravity="center"
@@ -81,7 +82,22 @@
                     android:textStyle="bold"
                     android:text="Selanjutnya" />
 
-            </LinearLayout>
+                <Button
+                    android:id="@+id/btn_request"
+                    android:layout_width="150dp"
+                    android:visibility="gone"
+                    android:background="@drawable/border_chat"
+                    android:layout_height="35dp"
+                    android:layout_margin="20dp"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/size_12dp"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="Request" />
+
+            </RelativeLayout>
 
             <!--<Button
                 android:id="@+id/btn_next_regis"

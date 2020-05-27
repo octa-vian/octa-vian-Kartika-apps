@@ -50,7 +50,7 @@ public class Constant {
 
     //URL
     private static final String baseURL = "http://gmedia.bz/kartikars/api/reseller/";
-    //http://gmedia.bz/kartika/api/reseller/auth/phone_validation
+    //private static final String baseURL = "http://kartikaelectric.com/kartikars/api/reseller/";
 
     public static final String URL_LOGIN = baseURL + "auth/login/";
     public static final String URL_REGISTER = baseURL + "auth/register/";
@@ -102,6 +102,8 @@ public class Constant {
     public static final String URL_POST_COUNT_CART = baseURL + "shop/get_cart_badge";
     public static final String URL_POST_BAYAR_KEDOKU = baseURL + "piutang/get_nobukti_pembayaran_piutang";
     public static final String URL_POST_UPDATE_FCM_ID = baseURL + "account/update_fcm_id";
+    public static final String URL_GET_CHAT = baseURL + "chat/list_chat";
+    public static final String URL_POST_FILE = baseURL + "chat/send_file";
 
 
 

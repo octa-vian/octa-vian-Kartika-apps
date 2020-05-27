@@ -70,7 +70,7 @@ public class ActivityDetailReturn extends AppCompatActivity {
 
                     if (status.equals("200")){
                         JSONObject oj = object.getJSONObject("response").getJSONObject("header");
-                        txt_no_buk.setText("No Bukti: "+oj.getString("nobukti"));
+                        txt_no_buk.setText( oj.getString("nobukti"));
                         txt_tgl.setText(oj.getString("tanggal"));
                         txt_status.setText(oj.getString("status"));
 

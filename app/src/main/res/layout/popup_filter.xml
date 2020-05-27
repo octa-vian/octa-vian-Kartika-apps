@@ -6,9 +6,9 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="210dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="@dimen/size_10dp"
         android:layout_margin="40dp"
         android:elevation="20dp"
         android:layout_centerInParent="true">
@@ -16,7 +16,7 @@
         <LinearLayout
             android:id="@+id/ln1"
             android:layout_gravity="center"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="12dp"
                 android:text="Filter"
                 android:textColor="@color/black"
                 android:gravity="center"
@@ -35,25 +35,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="20dp">
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginRight="@dimen/size_20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Harga"/>
 
                <RadioGroup
                    android:id="@+id/radio_grup"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
-                   <RadioButton
-                       android:id="@+id/txt_terlaris"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="@dimen/size_4dp"
-                       android:textSize="14sp"
-                       android:text="Terlaris"/>
 
                    <RadioButton
                        android:id="@+id/txt_termurah"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
+                       android:checked="true"
                        android:layout_margin="@dimen/size_4dp"
+                       android:textStyle="bold"
                        android:text="Termurah"
                        android:textSize="14sp" />
 
@@ -61,38 +62,73 @@
                        android:id="@+id/txt_termahal"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
+                       android:textStyle="bold"
                        android:layout_margin="@dimen/size_4dp"
                        android:textSize="14sp"
                        android:text="Termahal"/>
 
                    <RadioButton
-                       android:id="@+id/txt_tersedia"
+                       android:id="@+id/txt_terlaris"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:layout_margin="@dimen/size_4dp"
+                       android:textStyle="bold"
                        android:textSize="14sp"
-                       android:text="Tersedia"/>
+                       android:text="Terlaris"/>
 
-                   <RadioButton
-                       android:id="@+id/txt_preorder"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="@dimen/size_4dp"
-                       android:textSize="14sp"
-                       android:text="Preorder"/>
                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginRight="@dimen/size_20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Status"/>
+
+                <RadioGroup
+                    android:id="@+id/radio_grup1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/txt_tersedia"
+                        android:checked="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_margin="@dimen/size_4dp"
+                        android:textSize="14sp"
+                        android:text="Tersedia"/>
+
+                    <RadioButton
+                        android:id="@+id/txt_preorder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_margin="@dimen/size_4dp"
+                        android:textSize="14sp"
+                        android:text="Preorder"/>
+                </RadioGroup>
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/btn_simpan"
-                android:layout_width="120dp"
+                android:layout_width="160dp"
                 android:layout_height="32dp"
                 android:textSize="@dimen/size_12dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/size_20dp"
                 android:layout_marginRight="68dp"
                 android:layout_marginLeft="68dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="@dimen/size_20dp"
                 android:layout_gravity="center"
                 android:text="Simpan"
                 android:textColor="#fff"

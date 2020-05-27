@@ -53,8 +53,12 @@ public class ImageUtils {
     }
 
     // General Image
-    public void LoadRealImage(String uri, final ImageView image){
+  /*  public void LoadRealImage(String uri, final ImageView image){
 
+        Picasso.get().load(Uri.parse(uri)).into(image);
+    }*/
+
+    public void LoadRealImage(String uri, final ImageView image){
         Picasso.get().load(Uri.parse(uri)).into(image);
     }
 

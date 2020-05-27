@@ -15,7 +15,7 @@
         android:layout_above="@id/ln_2"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:layout_margin="@dimen/size_20dp">
 
     <ImageView
@@ -56,6 +56,7 @@
 
     <LinearLayout
         android:id="@+id/ln_2"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

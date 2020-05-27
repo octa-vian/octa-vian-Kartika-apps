@@ -50,6 +50,7 @@
                 android:layout_marginTop="@dimen/size_4dp"
                 android:layout_marginLeft="@dimen/size_4dp"
                 android:layout_marginRight="5dp"
+                android:textStyle="bold"
                 android:textSize="10sp"
                 android:text="nama produk"
                 android:textColor="@color/black"/>
@@ -59,6 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_4dp"
+                android:textStyle="bold"
+                android:textSize="@dimen/size_12dp"
                 android:layout_marginRight="@dimen/size_4dp"
                 android:text="Rp.120.000.00"
                 android:textColor="@color/color_orange_dialog"/>
@@ -70,11 +73,10 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="@dimen/size_4dp"
                 android:layout_marginBottom="@dimen/size_4dp"
-                android:gravity="right"
                 android:textStyle="bold"
                 android:textSize="10sp"
                 android:text="kosong"
-                android:textColor="@color/grey"/>
+                android:textColor="@color/grey_dark"/>
 
         </LinearLayout>
 

@@ -45,7 +45,7 @@ public class DetailActivityBarangHadiah extends AppCompatActivity {
     private TemplateAdaptorProdukDetail adepterproduk;
     private static String TAG = "Produk";
     private String id= "";
-    private Button btn_tukar;
+    private Button btn_tukar, btn_chat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +75,15 @@ public class DetailActivityBarangHadiah extends AppCompatActivity {
         }
 
         btn_tukar = (Button) findViewById(R.id.btn_tukar);
+        btn_chat = (Button) findViewById(R.id.btn_chat);
+        btn_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivityBarangHadiah.this, ActivityChat.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         btn_tukar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

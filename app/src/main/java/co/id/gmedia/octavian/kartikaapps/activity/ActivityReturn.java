@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class ActivityReturn extends AppCompatActivity {
     private TemplateAdaptorListDaftarReturn adapterReturn;
     private List<ModelProduk> listReturn = new ArrayList<>();
     private ProgressBar loading;
+    private ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,14 @@ public class ActivityReturn extends AppCompatActivity {
         setContentView(R.layout.activity_return);
 
         loading = findViewById(R.id.loading);
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         RecyclerView rc_return = findViewById(R.id.rc_daftarReturn);
         rc_return.setItemAnimator(new DefaultItemAnimator());

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -28,6 +30,7 @@ public class ActivityCekPesanan extends AppCompatActivity {
     private TemplateAdaptorListCekPesanan adapterCekPesanan;
     private List<ModelProduk> listCekPesanan = new ArrayList<>();
     private String noBukti="";
+    private ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,16 @@ public class ActivityCekPesanan extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         noBukti = extras.getString(Constant.EXTRA_NOBUKTI);
+
+        //View
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         RecyclerView cekPesanan = findViewById(R.id.rc_cekPiutang);
         cekPesanan.setItemAnimator(new DefaultItemAnimator());

@@ -27,7 +27,10 @@ import java.util.List;
 
 import co.id.gmedia.coremodul.DialogBox;
 import co.id.gmedia.coremodul.ItemValidation;
+import co.id.gmedia.octavian.kartikaapps.FragmentHome;
+import co.id.gmedia.octavian.kartikaapps.MainActivity;
 import co.id.gmedia.octavian.kartikaapps.R;
+import co.id.gmedia.octavian.kartikaapps.activity.pembayaran.HalamanDoku;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorCart;
 import co.id.gmedia.octavian.kartikaapps.model.ModelAddToCart;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
@@ -45,7 +48,7 @@ public class ActivityAddToCart extends AppCompatActivity {
     private ItemValidation iv = new ItemValidation();
     private DialogBox dialogBox;
     private CheckBox cb;
-    private LinearLayout item_kosong;
+    private LinearLayout item_kosong, ln_btn;
 
 
     @Override
@@ -65,6 +68,7 @@ public class ActivityAddToCart extends AppCompatActivity {
         btn_beli = findViewById(R.id.btn_beli);
         item_kosong = findViewById(R.id.ln_keranjang_kosong);
         btn_tambah = findViewById(R.id.btn_tambahkeranjang);
+        ln_btn = findViewById(R.id.ln_2);
 
         btn_tambah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +91,13 @@ public class ActivityAddToCart extends AppCompatActivity {
                 btnYa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PesanBarang();
+                        for (ModelAddToCart item: listCart){
+                            if (item.isSelected()){
+                                PesanBarang();
+                            }else{
+                                Toast.makeText(ActivityAddToCart.this, "Tidak ada barang terpilih!", Toast.LENGTH_LONG).show();
+                            }
+                        }
                     }
                 });
 
@@ -148,8 +158,8 @@ public class ActivityAddToCart extends AppCompatActivity {
                         startActivity(i);
                         finish();
                         Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
-                    }else {
-                        Toast.makeText(ActivityAddToCart.this, "Tidak ada barang yang terpilih!", Toast.LENGTH_LONG).show();
+                    } else {
+                            Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -171,6 +181,7 @@ public class ActivityAddToCart extends AppCompatActivity {
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
+                        ln_btn.setVisibility(View.VISIBLE);
                         // mProses.setVisibility(View.GONE);
                         listCart.clear();
                         try {
@@ -179,6 +190,7 @@ public class ActivityAddToCart extends AppCompatActivity {
                             String status = obj.getJSONObject("metadata").getString("status");
 
                             if (status.equals("200")) {
+                                ln_btn.setVisibility(View.VISIBLE);
                                 JSONArray meal = obj.getJSONArray("response");
                                 for (int i = 0; i < meal.length(); i++) {
                                     JSONObject objt = meal.getJSONObject(i);
@@ -201,6 +213,7 @@ public class ActivityAddToCart extends AppCompatActivity {
 
                             }else {
                                 item_kosong.setVisibility(View.VISIBLE);
+                                ln_btn.setVisibility(View.GONE);
                             }
 
                         } catch (JSONException e) {
@@ -282,5 +295,14 @@ public class ActivityAddToCart extends AppCompatActivity {
 
         txt_total.setText(iv.ChangeToRupiahFormat(total));
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(ActivityAddToCart.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

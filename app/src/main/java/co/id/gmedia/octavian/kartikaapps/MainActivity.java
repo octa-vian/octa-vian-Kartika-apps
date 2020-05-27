@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     String message = obj.getJSONObject("metadata").getString("message");
                     String status = obj.getJSONObject("metadata").getString("status");
                     if (status.equals("200")){
-                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
                     }

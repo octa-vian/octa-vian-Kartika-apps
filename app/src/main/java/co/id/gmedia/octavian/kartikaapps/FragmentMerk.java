@@ -163,7 +163,7 @@ public class FragmentMerk extends Fragment {
         if (init){
             loadMoreScrollListener.initLoad();
         }
-        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s", loadMoreScrollListener.getLoaded(), 20, search);
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s", loadMoreScrollListener.getLoaded(), 21, search);
         new APIvolley(context, new JSONObject(), "GET", Constant.URL_SEARCH_MERK+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override

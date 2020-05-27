@@ -42,7 +42,7 @@ public class DetailActivityBarang extends AppCompatActivity {
     private TemplateAdaptorProdukDetail adepterproduk;
     private static String TAG = "Produk";
     private String id= "";
-    private Button btn_beli;
+    private Button btn_beli, btn_Chat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +65,20 @@ public class DetailActivityBarang extends AppCompatActivity {
         txt_harga = findViewById(R.id.harga);
         txt_status =  findViewById(R.id.status);
         txt_deskripsi = findViewById(R.id.txt_deskripsi);
+        btn_Chat = findViewById(R.id.btn_chat);
 
         if(getIntent().hasExtra(Constant.EXTRA_BARANG)){
             Gson gson = new Gson();
             nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelProduk.class);
         }
+
+        btn_Chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivityBarang.this, ActivityChat.class);
+                startActivity(intent);
+            }
+        });
 
         btn_beli = (Button) findViewById(R.id.btn_beli);
         btn_beli.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +105,8 @@ public class DetailActivityBarang extends AppCompatActivity {
                         viewproduk.clear();
                         try {
                             JSONObject obj= new JSONObject(result).getJSONObject("response");
-                            obj.put("kodebrg",nota.getItem1());
+                            //obj.put("kodebrg",nota.getItem1());
+                            obj.getString("kodebrg");
                             txt_nama_brg.setText(obj.getString("namabrg"));
                             txt_harga.setText(obj.getString("harga"));
                             txt_deskripsi.setText(obj.getString("deskripsi"));

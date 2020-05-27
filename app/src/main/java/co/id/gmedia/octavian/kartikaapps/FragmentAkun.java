@@ -90,7 +90,7 @@ private static ProgressBar loading;
 
         context = getActivity();
         activity = getContext();
-        v = inflater.inflate(R.layout.layout_fragment_akun, container, false);
+        v = inflater.inflate(R.layout.layout_fragment_akun2, container, false);
 
         //View
         loading = v.findViewById(R.id.loading);
@@ -109,20 +109,7 @@ private static ProgressBar loading;
             public void onClick(View view) {
 
                 Pix.start((FragmentActivity) activity, Options.init().setCount(1).setRequestCode(GALERRY_REQUEST));
-                /*Dialog profile = new Dialog(context);
-                profile.setContentView(R.layout.pop_up_upload_gambar);
-                profile.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                //ImageView img_btn, img_upload;
-                img_btn = profile.findViewById(R.id.img_upload);
-                img_btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        *//*ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                GALERRY_REQUEST );*//*
-                        showFileChooser();
-                    }
-                });
-                profile.show();*/
+
             }
         });
 

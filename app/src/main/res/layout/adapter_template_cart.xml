@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_10dp"
-        app:cardCornerRadius="@dimen/size_4dp"
+        app:cardCornerRadius="@dimen/size_10dp"
         android:elevation="@dimen/size_20dp">
 
         <LinearLayout
@@ -24,7 +24,8 @@
 
                 <CheckBox
                     android:id="@+id/cb_box"
-                    android:layout_margin="@dimen/size_10dp"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:layout_marginRight="@dimen/size_4dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
 
@@ -39,7 +40,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size_4dp"
+                    android:layout_marginTop="@dimen/size_10dp"
                     android:layout_marginLeft="@dimen/size_10dp"
                     android:layout_marginRight="@dimen/size_10dp"
                     android:orientation="vertical">
@@ -49,6 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:textStyle="bold"
                         android:textSize="@dimen/size_12dp"
                         android:text="Nama Barang/Item"/>
 
@@ -70,20 +72,9 @@
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/size_10dp"
-                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_12dp"
+                        android:textStyle="bold"
                         android:text="Jumlah Pesanan"/>
-
-                        <TextView
-                            android:id="@+id/txt_status"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/grey"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:textSize="@dimen/size_12dp"
-                            android:text="status"/>
 
                     </LinearLayout>
 
@@ -98,48 +89,69 @@
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/size_10dp"
+                            android:textSize="@dimen/size_12dp"
                             android:textStyle="bold"
-                            android:gravity="center"
-                            android:textColor="@color/red_Dark"
-                            android:layout_gravity="center"
+                            android:gravity="left"
+                            android:textColor="@color/black"
                             android:text="80"/>
 
-                        <TextView
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp" />
-
                     </LinearLayout>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Status"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txt_status"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:textSize="@dimen/size_12dp"
+                        android:text="status"/>
+
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_20dp"
+                android:layout_marginTop="@dimen/size_4dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/size_4dp"
                     android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/img_hapus"
-                    android:layout_margin="@dimen/size_20dp"
+                    android:layout_gravity="center"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/hapussampah"/>
+                    android:src="@drawable/ic_delete_orange_24dp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_weight="0.6"
+                    android:layout_width="80dp"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/lampu2"
+                    android:scaleType="centerCrop"/>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_10dp"
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
@@ -147,6 +159,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tempo"
+                        android:textStyle="bold"
                         android:textSize="@dimen/size_12dp"/>
 
                 <TextView
@@ -154,6 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:text="90 Hari"
                     android:textSize="@dimen/size_12dp" />
 

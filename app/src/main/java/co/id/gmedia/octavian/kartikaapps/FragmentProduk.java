@@ -204,7 +204,7 @@ public class FragmentProduk extends Fragment {
                     @Override
                     public void onError(String result) {
                         Log.e(TAG,result);
-                       // mProses.setVisibility(View.GONE);
+                        mProses.setVisibility(View.GONE);
                         loadMoreScrollListener.finishLoad(0);
                         viewCategory.clear();
                         adaptorCategory.notifyDataSetChanged();

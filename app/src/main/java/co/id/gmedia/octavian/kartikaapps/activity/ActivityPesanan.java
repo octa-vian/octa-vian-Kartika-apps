@@ -312,8 +312,10 @@ public class ActivityPesanan extends AppCompatActivity {
                             if (status.equals("200")){
                                 //obj.put("txt_jumlah",txt_jumlah.getText().toString());
                                 Intent intent = new Intent(ActivityPesanan.this, ActivityAddToCart.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
+
                                 obj.getJSONObject("response").getString("jumlah");
                                 obj.getJSONObject("response").getString("harga_satuan_rp");
                                 obj.getJSONObject("response").getString("total_harga_rp");
