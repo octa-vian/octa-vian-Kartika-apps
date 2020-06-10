@@ -70,11 +70,41 @@ public class FragmentInfo extends Fragment {
                 }
             };
             info.addOnScrollListener(loadMoreScrollListener);
-
+            //LoadCountNotif();
             loadNotif(true);
         }
        return v;
     }
+
+   /* private void LoadCountNotif() {
+        new APIvolley(context, new JSONObject(), "POST", Constant.URL_POST_BADGE_NOTIF, new APIvolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    JSONObject object = new JSONObject(result);
+                    String message = object.getJSONObject("metadata").getString("message");
+                    String status = object.getJSONObject("metadata").getString("status");
+
+
+                    if (status.equals("200")){
+                        String kondisi = object.getJSONObject("response").getString("badge");
+                        MainActivity.badge_notif.setText(object.getJSONObject("response").getString("value"));
+                    } else {
+                        MainActivity.badge_notif.setVisibility(View.GONE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+                MainActivity.badge_notif.setVisibility(View.GONE);
+                Toast.makeText(context, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+            }
+        });
+    }*/
 
     private void loadNotif(boolean init) {
         loading.setVisibility(View.VISIBLE);
@@ -86,10 +116,10 @@ public class FragmentInfo extends Fragment {
             @Override
             public void onSuccess(String result) {
                 loading.setVisibility(View.GONE);
-                try {
                     if (init){
                         listnotif.clear();
                     }
+                try {
                     JSONObject object = new JSONObject(result);
                     String message = object.getJSONObject("metadata").getString("message");
                     String status = object.getJSONObject("metadata").getString("status");
@@ -105,9 +135,11 @@ public class FragmentInfo extends Fragment {
                                     ,obj.getString("date")
                                     ,obj.getString("hour")
                             ));
+
                             loadMoreScrollListener.finishLoad(ob.length());
                             adapterNotif.notifyDataSetChanged();
                         }
+                        MainActivity.LoadCountNotif();
                     } else {
                         loading.setVisibility(View.GONE);
                         //Toast.makeText(context, message, Toast.LENGTH_LONG).show();

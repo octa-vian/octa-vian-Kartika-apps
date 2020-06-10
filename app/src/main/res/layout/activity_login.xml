@@ -63,12 +63,23 @@
             android:text="Password:"
             android:textSize="12sp"
             android:textStyle="bold"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etPasswordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-14dp"
+            app:passwordToggleEnabled="true">
+
         <EditText
             android:id="@+id/txt_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/color_white"
+            android:inputType="textPassword"
             android:textStyle="bold"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/btn_resetPass"

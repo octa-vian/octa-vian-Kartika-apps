@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="@dimen/size_4dp"
-                android:layout_marginBottom="@dimen/size_4dp"
+                android:layout_marginBottom="@dimen/size_8dp"
                 android:textStyle="bold"
                 android:textSize="10sp"
                 android:text="kosong"

@@ -154,6 +154,7 @@ public class FragmentProduk extends Fragment {
                     public void onError(String result) {
                         mProses.setVisibility(View.GONE);
                         Log.e(TAG,result);
+                        Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                         viewCategory.clear();
                         adaptorCategory.notifyDataSetChanged();
 
@@ -193,7 +194,7 @@ public class FragmentProduk extends Fragment {
 
                         } catch (JSONException e) {
                             loadMoreScrollListener.finishLoad(0);
-                            Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -205,6 +206,7 @@ public class FragmentProduk extends Fragment {
                     public void onError(String result) {
                         Log.e(TAG,result);
                         mProses.setVisibility(View.GONE);
+                        Toast.makeText(context,"Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                         loadMoreScrollListener.finishLoad(0);
                         viewCategory.clear();
                         adaptorCategory.notifyDataSetChanged();

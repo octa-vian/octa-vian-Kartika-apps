@@ -91,13 +91,15 @@ public class ActivityAddToCart extends AppCompatActivity {
                 btnYa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        for (ModelAddToCart item: listCart){
+                        PesanBarang();
+                        /*for (ModelAddToCart item: listCart){
                             if (item.isSelected()){
-                                PesanBarang();
+
                             }else{
                                 Toast.makeText(ActivityAddToCart.this, "Tidak ada barang terpilih!", Toast.LENGTH_LONG).show();
                             }
-                        }
+
+                        }*/
                     }
                 });
 
@@ -169,7 +171,7 @@ public class ActivityAddToCart extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(ActivityAddToCart.this, result, Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityAddToCart.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -299,7 +301,6 @@ public class ActivityAddToCart extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         Intent intent = new Intent(ActivityAddToCart.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

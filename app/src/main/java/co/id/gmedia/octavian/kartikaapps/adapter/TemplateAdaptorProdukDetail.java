@@ -39,6 +39,7 @@ public class TemplateAdaptorProdukDetail extends RecyclerView.Adapter<TemplateAd
     public void onBindViewHolder(@NonNull TemplateViewHolder templateViewHolder, int i) {
         final ModelProduk item = listItem.get(i);
         final int final_position = i;
+
         Picasso.get().load(item.getItem1()).into(templateViewHolder.iv_cardview);
 
     }

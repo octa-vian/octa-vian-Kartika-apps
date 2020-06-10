@@ -14,7 +14,7 @@ import co.id.gmedia.octavian.kartikaapps.MainActivity;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
 
-public class HalamanDoku extends AppCompatActivity {
+public class  HalamanDoku extends AppCompatActivity {
 
     private String link="";
     private WebView webView;

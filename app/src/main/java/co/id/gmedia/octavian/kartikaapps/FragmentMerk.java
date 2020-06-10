@@ -200,6 +200,7 @@ public class FragmentMerk extends Fragment {
                     @Override
                     public void onError(String result) {
                         loading.setVisibility(View.GONE);
+                        Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                         loadMoreScrollListener.finishLoad(0);
                         Log.e(TAG,result);
                         viewMerk.clear();

@@ -7,13 +7,6 @@
     android:background="#FFFFFF"
     tools:context=".FragmentHome">
 
-    <!--<include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/part_actionbar"/>-->
-
-
-
         <LinearLayout
             android:id="@+id/ln_1"
             android:layout_width="match_parent"
@@ -32,7 +25,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:textColor="#fff"
-                    android:text="KARTIKA RESELLER"
+                    android:text="LAMPUKU"
                     android:textSize="24sp"
                     android:gravity="center"/>
 
@@ -70,6 +63,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="2.3">
 
+
                 <ImageView
                     android:id="@+id/pesan"
                     android:layout_width="23dp"
@@ -79,6 +73,20 @@
                     android:layout_margin="@dimen/size_4dp"
                     android:layout_gravity="center"
                     android:src="@drawable/chating"/>
+
+                    <TextView
+                        android:id="@+id/txt_count1"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bage_circle"
+                        android:textColor="@color/color_white"
+                        app:layout_constraintTop_toTopOf="@id/pesan"
+                        android:textSize="@dimen/size_10dp"
+                        android:text="3"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        tools:layout_editor_absoluteX="20dp"
+                        app:layout_constraintRight_toLeftOf="@id/cart"/>
 
                 <ImageView
                     android:id="@+id/cart"
@@ -177,8 +185,17 @@
                     android:id="@+id/ll_recyclerView1"
                     android:layout_marginRight="18dp"
                     android:layout_marginLeft="15dp"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/shimer_promo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_20dp"
+                    android:layout_marginRight="18dp"
+                    layout="@layout/item_shimmer_promo"/>
 
             </LinearLayout>
 
@@ -274,10 +291,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:orientation="vertical">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ll_recyclerView3"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/shimer_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_10dp"
+                    layout="@layout/item_shimmer_produk_home"/>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

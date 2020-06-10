@@ -65,6 +65,7 @@ import java.util.List;
 import co.id.gmedia.coremodul.ImageUtils;
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
+import co.id.gmedia.octavian.kartikaapps.MainActivity;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.adapter.ChatAdapter;
 import co.id.gmedia.octavian.kartikaapps.model.CustomItem;
@@ -110,6 +111,8 @@ public class ActivityChat extends AppCompatActivity {
     private File saveDirectory;
     private String TAG = "Chat";
     private ImageView img_back;
+
+
     public static int GALERRY_REQUEST = 777;
 
     @Override
@@ -1091,5 +1094,13 @@ public class ActivityChat extends AppCompatActivity {
         start = 0;
         isLoading = false;
         getChat();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ActivityChat.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

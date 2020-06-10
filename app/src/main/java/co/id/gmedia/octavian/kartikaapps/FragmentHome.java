@@ -21,11 +21,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +54,8 @@ import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
+import static android.view.View.GONE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,13 +65,14 @@ public class FragmentHome extends Fragment {
     private View v;
     private static EditText old_pass, new_pass, re_pass, old_pin, new_pin, re_pin, txt_phone, txt_otp, txt_Logout;
     private String times= "";
-    private TextView txt_point, tvRefresh, txt_count;
+    private TextView txt_point, tvRefresh, txt_count, txt_count_chat;
     private ItemValidation iv = new ItemValidation();
     private int count = 0;
     private boolean loadingTime;
     private Button btn_register, btn_request, btn_kirim;
     CountDownTimer countDownTimer;
     private TextView time;
+    private RecyclerView homeview, homeProduk;
 
     private List<ModelOneForAll> viewmenubaru = new ArrayList<>();
     private TemplateAdaptorpromo kategorimenu;
@@ -73,10 +80,14 @@ public class FragmentHome extends Fragment {
     private List<ModelProduk> viewproduk = new ArrayList<>();
     private TemplateAdaptorHotProduk adepterproduk;
     private TextView txt_search;
-    private CardView point;
-
+    private CardView point, sim_promo;
+    private LinearLayout sim_produk;
     private static String TAG = "Home";
+    private ImageView back;
     private SessionManager session;
+    private int width =30;
+    private int height = 100;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     public FragmentHome() {
         // Required empty public constructor
@@ -100,17 +111,22 @@ public class FragmentHome extends Fragment {
             txt_point = v.findViewById(R.id.txt_point);
             txt_search = v.findViewById(R.id.txt_search_btn);
             txt_count = v.findViewById(R.id.txt_count);
-            txt_count.setVisibility(View.GONE);
+            txt_count.setVisibility(GONE);
+            txt_count_chat = v.findViewById(R.id.txt_count1);
+            txt_count_chat.setVisibility(GONE);
+            sim_promo = v.findViewById(R.id.promo_sim);
+            sim_produk = v.findViewById(R.id.ln_shimer_produk_home);
             //txt_search.setEnabled(false);
             point = v.findViewById(R.id.cr_point);
+            shimmerFrameLayout = v.findViewById(R.id.shimmer_layout);
 
-            RecyclerView homeview = v.findViewById(R.id.ll_recyclerView1);
+            homeview = v.findViewById(R.id.ll_recyclerView1);
             homeview.setItemAnimator(new DefaultItemAnimator());
             homeview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false));
             kategorimenu = new TemplateAdaptorpromo (context, viewmenubaru) ;
             homeview.setAdapter(kategorimenu);
 
-            RecyclerView homeProduk = v.findViewById(R.id.ll_recyclerView3);
+            homeProduk = v.findViewById(R.id.ll_recyclerView3);
             homeProduk.setItemAnimator(new DefaultItemAnimator());
             homeProduk.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false));
             adepterproduk = new TemplateAdaptorHotProduk(context, viewproduk) ;
@@ -121,6 +137,7 @@ public class FragmentHome extends Fragment {
             LoadProduk();
             loadPoit();
             loadCount();
+            LoadCountChat();
 
             /*if (iv.parseNullDouble(txt_count.getText().toString()) ==null){
                 refresh(5000);
@@ -191,9 +208,19 @@ public class FragmentHome extends Fragment {
             v.findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final Dialog dialog = new Dialog(context);
+                    final Dialog dialog = new Dialog(context, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
                     dialog.setContentView(R.layout.popup_menu_setting);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    back = dialog.findViewById(R.id.back);
+
+                    back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    //dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
                     dialog.findViewById(R.id.ubah_pass).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -201,9 +228,18 @@ public class FragmentHome extends Fragment {
                             final Dialog dialog = new Dialog(context);
                             dialog.setContentView(R.layout.popup_ganti_pass);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            ImageView img_exit;
+                            img_exit = dialog.findViewById(R.id.exit);
                             old_pass = dialog.findViewById(R.id.txt_pass_lama);
                             new_pass = dialog.findViewById(R.id.txt_pass);
                             re_pass = dialog.findViewById(R.id.txt_ulang_pass);
+
+                            img_exit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                }
+                            });
 
                             dialog.findViewById(R.id.btn_simpan).setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -233,9 +269,18 @@ public class FragmentHome extends Fragment {
                             final Dialog dialog = new Dialog(context);
                             dialog.setContentView(R.layout.popup_ganti_pin);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            ImageView img_exit;
+                            img_exit = dialog.findViewById(R.id.exit);
                             old_pin = dialog.findViewById(R.id.txt_pin_lama);
                             new_pin  = dialog.findViewById(R.id.txt_pin_baru);
                             re_pin = dialog.findViewById(R.id.txt_ulang_pin);
+
+                            img_exit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                }
+                            });
 
                             dialog.findViewById(R.id.btn_simpan).setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -255,7 +300,16 @@ public class FragmentHome extends Fragment {
                             final Dialog dialog = new Dialog(context);
                             dialog.setContentView(R.layout.popup_reset_pin);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            ImageView img_exit;
+                            img_exit = dialog.findViewById(R.id.exit);
                             txt_phone = dialog.findViewById(R.id.txt_notelp);
+
+                            img_exit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                }
+                            });
 
                             dialog.findViewById(R.id.btn_proses).setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -314,11 +368,11 @@ public class FragmentHome extends Fragment {
                         if (kondisi.equals("show")){
                             txt_count.setVisibility(View.VISIBLE);
                         }else {
-                            txt_count.setVisibility(View.GONE);
+                            txt_count.setVisibility(GONE);
                         }
                         txt_count.setText(object.getJSONObject("response").getString("value"));
                     } else {
-                        txt_count.setVisibility(View.GONE);
+                        txt_count.setVisibility(GONE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -328,7 +382,42 @@ public class FragmentHome extends Fragment {
 
             @Override
             public void onError(String result) {
-                txt_count.setVisibility(View.GONE);
+                txt_count.setVisibility(GONE);
+                Toast.makeText(context, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void LoadCountChat() {
+        new APIvolley(context, new JSONObject(), "POST", Constant.URL_POST_COUNT_CHAT, new APIvolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                txt_count_chat.setVisibility(View.VISIBLE);
+                try {
+                    JSONObject object = new JSONObject(result);
+                    String message = object.getJSONObject("metadata").getString("message");
+                    String status = object.getJSONObject("metadata").getString("status");
+
+                    if (status.equals("200")){
+                        String kondisi = object.getJSONObject("response").getString("badge");
+                        if (kondisi.equals("show")){
+                            txt_count_chat.setVisibility(View.VISIBLE);
+                        }else {
+                            txt_count_chat.setVisibility(GONE);
+                        }
+                        txt_count_chat.setText(object.getJSONObject("response").getString("value"));
+                    } else {
+                        txt_count_chat.setVisibility(GONE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+                txt_count.setVisibility(GONE);
                 Toast.makeText(context, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
             }
         });
@@ -363,7 +452,6 @@ public class FragmentHome extends Fragment {
                     @Override
                     public void onError(String result) {
                         Log.e(TAG,result);
-
                     }
                 });
         refresh(5000);
@@ -386,6 +474,8 @@ public class FragmentHome extends Fragment {
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
+                        sim_produk.setVisibility(GONE);
+                        homeProduk.setVisibility(View.VISIBLE);
                         viewproduk.clear();
                         try {
                             JSONObject obj= new JSONObject(result);
@@ -402,7 +492,7 @@ public class FragmentHome extends Fragment {
                             }
 
                         } catch (JSONException e) {
-                            Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -412,7 +502,7 @@ public class FragmentHome extends Fragment {
 
                     @Override
                     public void onError(String result) {
-                        Toast.makeText(context,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                         Log.e(TAG,result);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
@@ -427,6 +517,8 @@ public class FragmentHome extends Fragment {
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
+                        sim_promo.setVisibility(GONE);
+                        homeview.setVisibility(View.VISIBLE);
                         viewmenubaru.clear();
                         try {
                             JSONObject obj= new JSONObject(result);
@@ -488,7 +580,6 @@ public class FragmentHome extends Fragment {
                     }
                     else {
                         Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -497,10 +588,10 @@ public class FragmentHome extends Fragment {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(context,result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
 
             }
-        }) ;
+        });
 
     }
 
@@ -540,7 +631,7 @@ public class FragmentHome extends Fragment {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(context,result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
 
             }
         }) ;
@@ -569,7 +660,7 @@ public class FragmentHome extends Fragment {
                 time.setText(""); //On finish change timer text
                 countDownTimer = null;//set CountDownTimer to null
                 btn_request.setVisibility(View.VISIBLE);
-                btn_kirim.setVisibility(View.GONE);
+                btn_kirim.setVisibility(GONE);
             }
         }.start();
 
@@ -601,7 +692,7 @@ public class FragmentHome extends Fragment {
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         time = dialog.findViewById(R.id.txt_time);
                         btn_request = dialog.findViewById(R.id.btn_request);
-                        btn_request.setVisibility(View.GONE);
+                        btn_request.setVisibility(GONE);
                         btn_kirim = dialog.findViewById(R.id.btn_next_otp);
                         btn_kirim.setVisibility(View.VISIBLE);
                         dialog.setCanceledOnTouchOutside(false);
@@ -640,7 +731,7 @@ public class FragmentHome extends Fragment {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(context, "koneksi bermasalah", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
 
             }
         }) ;
@@ -687,7 +778,7 @@ public class FragmentHome extends Fragment {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Kesalhan Jaringan", Toast.LENGTH_SHORT).show();
             }
         }) ;
 

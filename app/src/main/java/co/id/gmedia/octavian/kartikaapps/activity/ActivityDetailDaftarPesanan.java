@@ -188,7 +188,7 @@ public class ActivityDetailDaftarPesanan extends AppCompatActivity {
                     public void onError(String result) {
                         Log.e(TAG,result);
                         // mProses.setVisibility(View.GONE);
-                        Toast.makeText(ActivityDetailDaftarPesanan.this, result, Toast.LENGTH_LONG).show();
+                        Toast.makeText(ActivityDetailDaftarPesanan.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
                         CartTersedia.clear();
                         CartPreorder.clear();
                         adapterTersedia.notifyDataSetChanged();

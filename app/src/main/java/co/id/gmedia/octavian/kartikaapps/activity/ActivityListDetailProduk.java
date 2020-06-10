@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -63,6 +64,8 @@ public class ActivityListDetailProduk extends AppCompatActivity {
     private String Filter="";
     private ProgressBar loading;
     private ImageView img_back;
+    private ShimmerFrameLayout shimmerFrameLayout;
+
     private LoadMoreScrollListener loadMoreScrollListener;
 
     @Override
@@ -89,6 +92,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
         img_filter = findViewById(R.id.filter);
         loading = findViewById(R.id.loading);
         img_back = findViewById(R.id.back);
+        //shimmerFrameLayout = findViewById(R.id.shimmer_layout);
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,8 +222,16 @@ public class ActivityListDetailProduk extends AppCompatActivity {
         //LoadProduk(true);
     }
 
+   /*  @Override
+    protected void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
+    }*/
+
 
     private void LoadProduk(boolean init) {
+        /*shimmerFrameLayout.setVisibility(View.VISIBLE);
+        shimmerFrameLayout.startShimmer();*/
         loading.setVisibility(View.VISIBLE);
         if (init){
             loadMoreScrollListener.initLoad();
@@ -229,6 +241,8 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
+                        /*shimmerFrameLayout.setVisibility(View.GONE);
+                        shimmerFrameLayout.stopShimmer();*/
                         loading.setVisibility(View.GONE);
                         if (init){
                             viewproduk.clear();

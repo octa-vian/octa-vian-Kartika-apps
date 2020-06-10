@@ -47,7 +47,7 @@
                         android:layout_centerInParent="true"
                         android:background="?attr/selectableItemBackground"
                         android:id="@+id/iv_attach"
-                        android:src="@drawable/ic_attachment_black_24dp"/>
+                        android:src="@drawable/attach"/>
 
                 </RelativeLayout>
 
@@ -152,6 +152,7 @@
         android:id="@+id/lv_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_white"
         android:layout_below="@id/paddingTop"
         android:divider="@null"
         android:layout_above="@id/footer">
@@ -172,7 +173,8 @@
             android:layout_marginTop="@dimen/margin_default"
             android:layout_marginRight="@dimen/margin_default"
             android:layout_marginLeft="@dimen/margin_default"
-            android:background="@drawable/border_chat"
+            android:layout_marginBottom="@dimen/size_8dp"
+            android:background="@drawable/border_corner"
             android:weightSum="3"
             android:gravity="center"
             android:id="@+id/ll_photo"
@@ -187,14 +189,22 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:padding="@dimen/margin_small"
-                    android:drawableTop="@drawable/ic_folder_open"
-                    android:background="@color/color_white"
+                    android:background="@drawable/doc"
                     android:id="@+id/btn_buka_dokument"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:text="Buka Dokumen"/>
+                    style="?android:attr/borderlessButtonStyle" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:textColor="@color/color_white"
+                    android:gravity="center"
+                    android:textSize="@dimen/size_12dp"
+                    android:text="Buka Dokumen" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -206,13 +216,21 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:padding="@dimen/margin_small"
-                    android:drawableTop="@drawable/ic_galery_24dp"
-                    android:background="@color/color_white"
+                    android:background="@drawable/gallery"
                     style="?android:attr/borderlessButtonStyle"
                     android:id="@+id/btn_buka_gallery"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:textSize="@dimen/size_12dp"
+                    android:textColor="@color/color_white"
+                    android:gravity="center"
                     android:text="Buka Gallery"/>
             </LinearLayout>
 
@@ -225,13 +243,21 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:padding="@dimen/margin_small"
-                    android:drawableTop="@drawable/ic_photos"
-                    android:background="@color/color_white"
+                    android:background="@drawable/kamera"
                     android:id="@+id/btn_buka_kamera"
                     style="?android:attr/borderlessButtonStyle"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/size_12dp"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:gravity="center"
                     android:text="Buka Kamera"/>
             </LinearLayout>
 

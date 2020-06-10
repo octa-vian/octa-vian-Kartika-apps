@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="@drawable/border_chat_edt"
         android:layout_margin="10dp"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +30,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="35dp"
+                android:layout_marginBottom="20dp"
                 android:text="Form Register"
                 android:gravity="center"
                 android:textSize="28sp"
@@ -45,13 +48,29 @@
                 android:text="UserName:"
                 android:textSize="12sp"
                 android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-14dp"
+                    app:passwordToggleEnabled="false">
+
                 <EditText
                     android:id="@+id/txt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/size_12dp"
-                    android:hint="Username tidak boleh mengandung spasi"
+                    android:hint=""
                     android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_Dark"
+                    android:gravity="left"
+                    android:text="*User name tidak boleh mengandung spasi"
+                    android:textSize="8sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -59,14 +78,30 @@
                     android:text="Password:"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etPasswordLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-14dp"
+                    app:passwordToggleEnabled="true">
+
                 <EditText
                     android:id="@+id/txt_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/size_12dp"
-                    android:hint="Password minimal 5 digit"
+                    android:hint=""
                     android:inputType="textPassword"
                     android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_Dark"
+                    android:gravity="left"
+                    android:text="*Password minimal 5 digit"
+                    android:textSize="8sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -74,29 +109,61 @@
                     android:text="Ketik Ulang Password:"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-14dp"
+                    app:passwordToggleEnabled="true">
+
                 <EditText
                     android:id="@+id/txt_ulang_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/size_12dp"
-                    android:hint="Password minimal 5 digit"
+                    android:hint=""
                     android:inputType="textPassword"
                     android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pin:"
+                    android:textColor="@color/red_Dark"
+                    android:gravity="left"
+                    android:text="*Password minimal 5 digit"
+                    android:textSize="8sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pin Anda:"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-14dp"
+                    app:passwordToggleEnabled="true">
+
                 <EditText
                     android:id="@+id/txt_pin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberPassword"
                     android:textSize="@dimen/size_12dp"
-                    android:hint="Pin harus 4 digit"
+                    android:hint=""
                     android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_Dark"
+                    android:gravity="left"
+                    android:text="*Pin harus 4 digit"
+                    android:textSize="8sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -104,14 +171,29 @@
                     android:text="Ketik Ulang Pin:"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-14dp"
+                    app:passwordToggleEnabled="true">
+
                 <EditText
                     android:id="@+id/txt_repin"
                     android:inputType="numberPassword"
-                    android:hint="Pin harus 4 digit"
+                    android:hint=""
                     android:textSize="@dimen/size_12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_Dark"
+                    android:gravity="left"
+                    android:text="*Pin harus 4 digit"
+                    android:textSize="8sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -127,7 +209,7 @@
                 android:layout_gravity="center"
                 android:text="Register"
                 android:textColor="#fff"
-                android:background="@drawable/border_login"/>
+                android:background="@drawable/border_btn_lanjut"/>
 
         </LinearLayout>
         </ScrollView>

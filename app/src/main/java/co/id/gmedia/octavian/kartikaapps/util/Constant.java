@@ -100,10 +100,13 @@ public class Constant {
     public static final String URL_GET_NOTIF = baseURL + "notification/list_notif";
     public static final String URL_POST_SEND_CHAT = baseURL + "chat/send_text";
     public static final String URL_POST_COUNT_CART = baseURL + "shop/get_cart_badge";
+    public static final String URL_POST_COUNT_CHAT = baseURL + "chat/get_chat_badge";
     public static final String URL_POST_BAYAR_KEDOKU = baseURL + "piutang/get_nobukti_pembayaran_piutang";
     public static final String URL_POST_UPDATE_FCM_ID = baseURL + "account/update_fcm_id";
     public static final String URL_GET_CHAT = baseURL + "chat/list_chat";
     public static final String URL_POST_FILE = baseURL + "chat/send_file";
+    public static final String URL_POST_PHOTO_FROM_FILE = baseURL + "account/change_profile_pics_formdata";
+    public static final String URL_POST_BADGE_NOTIF= baseURL + "notification/get_notif_badge";
 
 
 

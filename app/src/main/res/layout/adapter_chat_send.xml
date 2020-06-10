@@ -51,7 +51,7 @@
                         android:text=""
                         android:layout_marginBottom="@dimen/size_4dp"
                         android:textSize="10sp"
-                        android:layout_gravity="left"
+                        android:layout_gravity="right"
                         android:id="@+id/tv_nama"
                         android:textColor="@color/color_black"/>
 

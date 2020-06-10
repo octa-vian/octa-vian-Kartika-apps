@@ -213,7 +213,7 @@ public class ChatAdapter extends ArrayAdapter {
             });
         }else if(extension.length() > 0){ //document
 
-            holder.ivImage.setImageResource(R.drawable.ic_attachment_black_24dp);
+            holder.ivImage.setImageResource(R.drawable.attach);
             holder.llAttach.setVisibility(View.VISIBLE);
             holder.tvPesan.setVisibility(View.GONE);
             holder.tvFileName.setText(item.getItem10());
@@ -226,7 +226,7 @@ public class ChatAdapter extends ArrayAdapter {
                 }
             });
         }else{
-            holder.ivImage.setImageResource(R.drawable.ic_attachment_black_24dp);
+            holder.ivImage.setImageResource(R.drawable.attach);
             holder.llAttach.setVisibility(View.GONE);
             holder.tvPesan.setVisibility(View.VISIBLE);
             holder.tvPesan.setText(item.getItem5());

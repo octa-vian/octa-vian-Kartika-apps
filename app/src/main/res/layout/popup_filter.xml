@@ -52,7 +52,7 @@
                        android:id="@+id/txt_termurah"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:checked="true"
+                       android:checked="false"
                        android:layout_margin="@dimen/size_4dp"
                        android:textStyle="bold"
                        android:text="Termurah"
@@ -100,7 +100,7 @@
 
                     <RadioButton
                         android:id="@+id/txt_tersedia"
-                        android:checked="true"
+                        android:checked="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"

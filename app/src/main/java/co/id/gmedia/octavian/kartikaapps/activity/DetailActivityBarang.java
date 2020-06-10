@@ -134,6 +134,7 @@ public class DetailActivityBarang extends AppCompatActivity {
                     @Override
                     public void onError(String result) {
                         Log.e(TAG,result);
+                        Toast.makeText(DetailActivityBarang.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
 

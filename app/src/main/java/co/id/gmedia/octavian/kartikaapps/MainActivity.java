@@ -4,21 +4,37 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+/*import androidx.fragment.app.FragmentTransaction;*/
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
@@ -28,6 +44,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private SessionManager session;
     private Fragment fragment;
+    public static TextView badge_notif;
+    private Handler mHandler = new Handler();
+    private static String kondisi="";
+    public static Activity activity;
+    private static ItemValidation iv = new ItemValidation();
+    //private Runnable refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,55 +57,102 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         setContentView(R.layout.menu_home_baru);
+        activity = this;
 
-        //ketika set default Home Fragment
-        loadfragment (new FragmentHome());
-        /*TabLayout tabl = findViewById(R.id.tablayout);
-        tabl.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        //FragmentManager fragmentManager = getFragmentManager();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        //memberi listener pada saat item bottom terpilih
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setBackgroundColor (Color.WHITE);
+
+        String menuFragment = getIntent().getStringExtra("notif");
+        if (menuFragment !=null){
+            if (menuFragment.equals("FromInfo")) {
+                loadfragment(new FragmentInfo());
+                bottomNavigationView.setSelectedItemId(R.id.nav_info);
+            }
+            else {
+                loadfragment (new FragmentHome());
+            }
+        }
+
+        //loadfragment (new FragmentHome());
+
+        //menginisialisasi Bottom Navisagasi
+        //bottomNavigationView.getMenu().findItem(R.id.nav_home).getIcon().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+        //bottomNavigationView.setItemIconTintList(ColorStateList.valueOf(R.color.red_color));
+
+        BottomNavigationMenuView bottomNavigationMenuView =
+                (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
+        View v = bottomNavigationMenuView.getChildAt(3);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
+
+        View badge = LayoutInflater.from(this)
+                .inflate(R.layout.notification_badge, itemView, true);
+        badge_notif = badge.findViewById(R.id.notifications);
+        badge_notif.setVisibility(View.GONE);
+
+
+        UpdateFcmId();
+        LoadCountNotif();
+
+
+    }
+
+
+
+    public static void LoadCountNotif() {
+        new APIvolley(activity, new JSONObject(), "POST", Constant.URL_POST_BADGE_NOTIF, new APIvolley.VolleyCallback() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
-                    case 0:
-                        fragment = new FragmentHome();
-                        loadfragment(fragment);
-                        break;
-                    case 1:
-                        fragment = new FragmentProduk();
-                        loadfragment(fragment);
-                        break;
-                    case 2:
-                        fragment = new FragmentMerk();
-                        loadfragment(fragment);
-                        break;
-                    case 3:
-                        fragment = new FragmentInfo();
-                        loadfragment(fragment);
-                        break;
-                    case 4:
-                        fragment = new FragmentAkun();
-                        loadfragment(fragment);
-                        break;
+            public void onSuccess(String result) {
+                int i=0;
+                try {
+                    JSONObject object = new JSONObject(result);
+                    String message = object.getJSONObject("metadata").getString("message");
+                    String status = object.getJSONObject("metadata").getString("status");
+
+                    if (status.equals("200")){
+                        kondisi = object.getJSONObject("response").getString("badge");
+                        badge_notif.setText(object.getJSONObject("response").getString("value"));
+                        i = iv.parseNullInteger(object.getJSONObject("response").getString("value"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (i>0){
+                    badge_notif.setVisibility(View.VISIBLE);
+                }else {
+                    badge_notif.setVisibility(View.GONE);
                 }
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
+            public void onError(String result) {
+                badge_notif.setVisibility(View.GONE);
+                Toast.makeText(activity, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
             }
+        });
+        //refresh(5000);
+    }
 
+    public static void refresh(int i) {
+       // final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void run() {
+                if (kondisi.equals("show")){
+                    badge_notif.setVisibility(View.VISIBLE);
+                    LoadCountNotif();
+                }else {
+                    badge_notif.setVisibility(View.GONE);
+                    LoadCountNotif();
+                }
+                //loadCount();
             }
-        });*/
-        //menginisialisasi Bottom Navisagasi
-        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
-        //memberi listener pada saat item bottom terpilih
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-
-        UpdateFcmId();
-
+        };
     }
 
     private void UpdateFcmId() {
@@ -125,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
             trans.replace(R.id.nav_host_fragment, fragment);
             trans.commitAllowingStateLoss();
-
         }
         return false;
     }

@@ -31,7 +31,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        String title = "Kartika Apps";
+        String title = "Lampuku";
         String body = "anda mendapat notifikasi";
         String type = "";
 
@@ -41,6 +41,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if(remoteMessage.getData().containsKey("type")){
                 type = remoteMessage.getData().get("type");
             }
+            MainActivity.LoadCountNotif();
         }
 
         if(remoteMessage.getNotification() != null){
@@ -70,46 +71,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
 
-        notificationBuilder.setAutoCancel(true)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.logokartika)
-                .setTicker(title)
-                .setContentTitle(title)
-                .setContentText(body);
-        //     .setPriority(Notification.PRIORITY_MAX)
-                /*.setContentTitle(remoteMessage.getNotification().getTitle())
-                .setContentText(remoteMessage.getNotification().getBody())
-                .setContentInfo(remoteMessage.getNotification().getTag());*/
-        //.setContentInfo(remoteMessage.getData().get("key_1"));
-
-        // notification click action
         Intent notificationIntent;
-        if(!AppSharedPreferences.isLoggedIn(this)){
-            notificationIntent = new Intent(this, LoginActivity.class);
-        }
-        else if(type != null && !type.isEmpty()){
-            switch (type){
-                case "Info":{
-                    notificationIntent = new Intent(this, FragmentInfo.class);
-                    break;
-                }
-                default:{
-                    notificationIntent = new Intent(this, FragmentInfo.class);
-                    break;
-                }
-            }
-        }
-        else if(remoteMessage.getData().containsKey("id_bayar_piutang")){
-            notificationIntent = new Intent(this, ActivityDetailPiutang.class);
-        }
-        else{
-            notificationIntent = new Intent(this, FragmentInfo.class);
-        }
+        notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.putExtra("notif", "FromInfo");
 
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent resultPendingIntent = PendingIntent.getActivity
-                (this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                (this, 0, notificationIntent, 0);
+
+        notificationBuilder.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.logored)
+                .setTicker(title)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setContentIntent(resultPendingIntent);
+
+
         notificationBuilder.setContentIntent(resultPendingIntent);
         notificationManager.notify(1, notificationBuilder.build());
     }

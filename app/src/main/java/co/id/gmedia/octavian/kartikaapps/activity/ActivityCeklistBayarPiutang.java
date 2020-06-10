@@ -133,6 +133,8 @@ public class ActivityCeklistBayarPiutang extends AppCompatActivity {
                         intent.putExtra("url", url);
                         startActivity(intent);
 
+                    } else {
+                        Toast.makeText(ActivityCeklistBayarPiutang.this, message, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -141,7 +143,7 @@ public class ActivityCeklistBayarPiutang extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-
+                Toast.makeText(ActivityCeklistBayarPiutang.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
             }
         });
     }

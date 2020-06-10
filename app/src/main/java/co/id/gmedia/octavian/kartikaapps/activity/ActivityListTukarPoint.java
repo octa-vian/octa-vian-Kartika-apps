@@ -177,7 +177,7 @@ public class ActivityListTukarPoint extends AppCompatActivity {
             loadMoreScrollListener.initLoad();
         }
         //txt_judul.setText(nota.getItem3());
-        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=%s",loadMoreScrollListener.getLoaded(), 10, search, Filter);
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=%s",loadMoreScrollListener.getLoaded(), 20, search, Filter);
         new APIvolley(ActivityListTukarPoint.this, new JSONObject(), "GET", Constant.URL_GET_LIST_HADIAH+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override

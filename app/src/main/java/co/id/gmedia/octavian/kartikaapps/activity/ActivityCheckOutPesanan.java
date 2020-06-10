@@ -36,6 +36,7 @@ public class ActivityCheckOutPesanan extends AppCompatActivity {
     private List<ModelCartTersedia> CartTersedia = new ArrayList<>();
     private TemplateAdaptorListTersedia adapterTersedia;
     private TemplateAdaptorListPreOrder adaptorPreOrder;
+
     private static String TAG = "CekOut";
     private String Nobukti;
     private Button lanjutkan;

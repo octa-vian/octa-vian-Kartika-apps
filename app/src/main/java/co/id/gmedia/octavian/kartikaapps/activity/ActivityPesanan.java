@@ -1,6 +1,9 @@
 package co.id.gmedia.octavian.kartikaapps.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
+import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukDetail;
+import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.model.ModelSpinner;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
@@ -46,6 +51,9 @@ public class ActivityPesanan extends AppCompatActivity {
     private List<ModelSpinner> listSpinner = new ArrayList<>();
     private ArrayAdapter adapterSP;
 
+    private List<ModelProduk> viewproduk = new ArrayList<>();
+    private TemplateAdaptorProdukDetail adepterproduk;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +66,17 @@ public class ActivityPesanan extends AppCompatActivity {
         txt_harga = findViewById(R.id.harga);
         txt_keterangan = findViewById(R.id.keterangan);
         txt_tempo = findViewById(R.id.tempo);
-        img_view = findViewById(R.id.img_gambar_detail);
+       // img_view = findViewById(R.id.img_gambar_detail);
         txt_jumlah = findViewById(R.id.txt_jumlah);
         txt_total_harga = findViewById(R.id.txt_totalHarga);
         btn_beli = findViewById(R.id.btn_beli);
+
+
+        RecyclerView homeProduk = findViewById(R.id.rv_gambar_detail);
+        homeProduk.setItemAnimator(new DefaultItemAnimator());
+        homeProduk.setLayoutManager(new LinearLayoutManager(ActivityPesanan.this, LinearLayoutManager.HORIZONTAL,false));
+        adepterproduk = new TemplateAdaptorProdukDetail(ActivityPesanan.this, viewproduk) ;
+        homeProduk.setAdapter(adepterproduk);
 
         btn_beli.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,8 +157,7 @@ public class ActivityPesanan extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-
-                Toast.makeText(ActivityPesanan.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityPesanan.this, "Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -202,8 +216,8 @@ public class ActivityPesanan extends AppCompatActivity {
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
+                        viewproduk.clear();
                         try {
-
                             JSONObject obj= new JSONObject(result);
                             String message = obj.getJSONObject("metadata").getString("message");
                             String status = obj.getJSONObject("metadata").getString("status");
@@ -213,11 +227,21 @@ public class ActivityPesanan extends AppCompatActivity {
                                 txt_namabrg.setText(obj.getJSONObject("response").getString("namabrg"));
                                 txt_keterangan.setText(obj.getJSONObject("response").getString("keterangan"));
                                 txt_tempo.setText(obj.getJSONObject("response").getString("tempo"));
-                                Picasso.get().load(obj.getJSONObject("response").getString("img_url")).into(img_view);
+
+                                JSONArray meal = obj.getJSONObject("response").getJSONArray("images");
+                                for (int i=0; i < meal.length(); i++){
+                                    JSONObject objt = meal.getJSONObject(i);
+                                    //input data
+                                    viewproduk.add(new ModelProduk(objt.getString("img_url")));
+                                    //Picasso.get().load(nota.getItem2()).into(img_gambarProduk);
+                                    //Picasso.get().load(objt.getString("img_url")).into(img_gambarProduk);
+
+                                }
+                                //Picasso.get().load(obj.getJSONObject("response").getString("img_url")).into(img_view);
                                 obj.getJSONObject("response").getString("stok");
 
-                            }else {
-                               // Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
                             }
                             //Picasso.get().load(nota.getItem2()).into(img_gambarProduk);
                         } catch (JSONException e) {
@@ -225,6 +249,7 @@ public class ActivityPesanan extends AppCompatActivity {
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
+                        adepterproduk.notifyDataSetChanged();
                         // Refresh Adapter
                     }
 
@@ -272,7 +297,7 @@ public class ActivityPesanan extends AppCompatActivity {
                             }
                             //Picasso.get().load(nota.getItem2()).into(img_gambarProduk);
                         } catch (JSONException e) {
-                            Toast.makeText(ActivityPesanan.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityPesanan.this,"kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -281,6 +306,7 @@ public class ActivityPesanan extends AppCompatActivity {
 
                     @Override
                     public void onError(String result) {
+                        Toast.makeText(ActivityPesanan.this,"kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                         Log.e(TAG,result);
 
                     }

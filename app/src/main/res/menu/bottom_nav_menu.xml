@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/homeorange"
+        android:icon="@drawable/homegrey"
         android:title="Beranda" />
 
     <item
         android:id="@+id/nav_produk"
-        android:icon="@drawable/produkorange"
+        android:icon="@drawable/produkgrey"
         android:title="Produk" />
 
     <item
         android:id="@+id/nav_merk"
-        android:icon="@drawable/merkorange"
+        android:icon="@drawable/merkgrey"
         android:title="Merk" />
 
     <item
         android:id="@+id/nav_info"
-        android:icon="@drawable/infoorange"
+        android:icon="@drawable/infogrey"
         android:title="Info" />
 
     <item
         android:id="@+id/nav_account"
-        android:icon="@drawable/akunorange"
+        android:icon="@drawable/akungrey"
         android:title="Akun" />
 
 </menu>

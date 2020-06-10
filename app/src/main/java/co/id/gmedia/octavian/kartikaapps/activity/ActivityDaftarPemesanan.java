@@ -86,7 +86,7 @@ public class ActivityDaftarPemesanan extends AppCompatActivity {
 
                     @Override
                     public void onError(String result) {
-                        Toast.makeText(ActivityDaftarPemesanan.this, "Kesalahan Koneksi", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ActivityDaftarPemesanan.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
                     }
                 });
     }
