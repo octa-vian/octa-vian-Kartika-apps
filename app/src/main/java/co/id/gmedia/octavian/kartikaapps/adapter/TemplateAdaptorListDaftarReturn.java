@@ -48,13 +48,19 @@ public class TemplateAdaptorListDaftarReturn extends RecyclerView.Adapter<Templa
         templateViewHolder.txt_tanggal.setText(item.getItem2());
         templateViewHolder.txt_status.setText(item.getItem3());
 
-        /*final ModelProduk itemSelected = listItem.get(i);
-        if(itemSelected.getItem5().toUpperCase().trim().equals("available")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_green_dialog));
+        final ModelProduk itemSelected = listItem.get(i);
+        if(itemSelected.getItem3().toLowerCase().trim().equals("VERIF")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
         }
-        else if(itemSelected.getItem5().toUpperCase().trim().equals("preorder")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
-        }*/
+        else if(itemSelected.getItem3().toLowerCase().trim().equals("BARU")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.orange));
+        }
+        else if(itemSelected.getItem3().toLowerCase().trim().equals("PENDING")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_red_drag));
+        }
+        else if(itemSelected.getItem3().toLowerCase().trim().equals("CLOSE")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.red_color));
+        }
 
 
         final Gson gson = new Gson();

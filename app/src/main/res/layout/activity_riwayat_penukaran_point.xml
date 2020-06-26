@@ -40,13 +40,6 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
-
     <EditText
         android:id="@+id/txt_search"
         android:layout_width="match_parent"
@@ -56,22 +49,29 @@
         android:layout_height="35dp"
         android:layout_marginTop="@dimen/size_20dp"
         android:layout_marginRight="@dimen/size_20dp"
-        android:layout_marginBottom="@dimen/size_20dp"
         android:layout_marginLeft="@dimen/size_20dp"
+        android:layout_marginBottom="@dimen/size_10dp"
         android:layout_weight="4"
         android:background="@drawable/border_grey_shadow"
         android:drawableLeft="@drawable/ic_search_black_24dp"
         android:gravity="center"
         android:hint="Cari riwayat penukaran  point"
+        android:fontFamily="@font/rubik_reguler"
         android:padding="@dimen/size_4dp"
-        android:textSize="@dimen/size_12dp" />
+        android:textSize="14sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_point"
-        android:layout_marginTop="@dimen/size_4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/txt_search">
+        android:layout_below="@id/txt_search"
+        android:layout_marginTop="4dp">
     </androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

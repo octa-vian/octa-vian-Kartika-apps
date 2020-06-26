@@ -60,7 +60,7 @@ public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCar
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
         }
         else{
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_red_drak));
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.red_new));
         }
 
         templateViewHolder.btn_hapus.setOnClickListener(new View.OnClickListener() {

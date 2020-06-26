@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class ActivityListDetailPromo extends AppCompatActivity {
     private static String TAG = "promo";
     private LoadMoreScrollListener loadMoreScrollListener;
     private ProgressBar loading;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,14 @@ public class ActivityListDetailPromo extends AppCompatActivity {
         setContentView(R.layout.activity_list_detail_promo);
 
         loading = findViewById(R.id.loading);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         RecyclerView homeview = findViewById(R.id.rv_list_detail_promo);
         homeview.setItemAnimator(new DefaultItemAnimator());

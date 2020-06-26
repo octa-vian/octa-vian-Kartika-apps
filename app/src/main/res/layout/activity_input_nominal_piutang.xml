@@ -25,13 +25,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size_8dp"
+                android:layout_margin="@dimen/size_4dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/denda"
+                    android:scaleType="centerCrop"
                     android:layout_margin="10dp"/>
 
                 <TextView
@@ -95,14 +96,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="100dp" />
+            app:layout_constraintGuide_begin="70dp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="280dp"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="200dp" />
 
         <Button
             android:id="@+id/btn_proses"

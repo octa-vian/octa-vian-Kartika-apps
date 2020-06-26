@@ -42,7 +42,7 @@
         android:id="@+id/rl_1"
         android:layout_width="match_parent"
         android:layout_below="@id/paddingTop"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:background="@color/red_Dark">
 
         <androidx.cardview.widget.CardView
@@ -50,18 +50,19 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             app:cardCornerRadius="12dp"
-            android:layout_margin="@dimen/size_20dp"
+            android:layout_margin="@dimen/size_10dp"
             android:elevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size_8dp"
+                android:layout_margin="@dimen/size_4dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/denda"
                     android:layout_margin="10dp"/>
 

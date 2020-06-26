@@ -89,7 +89,7 @@ public class FragmentAkun extends Fragment {
 private View v;
 private Context activity;
 private static Activity context;
-private CardView btn_denda, btn_piutang, btn_bayarPiutang, btn_Return;
+private CardView btn_denda, btn_piutang, btn_bayarPiutang, btn_Return, cardDaftar;
 private static TextView txt_namaOtlet, txt_nama, txt_no, btn_lihat;
 private static ImageView img_profile;
 private EditText txt_inputPin;
@@ -133,12 +133,20 @@ private static int totalSize;
         btn_bayarPiutang = v.findViewById(R.id.btn_bayar);
         btn_lihat = v.findViewById(R.id.btn_lihat);
         btn_Return = v.findViewById(R.id.btn_return);
+        cardDaftar = v.findViewById(R.id.card_daftar);
         img_profile = v.findViewById(R.id.iv_cardview);
 
         img_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Pix.start((FragmentActivity) activity, Options.init().setCount(1).setRequestCode(GALERRY_REQUEST));
+            }
+        });
+
+        cardDaftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Jangan di hapus!!!
             }
         });
 

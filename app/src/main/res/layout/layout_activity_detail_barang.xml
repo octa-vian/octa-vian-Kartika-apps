@@ -66,20 +66,20 @@
                     android:id="@+id/nama_brg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Nama Barang"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/size_16dp"
-                    android:text="Nama Barang"/>
+                    android:textSize="@dimen/size_16dp" />
 
                 <TextView
                     android:id="@+id/harga"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/orange"
-                    android:textStyle="bold"
                     android:layout_marginTop="@dimen/size_4dp"
-                    android:text="Rp. 20.000.00"/>
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Rp. 20.000.00"
+                    android:textColor="@color/orange"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -97,27 +97,27 @@
                 <TextView
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Status:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/size_16dp"
-                    android:text="Status:"/>
+                    android:textSize="@dimen/size_16dp" />
 
                 <TextView
                     android:id="@+id/status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Stok"
-                    android:textSize="14sp"
+                    android:fontFamily="@font/rubik_medium"
                     android:gravity="right"
-                    android:textStyle="bold"
-                    android:textColor="@color/grey"/>
+                    android:layout_gravity="center"
+                    android:text="Stok"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="@dimen/size_10dp"
                 android:background="@color/colorGreyAccent"/>
 
            <!-- <androidx.recyclerview.widget.RecyclerView
@@ -137,19 +137,20 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Deskripsi:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/size_16dp"
-                    android:text="Deskripsi:"/>
+                    android:textSize="@dimen/size_16dp" />
 
                 <TextView
                     android:id="@+id/txt_deskripsi"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:fontFamily="@font/rubik_reguler"
                     android:textAlignment="textStart"
-                    android:textSize="@dimen/size_12dp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/size_10dp"/>
+                    android:textSize="@dimen/size_12dp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -172,34 +173,34 @@
 
         <Button
             android:id="@+id/btn_chat"
-            android:layout_weight="1"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:layout_marginRight="@dimen/size_10dp"
-            android:layout_marginLeft="@dimen/size_10dp"
-            android:layout_marginBottom="@dimen/size_10dp"
-            android:background="@drawable/border_btn_white"
             android:layout_width="100dp"
             android:layout_height="35dp"
-            android:textSize="@dimen/size_12dp"
-            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:layout_marginBottom="@dimen/size_10dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_btn_white"
+            android:fontFamily="@font/rubik_medium"
             android:gravity="center"
-            android:text="Chat Sales"/>
+            android:text="Chat Sales"
+            android:textSize="@dimen/size_12dp" />
 
         <Button
             android:id="@+id/btn_beli"
-            android:layout_weight="1"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:layout_marginRight="@dimen/size_10dp"
-            android:layout_marginLeft="@dimen/size_10dp"
-            android:layout_marginBottom="@dimen/size_10dp"
-            android:background="@drawable/border_btn_lanjut"
             android:layout_width="100dp"
             android:layout_height="35dp"
-            android:textStyle="bold"
-            android:textSize="@dimen/size_12dp"
-            android:textColor="#fff"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:layout_marginBottom="@dimen/size_10dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_btn_lanjut"
+            android:fontFamily="@font/rubik_medium"
             android:gravity="center"
-            android:text="beli Sekarang"/>
+            android:text="beli Sekarang"
+            android:textColor="#fff"
+            android:textSize="@dimen/size_12dp" />
 
     </LinearLayout>
 

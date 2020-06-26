@@ -40,10 +40,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_daftarPesanan"
-        android:layout_marginTop="@dimen/size_4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/paddingTop">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_below="@id/paddingTop"
+        android:layout_marginTop="4dp"></androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

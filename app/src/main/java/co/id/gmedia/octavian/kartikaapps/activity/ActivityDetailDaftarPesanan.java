@@ -137,12 +137,13 @@ public class ActivityDetailDaftarPesanan extends AppCompatActivity {
                                     for (int l = 0; l < sate.length(); l++){
                                         JSONObject bakso = sate.getJSONObject(l);
                                         CartTersedia.add(new ModelCartTersedia(
-
                                                 bakso.getString("kodebrg")
                                                 ,bakso.getString("namabrg")
                                                 ,bakso.getString("jumlah")
                                                 ,bakso.getString("status")
-
+                                                ,bakso.getString("harga")
+                                                ,bakso.getString("keterangan_jumlah")
+                                                ,bakso.getString("sub_total")
                                         ));
                                         Stersedia.setVisibility(View.VISIBLE);
                                         cr_1.setVisibility(View.VISIBLE);
@@ -159,6 +160,9 @@ public class ActivityDetailDaftarPesanan extends AppCompatActivity {
                                                 ,bakso.getString("namabrg")
                                                 ,bakso.getString("jumlah")
                                                 ,bakso.getString("status")
+                                                ,bakso.getString("harga")
+                                                ,bakso.getString("keterangan_jumlah")
+                                                ,bakso.getString("sub_total")
                                         ));
                                         SpreOrder.setVisibility(View.VISIBLE);
                                         cr_2.setVisibility(View.VISIBLE);

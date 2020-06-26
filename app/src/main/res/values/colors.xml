@@ -13,10 +13,17 @@
     <color name="black">#000000</color>
     <color name="grey">#8EF81B</color>
     <color name="grey_dark">#16AB44</color>
+    <color name="color_ijo">#06D70D</color>
+    <color name="color_biru">#0404F6</color>
+    <color name="orange_drak">#F67504</color>
+    <color name="red_new">#F60404</color>
     <color name="transparant"> #ffffffff</color>
     <color name="colorTransparant">#00ffffff</color>
     <color name="colorTransparants">#80ffffff</color>
     <color name="orange">#F78D10</color>
     <color name="anggur">#582841</color>
+    <color name="color_harga">#FF2501</color>
+    <color name="color_preorder">#04508E</color>
+    <color name="color_tersedia">#018316</color>
 
 </resources>

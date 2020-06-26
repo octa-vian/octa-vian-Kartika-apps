@@ -5,10 +5,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 /*import androidx.fragment.app.FragmentTransaction;*/
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -66,8 +66,28 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         //memberi listener pada saat item bottom terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setBackgroundColor (Color.WHITE);
+        Bundle bundle = getIntent().getExtras();
 
-        String menuFragment = getIntent().getStringExtra("notif");
+        if (bundle !=null){
+            String brodcas = bundle.getString("jenis");
+            if (brodcas.equals("broadcast")){
+                loadfragment(new FragmentInfo());
+                bottomNavigationView.setSelectedItemId(R.id.nav_info);
+            }
+            else if (brodcas.equals("chat")){
+                loadfragment(new FragmentInfo());
+                bottomNavigationView.setSelectedItemId(R.id.nav_info);
+            }
+            else if (brodcas.equals("doku")){
+                loadfragment(new FragmentInfo());
+                bottomNavigationView.setSelectedItemId(R.id.nav_info);
+            }
+            bundle.clear();
+        } else{
+            loadfragment (new FragmentHome());
+        }
+
+       /* String menuFragment = getIntent().getStringExtra("notif");
         if (menuFragment !=null){
             if (menuFragment.equals("FromInfo")) {
                 loadfragment(new FragmentInfo());
@@ -76,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             else {
                 loadfragment (new FragmentHome());
             }
-        }
+        }*/
 
         //loadfragment (new FragmentHome());
 
@@ -97,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         UpdateFcmId();
         LoadCountNotif();
-
+        clearFragmentBackStack();
 
     }
 
@@ -153,6 +173,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 //loadCount();
             }
         };
+    }
+
+    public void clearFragmentBackStack() {
+        FragmentManager fh = getSupportFragmentManager();
+        for (int i = 0; i < fh.getBackStackEntryCount() - 1; i++) {
+            fh.popBackStack();
+        }
     }
 
     private void UpdateFcmId() {

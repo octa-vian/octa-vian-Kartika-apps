@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class ActivityDenda extends AppCompatActivity {
     private List<ModelProduk> lvDenda = new ArrayList<>();
     private TemplateAdaptorListDenda adapterDenda;
     private static String TAG = "Denda";
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,14 @@ public class ActivityDenda extends AppCompatActivity {
         setContentView(R.layout.activity_denda);
 
         txt_total = findViewById(R.id.txt_totalHarga);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         RecyclerView denda = findViewById(R.id.rv_denda);
         denda.setItemAnimator(new DefaultItemAnimator());

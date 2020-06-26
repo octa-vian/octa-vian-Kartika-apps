@@ -98,7 +98,6 @@ public class ActivityCheckOutPesanan extends AppCompatActivity {
     private void LoadData() {
         //mProses.setVisibility(View.VISIBLE);
         JSONObject object = new JSONObject();
-
         try {
 
             object.put("nobukti",Nobukti);
@@ -126,6 +125,7 @@ public class ActivityCheckOutPesanan extends AppCompatActivity {
                                 for (int i = 0; i < grab.length(); i++) {
                                     JSONObject grabFood = grab.getJSONObject(i);
                                     JSONObject food = grabFood.getJSONObject("barang_tersedia");
+
                                     JSONArray sate = food.getJSONArray("list");
                                     for (int l = 0; l < sate.length(); l++){
                                         JSONObject bakso = sate.getJSONObject(l);
@@ -134,6 +134,9 @@ public class ActivityCheckOutPesanan extends AppCompatActivity {
                                                 ,bakso.getString("namabrg")
                                                 ,bakso.getString("jumlah")
                                                 ,bakso.getString("status")
+                                                ,bakso.getString("harga")
+                                                ,bakso.getString("keterangan_jumlah")
+                                                ,bakso.getString("sub_total")
                                         ));
                                         Stersedia.setVisibility(View.VISIBLE);
                                         cr_1.setVisibility(View.VISIBLE);
@@ -150,6 +153,9 @@ public class ActivityCheckOutPesanan extends AppCompatActivity {
                                                 ,bakso.getString("namabrg")
                                                 ,bakso.getString("jumlah")
                                                 ,bakso.getString("status")
+                                                ,bakso.getString("harga")
+                                                ,bakso.getString("keterangan_jumlah")
+                                                ,bakso.getString("sub_total")
                                         ));
                                         SpreOrder.setVisibility(View.VISIBLE);
                                         cr_2.setVisibility(View.VISIBLE);

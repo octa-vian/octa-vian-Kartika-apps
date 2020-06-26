@@ -46,8 +46,9 @@ public class TemplateAdaptorListPiutang extends RecyclerView.Adapter<TemplateAda
         templateViewHolder.txt_nota.setText("Nomor Bukti: "+item.getItem1());
         templateViewHolder.txt_harga.setText(item.getItem2());
         templateViewHolder.txt_tanggal.setText(item.getItem3());
-        templateViewHolder.txt_tempo.setText(item.getItem4());
+        //templateViewHolder.txt_tempo.setText(item.getItem4());
         templateViewHolder.tgl_tempo.setText(item.getItem5());
+        templateViewHolder.txt_umur.setText(item.getItem6());
 
         /*final ModelProduk itemSelected = listItem.get(i);
         if(itemSelected.getItem5().toUpperCase().trim().equals("available")){
@@ -79,17 +80,20 @@ public class TemplateAdaptorListPiutang extends RecyclerView.Adapter<TemplateAda
 
 
         private ImageView iv_cardview;
-        private TextView txt_nota, txt_harga, txt_tanggal, txt_tempo, tgl_tempo;
+        private TextView txt_nota, txt_harga, txt_tanggal, txt_tempo, tgl_tempo, txt_umur;
         private CardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
-            super(itemView);
-                cardView = (CardView) itemView.findViewById(R.id.cr_piutang);
-               txt_nota = (TextView) itemView.findViewById(R.id.txt_noNota);
-               txt_harga =  (TextView) itemView.findViewById(R.id.txt_nominal);
-               txt_tanggal =  (TextView) itemView.findViewById(R.id.txt_tanggal);
-               txt_tempo = (TextView) itemView.findViewById(R.id.txt_tempo);
-               tgl_tempo = (TextView) itemView.findViewById(R.id.txt_tanggal_tempo);
+
+           super(itemView);
+           cardView = (CardView) itemView.findViewById(R.id.cr_piutang);
+           txt_nota = (TextView) itemView.findViewById(R.id.txt_noNota);
+           txt_harga =  (TextView) itemView.findViewById(R.id.txt_nominal);
+           txt_tanggal =  (TextView) itemView.findViewById(R.id.txt_tanggal);
+           txt_tempo = (TextView) itemView.findViewById(R.id.txt_tempo);
+           tgl_tempo = (TextView) itemView.findViewById(R.id.txt_tanggal_tempo);
+           txt_umur = (TextView) itemView.findViewById(R.id.txt_umur);
+
         }
     }
 }

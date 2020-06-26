@@ -1,6 +1,7 @@
 package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityDetailListSO;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
+import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
 
 public class TemplateAdaptorListCekPesanan extends RecyclerView.Adapter<TemplateAdaptorListCekPesanan.TemplateViewHolder> {
@@ -53,15 +58,15 @@ public class TemplateAdaptorListCekPesanan extends RecyclerView.Adapter<Template
         }*/
 
 
-        /*final Gson gson = new Gson();
+        final Gson gson = new Gson();
         templateViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(activity, ActivityDetailDaftarPesanan.class);
+                Intent i = new Intent(activity, ActivityDetailListSO.class);
                 i.putExtra(Constant.EXTRA_NOBUKTI, gson.toJson(item));
                 activity.startActivity(i);
             }
-        });*/
+        });
 
     }
 
@@ -84,6 +89,7 @@ public class TemplateAdaptorListCekPesanan extends RecyclerView.Adapter<Template
            txt_jumlah = (TextView) itemView.findViewById(R.id.txt_jumlah);
            txt_tanggal = (TextView) itemView.findViewById(R.id.txt_tanggal);
            txt_status = (TextView) itemView.findViewById(R.id.txt_status);
+           cardView = (CardView) itemView.findViewById(R.id.cr_daftarPiutang);
         }
     }
 }

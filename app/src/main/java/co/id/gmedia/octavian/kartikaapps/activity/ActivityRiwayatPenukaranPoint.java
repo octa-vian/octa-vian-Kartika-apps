@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -41,22 +42,25 @@ import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 import retrofit2.http.Tag;
 
 public class ActivityRiwayatPenukaranPoint extends AppCompatActivity {
-    private TemplateAdaptorListRiwayatPenukaranPoint adapterPoint;
-    private List<ModelProduk> listPoint = new ArrayList<>();
-    private ProgressBar loading;
-    private EditText txt_search;
-    private String search="";
-    private LoadMoreScrollListener loadMoreScrollListener;
+    public static TemplateAdaptorListRiwayatPenukaranPoint adapterPoint;
+    public static List<ModelProduk> listPoint = new ArrayList<>();
+    public static ProgressBar loading;
+    public static EditText txt_search;
+    public static String search="";
+    public static LoadMoreScrollListener loadMoreScrollListener;
     private ImageView btn_filter;
     private String Terendah = "terendah";
     private String Tertinggi = "tertinggi";
     private String Filter = "";
     private ImageView img_back;
+    public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riwayat_penukaran_point);
+
+        activity = this;
 
         //View
         txt_search = findViewById(R.id.txt_search);
@@ -155,13 +159,13 @@ public class ActivityRiwayatPenukaranPoint extends AppCompatActivity {
         //LoadData();
     }
 
-    private void LoadSearch(boolean init) {
+    public static void LoadSearch(boolean init) {
         loading.setVisibility(View.VISIBLE);
         if (init){
             loadMoreScrollListener.initLoad();
         }
         String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s",loadMoreScrollListener.getLoaded(), 10, search);
-        new APIvolley(ActivityRiwayatPenukaranPoint.this, new JSONObject(), "GET", Constant.URL_GET_SEARCH_RIWAYAT + parameter,
+        new APIvolley(activity, new JSONObject(), "GET", Constant.URL_GET_SEARCH_RIWAYAT + parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
@@ -183,6 +187,7 @@ public class ActivityRiwayatPenukaranPoint extends AppCompatActivity {
                                             ,ob.getString("tanggal")
                                             ,ob.getString("namabrg")
                                             ,ob.getString("status")
+                                            ,ob.getString("poin")
                                     ));
                                 }
                                 loadMoreScrollListener.finishLoad(arr.length());
@@ -199,9 +204,45 @@ public class ActivityRiwayatPenukaranPoint extends AppCompatActivity {
                     public void onError(String result) {
                         loading.setVisibility(View.GONE);
                         loadMoreScrollListener.finishLoad(0);
-                        Toast.makeText(ActivityRiwayatPenukaranPoint.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    public static void LoadConfrim(String kode){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("nobukti",kode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        new APIvolley(activity, object, "POST", Constant.URL_POST_CONFRIM, new APIvolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                try {
+                    JSONObject ob = new JSONObject(result);
+                    String message = ob.getJSONObject("metadata").getString("message");
+                    String status = ob.getJSONObject("metadata").getString("status");
+
+                    if (status.equals("200")){
+                        LoadSearch(true);
+                    }
+                    else {
+                        Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(activity, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void LoadData() {

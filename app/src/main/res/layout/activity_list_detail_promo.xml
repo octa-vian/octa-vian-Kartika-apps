@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.ActivityListDetailPromo">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+   <!-- <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cs_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -41,16 +41,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="220dp" />
+            app:layout_constraintGuide_begin="100dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="160dp" />
+            app:layout_constraintGuide_begin="80dp" />
 
-       <!-- <RelativeLayout
+       &lt;!&ndash; <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,12 +64,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </RelativeLayout>-->
+        </RelativeLayout>&ndash;&gt;
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <RelativeLayout
-        android:layout_below="@id/cs_1"
+        android:id="@+id/paddingTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red_Dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/backarrow"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detail Promo"
+                android:textColor="@color/color_white"
+                android:layout_gravity="center"
+                android:textSize="@dimen/size_16dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/paddingTop"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

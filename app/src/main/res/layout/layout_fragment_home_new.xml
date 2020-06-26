@@ -24,10 +24,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:textColor="#fff"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
                     android:text="LAMPUKU"
-                    android:textSize="24sp"
-                    android:gravity="center"/>
+                    android:textColor="#fff"
+                    android:textSize="24sp" />
 
             </LinearLayout>
             <LinearLayout
@@ -41,20 +42,21 @@
 
                 <TextView
                     android:id="@+id/txt_search_btn"
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="@dimen/size_10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:padding="@dimen/size_4dp"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="@dimen/size_10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/border_white"
-                    android:textSize="@dimen/size_12dp"
-                    android:hint="Cari produk disini"/>
+                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:fontFamily="@font/rubik_reguler"
+                    android:gravity="center"
+                    android:hint="Cari produk disini"
+                    android:padding="@dimen/size_4dp"
+                    android:textSize="@dimen/size_12dp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -158,26 +160,26 @@
                     android:weightSum="2"
                     android:orientation="horizontal">
 
-                <TextView
-                    android:layout_weight="1"
-                    android:id="@+id/ll_title1"
-                    android:textStyle="bold"
-                    android:textColor="@color/anggur"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Promo"
-                    android:textSize="18sp"
-                    />
+                    <TextView
+                        android:id="@+id/ll_title1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="Promo"
+                        android:textColor="@color/anggur"
+                        android:textSize="18sp" />
 
-                <TextView
-                    android:layout_weight="1"
-                    android:id="@+id/text1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/red_Dark"
-                    android:textSize="14sp"
-                    android:gravity="right"
-                    android:text="Lihat Semua"/>
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/rubik_reguler"
+                        android:gravity="right"
+                        android:text="Lihat Semua"
+                        android:textColor="@color/red_Dark"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -222,26 +224,27 @@
                     android:layout_margin="10dp"/>
 
                 <TextView
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="Poin Anda"
-                    android:textSize="14sp"
                     android:layout_gravity="center"
-                    android:gravity="left"/>
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_reguler"
+                    android:gravity="left"
+                    android:text="Poin Anda"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txt_point"
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="14sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:layout_gravity="center"
-                    android:gravity="center"/>
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -263,26 +266,26 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_weight="1"
                         android:id="@+id/txt_hot_produk"
-                        android:textStyle="bold"
-                        android:textColor="@color/anggur"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/rubik_medium"
                         android:text="Hot Produk"
-                        android:textSize="18sp"
-                        />
+                        android:textColor="@color/anggur"
+                        android:textSize="18sp" />
 
                     <TextView
-                        android:layout_weight="1"
                         android:id="@+id/lihat_semua"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/red_Dark"
-                        android:textSize="14sp"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/rubik_reguler"
                         android:gravity="right"
-                        android:text="Lihat Semua"/>
+                        android:text="Lihat Semua"
+                        android:textColor="@color/red_Dark"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
             </LinearLayout>

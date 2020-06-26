@@ -19,35 +19,40 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/txt"
         android:layout_marginBottom="50dp"
+        android:fontFamily="@font/rubik_medium"
         android:gravity="center"
+        android:text="Register"
         android:textColor="#fff"
         android:textSize="38sp"
-        android:textStyle="bold"
-        android:text="Register"/>
+        android:textStyle="bold" />
 
 
     <EditText
         android:id="@+id/txt_phone"
         android:layout_width="278dp"
-        android:layout_height="60dp"
-        android:textColorLink="@color/black"
-        android:textColor="@color/color_white"
-        android:inputType="number"
-        android:gravity="center"
-        android:textSize="28sp"
+        android:layout_height="35dp"
+        android:layout_marginTop="@dimen/size_8dp"
         android:layout_centerInParent="true"
-        android:text="" />
+        android:fontFamily="@font/rubik_reguler"
+        android:gravity="center"
+        android:inputType="number"
+        android:background="@drawable/border_white"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorLink="@color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/txt"
-        android:layout_above="@+id/txt_phone"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:textSize="12sp"
         android:layout_width="278dp"
         android:layout_height="wrap_content"
-        android:text="Masukan No Telp Anda"/>
+        android:layout_above="@+id/txt_phone"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Masukkan No Telp Anda"
+        android:textColor="#fff"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,15 +65,16 @@
         <Button
             android:id="@+id/btn_next_regis"
             android:layout_width="160dp"
-            android:background="@drawable/border_btn_lanjut"
             android:layout_height="40dp"
             android:layout_margin="20dp"
+            android:background="@drawable/border_btn_lanjut"
+            android:fontFamily="@font/rubik_medium"
             android:foregroundGravity="center"
             android:gravity="center"
+            android:text="Selanjutnya"
             android:textColor="#fff"
-            android:textStyle="bold"
             android:textSize="@dimen/size_12dp"
-            android:text="Selanjutnya" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 

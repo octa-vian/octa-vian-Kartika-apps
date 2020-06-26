@@ -53,7 +53,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
     private TextView txt_judul;
     private EditText txt_search;
     private ProgressDialog proses;
-    private String search="";
+    private String search = "";
     private ImageView img_filter;
     private String termurah = "termurah";
     private String termahal = "termahal";
@@ -61,7 +61,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
     private String priorder = "preorder";
     private String available = "available ";
     private String Status = "";
-    private String Filter="";
+    private String Filter = "";
     private ProgressBar loading;
     private ImageView img_back;
     private ShimmerFrameLayout shimmerFrameLayout;
@@ -75,8 +75,8 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
-        homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailProduk.this,2));
-        adepterproduk = new TemplateAdaptorProduk(ActivityListDetailProduk.this, viewproduk) ;
+        homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailProduk.this, 2));
+        adepterproduk = new TemplateAdaptorProduk(ActivityListDetailProduk.this, viewproduk);
         homeProduk.setAdapter(adepterproduk);
         loadMoreScrollListener = new LoadMoreScrollListener() {
             @Override
@@ -104,7 +104,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
         txt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if(i == EditorInfo.IME_ACTION_SEARCH){
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
                     search = textView.getText().toString();
                     LoadProduk(true);
                     return true;
@@ -126,15 +126,15 @@ public class ActivityListDetailProduk extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 //search = editable.toString();
-                if (editable.toString().length() == 0){
+                if (editable.toString().length() == 0) {
                     search = editable.toString();
                     LoadProduk(true);
                 }
-                Log.d("search",search);
+                Log.d("search", search);
             }
         });
 
-        if(getIntent().hasExtra(Constant.EXTRA_BARANG)){
+        if (getIntent().hasExtra(Constant.EXTRA_BARANG)) {
             Gson gson = new Gson();
             nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelOneForAll.class);
         }
@@ -159,11 +159,11 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
                 //mengisi value dari radio button
                 //kondisi cek list
-                if (Filter.equals(terlaris)){
+                if (Filter.equals(terlaris)) {
                     group.check(btn_terlaris.getId());
-                } else if (Filter.equals(termurah)){
+                } else if (Filter.equals(termurah)) {
                     group.check(btn_termurah.getId());
-                } else if (Filter.equals(termahal)){
+                } else if (Filter.equals(termahal)) {
                     group.check(btn_termahal.getId());
                 }
 
@@ -180,11 +180,11 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                         int idharga = group.getCheckedRadioButtonId();
                         int idstatus = group2.getCheckedRadioButtonId();
 
-                        if (idharga == btn_terlaris.getId()){
+                        if (idharga == btn_terlaris.getId()) {
                             Filter = terlaris;
-                        } else if (idharga == btn_termurah.getId()){
+                        } else if (idharga == btn_termurah.getId()) {
                             Filter = termurah;
-                        } else if (idharga == btn_termahal.getId()){
+                        } else if (idharga == btn_termahal.getId()) {
                             Filter = termahal;
                         }
 
@@ -194,8 +194,8 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                             Status = priorder;
                         }
 
-                        Log.d("status1",Filter);
-                        Log.d("status2",Status);
+                        Log.d("status1", Filter);
+                        Log.d("status2", Status);
                         /*switch (Id){
                             case R.id.txt_terlaris:
                                 String a = "terlaris ";
@@ -208,7 +208,6 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                                 break;
                             case  R.id.txt_termahal:
                                 break;
-
                         }*/
                         LoadProduk(true);
                         dialog.dismiss();
@@ -233,39 +232,39 @@ public class ActivityListDetailProduk extends AppCompatActivity {
         /*shimmerFrameLayout.setVisibility(View.VISIBLE);
         shimmerFrameLayout.startShimmer();*/
         loading.setVisibility(View.VISIBLE);
-        if (init){
+        if (init) {
             loadMoreScrollListener.initLoad();
         }
-        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=%s&stock_status=%s",loadMoreScrollListener.getLoaded(), 20, search, Filter, Status);
-        new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK+parameter,
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=%s&stock_status=%s", loadMoreScrollListener.getLoaded(), 20, search, Filter, Status);
+        new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK + parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
                         /*shimmerFrameLayout.setVisibility(View.GONE);
                         shimmerFrameLayout.stopShimmer();*/
                         loading.setVisibility(View.GONE);
-                        if (init){
+                        if (init) {
                             viewproduk.clear();
                         }
                         try {
-                            JSONObject obj= new JSONObject(result);
-                            JSONArray meal= obj.getJSONArray("response");
-                            for (int i=0; i < meal.length(); i++){
+                            JSONObject obj = new JSONObject(result);
+                            JSONArray meal = obj.getJSONArray("response");
+                            for (int i = 0; i < meal.length(); i++) {
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
                                 viewproduk.add(new ModelProduk(
                                         objt.getString("kodebrg")
-                                        ,objt.getString("img_url")
-                                        ,objt.getString("namabrg")
-                                        ,objt.getString("harga")
-                                        ,objt.getString("stok")));
+                                        , objt.getString("img_url")
+                                        , objt.getString("namabrg")
+                                        , objt.getString("harga")
+                                        , objt.getString("stok")));
                             }
                             loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             loadMoreScrollListener.finishLoad(0);
-                            Toast.makeText(ActivityListDetailProduk.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityListDetailProduk.this, "Terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -277,7 +276,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                     public void onError(String result) {
                         loading.setVisibility(View.GONE);
                         loadMoreScrollListener.finishLoad(0);
-                        Log.e(TAG,result);
+                        Log.e(TAG, result);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
 
@@ -288,37 +287,37 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
     private void LoadHotProduk(boolean init) {
         loading.setVisibility(View.VISIBLE);
-        if (init){
+        if (init) {
             loadMoreScrollListener.initLoad();
         }
-        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=terlaris",loadMoreScrollListener.getLoaded(), 20, search);
-        new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK+parameter,
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=terlaris", loadMoreScrollListener.getLoaded(), 20, search);
+        new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK + parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
                         loading.setVisibility(View.GONE);
                         try {
-                            if (init){
+                            if (init) {
                                 viewproduk.clear();
                             }
-                            JSONObject obj= new JSONObject(result);
-                            JSONArray meal= obj.getJSONArray("response");
-                            for (int i=0; i < meal.length(); i++){
+                            JSONObject obj = new JSONObject(result);
+                            JSONArray meal = obj.getJSONArray("response");
+                            for (int i = 0; i < meal.length(); i++) {
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
                                 viewproduk.add(new ModelProduk(
                                         objt.getString("kodebrg")
-                                        ,objt.getString("img_url")
-                                        ,objt.getString("namabrg")
-                                        ,objt.getString("harga")
-                                        ,objt.getString("stok")));
+                                        , objt.getString("img_url")
+                                        , objt.getString("namabrg")
+                                        , objt.getString("harga")
+                                        , objt.getString("stok")));
                             }
                             loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             loadMoreScrollListener.finishLoad(0);
-                            Toast.makeText(ActivityListDetailProduk.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityListDetailProduk.this, "terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -329,7 +328,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                     @Override
                     public void onError(String result) {
                         loadMoreScrollListener.finishLoad(0);
-                        Log.e(TAG,result);
+                        Log.e(TAG, result);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
 

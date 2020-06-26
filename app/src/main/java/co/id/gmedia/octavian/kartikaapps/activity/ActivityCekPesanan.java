@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -24,6 +24,7 @@ import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorListCekPesanan;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
+import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 
 public class ActivityCekPesanan extends AppCompatActivity {
 
@@ -31,6 +32,8 @@ public class ActivityCekPesanan extends AppCompatActivity {
     private List<ModelProduk> listCekPesanan = new ArrayList<>();
     private String noBukti="";
     private ImageView img_back;
+    private ProgressBar loading;
+    private LoadMoreScrollListener loadMoreScrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +44,8 @@ public class ActivityCekPesanan extends AppCompatActivity {
         noBukti = extras.getString(Constant.EXTRA_NOBUKTI);
 
         //View
+        loading = findViewById(R.id.loading);
         img_back = findViewById(R.id.back);
-
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,17 +58,31 @@ public class ActivityCekPesanan extends AppCompatActivity {
         cekPesanan.setLayoutManager(new LinearLayoutManager(ActivityCekPesanan.this, LinearLayoutManager.VERTICAL, false));
         adapterCekPesanan = new TemplateAdaptorListCekPesanan(ActivityCekPesanan.this, listCekPesanan);
         cekPesanan.setAdapter(adapterCekPesanan);
+        loadMoreScrollListener = new LoadMoreScrollListener() {
+            @Override
+            public void onLoadMore() {
+                LoadData(false);
+            }
+        };
+        cekPesanan.addOnScrollListener(loadMoreScrollListener);
 
-        LoadData();
+        LoadData(true);
     }
 
-    private void LoadData() {
-        String parameter = String.format(Locale.getDefault(), "?start=0&limit=10&nobukti=%s", noBukti);
+    private void LoadData(boolean init) {
+        loading.setVisibility(View.VISIBLE);
+        if (init){
+            loadMoreScrollListener.initLoad();
+        }
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&nobukti=%s",loadMoreScrollListener.getLoaded(), 10, noBukti);
         new APIvolley(ActivityCekPesanan.this, new JSONObject(), "GET", Constant.URL_GET_LIST_CEK_PESANAN+parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
-                        listCekPesanan.clear();
+                        loading.setVisibility(View.GONE);
+                        if (init){
+                            listCekPesanan.clear();
+                        }
                         try {
                             JSONObject json = new JSONObject(result);
                             String message = json.getJSONObject("metadata").getString("message");
@@ -83,11 +100,14 @@ public class ActivityCekPesanan extends AppCompatActivity {
                                             , pesanan.getString("status")
                                     ));
                                 }
+                                loadMoreScrollListener.finishLoad(cek.length());
+                                adapterCekPesanan.notifyDataSetChanged();
                             } else {
                                 Toast.makeText(ActivityCekPesanan.this, message, Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException e) {
+                            loadMoreScrollListener.finishLoad(0);
                             e.printStackTrace();
                         }
                         adapterCekPesanan.notifyDataSetChanged();
@@ -95,6 +115,9 @@ public class ActivityCekPesanan extends AppCompatActivity {
 
                     @Override
                     public void onError(String result) {
+                        loading.setVisibility(View.GONE);
+                        loadMoreScrollListener.finishLoad(0);
+                        adapterCekPesanan.notifyDataSetChanged();
                         Toast.makeText(ActivityCekPesanan.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
                     }
                 });

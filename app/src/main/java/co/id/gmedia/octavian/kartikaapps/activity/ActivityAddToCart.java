@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +50,7 @@ public class ActivityAddToCart extends AppCompatActivity {
     private DialogBox dialogBox;
     private CheckBox cb;
     private LinearLayout item_kosong, ln_btn;
+    private ImageView back;
 
 
     @Override
@@ -69,6 +71,14 @@ public class ActivityAddToCart extends AppCompatActivity {
         item_kosong = findViewById(R.id.ln_keranjang_kosong);
         btn_tambah = findViewById(R.id.btn_tambahkeranjang);
         ln_btn = findViewById(R.id.ln_2);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         btn_tambah.setOnClickListener(new View.OnClickListener() {
             @Override

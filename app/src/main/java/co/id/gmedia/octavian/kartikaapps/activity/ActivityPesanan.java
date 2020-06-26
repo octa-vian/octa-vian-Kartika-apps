@@ -41,7 +41,7 @@ import co.id.gmedia.octavian.kartikaapps.util.Constant;
 public class ActivityPesanan extends AppCompatActivity {
 
     private ImageView img_view;
-    private TextView txt_namabrg, txt_harga, txt_tempo, txt_keterangan, txt_total_harga;
+    private TextView txt_namabrg, txt_harga, txt_tempo, txt_keterangan, txt_total_harga, txt_deskripsi;
     private Button btn_beli;
     private EditText txt_jumlah;
     private String Idbrg;
@@ -65,11 +65,12 @@ public class ActivityPesanan extends AppCompatActivity {
         txt_namabrg = findViewById(R.id.nama_brg);
         txt_harga = findViewById(R.id.harga);
         txt_keterangan = findViewById(R.id.keterangan);
-        txt_tempo = findViewById(R.id.tempo);
+        //txt_tempo = findViewById(R.id.tempo);
        // img_view = findViewById(R.id.img_gambar_detail);
         txt_jumlah = findViewById(R.id.txt_jumlah);
         txt_total_harga = findViewById(R.id.txt_totalHarga);
         btn_beli = findViewById(R.id.btn_beli);
+        txt_deskripsi = findViewById(R.id.txt_deskripsi);
 
 
         RecyclerView homeProduk = findViewById(R.id.rv_gambar_detail);
@@ -84,6 +85,7 @@ public class ActivityPesanan extends AppCompatActivity {
                 InitKirim();
             }
         });
+
 
         Bundle extras = getIntent().getExtras();
         Idbrg = extras.getString(Constant.EXTRA_BARANG);
@@ -111,6 +113,7 @@ public class ActivityPesanan extends AppCompatActivity {
 
     }
 
+
     private void InitDropdown() {
 
         JSONObject obj =  new JSONObject();
@@ -130,7 +133,6 @@ public class ActivityPesanan extends AppCompatActivity {
                     String status = object.getJSONObject("metadata").getString("status");
 
                     if (status.equals("200")) {
-
                         JSONArray obj = object.getJSONObject("response").getJSONArray("dropdown");
                         for (int i = 0; i < obj.length(); i++) {
 
@@ -138,6 +140,7 @@ public class ActivityPesanan extends AppCompatActivity {
                             listSpinner.add(new ModelSpinner(
                                     bakso.getString("satuan_kecil"),
                                     bakso.getString("satuan_kecil")));
+
                             listSpinner.add(new ModelSpinner(
                                     bakso.getString("satuan_besar"),
                                     bakso.getString("satuan_besar")));
@@ -158,7 +161,6 @@ public class ActivityPesanan extends AppCompatActivity {
             @Override
             public void onError(String result) {
                 Toast.makeText(ActivityPesanan.this, "Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -205,10 +207,8 @@ public class ActivityPesanan extends AppCompatActivity {
     private void InitData() {
         JSONObject object = new JSONObject();
         try {
-
             object.put("kodebrg",Idbrg);
             Log.d("test",Idbrg);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -226,7 +226,8 @@ public class ActivityPesanan extends AppCompatActivity {
                                 obj.put("kodebrg",Idbrg);
                                 txt_namabrg.setText(obj.getJSONObject("response").getString("namabrg"));
                                 txt_keterangan.setText(obj.getJSONObject("response").getString("keterangan"));
-                                txt_tempo.setText(obj.getJSONObject("response").getString("tempo"));
+                               // txt_tempo.setText(obj.getJSONObject("response").getString("tempo"));
+                                String tempo = obj.getJSONObject("response").getString("tempo");
 
                                 JSONArray meal = obj.getJSONObject("response").getJSONArray("images");
                                 for (int i=0; i < meal.length(); i++){
@@ -289,34 +290,31 @@ public class ActivityPesanan extends AppCompatActivity {
                                 txt_harga.setText(obj.getJSONObject("response").getString("harga_satuan_rp"));
                                 txt_total_harga.setText(obj.getJSONObject("response").getString("total_harga_rp"));
                                 txt_keterangan.setText(obj.getJSONObject("response").getString("keterangan"));
-                                obj.getJSONObject("response").getString("harga_satuan");
-                                obj.getJSONObject("response").getString("total_harga");
-
+                                String hg_satuan = obj.getJSONObject("response").getString("harga_satuan");
+                                String total_hg = obj.getJSONObject("response").getString("total_harga");
+                                txt_deskripsi.setText(obj.getJSONObject("response").getString("keterangan_new"));
                             }else {
                                 Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
                             }
                             //Picasso.get().load(nota.getItem2()).into(img_gambarProduk);
                         } catch (JSONException e) {
-                            Toast.makeText(ActivityPesanan.this,"kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
                         // Refresh Adapter
                     }
-
                     @Override
                     public void onError(String result) {
-                        Toast.makeText(ActivityPesanan.this,"kesalahan Jaringan", Toast.LENGTH_SHORT).show();
+                       //Toast.makeText(ActivityPesanan.this,"kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                         Log.e(TAG,result);
-
                     }
                 });
     }
 
     private void InitKirim() {
         JSONObject object = new JSONObject();
-        try {
 
+        try {
             object.put("kodebrg",Idbrg);
             object.put("jml_pesan",txt_jumlah.getText().toString());
             object.put("satuan",satuan);
@@ -341,12 +339,12 @@ public class ActivityPesanan extends AppCompatActivity {
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
-
                                 obj.getJSONObject("response").getString("jumlah");
                                 obj.getJSONObject("response").getString("harga_satuan_rp");
                                 obj.getJSONObject("response").getString("total_harga_rp");
                                 obj.getJSONObject("response").getString("harga_satuan");
                                 obj.getJSONObject("response").getString("total_harga");
+
                                 Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
                             }else {
                                 Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();

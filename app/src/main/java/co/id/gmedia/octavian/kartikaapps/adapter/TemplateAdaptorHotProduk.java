@@ -50,11 +50,11 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
         templateViewHolder.txt_status.setText(item.getItem5());
 
         final ModelProduk itemSelected = listItem.get(i);
-        if(itemSelected.getItem5().toUpperCase().trim().equals("available ")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_green_dialog));
+        if(itemSelected.getItem5().toLowerCase().trim().equals("available")  || itemSelected.getItem5().toLowerCase().trim().equals("tersedia")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_tersedia));
         }
-        else if(itemSelected.getItem5().toUpperCase().trim().equals("preorder")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
+        else{
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_preorder));
         }
 
         final Gson gson = new Gson();

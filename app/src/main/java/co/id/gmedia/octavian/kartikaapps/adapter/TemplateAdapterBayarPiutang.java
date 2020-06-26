@@ -38,7 +38,7 @@ public class TemplateAdapterBayarPiutang extends ArrayAdapter {
 
     private static class ViewHolder {
         private ImageView iv_cardview, btn_hapus;
-        private TextView txt_noBukti, txt_Totalharga, txt_Tgltempo, txt_Dibayar, txt_tgl;
+        private TextView txt_noBukti, txt_Totalharga, txt_Tgltempo, txt_Dibayar, txt_tgl, txt_umur;
         private MaterialCardView cardView;
         private CheckBox cb_btn;
     }
@@ -63,6 +63,7 @@ public class TemplateAdapterBayarPiutang extends ArrayAdapter {
             holder.txt_Totalharga = (TextView) convertView.findViewById(R.id.txt_total);
             holder.txt_Dibayar = (TextView) convertView.findViewById(R.id.txt_dibayar);
             holder.cb_btn = (CheckBox) convertView.findViewById(R.id.cb_box);
+            holder.txt_umur = (TextView) convertView.findViewById(R.id.txt_umur);
             convertView.setTag(holder);
 
         }else{
@@ -74,6 +75,7 @@ public class TemplateAdapterBayarPiutang extends ArrayAdapter {
             holder.txt_Tgltempo = (TextView) convertView.findViewById(R.id.txt_tanggal_tempo);
             holder.txt_Totalharga = (TextView) convertView.findViewById(R.id.txt_total);
             holder.txt_Dibayar = (TextView) convertView.findViewById(R.id.txt_dibayar);
+            holder.txt_umur = (TextView) convertView.findViewById(R.id.txt_umur);
             holder.cb_btn = (CheckBox) convertView.findViewById(R.id.cb_box);
             convertView.setTag(holder);
             //holder = (ViewHolder) convertView.getTag();
@@ -85,6 +87,7 @@ public class TemplateAdapterBayarPiutang extends ArrayAdapter {
         holder.txt_tgl.setText(item.getItem3());
         holder.txt_Tgltempo.setText(item.getItem4());
         holder.txt_Totalharga.setText(item.getItem5());
+        holder.txt_umur.setText(item.getItem9());
         holder.txt_Dibayar.setText(iv.ChangeToRupiahFormat(item.getItem8()));
 
         if(item.isSelected()){

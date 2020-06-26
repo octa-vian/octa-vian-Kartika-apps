@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +31,9 @@ public class ActivityDetailPiutang extends AppCompatActivity {
 
     private List<ModelProduk> listItem = new ArrayList<>();
     private TemplateAdaptorListDetailPiutang adapterPiutang;
-    private TextView txt_noBukti, txt_tgl, txt_total, txt_tempo, txt_tgl_tempo;
+    private TextView txt_noBukti, txt_tgl, txt_total, txt_tempo, txt_tgl_tempo, txt_umur;
     private ModelProduk piutang;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,19 @@ public class ActivityDetailPiutang extends AppCompatActivity {
 
         //View
         txt_noBukti = findViewById(R.id.txt_noBukti);
+        txt_umur = findViewById(R.id.txt_umur);
         txt_tgl = findViewById(R.id.txt_tanggal);
         txt_total = findViewById(R.id.txt_nominal);
         txt_tempo = findViewById(R.id.txt_tempo);
         txt_tgl_tempo = findViewById(R.id.txt_tanggal_tempo);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         if(getIntent().hasExtra(Constant.EXTRA_BARANG)){
             Gson gson = new Gson();
@@ -78,9 +90,9 @@ public class ActivityDetailPiutang extends AppCompatActivity {
                         txt_tgl.setText(ob.getString("tanggal"));
                         txt_tempo.setText(ob.getString("tempo"));
                         txt_tgl_tempo.setText(ob.getString("tanggal_tempo"));
+                        txt_umur.setText(ob.getString("umur"));
 
                         JSONArray objt = objec.getJSONObject("response").getJSONArray("detail");
-
                         for (int i =0; i < objec.length(); i++){
                             JSONObject data = objt.getJSONObject(i);
                             listItem.add(new ModelProduk(

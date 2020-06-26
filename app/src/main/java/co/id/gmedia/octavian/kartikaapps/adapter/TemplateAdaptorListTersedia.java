@@ -1,6 +1,7 @@
 package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,10 @@ public class TemplateAdaptorListTersedia extends RecyclerView.Adapter<TemplateAd
         final int final_position = i;
         templateViewHolder.txt_nama.setText(item.getItem2());
         templateViewHolder.txt_jumlah.setText(item.getItem3());
+        templateViewHolder.harga.setText(item.getItem5());
+        templateViewHolder.keterangan.setText(item.getItem6());
+        templateViewHolder.total.setText(item.getItem7());
+
         //templateViewHolder.status.setText(item.getItem4());
 
         /*final ModelProduk itemSelected = listItem.get(i);
@@ -75,13 +80,16 @@ public class TemplateAdaptorListTersedia extends RecyclerView.Adapter<TemplateAd
 
 
         private ImageView iv_cardview;
-        private TextView txt_nama, txt_jumlah, status;
+        private TextView txt_nama, txt_jumlah, keterangan, harga, total, status;
         private MaterialCardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
            txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_brg);
            txt_jumlah =  (TextView) itemView.findViewById(R.id.txt_jumlah);
+           keterangan = (TextView) itemView.findViewById(R.id.txt_keterangan);
+           harga = (TextView) itemView.findViewById(R.id.txt_harga);
+           total = (TextView) itemView.findViewById(R.id.txt_total_harga);
            //status =  (TextView) itemView.findViewById(R.id.txt_status);
         }
     }

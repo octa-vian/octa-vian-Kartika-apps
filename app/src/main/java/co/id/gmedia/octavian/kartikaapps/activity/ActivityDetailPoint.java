@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class ActivityDetailPoint extends AppCompatActivity {
     private ItemValidation iv = new ItemValidation();
     private static String TAG= "";
     private CardView btn_tukar, btn_riwayat;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,14 @@ public class ActivityDetailPoint extends AppCompatActivity {
         txt_point = findViewById(R.id.txt_point);
         btn_tukar = findViewById(R.id.cv_tukar);
         btn_riwayat = findViewById(R.id.cv_riwayat);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         btn_tukar.setOnClickListener(new View.OnClickListener() {
             @Override

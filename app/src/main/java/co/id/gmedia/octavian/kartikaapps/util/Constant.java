@@ -34,7 +34,7 @@ public class Constant {
     public static final String ResetPin = "reset_pin";
 
 
-    public static final String TAG = "semargres_log";
+    public static final String TAG = "";
 
     //MERCHANT LAYOUT TYPE
     public static final int LAYOUT_TERDEKAT = 123;
@@ -50,7 +50,7 @@ public class Constant {
 
     //URL
     private static final String baseURL = "http://gmedia.bz/kartikars/api/reseller/";
-    //private static final String baseURL = "http://kartikaelectric.com/kartikars/api/reseller/";
+    //private static final String baseURL = "https://kartikaelectric.com/kartikars/api/reseller/";
 
     public static final String URL_LOGIN = baseURL + "auth/login/";
     public static final String URL_REGISTER = baseURL + "auth/register/";
@@ -85,7 +85,7 @@ public class Constant {
     public static final String URL_GET_DETAIL_PIUTANG = baseURL + "piutang/detail_piutang";
     public static final String URL_GET_BAYAR_PIUTANG = baseURL + "piutang/list_pembayaran_piutang";
     public static final String URL_GET_CEKLIST_BAYAR = baseURL + "piutang/checklist_nota_piutang";
-    public static final String URL_GET_LIST_DAFTAR_PEMESANAN = baseURL + "order_info/list_order?start=0&limit=10";
+    public static final String URL_GET_LIST_DAFTAR_PEMESANAN = baseURL + "order_info/list_order";
     public static final String URL_GET_LIST_CEK_PESANAN = baseURL + "order_info/list_pengiriman";
     public static final String URL_POST_INPUT_PIN = baseURL + "auth/pin_validation";
     public static final String URL_GET_RETURN = baseURL + "retur/list_retur?start=0&limit=10";
@@ -107,6 +107,11 @@ public class Constant {
     public static final String URL_POST_FILE = baseURL + "chat/send_file";
     public static final String URL_POST_PHOTO_FROM_FILE = baseURL + "account/change_profile_pics_formdata";
     public static final String URL_POST_BADGE_NOTIF= baseURL + "notification/get_notif_badge";
+    public static final String URL_GET_DETAIL_PEMBAYARAN_PIUTANG= baseURL + "piutang/detail_pembayaran_piutang";
+    public static final String URL_GET_DETAIL_PEMBAYARAN_NOTA_PIUTANG= baseURL + "piutang/detail_barang_nota_bayar";
+    public static final String URL_POST_DETAIL_SO= baseURL + "order_info/detail_pengiriman";
+    public static final String URL_POST_CONFRIM= baseURL + "poin/konfirmasi_poin";
+
 
 
 

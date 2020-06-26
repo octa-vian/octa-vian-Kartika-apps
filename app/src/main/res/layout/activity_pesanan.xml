@@ -66,10 +66,10 @@
                         android:id="@+id/nama_brg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="Nama Barang"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/size_16dp"
-                        android:text="Nama Barang"/>
+                        android:textSize="@dimen/size_16dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -78,64 +78,53 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="Harga:"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="Harga:"/>
+                            android:textSize="14sp"/>
 
                         <TextView
-                            android:layout_weight="1"
                             android:id="@+id/harga"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/size_16dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/rubik_medium"
                             android:gravity="right"
+                            android:text="0"
                             android:textColor="@color/orange"
-                            android:textStyle="bold"
-                            android:text="0"/>
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="Tempo:"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="Tempo:"/>
+                            android:textSize="14sp" />
 
                         <TextView
-                            android:layout_weight="1"
                             android:id="@+id/tempo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/rubik_medium"
                             android:gravity="right"
+                            android:text="0"
                             android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:text="0"/>
+                            android:textSize="14sp" />
 
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:id="@+id/keterangan"
-                        android:layout_marginTop="@dimen/size_4dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:textSize="@dimen/size_12dp"
-                        android:textColor="@color/grey"
-                        android:text="*******"/>
+                    </LinearLayout>-->
 
                 </LinearLayout>
 
@@ -147,14 +136,14 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/size_10dp"
-                    android:layout_marginLeft="@dimen/size_10dp"
-                    android:layout_marginRight="@dimen/size_10dp"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:layout_marginRight="@dimen/size_10dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Jumlah Pesanan:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/size_16dp"
-                    android:text="Jumlah Pesanan:"/>
+                    android:textSize="@dimen/size_16dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -168,12 +157,12 @@
                     <EditText
                         android:id="@+id/txt_jumlah"
                         android:layout_width="0dp"
-                        android:layout_weight="0.7"
                         android:layout_height="30dp"
-                        android:textStyle="bold"
-                        android:inputType="number"
+                        android:layout_weight="0.7"
                         android:background="@drawable/border_corner_drak_grey"
+                        android:fontFamily="@font/rubik_medium"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size_16dp" />
@@ -187,6 +176,66 @@
                         android:layout_weight="0.8"
                         android:textColor="@color/black" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_16dp"
+                    android:text="Keterangan"/>
+
+                <!--<TextView
+                    android:id="@+id/keterangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/rubik_reguler"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:text="*******"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="@dimen/size_12dp" />-->
+
+                    <TextView
+                        android:id="@+id/keterangan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/size_12dp"
+                        android:textColor="@color/grey_dark"
+                        android:layout_marginTop="@dimen/size_4dp"
+                        android:layout_marginLeft="@dimen/size_10dp"
+                        android:layout_marginRight="@dimen/size_10dp"
+                        android:text=""/>
+
+                    <View
+                        android:id="@+id/view_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/size_10dp"
+                        android:layout_marginRight="@dimen/size_10dp"
+                        android:layout_marginTop="@dimen/size_2dp"
+                        android:layout_marginBottom="@dimen/size_2dp"
+                        android:background="@color/colorGreyAccent"/>
+
+                <TextView
+                    android:id="@+id/txt_deskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/size_12dp"
+                    android:textColor="@color/grey_dark"
+                    android:layout_marginRight="@dimen/size_10dp"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:layout_marginBottom="@dimen/size_10dp"
+                    android:text=""/>
                 </LinearLayout>
 
 
@@ -263,36 +312,40 @@
             <TextView
                 android:layout_width="150dp"
                 android:layout_height="@dimen/size_20dp"
-                android:textColor="@color/black"
+                android:fontFamily="@font/rubik_medium"
+                android:textSize="@dimen/size_16dp"
                 android:gravity="center"
-                android:textStyle="bold"
-                android:text="Total Harga:"/>
+                android:text="Total Order"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/txt_totalHarga"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/rubik_reguler"
                 android:gravity="center"
-                android:text="Total"/>
+                android:text="Total"
+                android:textSize="14sp"
+                android:textColor="@color/orange" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_beli"
-            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size_10dp"
             android:layout_marginTop="@dimen/size_10dp"
             android:layout_marginRight="@dimen/size_20dp"
             android:layout_marginBottom="@dimen/size_10dp"
-            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_weight="1"
             android:background="@drawable/border_btn_lanjut"
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:textColor="#fff"
-            android:textSize="@dimen/size_12dp"
-            android:layout_gravity="center"
+            android:fontFamily="@font/rubik_medium"
             android:gravity="center"
-            android:text="Pesan"/>
+            android:text="Pesan"
+            android:textColor="#fff"
+            android:textSize="@dimen/size_12dp" />
 
     </LinearLayout>
     </androidx.cardview.widget.CardView>

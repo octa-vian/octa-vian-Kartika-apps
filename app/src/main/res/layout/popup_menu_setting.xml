@@ -12,7 +12,7 @@
         android:layout_width="120dp"
         android:foregroundGravity="center"
         android:layout_marginRight="@dimen/size_8dp"
-        app:cardBackgroundColor="@color/color_white"
+        app:cardBackgroundColor="@color/colorGreyLight"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -37,7 +37,7 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:text="Ubah Password"
-                android:textColor="@color/black"/>
+                android:textColor="@color/color_white"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -48,7 +48,7 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:text="Ubah Pin"
-                android:textColor="@color/black"/>
+                android:textColor="@color/color_white"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -60,7 +60,7 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:text="Reset Pin"
-                android:textColor="@color/black"/>
+                android:textColor="@color/color_white"/>
 
             <View
                 android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:text="Log Out"
-                android:textColor="@color/black"/>
+                android:textColor="@color/color_white"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

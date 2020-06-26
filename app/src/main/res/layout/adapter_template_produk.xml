@@ -56,29 +56,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/size_2dp"
-            android:textStyle="bold"
-            android:textSize="10sp"
+            android:fontFamily="@font/rubik_medium"
             android:text="nama produk"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/txt_harga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/size_12dp"
+            android:fontFamily="@font/rubik_medium"
             android:text="Rp.120.000.00"
-            android:textColor="@color/color_orange_dialog"/>
+            android:textColor="@color/color_orange_dialog"
+            android:textSize="@dimen/size_12dp" />
 
         <TextView
             android:id="@+id/status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
             android:gravity="left"
-            android:textStyle="bold"
-            android:textSize="10sp"
             android:text="kosong"
-            android:textColor="@color/grey"/>
+            android:textColor="@color/grey"
+            android:textSize="10sp" />
 
     </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,6 +40,7 @@ public class ActivityPiutang extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piutang);
+
         txt_total = findViewById(R.id.txt_total);
         mProses = findViewById(R.id.loading);
         img_back = findViewById(R.id.back);
@@ -116,6 +117,7 @@ public class ActivityPiutang extends AppCompatActivity {
                                             , objt.getString("tanggal")
                                             , objt.getString("tempo")
                                             , objt.getString("tanggal_tempo")
+                                            ,objt.getString("umur")
 
                                     ));
                                 }

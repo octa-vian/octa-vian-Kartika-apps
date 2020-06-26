@@ -45,12 +45,13 @@
             android:id="@+id/txt_nama_merk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_margin="2dp"
-            android:textStyle="bold"
-            android:textSize="@dimen/size_12dp"
+            android:fontFamily="@font/rubik_reguler"
+            android:gravity="center"
             android:text="nama produk"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_12dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -134,7 +134,8 @@ public class DetailActivityBarangHadiah extends AppCompatActivity {
 
                     if (status.equals("200")){
                         obj.getJSONObject("response").getString("nobukti");
-
+                        Intent intent = new Intent(DetailActivityBarangHadiah.this, ActivityRiwayatPenukaranPoint.class);
+                        startActivity(intent);
                         Toast.makeText(DetailActivityBarangHadiah.this, message, Toast.LENGTH_LONG).show();
                     } else{
                         Toast.makeText(DetailActivityBarangHadiah.this, message, Toast.LENGTH_LONG).show();

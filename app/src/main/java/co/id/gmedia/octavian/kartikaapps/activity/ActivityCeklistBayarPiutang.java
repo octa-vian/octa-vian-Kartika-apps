@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class ActivityCeklistBayarPiutang extends AppCompatActivity {
     private static TextView txt_total, txt_totalPembayaran;
     private static ItemValidation iv = new ItemValidation();
     private ProgressBar proses;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,15 @@ public class ActivityCeklistBayarPiutang extends AppCompatActivity {
         bayarPiutang.setAdapter(adapterBayar);*/
 
         LoadData();
+
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         btn_lanjutkan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,6 +184,7 @@ public class ActivityCeklistBayarPiutang extends AppCompatActivity {
                                     ,obj.getString("bayar_rp")
                                     ,obj.getString("total")
                                     ,obj.getString("bayar")
+                                    ,obj.getString("umur")
                                     ,false
                             ));
                         }

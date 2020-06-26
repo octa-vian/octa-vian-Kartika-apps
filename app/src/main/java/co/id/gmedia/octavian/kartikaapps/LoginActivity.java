@@ -302,9 +302,9 @@ public class LoginActivity extends AppCompatActivity {
                         AppSharedPreferences.Login(LoginActivity.this
                                 , response.getJSONObject("response").getString("id_customer")
                                 , response.getJSONObject("response").getString("token"));
-
                                 response.getJSONObject("response").getString("expired_at");
                                 response.getJSONObject("response").getString("nama");
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -314,8 +314,8 @@ public class LoginActivity extends AppCompatActivity {
                     else {
                         Log.d(TAG, "Login Gagal" +message);
                         Toast.makeText(LoginActivity.this,message, Toast.LENGTH_SHORT).show();
-
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -330,6 +330,4 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-
-
 }

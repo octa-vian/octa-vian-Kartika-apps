@@ -13,47 +13,51 @@
             android:id="@+id/txt_judul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Judul Notif"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/size_20dp"
             android:layout_marginLeft="@dimen/size_20dp"
-            android:layout_marginRight="@dimen/size_20dp"/>
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginRight="@dimen/size_20dp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="Judul Notif"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_tanggal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_judul"
-            android:text="tanggal"
-            android:textSize="@dimen/size_12dp"
             android:layout_marginLeft="@dimen/size_20dp"
-            android:layout_marginRight="@dimen/size_20dp"/>
+            android:layout_marginRight="@dimen/size_20dp"
+            android:fontFamily="@font/rubik_reguler"
+            android:text="tanggal"
+            android:textSize="@dimen/size_12dp" />
 
         <TextView
             android:id="@+id/txt_isi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_tanggal"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:text="mmkkkkkkkkkkmkmkmkmkmkmkmkmkmkmkmkmkkmkmkmkmk"
+            android:layout_marginLeft="@dimen/size_20dp"
             android:layout_marginTop="@dimen/size_8dp"
             android:layout_marginRight="@dimen/size_20dp"
-            android:layout_marginLeft="@dimen/size_20dp"/>
+            android:fontFamily="@font/rubik_reguler"
+            android:text="mmkkkkkkkkkkmkmkmkmkmkmkmkmkmkmkmkmkkmkmkmkmk"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_jam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/txt_isi"
+            android:layout_marginLeft="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_20dp"
+            android:fontFamily="@font/rubik_reguler"
             android:gravity="right"
             android:text="00.20"
-            android:textSize="@dimen/size_12dp"
-            android:layout_below="@id/txt_isi"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:layout_marginLeft="@dimen/size_20dp"
-            android:layout_marginRight="@dimen/size_20dp"/>
+            android:textSize="@dimen/size_12dp" />
 
         <View
             android:layout_width="match_parent"

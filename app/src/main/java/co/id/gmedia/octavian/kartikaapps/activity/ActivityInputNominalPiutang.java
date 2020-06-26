@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,8 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
     private Button btn_lanjut;
     private ItemValidation iv = new ItemValidation();
     private String total="";
+    private String currentString = "";
+    private String nom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +58,41 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
 
                 else {
                     Intent intent = new Intent(ActivityInputNominalPiutang.this, ActivityCeklistBayarPiutang.class);
-                    intent.putExtra(Constant.EXTRA_NILAI_PIUTANG, txt_inputPiutang.getText().toString());
+                    //double init = iv.parseNullDouble(txt_inputPiutang.getText().toString());
+                    intent.putExtra(Constant.EXTRA_NILAI_PIUTANG, nom);
                     startActivity(intent);
                     finish();
                 }
+            }
+        });
+
+        txt_inputPiutang.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!editable.toString().equals(currentString)){
+
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    txt_inputPiutang.removeTextChangedListener(this);
+
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
+                    currentString = formatted;
+                    txt_inputPiutang.setText(formatted);
+                    txt_inputPiutang.setSelection(formatted.length());
+                    nom = txt_inputPiutang.getText().toString().replaceAll("[,.]", "");
+                    txt_inputPiutang.addTextChangedListener(this);
+                }
+
             }
         });
 

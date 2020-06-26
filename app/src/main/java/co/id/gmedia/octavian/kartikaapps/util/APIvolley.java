@@ -181,6 +181,7 @@ public class APIvolley {
                             hostname.equalsIgnoreCase("talam.gmedia.net.id") ||
                             hostname.equalsIgnoreCase("ipv4-10-27-68.as55666.net") ||
                             hostname.equalsIgnoreCase("gmedia.bz") ||
+                           // hostname.equalsIgnoreCase("kartikaelectric.com") ||
                             hostname.equalsIgnoreCase("app.midtrans.com") ||
                             hostname.equalsIgnoreCase("office.putmasaripratama.co.id") ||
                             hostname.equalsIgnoreCase("api.sandbox.midtrans.com") ||

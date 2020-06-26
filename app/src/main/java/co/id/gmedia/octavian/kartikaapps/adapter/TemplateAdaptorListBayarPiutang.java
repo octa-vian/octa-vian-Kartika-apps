@@ -1,6 +1,7 @@
 package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,15 +9,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.gson.Gson;
 
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
+import co.id.gmedia.octavian.kartikaapps.activity.DetailActivityBarang;
+import co.id.gmedia.octavian.kartikaapps.activity.pembayaran.ActivityDetailPembayaranPiutang;
 import co.id.gmedia.octavian.kartikaapps.model.ModelAddToCart;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
+import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
 
 public class TemplateAdaptorListBayarPiutang extends RecyclerView.Adapter<TemplateAdaptorListBayarPiutang.TemplateViewHolder> {
@@ -62,6 +68,17 @@ public class TemplateAdaptorListBayarPiutang extends RecyclerView.Adapter<Templa
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
         }*/
 
+         final Gson gson = new Gson();
+            templateViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(activity, ActivityDetailPembayaranPiutang.class);
+                i.putExtra(Constant.EXTRA_BARANG, gson.toJson(item));
+                activity.startActivity(i);
+
+            }
+        });
+
 
 
     }
@@ -76,7 +93,7 @@ public class TemplateAdaptorListBayarPiutang extends RecyclerView.Adapter<Templa
 
         private ImageView iv_cardview;
         private TextView txt_nobukti, txt_tgl, txt_caraBayar, txt_status, txt_total;
-        private MaterialCardView cardView;
+        private CardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,6 +102,7 @@ public class TemplateAdaptorListBayarPiutang extends RecyclerView.Adapter<Templa
            txt_caraBayar = (TextView) itemView.findViewById(R.id.txt_carabayar);
            txt_status = (TextView) itemView.findViewById(R.id.txt_status);
            txt_total = (TextView) itemView.findViewById(R.id.txt_total);
+           cardView = (CardView) itemView.findViewById(R.id.cr_view);
         }
     }
 }
