@@ -2,6 +2,7 @@ package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,14 +50,28 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
         templateViewHolder.txt_harga.setText(item.getItem4());
         templateViewHolder.txt_status.setText(item.getItem5());
 
+        if (item.getItem6().equals("1")){
+            templateViewHolder.txt_harga_asli.setText(item.getItem7());
+        }else{
+            templateViewHolder.txt_harga_asli.setVisibility(View.VISIBLE);
+        }
+        templateViewHolder.txt_harga_asli.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+
         final ModelProduk itemSelected = listItem.get(i);
-        if(itemSelected.getItem5().toLowerCase().trim().equals("available")  || itemSelected.getItem5().toLowerCase().trim().equals("tersedia")){
+        if(itemSelected.getItem5().toLowerCase().trim().equals("available") || itemSelected.getItem5().toLowerCase().trim().equals("tersedia")){
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
         }
         else{
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_red_drak));
         }
 
+        /*if (item.getItem6().equals("1")){
+            templateViewHolder.txt_harga_asli.setText(item.getItem7());
+            templateViewHolder.txt_harga_asli.setVisibility(View.VISIBLE);
+        } else{
+            templateViewHolder.txt_harga_asli.setText(item.getItem7());
+            templateViewHolder.txt_harga_asli.setVisibility(View.GONE);
+        }*/
 
         final Gson gson = new Gson();
         templateViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -65,10 +80,8 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
                 Intent i = new Intent(activity, DetailActivityBarang.class);
                 i.putExtra(Constant.EXTRA_BARANG, gson.toJson(item));
                 activity.startActivity(i);
-
             }
         });
-
     }
 
     @Override
@@ -80,7 +93,7 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
 
 
         private ImageView iv_cardview;
-        private TextView txt_nama, txt_harga, txt_status;
+        private TextView txt_nama, txt_harga, txt_status, txt_harga_asli;
         private CardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
@@ -90,6 +103,7 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
            txt_harga =  (TextView) itemView.findViewById(R.id.txt_harga);
            txt_status =  (TextView) itemView.findViewById(R.id.status);
            cardView = (CardView) itemView.findViewById(R.id.layout_category);
+           txt_harga_asli = (TextView) itemView.findViewById(R.id.txt_harga_asli);
         }
     }
 }

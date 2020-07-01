@@ -9,14 +9,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedDispatcher;
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +46,7 @@ import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorHotProduk;
+import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorIklan;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorpromo;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityDetailPoint;
@@ -53,6 +57,7 @@ import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
+import me.relex.circleindicator.CircleIndicator2;
 
 import static android.view.View.GONE;
 
@@ -72,7 +77,10 @@ public class FragmentHome extends Fragment {
     private Button btn_register, btn_request, btn_kirim;
     CountDownTimer countDownTimer;
     private TextView time;
-    private RecyclerView homeview, homeProduk;
+    private RecyclerView homeview, homeProduk, rvIklan;
+
+    private List<ModelProduk> listIklan = new ArrayList<>();
+    private TemplateAdaptorIklan adapterIklan;
 
     private List<ModelOneForAll> viewmenubaru = new ArrayList<>();
     private TemplateAdaptorpromo kategorimenu;
@@ -88,13 +96,15 @@ public class FragmentHome extends Fragment {
     private int width =30;
     private int height = 100;
     private ShimmerFrameLayout shimmerFrameLayout;
+    final int duration = 30;
+    final int pixelsToMove = 50;
+    boolean flag = true;
 
     public FragmentHome() {
         // Required empty public constructor
     }
 
     private Activity context;
-
     private ImageView btn_pesan, btn_cart, btn_setting;
 
 
@@ -120,11 +130,66 @@ public class FragmentHome extends Fragment {
             point = v.findViewById(R.id.cr_point);
             shimmerFrameLayout = v.findViewById(R.id.shimmer_layout);
 
+            rvIklan = v.findViewById(R.id.rviklan);
+            rvIklan.setItemAnimator(new DefaultItemAnimator());
+            LinearLayoutManager layouIklan = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            rvIklan.setLayoutManager(layouIklan);
+            adapterIklan = new TemplateAdaptorIklan(context, listIklan);
+            rvIklan.setAdapter(adapterIklan);
+
+            PagerSnapHelper pagerSnapHelper1 = new PagerSnapHelper();
+            pagerSnapHelper1.attachToRecyclerView(rvIklan);
+
+            CircleIndicator2 indicator1 = v.findViewById(R.id.sc_indicator_iklan);
+            indicator1.attachToRecyclerView(rvIklan, pagerSnapHelper1);
+            adapterIklan.registerAdapterDataObserver(indicator1.getAdapterDataObserver());
+
+             final Handler mHandler = new Handler(Looper.getMainLooper());
+             final Runnable MlakuDewe = new Runnable() {
+                @Override
+                public void run() {
+                    rvIklan.smoothScrollBy(pixelsToMove, 0);
+                    mHandler.postDelayed(this, duration);
+                }
+            };
+
+            rvIklan.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    int lastItem = layouIklan.findLastCompletelyVisibleItemPosition();
+                    if (lastItem == layouIklan.getItemCount() - 1) {
+                        mHandler.removeCallbacks(MlakuDewe);
+                        Handler postHandler = new Handler();
+                        postHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                rvIklan.setAdapter(null);
+                                rvIklan.setAdapter(adapterIklan);
+                                mHandler.postDelayed(MlakuDewe, 3000);
+                            }
+                        }, 3000);
+                    }
+                }
+            });
+            mHandler.postDelayed(MlakuDewe, 3000);
+
+
             homeview = v.findViewById(R.id.ll_recyclerView1);
             homeview.setItemAnimator(new DefaultItemAnimator());
-            homeview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false));
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            //homeview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false));
+            homeview.setLayoutManager(layoutManager);
             kategorimenu = new TemplateAdaptorpromo (context, viewmenubaru) ;
             homeview.setAdapter(kategorimenu);
+
+            PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+            pagerSnapHelper.attachToRecyclerView(homeview);
+
+            CircleIndicator2 indicator = v.findViewById(R.id.sc_indicator);
+            indicator.attachToRecyclerView(homeview, pagerSnapHelper);
+            kategorimenu.registerAdapterDataObserver(indicator.getAdapterDataObserver());
+
 
             homeProduk = v.findViewById(R.id.ll_recyclerView3);
             homeProduk.setItemAnimator(new DefaultItemAnimator());
@@ -138,6 +203,7 @@ public class FragmentHome extends Fragment {
             loadPoit();
             loadCount();
             LoadCountChat();
+            LoadHomeIklan();
 
             /*if (iv.parseNullDouble(txt_count.getText().toString()) ==null){
                 refresh(5000);
@@ -506,6 +572,44 @@ public class FragmentHome extends Fragment {
                         Log.e(TAG,result);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
+
+                    }
+                });
+
+    }
+
+    private void LoadHomeIklan() {
+        new APIvolley(context, new JSONObject(), "POST", Constant.URL_PROMO,
+                new APIvolley.VolleyCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        listIklan.clear();
+                        try {
+                            JSONObject obj= new JSONObject(result);
+                            JSONArray meal= obj.getJSONArray("response");
+                            for (int i=0; i < meal.length(); i++){
+                                JSONObject objt = meal.getJSONObject(i);
+                                //input data
+                                listIklan.add(new ModelProduk(
+                                        objt.getString("kodebrg")
+                                        ,objt.getString("id")
+                                        ,objt.getString("img_url")));
+                            }
+
+                        } catch (JSONException e) {
+                            Toast.makeText(context,"Kesalahan jaringan", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, e.getMessage());
+                            e.printStackTrace();
+                        }
+                        // Refresh Adapter
+                        adapterIklan.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        Log.e(TAG,result);
+                        listIklan.clear();
+                        adapterIklan.notifyDataSetChanged();
 
                     }
                 });

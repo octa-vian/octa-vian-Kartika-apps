@@ -27,6 +27,7 @@ public class Constant {
 
    //Customer
    public static String Idcus = "";
+   public static String flag_promo = "flag_promo";
 
    //type OTP
     public static final String Register = "register";

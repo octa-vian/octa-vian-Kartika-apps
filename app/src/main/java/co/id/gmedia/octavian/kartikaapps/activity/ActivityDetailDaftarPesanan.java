@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class ActivityDetailDaftarPesanan extends AppCompatActivity {
     private Button lanjutkan;
     private ModelProduk nota;
     private CardView cr_1, cr_2;
+    private ImageView img_back;
     private TextView noPesanan, tglPesanan, note1, note2, total, Stersedia, SpreOrder;
 
     @Override
@@ -65,6 +67,14 @@ public class ActivityDetailDaftarPesanan extends AppCompatActivity {
         cr_1.setVisibility(View.GONE);
         cr_2 = findViewById(R.id.cr_preorder);
         cr_2.setVisibility(View.GONE);
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         lanjutkan.setOnClickListener(new View.OnClickListener() {
             @Override

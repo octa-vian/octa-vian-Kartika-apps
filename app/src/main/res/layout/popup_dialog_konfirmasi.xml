@@ -24,7 +24,7 @@
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginRight="@dimen/size_4dp"
                 android:layout_marginLeft="@dimen/size_4dp"
-                android:text="Apakah anda yakin ingin mengkonfirmasi?"
+                android:text="Apakah anda yakin barang sudah sampai? Ya/Tidak"
                 android:fontFamily="@font/rubik_medium"
                 android:textColor="@color/black"
                 android:gravity="center"

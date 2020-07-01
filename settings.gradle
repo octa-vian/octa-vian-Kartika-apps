@@ -1,2 +1,2 @@
-include ':app', ':octavianmodul'
+include ':app', ':octavianmodul', 'circleindicator'
 rootProject.name='KartikaApps'

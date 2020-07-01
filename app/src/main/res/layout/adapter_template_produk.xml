@@ -62,6 +62,16 @@
             android:textSize="10sp" />
 
         <TextView
+            android:id="@+id/txt_harga_asli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:visibility="gone"
+            android:text="Rp.120.000.00"
+            android:textColor="@color/black_overlay"
+            android:textSize="@dimen/size_12dp" />
+
+        <TextView
             android:id="@+id/txt_harga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

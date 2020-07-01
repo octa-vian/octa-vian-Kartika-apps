@@ -251,14 +251,34 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                             JSONArray meal = obj.getJSONArray("response");
                             for (int i = 0; i < meal.length(); i++) {
                                 JSONObject objt = meal.getJSONObject(i);
+
                                 //input data
-                                viewproduk.add(new ModelProduk(
-                                        objt.getString("kodebrg")
+                                ModelProduk modelProduk = new ModelProduk( objt.getString("kodebrg")
                                         , objt.getString("img_url")
                                         , objt.getString("namabrg")
                                         , objt.getString("harga")
-                                        , objt.getString("stok")));
+                                        , objt.getString("stok")
+                                        ,objt.getString("flag_promo"));
+
+                                if (objt.getString("flag_promo").equals("1")){
+                                    modelProduk.setItem7(objt.getString("harga_asli"));
+                                } else{
+                                    modelProduk.setItem6("");
+                                }
+                                viewproduk.add(modelProduk);
+
                             }
+
+
+                           /* {
+                                "img_url": "http://gmedia.bz/kartikars/assets/img/barang/logo/comingsoon.png",
+                                    "kodebrg": "003551",
+                                    "namabrg": "MUG LISTRIK STAINLES 13CM Q2",
+                                    "harga": "Rp 3.000",
+                                    "stok": "Tersedia",
+                                    "flag_promo": "1",
+                                    "harga_asli": "Rp 37.636"
+                            }*/
                             loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();
 
@@ -305,12 +325,19 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                             for (int i = 0; i < meal.length(); i++) {
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
-                                viewproduk.add(new ModelProduk(
-                                        objt.getString("kodebrg")
+
+                                ModelProduk modelProduk = new ModelProduk( objt.getString("kodebrg")
                                         , objt.getString("img_url")
                                         , objt.getString("namabrg")
                                         , objt.getString("harga")
-                                        , objt.getString("stok")));
+                                        , objt.getString("stok")
+                                        ,objt.getString("flag_promo"));
+                                if (objt.getString("flag_promo").equals("1")){
+                                    modelProduk.setItem7(objt.getString("harga_asli"));
+                                } else{
+                                    modelProduk.setItem6("");
+                                }
+                                viewproduk.add(modelProduk);
                             }
                             loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();

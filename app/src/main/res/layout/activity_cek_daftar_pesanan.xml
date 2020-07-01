@@ -6,10 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".activity.ActivityCheckOutPesanan">
 
+    <RelativeLayout
+        android:id="@+id/paddingTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red_Dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/backarrow"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detail Daftar Pemesanan"
+                android:textColor="@color/color_white"
+                android:layout_gravity="center"
+                android:textSize="@dimen/size_16dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </RelativeLayout>
+
     <ScrollView
         android:id="@+id/scr_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/paddingTop"
         android:layout_above="@id/vw_1"
         android:layout_marginBottom="0dp">
 
