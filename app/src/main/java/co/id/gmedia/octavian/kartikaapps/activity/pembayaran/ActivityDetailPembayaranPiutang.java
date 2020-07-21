@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,16 +37,20 @@ public class ActivityDetailPembayaranPiutang extends AppCompatActivity {
     private TemplateAdaptorListDetailPembayaranPiutang adapterPiutang;
     private List<ModelProduk> listPiutang = new ArrayList<>();
     private ModelProduk nota;
+    private ImageView btn_exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_detail_pembayaran_piutang);
 
         //View
         txt_nota = findViewById(R.id.txt_noBukti);
         txt_tgl = findViewById(R.id.txt_tanggal);
         txt_nominal = findViewById(R.id.txt_nominal);
+        btn_exit = findViewById(R.id.back);
 
         RecyclerView Piutang = findViewById(R.id.rv_detailPiutang);
         Piutang.setItemAnimator(new DefaultItemAnimator());
@@ -55,6 +62,14 @@ public class ActivityDetailPembayaranPiutang extends AppCompatActivity {
             Gson gson = new Gson();
             nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelProduk.class);
         }
+
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         LoadDetailPembayaran();
     }
 

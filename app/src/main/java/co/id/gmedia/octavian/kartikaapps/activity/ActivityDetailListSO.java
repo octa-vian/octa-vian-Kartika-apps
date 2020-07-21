@@ -2,6 +2,7 @@ package co.id.gmedia.octavian.kartikaapps.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,8 @@ public class ActivityDetailListSO extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_detail_so);
 
         //View
@@ -108,6 +111,7 @@ public class ActivityDetailListSO extends AppCompatActivity {
                                     ,data.getString("harga_satuan")
                                     ,data.getString("total_harga")
                                     ,data.getString("img_url")
+                                    ,data.getString("diskon")
                             ));
                         }
 

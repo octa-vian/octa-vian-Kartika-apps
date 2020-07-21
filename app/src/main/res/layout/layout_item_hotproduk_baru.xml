@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:layout_width="130dp"
+    android:layout_height="189dp">
+
+        <LinearLayout
+            android:id="@+id/ln_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp">
+
+               <!-- <androidx.cardview.widget.CardView
+                    android:id="@+id/card_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintDimensionRatio="4:4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:elevation="@dimen/size_10dp">-->
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_cardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/hot_produck" />
+
+
+                    </RelativeLayout>
+
+<!--                </androidx.cardview.widget.CardView>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--<TextView
+                android:id="@+id/txt_nama_brg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_4dp"
+                android:layout_marginTop="@dimen/size_4dp"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="nama produk"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/txt_harga_promo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_4dp"
+                android:layout_marginRight="@dimen/size_4dp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="Rp.120.000.00"
+                android:textColor="@color/colorGreyLight"
+                android:textSize="@dimen/size_12dp" />
+
+            <TextView
+                android:id="@+id/txt_harga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_4dp"
+                android:layout_marginRight="@dimen/size_4dp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="Rp.120.000.00"
+                android:textColor="@color/color_harga"
+                android:textSize="@dimen/size_12dp" />-->
+
+
+
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/lihat_semua"
+        android:layout_width="100dp"
+        android:layout_height="28dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Lihat Semua"
+        android:textColor="@color/color_white"
+        android:background="@drawable/border_red_btn"
+        android:layout_marginBottom="@dimen/size_8dp"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>

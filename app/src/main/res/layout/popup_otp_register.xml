@@ -73,7 +73,7 @@
                     android:id="@+id/btn_next_otp"
                     android:layout_width="150dp"
                     android:visibility="gone"
-                    android:background="@drawable/border_btn_lanjut"
+                    android:background="@drawable/border_red_btn"
                     android:layout_height="35dp"
                     android:layout_margin="20dp"
                     android:layout_centerInParent="true"

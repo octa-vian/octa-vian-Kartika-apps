@@ -302,6 +302,7 @@ public class LoginActivity extends AppCompatActivity {
                         AppSharedPreferences.Login(LoginActivity.this
                                 , response.getJSONObject("response").getString("id_customer")
                                 , response.getJSONObject("response").getString("token"));
+
                                 response.getJSONObject("response").getString("expired_at");
                                 response.getJSONObject("response").getString("nama");
 

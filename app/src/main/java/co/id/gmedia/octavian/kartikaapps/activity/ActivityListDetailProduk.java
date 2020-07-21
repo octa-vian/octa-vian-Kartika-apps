@@ -2,6 +2,7 @@ package co.id.gmedia.octavian.kartikaapps.activity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import co.id.gmedia.octavian.kartikaapps.MainActivity;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
@@ -71,7 +74,11 @@ public class ActivityListDetailProduk extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_list_detail_produk_no_title);
+
+        ActivityJump.positon=0;
 
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
@@ -147,6 +154,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 final RadioButton btn_terlaris, btn_termahal, btn_termurah, btn_tersedia, btn_preorder;
                 final RadioGroup group, group2;
+
                 group = dialog.findViewById(R.id.radio_grup);
                 group2 = dialog.findViewById(R.id.radio_grup1);
                 btn_terlaris = dialog.findViewById(R.id.txt_terlaris);
@@ -263,7 +271,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
                                 if (objt.getString("flag_promo").equals("1")){
                                     modelProduk.setItem7(objt.getString("harga_asli"));
                                 } else{
-                                    modelProduk.setItem6("");
+                                    modelProduk.setItem6("0");
                                 }
                                 viewproduk.add(modelProduk);
 
@@ -366,6 +374,9 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(ActivityListDetailProduk.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         super.onBackPressed();
     }
 }

@@ -5,7 +5,7 @@
     android:layout_margin="10dp"
     app:cardCornerRadius="4dp"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="198dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintDimensionRatio="4:4"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:elevation="@dimen/size_20dp">
+                    android:elevation="@dimen/size_10dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -54,6 +54,17 @@
                 android:text="nama produk"
                 android:textColor="@color/black"
                 android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/txt_harga_promo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_4dp"
+                android:layout_marginRight="@dimen/size_4dp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="Rp.120.000.00"
+                android:textColor="@color/colorGreyLight"
+                android:textSize="@dimen/size_12dp" />
 
             <TextView
                 android:id="@+id/txt_harga"

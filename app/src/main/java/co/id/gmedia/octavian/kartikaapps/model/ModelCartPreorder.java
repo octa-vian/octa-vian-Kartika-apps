@@ -42,6 +42,29 @@ public class ModelCartPreorder {
         this.item7=item7;
     }
 
+    public ModelCartPreorder(String item1, String item2, String item3, String item4, String item5, String item6, String item7, String item8){
+        this.item1=item1;
+        this.item2=item2;
+        this.item3=item3;
+        this.item4=item4;
+        this.item5=item5;
+        this.item6=item6;
+        this.item7=item7;
+        this.item8=item8;
+    }
+
+    public ModelCartPreorder(String item1, String item2, String item3, String item4, String item5, String item6, String item7, String item8, String item9){
+        this.item1=item1;
+        this.item2=item2;
+        this.item3=item3;
+        this.item4=item4;
+        this.item5=item5;
+        this.item6=item6;
+        this.item7=item7;
+        this.item8=item8;
+        this.item9=item9;
+    }
+
     public ModelCartPreorder(String item1, String item2, String item3, String item4, String item5, String item6, String item7, String item8, String item9, String item10, String item11){
         this.item1=item1;
         this.item2=item2;

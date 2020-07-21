@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -57,6 +58,8 @@ public class ActivityBayarPiutang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_bayar_piutang);
 
         //View
@@ -231,7 +234,7 @@ public class ActivityBayarPiutang extends AppCompatActivity {
                         adapterBayar.notifyDataSetChanged();
                     }else {
                         loading.setVisibility(View.GONE);
-                        Toast.makeText(ActivityBayarPiutang.this, message, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(ActivityBayarPiutang.this, message, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     loadMoreScrollListener.finishLoad(0);

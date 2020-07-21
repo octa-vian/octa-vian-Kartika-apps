@@ -47,6 +47,17 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btn_tidak"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/border_white_black_new"
+                    android:textSize="@dimen/size_12dp"
+                    android:layout_margin="@dimen/size_10dp"
+                    android:text="Tidak"/>
+
+                <Button
                     android:id="@+id/btn_ya"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -54,19 +65,8 @@
                     android:textSize="@dimen/size_12dp"
                     android:textColor="@color/color_white"
                     android:layout_margin="@dimen/size_10dp"
-                    android:background="@drawable/border_btn_lanjut"
+                    android:background="@drawable/border_red_btn"
                     android:text="Ya"/>
-
-                <Button
-                    android:id="@+id/btn_tidak"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="37dp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/border_btn_white"
-                    android:textSize="@dimen/size_12dp"
-                    android:layout_margin="@dimen/size_10dp"
-                    android:text="Tidak"/>
 
             </LinearLayout>
 

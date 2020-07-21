@@ -3,6 +3,7 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">*</domain>
         <domain includeSubdomains="true">gmedia.bz</domain>
+        <domain includeSubdomains="true">kartikaelectric.com</domain>
         <domain includeSubdomains="true">talam.gmedia.net.id</domain>
     </domain-config>
 </network-security-config>

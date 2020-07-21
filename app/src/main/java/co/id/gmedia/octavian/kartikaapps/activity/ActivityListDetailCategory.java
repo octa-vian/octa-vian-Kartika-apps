@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,7 +74,11 @@ public class ActivityListDetailCategory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_list_detail_produk);
+
+
 
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
@@ -228,12 +233,19 @@ public class ActivityListDetailCategory extends AppCompatActivity {
                             for (int i=0; i < meal.length(); i++){
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
-                                viewproduk.add(new ModelProduk(
-                                        objt.getString("kodebrg")
-                                        ,objt.getString("img_url")
-                                        ,objt.getString("namabrg")
-                                        ,objt.getString("harga")
-                                        ,objt.getString("stok")));
+                                ModelProduk modelProduk = new ModelProduk( objt.getString("kodebrg")
+                                        , objt.getString("img_url")
+                                        , objt.getString("namabrg")
+                                        , objt.getString("harga")
+                                        , objt.getString("stok")
+                                        ,objt.getString("flag_promo"));
+
+                                if (objt.getString("flag_promo").equals("1")){
+                                    modelProduk.setItem7(objt.getString("harga_asli"));
+                                } else{
+                                    modelProduk.setItem6("");
+                                }
+                                viewproduk.add(modelProduk);
                             }
                             loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();

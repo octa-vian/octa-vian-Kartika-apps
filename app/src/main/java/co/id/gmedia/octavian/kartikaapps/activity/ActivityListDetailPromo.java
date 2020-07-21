@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -39,6 +40,8 @@ public class ActivityListDetailPromo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_list_detail_promo);
 
         loading = findViewById(R.id.loading);
@@ -87,9 +90,16 @@ public class ActivityListDetailPromo extends AppCompatActivity {
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
                                 viewmenubaru.add(new ModelOneForAll(
-                                        objt.getString("kodebrg")
-                                        ,objt.getString("id")
-                                        ,objt.getString("img_url")));
+                                        objt.getString("id")
+                                        ,objt.getString("kode_promo")
+                                        ,objt.getString("title")
+                                        ,objt.getString("img_url")
+                                        ,objt.getString("start_date")
+                                        ,objt.getString("start_time")
+                                        ,objt.getString("end_date")
+                                        ,objt.getString("end_time")
+
+                                ));
                             }
 
                             loadMoreScrollListener.finishLoad(meal.length());

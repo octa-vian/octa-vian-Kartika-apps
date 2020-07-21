@@ -36,6 +36,8 @@ import org.json.JSONObject;
 
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
@@ -55,10 +57,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.menu_home_baru);
+
         activity = this;
 
         //FragmentManager fragmentManager = getFragmentManager();
@@ -81,6 +84,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             else if (brodcas.equals("doku")){
                 loadfragment(new FragmentInfo());
                 bottomNavigationView.setSelectedItemId(R.id.nav_info);
+            }
+
+            else if (brodcas.equals("pesan")){
+                Intent intent = new Intent(MainActivity.this, ActivityChat.class);
+                startActivity(intent);
+                finish();
             }
             bundle.clear();
         } else{
@@ -260,5 +269,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return true;
     }
+
+    /*@Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }*/
 
 }

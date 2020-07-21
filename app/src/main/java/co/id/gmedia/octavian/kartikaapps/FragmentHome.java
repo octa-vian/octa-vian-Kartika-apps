@@ -40,11 +40,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityListTukarPoint;
+import co.id.gmedia.octavian.kartikaapps.adapter.MerchantHotProduk;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorHotProduk;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorIklan;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorpromo;
@@ -86,10 +90,10 @@ public class FragmentHome extends Fragment {
     private TemplateAdaptorpromo kategorimenu;
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
-    private TemplateAdaptorHotProduk adepterproduk;
-    private TextView txt_search;
-    private CardView point, sim_promo;
-    private LinearLayout sim_produk;
+    private MerchantHotProduk adepterproduk;
+    private TextView txt_search, tukar_poin;
+    private CardView point, sim_point, sim_iklan;
+    private LinearLayout sim_produk, ln_point, sim_promo;
     private static String TAG = "Home";
     private ImageView back;
     private SessionManager session;
@@ -97,8 +101,10 @@ public class FragmentHome extends Fragment {
     private int height = 100;
     private ShimmerFrameLayout shimmerFrameLayout;
     final int duration = 30;
-    final int pixelsToMove = 50;
+    private int pixelsToMove = 0;
+    private Timer timer;
     boolean flag = true;
+
 
     public FragmentHome() {
         // Required empty public constructor
@@ -126,8 +132,12 @@ public class FragmentHome extends Fragment {
             txt_count_chat.setVisibility(GONE);
             sim_promo = v.findViewById(R.id.promo_sim);
             sim_produk = v.findViewById(R.id.ln_shimer_produk_home);
+            sim_iklan = v.findViewById(R.id.shimer_iklan);
+            sim_point = v.findViewById(R.id.sim_poin);
+            ln_point = v.findViewById(R.id.ln_point);
             //txt_search.setEnabled(false);
             point = v.findViewById(R.id.cr_point);
+            tukar_poin = v.findViewById(R.id.tukar_point);
             shimmerFrameLayout = v.findViewById(R.id.shimmer_layout);
 
             rvIklan = v.findViewById(R.id.rviklan);
@@ -144,7 +154,7 @@ public class FragmentHome extends Fragment {
             indicator1.attachToRecyclerView(rvIklan, pagerSnapHelper1);
             adapterIklan.registerAdapterDataObserver(indicator1.getAdapterDataObserver());
 
-             final Handler mHandler = new Handler(Looper.getMainLooper());
+            /* final Handler mHandler = new Handler(Looper.getMainLooper());
              final Runnable MlakuDewe = new Runnable() {
                 @Override
                 public void run() {
@@ -172,7 +182,7 @@ public class FragmentHome extends Fragment {
                     }
                 }
             });
-            mHandler.postDelayed(MlakuDewe, 3000);
+            mHandler.postDelayed(MlakuDewe, 3000);*/
 
 
             homeview = v.findViewById(R.id.ll_recyclerView1);
@@ -194,16 +204,12 @@ public class FragmentHome extends Fragment {
             homeProduk = v.findViewById(R.id.ll_recyclerView3);
             homeProduk.setItemAnimator(new DefaultItemAnimator());
             homeProduk.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false));
-            adepterproduk = new TemplateAdaptorHotProduk(context, viewproduk) ;
+            adepterproduk = new MerchantHotProduk(context, viewproduk) ;
             homeProduk.setAdapter(adepterproduk);
 
             //Api
-            LoadHomePromo();
-            LoadProduk();
+            LoadAll();
             loadPoit();
-            loadCount();
-            LoadCountChat();
-            LoadHomeIklan();
 
             /*if (iv.parseNullDouble(txt_count.getText().toString()) ==null){
                 refresh(5000);
@@ -213,10 +219,10 @@ public class FragmentHome extends Fragment {
                 txt_count.setVisibility(View.GONE);
             }*/
 
-            point.setOnClickListener(new View.OnClickListener() {
+            tukar_poin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ActivityDetailPoint.class);
+                    Intent intent = new Intent(context, ActivityListTukarPoint.class);
                     context.startActivity(intent);
                 }
             });
@@ -262,13 +268,13 @@ public class FragmentHome extends Fragment {
                 }
             });
 
-            v.findViewById(R.id.lihat_semua).setOnClickListener(new View.OnClickListener() {
+           /* v.findViewById(R.id.lihat_semua).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ActivityListDetailProduk.class);
                     startActivity(intent);
                 }
-            });
+            });*/
 
 
             v.findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
@@ -398,6 +404,7 @@ public class FragmentHome extends Fragment {
                 public void onClick(View view) {
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.popup_menu_setting);
+
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialog.show();
                 }
@@ -417,6 +424,64 @@ public class FragmentHome extends Fragment {
         }
 
         return v;
+    }
+
+    private void LoadAll(){
+        LoadHomePromo();
+        LoadProduk();
+        loadCount();
+        LoadCountChat();
+        LoadHomeIklan();
+        OnScrolling();
+    }
+
+    private void  PesanError(boolean f){
+        if (f==true){
+            Dialog dialog = new Dialog(context);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setContentView(R.layout.pop_up_terjadi_kesalahan);
+
+            Button btn_coba, btn_batal;
+            btn_coba = dialog.findViewById(R.id.btn_coba_lagi);
+            btn_batal = dialog.findViewById(R.id.btn_batal);
+
+            btn_coba.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    LoadAll();
+                }
+            });
+
+            btn_batal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        } else {
+            LoadAll();
+        }
+    }
+
+    private void OnScrolling(){
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                  if (pixelsToMove==listIklan.size())
+                      pixelsToMove=0;
+                  rvIklan.smoothScrollToPosition(pixelsToMove++);
+            }
+        };
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(runnable);
+            }
+        },250, 3000  );
     }
 
     private void loadCount() {
@@ -495,6 +560,8 @@ public class FragmentHome extends Fragment {
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
+                        sim_point.setVisibility(GONE);
+                        ln_point.setVisibility(View.VISIBLE);
                         try {
                             JSONObject obj= new JSONObject(result);
                             String message = obj.getJSONObject("metadata").getString("message");
@@ -506,6 +573,8 @@ public class FragmentHome extends Fragment {
 
                             }else {
                                 //Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+                                sim_point.setVisibility(View.VISIBLE);
+                                ln_point.setVisibility(GONE);
                             }
 
                         } catch (JSONException e) {
@@ -517,6 +586,8 @@ public class FragmentHome extends Fragment {
 
                     @Override
                     public void onError(String result) {
+                        sim_point.setVisibility(View.VISIBLE);
+                        ln_point.setVisibility(GONE);
                         Log.e(TAG,result);
                     }
                 });
@@ -549,12 +620,21 @@ public class FragmentHome extends Fragment {
                             for (int i=0; i < meal.length(); i++){
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
-                                viewproduk.add(new ModelProduk(
-                                        objt.getString("kodebrg")
+                                ModelProduk modelProduk = new ModelProduk( objt.getString("kodebrg")
                                         ,objt.getString("img_url")
                                         ,objt.getString("namabrg")
                                         ,objt.getString("harga")
-                                        ,objt.getString("stok")));
+                                        ,objt.getString("stok")
+                                        ,objt.getString("flag_promo"));
+
+                                if (objt.getString("flag_promo").equals("1")){
+                                    modelProduk.setItem7(objt.getString("harga_asli"));
+                                } else{
+                                    modelProduk.setItem6("0");
+                                }
+
+                                viewproduk.add(modelProduk);
+
                             }
 
                         } catch (JSONException e) {
@@ -570,6 +650,8 @@ public class FragmentHome extends Fragment {
                     public void onError(String result) {
                         Toast.makeText(context,"Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
                         Log.e(TAG,result);
+                        sim_produk.setVisibility(View.VISIBLE);
+                        homeProduk.setVisibility(GONE);
                         viewproduk.clear();
                         adepterproduk.notifyDataSetChanged();
 
@@ -579,10 +661,12 @@ public class FragmentHome extends Fragment {
     }
 
     private void LoadHomeIklan() {
-        new APIvolley(context, new JSONObject(), "POST", Constant.URL_PROMO,
+        new APIvolley(context, new JSONObject(), "POST", Constant.URL_POST_IKLAN,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
+                        sim_iklan.setVisibility(GONE);
+                        rvIklan.setVisibility(View.VISIBLE);
                         listIklan.clear();
                         try {
                             JSONObject obj= new JSONObject(result);
@@ -591,8 +675,9 @@ public class FragmentHome extends Fragment {
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
                                 listIklan.add(new ModelProduk(
-                                        objt.getString("kodebrg")
-                                        ,objt.getString("id")
+                                        objt.getString("id")
+                                        ,objt.getString("kode_promo")
+                                        ,objt.getString("title")
                                         ,objt.getString("img_url")));
                             }
 
@@ -609,6 +694,8 @@ public class FragmentHome extends Fragment {
                     public void onError(String result) {
                         Log.e(TAG,result);
                         listIklan.clear();
+                        sim_iklan.setVisibility(View.VISIBLE);
+                        rvIklan.setVisibility(GONE);
                         adapterIklan.notifyDataSetChanged();
 
                     }
@@ -623,6 +710,7 @@ public class FragmentHome extends Fragment {
                     public void onSuccess(String result) {
                         sim_promo.setVisibility(GONE);
                         homeview.setVisibility(View.VISIBLE);
+                        //PesanError(false);
                         viewmenubaru.clear();
                         try {
                             JSONObject obj= new JSONObject(result);
@@ -631,9 +719,15 @@ public class FragmentHome extends Fragment {
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
                                 viewmenubaru.add(new ModelOneForAll(
-                                        objt.getString("kodebrg")
-                                        ,objt.getString("id")
-                                        ,objt.getString("img_url")));
+                                         objt.getString("id")
+                                        ,objt.getString("kode_promo")
+                                        ,objt.getString("title")
+                                        ,objt.getString("img_url")
+                                        ,objt.getString("start_date")
+                                        ,objt.getString("start_time")
+                                        ,objt.getString("end_date")
+                                        ,objt.getString("end_time")
+                                ));
                             }
 
                         } catch (JSONException e) {
@@ -643,17 +737,38 @@ public class FragmentHome extends Fragment {
                         }
                         // Refresh Adapter
                         kategorimenu.notifyDataSetChanged();
+
                     }
 
                     @Override
                     public void onError(String result) {
                         Log.e(TAG,result);
                         viewmenubaru.clear();
-                        kategorimenu.notifyDataSetChanged();
+                        Dialog dialog = new Dialog(context);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.setContentView(R.layout.pop_up_terjadi_kesalahan);
 
+                        Button btn_coba, btn_batal;
+                        btn_coba = dialog.findViewById(R.id.btn_coba_lagi);
+                        btn_batal = dialog.findViewById(R.id.btn_batal);
+
+                        btn_coba.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                                LoadAll();
+                            }
+                        });
+
+                        btn_batal.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
                     }
                 });
-
     }
 
     private void iniFormRegis() {
@@ -877,15 +992,40 @@ public class FragmentHome extends Fragment {
                     e.printStackTrace();
                 }
             }
-
-
-
             @Override
             public void onError(String result) {
                 Toast.makeText(context, "Kesalhan Jaringan", Toast.LENGTH_SHORT).show();
             }
         }) ;
 
+    }
+
+    private void ErrorPopup(){
+        Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(R.layout.pop_up_terjadi_kesalahan);
+
+        Button btn_coba, btn_batal;
+        btn_coba = dialog.findViewById(R.id.btn_coba_lagi);
+        btn_batal = dialog.findViewById(R.id.btn_batal);
+
+        btn_coba.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                LoadHomeIklan();
+                LoadHomePromo();
+                LoadProduk();
+            }
+        });
+
+        btn_batal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -22,7 +23,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/layout_category"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/size_10dp"
             app:layout_constraintDimensionRatio="4:4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +39,20 @@
                     android:id="@+id/rv_gambar_detail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/gambarpromo"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/gambarpromo" />
+
+
+
+                <me.relex.circleindicator.CircleIndicator2
+                    android:id="@+id/sc_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:layout_marginBottom="@dimen/size_4dp"
+                    android:gravity="center"
+                    app:ci_drawable="@color/black" />
 
             </RelativeLayout>
 
@@ -69,7 +82,18 @@
                     android:fontFamily="@font/rubik_medium"
                     android:text="Nama Barang"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/size_16dp" />
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/harga_promo"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_4dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Rp. 20.000.00"
+                    android:textColor="@color/colorGreyLight"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/harga"
@@ -78,8 +102,8 @@
                     android:layout_marginTop="@dimen/size_4dp"
                     android:fontFamily="@font/rubik_medium"
                     android:text="Rp. 20.000.00"
-                    android:textColor="@color/orange"
-                    android:textSize="14sp" />
+                    android:textColor="@color/color_harga"
+                    android:textSize="@dimen/size_16dp" />
 
             </LinearLayout>
 
@@ -87,12 +111,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/size_20dp"
+                android:layout_marginBottom="@dimen/size_8dp"
                 android:background="@color/colorGreyAccent"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="60dp"
@@ -107,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_medium"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:layout_gravity="center"
                     android:text="Stok"
                     android:textColor="@color/grey_dark"
@@ -118,6 +143,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginTop="@dimen/size_8dp"
                 android:background="@color/colorGreyAccent"/>
 
            <!-- <androidx.recyclerview.widget.RecyclerView
@@ -180,9 +206,10 @@
             android:layout_marginRight="@dimen/size_10dp"
             android:layout_marginBottom="@dimen/size_10dp"
             android:layout_weight="1"
-            android:background="@drawable/border_btn_white"
+            android:background="@drawable/border_white"
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"
+            android:textColor="@color/red_Dark"
             android:text="Chat Sales"
             android:textSize="@dimen/size_12dp" />
 
@@ -195,13 +222,30 @@
             android:layout_marginRight="@dimen/size_10dp"
             android:layout_marginBottom="@dimen/size_10dp"
             android:layout_weight="1"
-            android:background="@drawable/border_btn_lanjut"
+            android:background="@drawable/border_red_btn"
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"
             android:text="beli Sekarang"
             android:textColor="#fff"
             android:textSize="@dimen/size_12dp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorTransparant"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginLeft="@dimen/size_8dp"
+            android:layout_marginBottom="@dimen/size_8dp"
+            android:src="@drawable/ic_arrow_back_black"/>
     </LinearLayout>
 
 </RelativeLayout>

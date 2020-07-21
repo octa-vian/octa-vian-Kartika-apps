@@ -52,17 +52,18 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
 
         if (item.getItem6().equals("1")){
             templateViewHolder.txt_harga_asli.setText(item.getItem7());
-        }else{
             templateViewHolder.txt_harga_asli.setVisibility(View.VISIBLE);
+        }else{
+            templateViewHolder.txt_harga_asli.setVisibility(View.GONE);
         }
         templateViewHolder.txt_harga_asli.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
         final ModelProduk itemSelected = listItem.get(i);
         if(itemSelected.getItem5().toLowerCase().trim().equals("available") || itemSelected.getItem5().toLowerCase().trim().equals("tersedia")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_tersedia));
         }
         else{
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_red_drak));
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_preorder));
         }
 
         /*if (item.getItem6().equals("1")){

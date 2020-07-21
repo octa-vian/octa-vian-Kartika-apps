@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ public class ActivityCheckOutPesanan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_check_out_pesanan);
 
         //View
@@ -137,6 +140,8 @@ public class ActivityCheckOutPesanan extends AppCompatActivity {
                                                 ,bakso.getString("harga")
                                                 ,bakso.getString("keterangan_jumlah")
                                                 ,bakso.getString("sub_total")
+                                                ,bakso.getString("diskon")
+                                                ,bakso.getString("sub_total_asli")
                                         ));
                                         Stersedia.setVisibility(View.VISIBLE);
                                         cr_1.setVisibility(View.VISIBLE);
@@ -156,6 +161,8 @@ public class ActivityCheckOutPesanan extends AppCompatActivity {
                                                 ,bakso.getString("harga")
                                                 ,bakso.getString("keterangan_jumlah")
                                                 ,bakso.getString("sub_total")
+                                                ,bakso.getString("diskon")
+                                                ,bakso.getString("sub_total_asli")
                                         ));
                                         SpreOrder.setVisibility(View.VISIBLE);
                                         cr_2.setVisibility(View.VISIBLE);

@@ -228,8 +228,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/rubik_medium"
                 android:text="Register"
-                android:textColor="#fff"
-                android:background="@drawable/border_btn_lanjut"/>
+                android:textColor="@color/black"
+                android:background="@drawable/border_white"/>
 
         </LinearLayout>
         </ScrollView>

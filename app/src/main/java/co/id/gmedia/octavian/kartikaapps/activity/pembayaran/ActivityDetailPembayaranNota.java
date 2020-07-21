@@ -1,6 +1,9 @@
 package co.id.gmedia.octavian.kartikaapps.activity.pembayaran;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,21 +32,26 @@ import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
 public class ActivityDetailPembayaranNota extends AppCompatActivity {
 
-    private TextView txt_nota, txt_tgl, txt_nominal;
+    private TextView txt_nota, txt_tgl, txt_nominal, txt_nominal_total;
 
     private TemplateAdaptorListDetailNotaPiutang adapterPiutang;
     private List<ModelProduk> listPiutang = new ArrayList<>();
     private ModelProduk nota;
+    private ImageView btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_detail_nota_piutang);
 
         //View
         txt_nota = findViewById(R.id.txt_noBukti);
         txt_tgl = findViewById(R.id.txt_tanggal);
         txt_nominal = findViewById(R.id.txt_nominal);
+        btn_back = findViewById(R.id.back);
+        txt_nominal_total = findViewById(R.id.txt_nominal_total);
 
         RecyclerView Piutang = findViewById(R.id.rv_detailPiutang);
         Piutang.setItemAnimator(new DefaultItemAnimator());
@@ -55,6 +63,13 @@ public class ActivityDetailPembayaranNota extends AppCompatActivity {
             Gson gson = new Gson();
             nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelProduk.class);
         }
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         LoadDetailPembayaran();
     }
@@ -76,6 +91,7 @@ public class ActivityDetailPembayaranNota extends AppCompatActivity {
                         txt_nota.setText("No Bukti: "+object.getString("nobukti"));
                         txt_nominal.setText(object.getString("nominal"));
                         txt_tgl.setText(object.getString("tanggal"));
+                        txt_nominal_total.setText(object.getString("total_piutang"));
 
                         JSONArray array = obj.getJSONObject("response").getJSONArray("detail");
                         for (int i=0; i < array.length(); i++ ){
@@ -87,6 +103,7 @@ public class ActivityDetailPembayaranNota extends AppCompatActivity {
                                     ,ob.getString("harga_satuan")
                                     ,ob.getString("total_harga")
                                     ,ob.getString("img_url")
+                                    ,ob.getString("diskon")
                             ));
                         }
                     }

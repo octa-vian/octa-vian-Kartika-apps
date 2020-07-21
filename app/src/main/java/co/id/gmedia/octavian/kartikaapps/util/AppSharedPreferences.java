@@ -13,6 +13,7 @@ public class AppSharedPreferences {
     private static final String EMAIL_PREF = "email";
     private static final String REGISTER_PREF = "registered";
     private static final String NILAI_PIUTANG = "piutang";
+    private static final String CHAT_FLAG = "is_balasan";
 
     private static SharedPreferences getPreferences(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -28,6 +29,10 @@ public class AppSharedPreferences {
 
     public static String getUid(Context context){
         return getPreferences(context).getString(UID_PREF, "");
+    }
+
+    public static String getflag (Context context){
+        return getPreferences(context).getString(CHAT_FLAG, "");
     }
 
     public static String getToken(Context context){
@@ -75,9 +80,9 @@ public class AppSharedPreferences {
         editor.apply();
     }
 
-    public static void setStatusPref(Context context, boolean penjual){
+    public static void setStatusPref(Context context, String flag){
         SharedPreferences.Editor editor = getPreferences(context).edit();
-        editor.putBoolean(STATUS_PREF, penjual);
+        editor.putString(CHAT_FLAG, flag);
         editor.apply();
     }
 }

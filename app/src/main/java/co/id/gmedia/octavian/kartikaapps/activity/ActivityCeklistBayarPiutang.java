@@ -10,6 +10,7 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -49,6 +50,8 @@ public class ActivityCeklistBayarPiutang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_ceklist_bayar_piutang);
 
         //View
@@ -185,6 +188,7 @@ public class ActivityCeklistBayarPiutang extends AppCompatActivity {
                                     ,obj.getString("total")
                                     ,obj.getString("bayar")
                                     ,obj.getString("umur")
+                                    ,obj.getString("flag")
                                     ,false
                             ));
                         }

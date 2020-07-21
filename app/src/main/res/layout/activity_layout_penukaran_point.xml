@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F6FA"
+    tools:context=".activity.ActivityListDetailPromo">
+
+    <RelativeLayout
+        android:id="@+id/paddingTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red_Dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/backarrow"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Penukaran Poin"
+                    android:textColor="@color/color_white"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/size_16dp"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/btn_riwayat"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:text="Lihat Riwayat"
+                    android:background="@drawable/border_white"
+                    android:textSize="12sp"
+                    android:textColor="@color/red_Dark"
+                    android:fontFamily="@font/rubik_reguler"
+                    android:layout_weight="1.3"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ln2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/paddingTop"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="@dimen/size_12dp"
+            android:paddingBottom="@dimen/size_10dp">
+
+            <View
+                android:id="@+id/viewView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/red_Dark"
+                app:layout_constraintBottom_toTopOf="@id/guideline3" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_point"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginBottom="@dimen/size_10dp"
+                app:layout_constraintBottom_toTopOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/guideline3"
+                android:elevation="@dimen/size_20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/poin"
+                        android:layout_margin="10dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/rubik_medium"
+                        android:gravity="left"
+                        android:text="Poin Anda"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txt_point"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/rubik_medium"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="60dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ln1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ln2"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:padding="@dimen/size_4dp"
+        android:orientation="horizontal">
+
+        <!-- <ImageView
+             android:id="@+id/back"
+             android:layout_width="28dp"
+             android:layout_height="28dp"
+             android:layout_marginLeft="@dimen/size_4dp"
+             android:layout_gravity="center"
+             android:src="@drawable/backarrow"/>-->
+
+        <EditText
+            android:id="@+id/txt_search"
+            android:layout_width="match_parent"
+            android:layout_below="@id/paddingTop"
+            android:inputType="textPersonName"
+            android:imeOptions="actionSearch"
+            android:layout_height="38dp"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:layout_weight="4"
+            android:background="@drawable/border_white_black_new"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:hint="Cari produk apa"
+            android:padding="@dimen/size_8dp"
+            android:textSize="@dimen/size_12dp" />
+
+        <ImageView
+            android:id="@+id/filter"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_filter_list"/>
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_detail_produk"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/ln1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+
+
+</RelativeLayout>

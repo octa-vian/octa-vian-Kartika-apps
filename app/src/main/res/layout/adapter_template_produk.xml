@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_medium"
             android:text="Rp.120.000.00"
-            android:textColor="@color/color_orange_dialog"
+            android:textColor="@color/color_harga"
             android:textSize="@dimen/size_12dp" />
 
         <TextView

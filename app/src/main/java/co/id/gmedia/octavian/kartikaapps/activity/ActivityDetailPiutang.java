@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,13 +32,15 @@ public class ActivityDetailPiutang extends AppCompatActivity {
 
     private List<ModelProduk> listItem = new ArrayList<>();
     private TemplateAdaptorListDetailPiutang adapterPiutang;
-    private TextView txt_noBukti, txt_tgl, txt_total, txt_tempo, txt_tgl_tempo, txt_umur;
+    private TextView txt_noBukti, txt_tgl, txt_total, txt_tempo, txt_tgl_tempo, txt_umur, txt_sisa_piutang;
     private ModelProduk piutang;
     private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_detail_piutang);
 
         //View
@@ -47,6 +50,7 @@ public class ActivityDetailPiutang extends AppCompatActivity {
         txt_total = findViewById(R.id.txt_nominal);
         txt_tempo = findViewById(R.id.txt_tempo);
         txt_tgl_tempo = findViewById(R.id.txt_tanggal_tempo);
+        txt_sisa_piutang  = findViewById(R.id.txt_nominal_dibayar);
         back = findViewById(R.id.back);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +80,9 @@ public class ActivityDetailPiutang extends AppCompatActivity {
                 new APIvolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
-                listItem.clear();
 
                 try {
+                    listItem.clear();
                     JSONObject objec = new JSONObject(result);
                     String message = objec.getJSONObject("metadata").getString("message");
                     String status = objec.getJSONObject("metadata").getString("status");
@@ -91,6 +95,7 @@ public class ActivityDetailPiutang extends AppCompatActivity {
                         txt_tempo.setText(ob.getString("tempo"));
                         txt_tgl_tempo.setText(ob.getString("tanggal_tempo"));
                         txt_umur.setText(ob.getString("umur"));
+                        txt_sisa_piutang.setText(ob.getString("sisa_piutang"));
 
                         JSONArray objt = objec.getJSONObject("response").getJSONArray("detail");
                         for (int i =0; i < objec.length(); i++){
@@ -102,6 +107,7 @@ public class ActivityDetailPiutang extends AppCompatActivity {
                                     ,data.getString("harga_satuan")
                                     ,data.getString("total_harga")
                                     ,data.getString("img_url")
+                                    ,data.getString("diskon")
                             ));
                         }
 
@@ -116,7 +122,7 @@ public class ActivityDetailPiutang extends AppCompatActivity {
 
             @Override
             public void onError(String result) {
-                Toast.makeText(ActivityDetailPiutang.this, result, Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityDetailPiutang.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
 
             }
         });

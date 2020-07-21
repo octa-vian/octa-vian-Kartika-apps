@@ -1,0 +1,12 @@
+AIzaSyAtzK9JEtCkbcfzD6kllrHZvTcJfXRDkHk
+
+SHA1withRSA
+
+ 5E:2D:F2:75:06:4C:D2:12:D3:93:4B:82:90:52:24:A3:A6:4A:6E:EF
+
+kunci key API:
+
+AIzaSyAtzK9JEtCkbcfzD6kllrHZvTcJfXRDkHk
+
+Api 2=
+AIzaSyAGnQFeZjOFy1xo17Wg_V0M8M8yyJIabnE

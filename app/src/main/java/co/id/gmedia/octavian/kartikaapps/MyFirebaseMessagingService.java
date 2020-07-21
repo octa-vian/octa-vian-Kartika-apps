@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityDetailPiutang;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
@@ -60,9 +61,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         body = remoteMessage.getData().get("body");
 
         Set<String> data = extra.keySet();
+        int typeContent = 0;
         for (String key:data){
             intent.putExtra(key, extra.get(key));
+
+            /*if (key.trim().toLowerCase().equals("jenis")){
+                if (extra.get(key).trim().toUpperCase().equals("pesan")){
+                    typeContent = 1;
+                }
+            }*/
         }
+
+        /*if(typeContent != 9){
+            switch (typeContent){
+                case 1:
+                    intent = new Intent(this, ActivityChat.class);
+                    break;
+                default:
+                    intent = new Intent(this, MainActivity.class);
+                    break;
+            }
+
+            intent.putExtra("backto", true);
+            for(String key: extra.keySet()){
+                intent.putExtra(key, extra.get(key));
+            }
+        }*/
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -106,6 +130,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //notificationBuilder.setContentIntent(pendingIntent);
         notificationManager.notify(1, notificationBuilder.build());
         MainActivity.LoadCountNotif();
+        ActivityChat.getChat();
 
 
     }

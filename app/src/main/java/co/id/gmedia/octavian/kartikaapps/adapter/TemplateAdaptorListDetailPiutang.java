@@ -40,11 +40,13 @@ public class TemplateAdaptorListDetailPiutang extends RecyclerView.Adapter<Templ
     public void onBindViewHolder(@NonNull TemplateViewHolder templateViewHolder, int i) {
         final ModelProduk item = listItem.get(i);
         final int final_position = i;
+
         Picasso.get().load(item.getItem6()).into(templateViewHolder.iv_cardview);
         templateViewHolder.txt_harga.setText(item.getItem4());
         templateViewHolder.txt_nama.setText(item.getItem2());
         templateViewHolder.txt_jumlah.setText(item.getItem3());
         templateViewHolder.txt_total.setText(item.getItem5());
+        templateViewHolder.txt_diskon.setText(item.getItem7());
 
         /*final ModelProduk itemSelected = listItem.get(i);
         if(itemSelected.getItem5().toUpperCase().trim().equals("available")){
@@ -67,7 +69,7 @@ public class TemplateAdaptorListDetailPiutang extends RecyclerView.Adapter<Templ
 
 
         private ImageView iv_cardview;
-        private TextView txt_nama, txt_harga, txt_jumlah, txt_total;
+        private TextView txt_nama, txt_harga, txt_jumlah, txt_total, txt_diskon;
         private MaterialCardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
@@ -77,6 +79,7 @@ public class TemplateAdaptorListDetailPiutang extends RecyclerView.Adapter<Templ
            txt_jumlah = (TextView) itemView.findViewById(R.id.txt_jumlh);
            txt_total = (TextView) itemView.findViewById(R.id.txt_totalHarga);
            iv_cardview = (ImageView) itemView.findViewById(R.id.img_gambar);
+           txt_diskon = (TextView) itemView.findViewById(R.id.txt_diskon);
         }
     }
 }

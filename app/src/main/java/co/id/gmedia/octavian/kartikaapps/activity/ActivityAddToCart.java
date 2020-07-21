@@ -12,12 +12,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,10 +33,12 @@ import co.id.gmedia.coremodul.DialogBox;
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.octavian.kartikaapps.FragmentHome;
 import co.id.gmedia.octavian.kartikaapps.MainActivity;
+import co.id.gmedia.octavian.kartikaapps.NotificationActivity;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.activity.pembayaran.HalamanDoku;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorCart;
 import co.id.gmedia.octavian.kartikaapps.model.ModelAddToCart;
+import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
@@ -45,18 +50,30 @@ public class ActivityAddToCart extends AppCompatActivity {
     private TextView txt_total;
     private double total =0;
     private Button btn_beli, btn_tambah;
-    private ModelAddToCart nota;
+    private ModelOneForAll nota;
     private ItemValidation iv = new ItemValidation();
     private DialogBox dialogBox;
     private CheckBox cb;
     private LinearLayout item_kosong, ln_btn;
     private ImageView back;
+    private String Idbrg="";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_add_to_cart);
+
+        /*if (getIntent().hasExtra(Constant.EXTRA_BARANG)) {
+            Gson gson = new Gson();
+            nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelOneForAll.class);
+        }*/
+
+        /*Bundle bundle =getIntent().getExtras();
+        String id = bundle.getString("Target");
+        String Idb = String.valueOf(id);*/
 
         RecyclerView cart = findViewById(R.id.rv_tocart);
         cart.setItemAnimator(new DefaultItemAnimator());
@@ -80,12 +97,45 @@ public class ActivityAddToCart extends AppCompatActivity {
             }
         });
 
+        /*Bundle bundle = getIntent().getExtras();
+        Idbrg = getIntent().getStringExtra(Constant.EXTRA_BARANG);
+        String no = String.valueOf(Idbrg);*/
+
         btn_tambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityAddToCart.this, ActivityListDetailProduk.class);
-                startActivity(intent);
-                finish();
+
+                if (ActivityJump.positon == 1){
+                    Intent intent = new Intent(ActivityAddToCart.this, ActivityListDetailPromoProduk.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+                } else if(ActivityJump.positon== 0){
+                    Intent intent = new Intent(ActivityAddToCart.this, ActivityListDetailProduk.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+                }else if(ActivityJump.positon== 2){
+                    Intent intent = new Intent(ActivityAddToCart.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Intent intent = new Intent(ActivityAddToCart.this, ActivityListDetailProduk.class);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+                }
+
+               /* if (Idbrg.equals(no)){
+
+                } else{
+                    Intent intent = new Intent(ActivityAddToCart.this, ActivityListDetailProduk.class);
+                    startActivity(intent);
+                    finish();
+                }*/
+
             }
         });
 
@@ -102,23 +152,13 @@ public class ActivityAddToCart extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         PesanBarang();
-                        /*for (ModelAddToCart item: listCart){
-                            if (item.isSelected()){
-
-                            }else{
-                                Toast.makeText(ActivityAddToCart.this, "Tidak ada barang terpilih!", Toast.LENGTH_LONG).show();
-                            }
-
-                        }*/
                     }
                 });
 
                 btnNo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(ActivityAddToCart.this, ActivityAddToCart.class);
-                        startActivity(intent);
-                        finish();
+                       dialog.dismiss();
                     }
                 });
 
@@ -219,6 +259,7 @@ public class ActivityAddToCart extends AppCompatActivity {
                                             , objt.getString("harga_satuan")
                                             , objt.getString("total_harga")
                                             , objt.getString("stok")
+                                            , objt.getString("diskon")
                                             ,false
                                     ));
                                 }

@@ -137,7 +137,7 @@
                     android:layout_gravity="center"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/ic_delete_orange_24dp"/>
+                    android:src="@drawable/ic_delete_red"/>
 
                 </LinearLayout>
 
@@ -158,7 +158,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tempo"
+                        android:text="Diskon"
                         android:textStyle="bold"
                         android:textSize="@dimen/size_12dp"/>
 
@@ -168,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:text="90 Hari"
+                    android:text=""
                     android:textSize="@dimen/size_12dp" />
 
                 </LinearLayout>

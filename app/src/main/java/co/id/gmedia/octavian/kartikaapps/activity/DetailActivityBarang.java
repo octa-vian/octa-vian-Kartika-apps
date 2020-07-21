@@ -3,9 +3,11 @@ package co.id.gmedia.octavian.kartikaapps.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,18 +33,20 @@ import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukDetail;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
+import me.relex.circleindicator.CircleIndicator2;
 
 public class DetailActivityBarang extends AppCompatActivity {
 
     private ModelProduk nota;
     private ImageView img_gambar,img_gambarProduk;
-    private TextView txt_nama_brg, txt_harga, txt_status, txt_deskripsi;
+    private TextView txt_nama_brg, txt_harga, txt_status, txt_deskripsi, harga_promo;
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
     private TemplateAdaptorProdukDetail adepterproduk;
     private static String TAG = "Produk";
     private String id= "";
     private Button btn_beli, btn_Chat;
+    private ImageView img_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,13 @@ public class DetailActivityBarang extends AppCompatActivity {
         adepterproduk = new TemplateAdaptorProdukDetail(DetailActivityBarang.this, viewproduk) ;
         homeProduk.setAdapter(adepterproduk);
 
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(homeProduk);
+
+        CircleIndicator2 bunderbunder = findViewById(R.id.sc_indicator);
+        bunderbunder.attachToRecyclerView(homeProduk, pagerSnapHelper);
+        adepterproduk.registerAdapterDataObserver(bunderbunder.getAdapterDataObserver());
+
         img_gambar = findViewById(R.id.iv_cardview);
         //img_gambarProduk = findViewById(R.id.iv_image);
         txt_nama_brg = findViewById(R.id.nama_brg);
@@ -66,6 +77,15 @@ public class DetailActivityBarang extends AppCompatActivity {
         txt_status =  findViewById(R.id.status);
         txt_deskripsi = findViewById(R.id.txt_deskripsi);
         btn_Chat = findViewById(R.id.btn_chat);
+        img_back = findViewById(R.id.back);
+        harga_promo = findViewById(R.id.harga_promo);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         if(getIntent().hasExtra(Constant.EXTRA_BARANG)){
             Gson gson = new Gson();
@@ -111,6 +131,15 @@ public class DetailActivityBarang extends AppCompatActivity {
                             txt_harga.setText(obj.getString("harga"));
                             txt_deskripsi.setText(obj.getString("deskripsi"));
                             txt_status.setText(obj.getString("stok"));
+                            String flag = obj.getString("flag_promo");
+
+                            if (flag.equals("1")){
+                                harga_promo.setText(obj.getString("harga_asli"));
+                                harga_promo.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                                harga_promo.setVisibility(View.VISIBLE);
+                            } else {
+                                flag.equals("0");
+                            }
 
                             JSONArray meal = obj.getJSONArray("images");
                             for (int i=0; i < meal.length(); i++){

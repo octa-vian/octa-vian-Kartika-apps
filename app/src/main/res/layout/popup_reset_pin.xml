@@ -77,8 +77,8 @@
                 android:layout_marginBottom="40dp"
                 android:layout_gravity="center"
                 android:text="Kirim"
-                android:textColor="#fff"
-                android:background="@drawable/border_btn_lanjut"/>
+                android:textColor="@color/black"
+                android:background="@drawable/border_white"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -61,7 +61,7 @@
                 android:layout_gravity="center"
                 android:text="Masuk"
                 android:textColor="@color/color_white"
-                android:background="@drawable/border_btn_lanjut"
+                android:background="@drawable/border_red_btn"
                 android:layout_margin="@dimen/size_20dp"/>
 
 

@@ -53,14 +53,14 @@ public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCar
         templateViewHolder.txt_jumlah.setText(item.getItem5());
         templateViewHolder.txt_status.setText(item.getItem11());
         templateViewHolder.txt_harga.setText(item.getItem8());
-        templateViewHolder.txt_tempo.setText(item.getItem6());
+        templateViewHolder.txt_tempo.setText(item.getItem12());
 
         final ModelAddToCart itemSelected = listItem.get(i);
         if(itemSelected.getItem11().toLowerCase().trim().equals("available")  || itemSelected.getItem11().toLowerCase().trim().equals("tersedia")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_tersedia));
         }
         else{
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.red_new));
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_preorder));
         }
 
         templateViewHolder.btn_hapus.setOnClickListener(new View.OnClickListener() {

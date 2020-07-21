@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,15 +34,26 @@ public class ActivityDetailReturn extends AppCompatActivity {
     private List<ModelProduk> listReturn = new ArrayList<>();
     private TextView txt_no_buk, txt_tgl, txt_status;
     private ModelProduk nota;
+    private ImageView img_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_detail_return);
 
         //View
         txt_no_buk = findViewById(R.id.txt_noBukti);
         txt_tgl = findViewById(R.id.txt_tanggal);
         txt_status = findViewById(R.id.txt_status);
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         if(getIntent().hasExtra(Constant.EXTRA_NOBUKTI)){
             Gson gson = new Gson();

@@ -19,6 +19,11 @@
         <item name="android:textColor">@android:color/tab_indicator_text</item>
     </style>
 
+    <style name="DisableEditText">
+        <item name="android:inputType">none</item>
+        <item name="android:editable">false</item>
+    </style>
+
     <style name="AppTheme.Custom" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Your Toolbar Color-->
         <item name="colorPrimary">@color/red_Dark</item>

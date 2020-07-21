@@ -28,13 +28,66 @@
             android:layout_marginBottom="@dimen/size_10dp"
             android:layout_marginRight="@dimen/size_10dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/judul_piutang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_orange_setengah"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_judul_piutang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginRight="@dimen/size_4dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="denda"
+                    android:textColor="@color/color_white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/judul_denda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_red_setengah"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_judul_denda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginRight="@dimen/size_4dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="denda"
+                    android:textColor="@color/color_white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/size_10dp"
             android:layout_marginRight="@dimen/size_10dp"
-            android:layout_marginTop="@dimen/size_10dp"
             android:layout_marginBottom="@dimen/size_10dp"
+            android:layout_marginTop="@dimen/size_10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -50,6 +103,7 @@
                     android:layout_marginLeft="@dimen/size_4dp"
                     android:layout_marginRight="@dimen/size_4dp"
                     android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/rubik_medium"
                     android:text="No Nota"
                     android:textColor="@color/red_Dark"
@@ -62,6 +116,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/rubik_reguler"
                     android:gravity="right"
+                    android:layout_gravity="center"
                     android:text="Tanggal"
                     android:textColor="@color/red_Dark"
                     android:textSize="@dimen/size_12dp" />
@@ -74,6 +129,7 @@
                 android:background="@color/colorGreyAccent" />
 
             <LinearLayout
+                android:id="@+id/tgl_tempo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size_4dp"
@@ -103,6 +159,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/umur_tempo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size_4dp"
@@ -188,6 +245,7 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
+        </LinearLayout>
         </LinearLayout>
         </androidx.cardview.widget.CardView>
         </LinearLayout>

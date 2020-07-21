@@ -71,9 +71,9 @@
                 android:layout_marginLeft="68dp"
                 android:layout_marginBottom="40dp"
                 android:layout_gravity="center"
-                android:text="Simpan"
+                android:text="Proses"
                 android:textColor="#fff"
-                android:background="@drawable/border_btn_lanjut"/>
+                android:background="@drawable/border_red_btn"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

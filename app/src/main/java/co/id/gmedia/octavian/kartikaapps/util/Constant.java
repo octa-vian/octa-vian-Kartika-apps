@@ -37,21 +37,16 @@ public class Constant {
 
     public static final String TAG = "";
 
-    //MERCHANT LAYOUT TYPE
-    public static final int LAYOUT_TERDEKAT = 123;
-    public static final int LAYOUT_POPULER = 124;
-    public static final int LAYOUT_KATEGORI = 125;
 
     //EXTRA
-
     public static final String EXTRA_BARANG = "barang";
     public static final String EXTRA_NOBUKTI = "nobukti";
     public static final String EXTRA_NILAI_PIUTANG = "nilaipiutang";
 
 
     //URL
-    private static final String baseURL = "http://gmedia.bz/kartikars/api/reseller/";
-    //private static final String baseURL = "https://kartikaelectric.com/kartikars/api/reseller/";
+    //private static final String baseURL = "http://gmedia.bz/kartikars/api/reseller/";
+    private static final String baseURL = "http://kartikaelectric.com/LampuKu/api/reseller/";
 
     public static final String URL_LOGIN = baseURL + "auth/login/";
     public static final String URL_REGISTER = baseURL + "auth/register/";
@@ -112,6 +107,8 @@ public class Constant {
     public static final String URL_GET_DETAIL_PEMBAYARAN_NOTA_PIUTANG= baseURL + "piutang/detail_barang_nota_bayar";
     public static final String URL_POST_DETAIL_SO= baseURL + "order_info/detail_pengiriman";
     public static final String URL_POST_CONFRIM= baseURL + "poin/konfirmasi_poin";
+    public static final String URL_POST_IKLAN= baseURL + "promo/slider_iklan";
+    public static final String URL_GET_PROMO_PRODUK= baseURL + "promo/filter_product";
 
 
 

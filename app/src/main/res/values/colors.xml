@@ -5,12 +5,15 @@
     <color name="colorAccent">#CE2949</color>
     <color name="color_red_drak">#Ab0325 </color>
     <color name="colorGreyAccent">#D8D8D8</color>
+    <color name="colorGreyAccent1">#EEEEEE</color>
+    <color name="colorGreyLightAccent">#EAE9E9</color>
     <color name="colorGreyLight">#939393</color>
     <color name="red_color">#FA0D0D</color>
     <color name="red_Dark">#CE2949</color>
     <color name="red_shadow">#FF7F80</color>
     <color name="black_overlay">#66000000</color>
     <color name="black">#000000</color>
+    <color name="grey_text">#93938C</color>
     <color name="grey">#8EF81B</color>
     <color name="grey_dark">#16AB44</color>
     <color name="color_ijo">#06D70D</color>

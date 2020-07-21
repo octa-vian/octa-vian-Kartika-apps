@@ -108,6 +108,7 @@ private static ProgressBar loading;
 private static String filePathURI;
 private static File sourceFile;
 private static int totalSize;
+private View view;
 
 
     public FragmentAkun() {
@@ -135,6 +136,14 @@ private static int totalSize;
         btn_Return = v.findViewById(R.id.btn_return);
         cardDaftar = v.findViewById(R.id.card_daftar);
         img_profile = v.findViewById(R.id.iv_cardview);
+        view = v.findViewById(R.id.viewView);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         img_profile.setOnClickListener(new View.OnClickListener() {
             @Override

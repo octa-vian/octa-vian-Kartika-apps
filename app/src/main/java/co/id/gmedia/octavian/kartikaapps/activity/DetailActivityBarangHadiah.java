@@ -38,7 +38,7 @@ import co.id.gmedia.octavian.kartikaapps.util.Constant;
 public class DetailActivityBarangHadiah extends AppCompatActivity {
 
     private ModelProduk nota;
-    private ImageView img_gambar,img_gambarProduk;
+    private ImageView img_gambar,img_gambarProduk, img_back;
     private TextView txt_nama_brg, txt_point, txt_status, txt_deskripsi;
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
@@ -51,8 +51,8 @@ public class DetailActivityBarangHadiah extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // remove title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.layout_activity_detail_barang_hadiah);
 
         RecyclerView homeProduk = findViewById(R.id.rv_gambar_detail);
@@ -68,11 +68,19 @@ public class DetailActivityBarangHadiah extends AppCompatActivity {
         txt_point = findViewById(R.id.point);
         txt_status =  findViewById(R.id.status);
         txt_deskripsi = findViewById(R.id.txt_deskripsi);
+        img_back = findViewById(R.id.back);
 
         if(getIntent().hasExtra(Constant.EXTRA_BARANG)){
             Gson gson = new Gson();
             nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelProduk.class);
         }
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         btn_tukar = (Button) findViewById(R.id.btn_tukar);
         btn_chat = (Button) findViewById(R.id.btn_chat);

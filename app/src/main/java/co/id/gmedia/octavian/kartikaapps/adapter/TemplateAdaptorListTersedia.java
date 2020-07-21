@@ -45,7 +45,9 @@ public class TemplateAdaptorListTersedia extends RecyclerView.Adapter<TemplateAd
         templateViewHolder.txt_jumlah.setText(item.getItem3());
         templateViewHolder.harga.setText(item.getItem5());
         templateViewHolder.keterangan.setText(item.getItem6());
-        templateViewHolder.total.setText(item.getItem7());
+        templateViewHolder.total.setText(item.getItem9());
+        templateViewHolder.total_disc.setText(item.getItem7());
+        templateViewHolder.diskon.setText(item.getItem8());
 
         //templateViewHolder.status.setText(item.getItem4());
 
@@ -80,7 +82,7 @@ public class TemplateAdaptorListTersedia extends RecyclerView.Adapter<TemplateAd
 
 
         private ImageView iv_cardview;
-        private TextView txt_nama, txt_jumlah, keterangan, harga, total, status;
+        private TextView txt_nama, txt_jumlah, keterangan, harga, total, diskon, total_disc;
         private MaterialCardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
@@ -89,8 +91,9 @@ public class TemplateAdaptorListTersedia extends RecyclerView.Adapter<TemplateAd
            txt_jumlah =  (TextView) itemView.findViewById(R.id.txt_jumlah);
            keterangan = (TextView) itemView.findViewById(R.id.txt_keterangan);
            harga = (TextView) itemView.findViewById(R.id.txt_harga);
-           total = (TextView) itemView.findViewById(R.id.txt_total_harga);
-           //status =  (TextView) itemView.findViewById(R.id.txt_status);
+           total = (TextView) itemView.findViewById(R.id.txt_total_harga_asli);
+           diskon =  (TextView) itemView.findViewById(R.id.txt_diskon);
+           total_disc =  (TextView) itemView.findViewById(R.id.txt_total_harga);
         }
     }
 }

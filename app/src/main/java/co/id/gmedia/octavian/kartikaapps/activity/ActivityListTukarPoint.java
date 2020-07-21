@@ -1,14 +1,17 @@
 package co.id.gmedia.octavian.kartikaapps.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukTukarPoint;
@@ -59,13 +63,18 @@ public class ActivityListTukarPoint extends AppCompatActivity {
     private ProgressBar loading;
     private ImageView img_back;
     private LoadMoreScrollListener loadMoreScrollListener;
+    private Button riwayat;
+    private TextView txt_point;
+    private ItemValidation iv = new ItemValidation();
 
     private ModelOneForAll nota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_detail_produk_no_title);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_layout_penukaran_point);
 
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
@@ -87,6 +96,16 @@ public class ActivityListTukarPoint extends AppCompatActivity {
         btn_filter = findViewById(R.id.filter);
         loading = findViewById(R.id.loading);
         img_back = findViewById(R.id.back);
+        riwayat = findViewById(R.id.btn_riwayat);
+        txt_point = findViewById(R.id.txt_point);
+
+        riwayat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityListTukarPoint.this, ActivityRiwayatPenukaranPoint.class);
+                startActivity(intent);
+            }
+        });
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +188,55 @@ public class ActivityListTukarPoint extends AppCompatActivity {
         });
 
         LoadProduk(true);
+        loadPoit();
     }
+
+    private void loadPoit() {
+        new APIvolley(ActivityListTukarPoint.this, new JSONObject(), "POST", Constant.URL_TOTAL_POINT,
+                new APIvolley.VolleyCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        try {
+                            JSONObject obj= new JSONObject(result);
+                            String message = obj.getJSONObject("metadata").getString("message");
+                            String status = obj.getJSONObject("metadata").getString("status");
+
+                            if (status.equals("200")){
+                                String total = obj.getJSONObject("response").getString("total_poin");
+                                txt_point.setText(iv.ChangeToCurrencyFormat(total) + " Point ");
+
+                            }else {
+                                Toast.makeText(ActivityListTukarPoint.this,message, Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            Toast.makeText(ActivityListTukarPoint.this,"terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, e.getMessage());
+                            e.printStackTrace();
+                        }
+                        // Refresh Adapter
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        Log.e(TAG,result);
+
+                    }
+                });
+        refresh(5000);
+    }
+
+    private void refresh(int i) {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                loadPoit();
+            }
+        };
+        handler.postDelayed(runnable, i);
+    }
+
 
     private void LoadProduk(boolean init) {
         loading.setVisibility(View.VISIBLE);
@@ -226,4 +293,8 @@ public class ActivityListTukarPoint extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

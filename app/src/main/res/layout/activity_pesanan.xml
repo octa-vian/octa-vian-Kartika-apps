@@ -24,7 +24,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/layout_category"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/size_10dp"
                     app:layout_constraintDimensionRatio="4:4"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +40,26 @@
                             android:id="@+id/rv_gambar_detail"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
+
+                        <ImageView
+                            android:id="@+id/back"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="@dimen/size_8dp"
+                            android:layout_marginLeft="@dimen/size_8dp"
+                            android:src="@drawable/ic_arrow_back_black"/>
+
+                        <me.relex.circleindicator.CircleIndicator2
+                            android:id="@+id/sc_indicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="@dimen/size_4dp"
+                            android:layout_marginBottom="@dimen/size_4dp"
+                            android:gravity="center"
+                            app:ci_drawable="@color/black" />
 
                     </RelativeLayout>
 
@@ -69,7 +89,7 @@
                         android:fontFamily="@font/rubik_medium"
                         android:text="Nama Barang"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/size_16dp" />
+                        android:textSize="18sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -77,14 +97,14 @@
                         android:layout_marginTop="@dimen/size_4dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="@font/rubik_medium"
-                            android:text="Harga:"
+                            android:text="Harga"
                             android:textColor="@color/black"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp"/>-->
 
                         <TextView
                             android:id="@+id/harga"
@@ -92,10 +112,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="@font/rubik_medium"
-                            android:gravity="right"
+                            android:gravity="left"
                             android:text="0"
-                            android:textColor="@color/orange"
-                            android:textSize="14sp" />
+                            android:textColor="@color/color_harga"
+                            android:textSize="@dimen/size_16dp" />
 
                     </LinearLayout>
 
@@ -130,7 +150,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="2dp"
                     android:layout_marginTop="@dimen/size_4dp"
                     android:background="@color/colorGreyAccent"/>
 
@@ -141,9 +161,10 @@
                     android:layout_marginTop="@dimen/size_10dp"
                     android:layout_marginRight="@dimen/size_10dp"
                     android:fontFamily="@font/rubik_medium"
-                    android:text="Jumlah Pesanan:"
+                    android:text="Jumlah Pesanan"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_16dp" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -151,6 +172,7 @@
                     android:layout_marginTop="@dimen/size_4dp"
                     android:layout_marginLeft="@dimen/size_10dp"
                     android:layout_marginRight="@dimen/size_10dp"
+                    android:layout_marginBottom="@dimen/size_4dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -159,7 +181,7 @@
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="0.7"
-                        android:background="@drawable/border_corner_drak_grey"
+                        android:background="@drawable/border_white_black_new"
                         android:fontFamily="@font/rubik_medium"
                         android:gravity="center"
                         android:inputType="number"
@@ -170,12 +192,89 @@
                     <Spinner
                         android:id="@+id/spinner"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="@dimen/size_2dp"
-                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_4dp"
+                        android:layout_height="32dp"
                         android:layout_marginRight="@dimen/size_10dp"
                         android:layout_weight="0.8"
                         android:textColor="@color/black" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:layout_marginBottom="@dimen/size_4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_10dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="Diskon"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_16dp" />
+
+                   <!-- <TextView
+                        android:layout_weight="0.8"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_10dp"
+                        android:layout_marginRight="@dimen/size_10dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/rubik_medium"
+                        android:text="Harga Diskon"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_16dp" />-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8dp"
+                        android:orientation="horizontal">
+
+                    <!--<com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/til_diskon">-->
+
+                    <EditText
+                        android:id="@+id/txt_diskon"
+                        android:layout_width="110dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/size_10dp"
+                        android:background="@drawable/border_white_black_new"
+                        android:fontFamily="@font/rubik_medium"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_16dp" />
+
+                   <!-- </com.google.android.material.textfield.TextInputLayout>-->
+
+                        <!--<TextView
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="0.8"
+                            android:layout_marginLeft="@dimen/size_8dp"
+                            android:layout_marginRight="@dimen/size_8dp"
+                            android:background="@drawable/border_white_black_new"
+                            android:text="500"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/size_16dp"
+                            android:textColor="@color/black"/>-->
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -209,14 +308,14 @@
                         android:id="@+id/keterangan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="@dimen/size_12dp"
-                        android:textColor="@color/grey_dark"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
                         android:layout_marginTop="@dimen/size_4dp"
                         android:layout_marginLeft="@dimen/size_10dp"
                         android:layout_marginRight="@dimen/size_10dp"
                         android:text=""/>
 
-                    <View
+                    <!--<View
                         android:id="@+id/view_line"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -224,14 +323,14 @@
                         android:layout_marginRight="@dimen/size_10dp"
                         android:layout_marginTop="@dimen/size_2dp"
                         android:layout_marginBottom="@dimen/size_2dp"
-                        android:background="@color/colorGreyAccent"/>
+                        android:background="@color/colorGreyAccent"/>-->
 
                 <TextView
                     android:id="@+id/txt_deskripsi"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="@dimen/size_12dp"
-                    android:textColor="@color/grey_dark"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
                     android:layout_marginRight="@dimen/size_10dp"
                     android:layout_marginLeft="@dimen/size_10dp"
                     android:layout_marginBottom="@dimen/size_10dp"
@@ -298,52 +397,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/size_10dp"
+            android:weightSum="2"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/size_20dp"
                 android:fontFamily="@font/rubik_medium"
-                android:textSize="@dimen/size_16dp"
-                android:gravity="center"
+                android:textSize="14sp"
+                android:gravity="left"
                 android:text="Total Order"
                 android:textColor="@color/black" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/txt_totalHarga"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rubik_reguler"
-                android:gravity="center"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="right"
                 android:text="Total"
                 android:textSize="14sp"
-                android:textColor="@color/orange" />
+                android:textStyle="bold"
+                android:textColor="@color/red_Dark" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_beli"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/size_10dp"
             android:layout_marginTop="@dimen/size_10dp"
-            android:layout_marginRight="@dimen/size_20dp"
             android:layout_marginBottom="@dimen/size_10dp"
             android:layout_weight="1"
-            android:background="@drawable/border_btn_lanjut"
+            android:background="@drawable/border_red_btn"
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"
-            android:text="Pesan"
+            android:text="Pesan Sekarang"
             android:textColor="#fff"
             android:textSize="@dimen/size_12dp" />
 

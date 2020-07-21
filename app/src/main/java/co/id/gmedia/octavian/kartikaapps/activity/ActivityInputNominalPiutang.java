@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,15 +31,28 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
     private String total="";
     private String currentString = "";
     private String nom;
+    private ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_input_nominal_piutang);
 
         txt_total = findViewById(R.id.txt_total);
         txt_inputPiutang = findViewById(R.id.InputPiutang);
         btn_lanjut = findViewById(R.id.btn_proses);
+        img_back = findViewById(R.id.back);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
         btn_lanjut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

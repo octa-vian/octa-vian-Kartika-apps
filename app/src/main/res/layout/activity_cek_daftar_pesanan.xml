@@ -55,7 +55,10 @@
                 android:id="@+id/ln1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size_20dp"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginRight="@dimen/size_20dp"
+                android:layout_marginBottom="@dimen/size_4dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -238,9 +241,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:textStyle="bold"
-                android:textColor="@color/orange"
+                android:textColor="@color/red_Dark"
                 android:textSize="14sp"
-                android:text=""/>
+                android:text="0"/>
 
 
         </LinearLayout>
@@ -253,7 +256,7 @@
             android:layout_marginRight="@dimen/size_10dp"
             android:layout_marginLeft="@dimen/size_10dp"
             android:layout_marginBottom="@dimen/size_16dp"
-            android:background="@drawable/border_btn_lanjut"
+            android:background="@drawable/border_red_btn"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textStyle="bold"

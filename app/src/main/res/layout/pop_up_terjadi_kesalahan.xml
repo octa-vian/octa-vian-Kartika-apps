@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/size_12dp"
+        android:elevation="@dimen/size_12dp"
+        app:cardCornerRadius="@dimen/size_12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_4dp"
+            android:layout_marginTop="@dimen/size_4dp"
+            android:layout_marginEnd="@dimen/size_4dp"
+            android:layout_marginBottom="@dimen/size_4dp">
+
+            <ImageView
+                android:id="@+id/img_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_12dp"
+                android:src="@drawable/ic_warning_black" />
+
+            <TextView
+                android:id="@+id/txt_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_warning"
+                android:layout_marginLeft="@dimen/size_12dp"
+                android:layout_marginRight="@dimen/size_12dp"
+                android:fontFamily="@font/rubik_reguler"
+                android:gravity="center"
+                android:text="Kemungkinan terjadi kesalahan pada server, atau koneksi anda tidak setabil"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_1"
+                android:layout_marginLeft="@dimen/size_10dp"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:layout_marginRight="@dimen/size_10dp"
+                android:layout_marginBottom="@dimen/size_10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_coba_lagi"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="@dimen/size_4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_red_btn"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Coba Lagi"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/size_12dp" />
+
+                <Button
+                    android:id="@+id/btn_batal"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="@dimen/size_4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_white_black_new"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="Batal"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12dp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

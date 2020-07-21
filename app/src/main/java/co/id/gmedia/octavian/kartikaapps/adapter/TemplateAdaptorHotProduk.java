@@ -2,6 +2,7 @@ package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,14 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
         templateViewHolder.txt_harga.setText(item.getItem4());
         templateViewHolder.txt_status.setText(item.getItem5());
 
+        if (item.getItem6().equals("1")){
+            templateViewHolder.txt_harga_promo.setText(item.getItem7());
+            templateViewHolder.txt_harga_promo.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        } else{
+            templateViewHolder.txt_harga_promo.setText(item.getItem7());
+            templateViewHolder.txt_harga_promo.setVisibility(View.GONE);
+        }
+
         final ModelProduk itemSelected = listItem.get(i);
         if(itemSelected.getItem5().toLowerCase().trim().equals("available")  || itemSelected.getItem5().toLowerCase().trim().equals("tersedia")){
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_tersedia));
@@ -56,6 +65,7 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
         else{
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_preorder));
         }
+
 
         final Gson gson = new Gson();
         templateViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +89,7 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
 
         private CardView cardView;
         private ImageView iv_cardview;
-        private TextView txt_nama, txt_harga, txt_status;
+        private TextView txt_nama, txt_harga, txt_status, txt_harga_promo;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +98,7 @@ public class TemplateAdaptorHotProduk extends RecyclerView.Adapter<TemplateAdapt
            txt_harga =  (TextView) itemView.findViewById(R.id.txt_harga);
            txt_status =  (TextView) itemView.findViewById(R.id.status);
            cardView = (CardView) itemView.findViewById(R.id.card_produk);
+           txt_harga_promo = (TextView) itemView.findViewById(R.id.txt_harga_promo);
         }
     }
 }

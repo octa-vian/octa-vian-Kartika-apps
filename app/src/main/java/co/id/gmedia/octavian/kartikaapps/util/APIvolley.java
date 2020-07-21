@@ -1,6 +1,7 @@
 package co.id.gmedia.octavian.kartikaapps.util;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -84,7 +85,7 @@ public class APIvolley {
 
             @Override
             public void onResponse(String response) {
-
+                Log.d("ApiVolly", REST_URL+" : "+response);
                 // Important Note : need to use try catch when parsing JSONObject, no need when parsing string
 
                 if(response == null || response.equals("null")) {
@@ -101,7 +102,7 @@ public class APIvolley {
 
                     e.printStackTrace();
 //                    Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(context, context.getResources().getString(R.string.api_error), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, context.getResources().getString(R.string.api_error), Toast.LENGTH_LONG).show();
                     callback.onError(e.toString());
                 }
             }
@@ -109,6 +110,7 @@ public class APIvolley {
             @Override
 
             public void onErrorResponse(VolleyError error) {
+                Log.d("ApiVolly", REST_URL+" : "+error.toString());
                 callback.onError(error.toString());
                 return;
             }
@@ -152,7 +154,7 @@ public class APIvolley {
 
         // retry when timeout
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                20*1000,-1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                20*5000,-1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
 
         stringRequest.setShouldCache(false);
@@ -181,6 +183,7 @@ public class APIvolley {
                             hostname.equalsIgnoreCase("talam.gmedia.net.id") ||
                             hostname.equalsIgnoreCase("ipv4-10-27-68.as55666.net") ||
                             hostname.equalsIgnoreCase("gmedia.bz") ||
+                            hostname.equalsIgnoreCase("kartikaelectric.com") ||
                            // hostname.equalsIgnoreCase("kartikaelectric.com") ||
                             hostname.equalsIgnoreCase("app.midtrans.com") ||
                             hostname.equalsIgnoreCase("office.putmasaripratama.co.id") ||

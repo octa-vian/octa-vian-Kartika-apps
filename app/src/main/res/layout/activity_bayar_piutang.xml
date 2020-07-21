@@ -176,7 +176,7 @@
 
         <Button
             android:id="@+id/btn_bayar"
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="35dp"
             android:gravity="center"
             android:layout_gravity="center"
@@ -184,7 +184,7 @@
             android:textSize="@dimen/size_12dp"
             android:textStyle="bold"
             android:text="Bayar"
-            android:background="@drawable/border_btn_lanjut"
+            android:background="@drawable/border_red_btn"
             android:layout_margin="@dimen/size_20dp"/>
     </LinearLayout>
 

@@ -44,6 +44,7 @@ import co.id.gmedia.coremodul.ImageUtils;
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.model.CustomItem;
+import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
 
 
 /**
@@ -138,10 +139,10 @@ public class ChatAdapter extends ArrayAdapter {
 
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 
-            if(tipeViewList == 0){
-                convertView = inflater.inflate(R.layout.adapter_chat_send, null);
-            }else{
+            if(tipeViewList == 1){
                 convertView = inflater.inflate(R.layout.adapter_chat_receive, null);
+            }else{
+                convertView = inflater.inflate(R.layout.adapter_chat_send, null);
             }
 
             holder.tvNama = (TextView) convertView.findViewById(R.id.tv_nama);
@@ -167,6 +168,7 @@ public class ChatAdapter extends ArrayAdapter {
         holder.tvPesan.setText(item.getItem3());
         holder.tvTime.setText(iv.ChangeFormatDateString(item.getItem4(), FormatItem.formatTimestamp, FormatItem.formatDateTimeDisplay));
 
+        AppSharedPreferences.setStatusPref(context, String.valueOf(item.getItem3()));
         /*listChat.add(new CustomItem(
                 obj.getString("is_open")    // 1
                 ,obj.getString("id") //2

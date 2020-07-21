@@ -45,6 +45,8 @@ public class TemplateAdaptorListPreOrder extends RecyclerView.Adapter<TemplateAd
         templateViewHolder.txt_jumlah.setText(item.getItem3());
         templateViewHolder.keterangan.setText(item.getItem6());
         templateViewHolder.total.setText(item.getItem7());
+        templateViewHolder.total_asli.setText(item.getItem9());
+        templateViewHolder.diskon.setText(item.getItem8());
         //templateViewHolder.status.setText(item.getItem4());
 
         /*final ModelProduk itemSelected = listItem.get(i);
@@ -78,7 +80,7 @@ public class TemplateAdaptorListPreOrder extends RecyclerView.Adapter<TemplateAd
 
 
         private ImageView iv_cardview;
-        private TextView txt_nama, txt_jumlah, keterangan, harga, total, status;
+        private TextView txt_nama, txt_jumlah, keterangan, harga, total, diskon, total_asli;
         private MaterialCardView cardView;
 
         public TemplateViewHolder(@NonNull View itemView) {
@@ -88,7 +90,8 @@ public class TemplateAdaptorListPreOrder extends RecyclerView.Adapter<TemplateAd
             keterangan = (TextView) itemView.findViewById(R.id.txt_keterangan);
             harga = (TextView) itemView.findViewById(R.id.txt_harga);
             total = (TextView) itemView.findViewById(R.id.txt_total_harga);
-            //status = (TextView) itemView.findViewById(R.id.txt_status);
+            diskon = (TextView) itemView.findViewById(R.id.txt_diskon);
+            total_asli = (TextView) itemView.findViewById(R.id.txt_total_harga_asli);
         }
     }
 }

@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.animation.Animator;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -26,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -78,16 +80,16 @@ import static co.id.gmedia.coremodul.ImageUtils.getImageUri;
 
 public class ActivityChat extends AppCompatActivity {
 
-    private EditText edt_chat;
+    private static EditText edt_chat;
     private ImageView iv_send;
     private ItemValidation iv = new ItemValidation();
-    private List<CustomItem> listChat, morelist;
-    private ListView lvChat;
-    private ChatAdapter adapter;
-    private int start = 0;
-    private final int count = 20;
-    private boolean isLoading = false;
-    private View footerList;
+    private static List<CustomItem> listChat, morelist;
+    private static ListView lvChat;
+    private static ChatAdapter adapter;
+    private static int start = 0;
+    private static final int count = 20;
+    private static boolean isLoading = false;
+    private static View footerList;
     private ProgressBar pbLoading;
     private static int RESULT_OK = -1;
     private static int PICK_IMAGE_REQUEST = 1212;
@@ -111,6 +113,7 @@ public class ActivityChat extends AppCompatActivity {
     private File saveDirectory;
     private String TAG = "Chat";
     private ImageView img_back;
+    private static Activity activity;
 
 
     public static int GALERRY_REQUEST = 777;
@@ -118,7 +121,10 @@ public class ActivityChat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 1);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_chat);
+        activity = this;
 
         //View
         edt_chat = findViewById(R.id.edt_chat);
@@ -180,7 +186,6 @@ public class ActivityChat extends AppCompatActivity {
         btnBukaDokumen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 openAttachDialog(false);
                 showDocumentChooser();
             }
@@ -822,7 +827,7 @@ public class ActivityChat extends AppCompatActivity {
     }
 
 
-    private void getChat() {
+    public static void getChat() {
         JSONObject object = new JSONObject();
         try {
             object.put("start",String.valueOf(start));
@@ -831,7 +836,7 @@ public class ActivityChat extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        new APIvolley(ActivityChat.this, object, "POST", Constant.URL_GET_CHAT, new APIvolley.VolleyCallback() {
+        new APIvolley(activity, object, "POST", Constant.URL_GET_CHAT, new APIvolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
                 JSONObject ob;
@@ -894,6 +899,7 @@ public class ActivityChat extends AppCompatActivity {
                                     ,isImage                              // 13
                                     ,isDocument                           // 14
                                     ,isFileType                           // 15
+
                             ));
 
 
@@ -913,11 +919,11 @@ public class ActivityChat extends AppCompatActivity {
         });
     }
 
-    private void setChatRoom(List<CustomItem> listItem) {
+    private static void setChatRoom(List<CustomItem> listItem) {
         lvChat.setAdapter(null);
 
         if (listItem != null){
-            adapter = new ChatAdapter(this,  listItem);
+            adapter = new ChatAdapter(activity,  listItem);
             lvChat.setAdapter(adapter);
             lvChat.setSelection(listItem.size() - 1);
 
@@ -929,7 +935,7 @@ public class ActivityChat extends AppCompatActivity {
                     final CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
                     if(item.getItem1().equals("0")){
 
-                        AlertDialog dialog = new AlertDialog.Builder(ActivityChat.this)
+                        AlertDialog dialog = new AlertDialog.Builder(activity)
                                 .setTitle("Hapus Pesan")
                                 .setMessage("Anda ingin menghapus pesan ini?")
                                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
@@ -979,7 +985,7 @@ public class ActivityChat extends AppCompatActivity {
 
     }
 
-    private void getMoreData() {
+    private static void getMoreData() {
         isLoading = true;
         morelist = new ArrayList<>();
         JSONObject object = new JSONObject();
@@ -990,7 +996,7 @@ public class ActivityChat extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        new APIvolley(ActivityChat.this, object, "POST", Constant.URL_GET_CHAT, new APIvolley.VolleyCallback() {
+        new APIvolley(activity, object, "POST", Constant.URL_GET_CHAT, new APIvolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
                 isLoading = false;

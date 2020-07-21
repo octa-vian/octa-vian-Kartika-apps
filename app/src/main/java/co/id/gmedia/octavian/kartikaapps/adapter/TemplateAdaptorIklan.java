@@ -32,7 +32,8 @@ public class TemplateAdaptorIklan extends RecyclerView.Adapter<TemplateAdaptorIk
     @Override
     public TemplateViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new TemplateViewHolder(LayoutInflater.from(activity).
-                inflate(R.layout.layout_adapter_gambar_detail, viewGroup, false));
+                inflate(R.layout.layout_adapter_gambar_iklan, viewGroup, false));
+        //jngan lupa layout iklan diganti
     }
 
     @Override
@@ -40,7 +41,7 @@ public class TemplateAdaptorIklan extends RecyclerView.Adapter<TemplateAdaptorIk
         final ModelProduk item = listItem.get(i);
         final int final_position = i;
 
-        Picasso.get().load(item.getItem3()).into(templateViewHolder.iv_cardview);
+        Picasso.get().load(item.getItem4()).into(templateViewHolder.iv_cardview);
 
 
     }
