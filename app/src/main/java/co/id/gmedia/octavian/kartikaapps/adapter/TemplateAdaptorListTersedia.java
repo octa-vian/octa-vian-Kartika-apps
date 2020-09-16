@@ -44,7 +44,6 @@ public class TemplateAdaptorListTersedia extends RecyclerView.Adapter<TemplateAd
         templateViewHolder.txt_nama.setText(item.getItem2());
         templateViewHolder.txt_jumlah.setText(item.getItem3());
         templateViewHolder.harga.setText(item.getItem5());
-        templateViewHolder.keterangan.setText(item.getItem6());
         templateViewHolder.total.setText(item.getItem9());
         templateViewHolder.total_disc.setText(item.getItem7());
         templateViewHolder.diskon.setText(item.getItem8());
@@ -89,7 +88,6 @@ public class TemplateAdaptorListTersedia extends RecyclerView.Adapter<TemplateAd
             super(itemView);
            txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_brg);
            txt_jumlah =  (TextView) itemView.findViewById(R.id.txt_jumlah);
-           keterangan = (TextView) itemView.findViewById(R.id.txt_keterangan);
            harga = (TextView) itemView.findViewById(R.id.txt_harga);
            total = (TextView) itemView.findViewById(R.id.txt_total_harga_asli);
            diskon =  (TextView) itemView.findViewById(R.id.txt_diskon);

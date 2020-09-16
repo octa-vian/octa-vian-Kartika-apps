@@ -47,18 +47,95 @@
     <ListView
         android:id="@+id/lv_ceklistBayar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/paddingTop"
-        android:layout_above="@id/ln_btn">
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ln_btn"
+        android:layout_below="@id/paddingTop">
+
     </ListView>
 
     <LinearLayout
         android:id="@+id/ln_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size_10dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ln_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginBottom="@dimen/size_8dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size_10dp"
+                android:layout_marginRight="@dimen/size_10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="25dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:background="@color/orange"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="left"
+                    android:text="Piutang"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size_10dp"
+                android:layout_marginRight="@dimen/size_10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="25dp"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:background="@color/red_Dark"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="left"
+                    android:text="Denda"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,88 +143,88 @@
             android:background="@color/colorGreyLightAccent"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_10dp"
-            android:layout_marginRight="@dimen/size_10dp"
-            android:layout_marginLeft="@dimen/size_10dp"
-            android:orientation="horizontal">
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/rubik_medium"
-                android:gravity="center"
-                android:text="Sisa Terbayar"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_12dp" />
+                android:layout_marginLeft="@dimen/size_10dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginRight="@dimen/size_10dp"
+                android:orientation="horizontal">
 
-            <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text="Sisa Terbayar"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text="Total Terbayar"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/rubik_medium"
-                android:gravity="center"
-                android:text="Total Terbayar"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_12dp" />
+                android:layout_marginLeft="@dimen/size_10dp"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:layout_marginRight="@dimen/size_10dp"
+                android:layout_marginBottom="@dimen/size_10dp"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txt_totalPembayaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/red_Dark"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_8dp"
-            android:layout_marginRight="@dimen/size_10dp"
-            android:layout_marginLeft="@dimen/size_10dp"
-            android:layout_marginBottom="@dimen/size_10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/txt_totalPembayaran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/rubik_medium"
-                android:gravity="center"
-                android:text=""
-                android:textColor="@color/red_Dark"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txt_totalbelanja"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/rubik_medium"
-                android:gravity="center"
-                android:text=""
-                android:textColor="@color/red_Dark"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txt_totalbelanja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/red_Dark"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
 
 
         <Button
             android:id="@+id/btn_lanjutkan"
-            android:layout_weight="1"
-            android:layout_marginTop="@dimen/size_20dp"
-            android:layout_marginRight="@dimen/size_10dp"
-            android:layout_marginLeft="@dimen/size_10dp"
-            android:layout_marginBottom="@dimen/size_16dp"
-            android:background="@drawable/border_red_btn"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:textStyle="bold"
-            android:textSize="@dimen/size_12dp"
-            android:textColor="#fff"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:text="Proses"/>
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:layout_marginBottom="@dimen/size_16dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_red_btn"
+            android:gravity="center"
+            android:text="Proses"
+            android:textColor="#fff"
+            android:textSize="@dimen/size_12dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

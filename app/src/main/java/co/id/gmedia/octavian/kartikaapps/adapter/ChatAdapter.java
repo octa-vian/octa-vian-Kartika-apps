@@ -65,13 +65,11 @@ public class ChatAdapter extends ArrayAdapter {
     }
 
     public void addMoreData(List<CustomItem> moreData){
-
         items.addAll(0,moreData);
         notifyDataSetChanged();
     }
 
     public void addMoreChat(CustomItem moreData){
-
         items.add(moreData);
         notifyDataSetChanged();
     }

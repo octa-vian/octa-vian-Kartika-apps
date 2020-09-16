@@ -45,6 +45,7 @@
                     android:layout_margin="@dimen/size_10dp"
                     android:layout_width="260dp"
                     android:layout_height="35dp"
+                    android:maxLength="6"
                     android:inputType="numberPassword"
                     android:layout_centerInParent="true"
                     android:background="@drawable/border_white_black"

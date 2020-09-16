@@ -38,6 +38,7 @@ import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityDaftarPemesanan;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
@@ -86,12 +87,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 bottomNavigationView.setSelectedItemId(R.id.nav_info);
             }
 
-            else if (brodcas.equals("pesan")){
-                Intent intent = new Intent(MainActivity.this, ActivityChat.class);
+            else if (brodcas.equals("pesanan")){
+                Intent intent = new Intent(MainActivity.this, ActivityDaftarPemesanan.class);
                 startActivity(intent);
                 finish();
             }
+
+            else if (brodcas.equals("pesan")){
+                Intent intent = new Intent(MainActivity.this, ActivityChat.class);
+               // ActivityChat.getChat();
+                intent.putExtra("key", "succses");
+                startActivity(intent);
+                getIntent().getExtras().remove("jenis");
+                finish();
+            }
             bundle.clear();
+
         } else{
             loadfragment (new FragmentHome());
         }

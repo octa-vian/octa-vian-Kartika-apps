@@ -43,6 +43,7 @@ import co.id.gmedia.octavian.kartikaapps.MainActivity;
 import co.id.gmedia.octavian.kartikaapps.NotificationActivity;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
+import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukPromo;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
@@ -52,7 +53,7 @@ import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 public class ActivityListDetailPromoProduk extends AppCompatActivity {
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
-    private TemplateAdaptorProduk adepterproduk;
+    private TemplateAdaptorProdukPromo adepterproduk;
     private static String TAG = "Produk";
     private ModelOneForAll nota;
     private TextView txt_judul;
@@ -87,7 +88,7 @@ public class ActivityListDetailPromoProduk extends AppCompatActivity {
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
         homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailPromoProduk.this, 2));
-        adepterproduk = new TemplateAdaptorProduk(ActivityListDetailPromoProduk.this, viewproduk);
+        adepterproduk = new TemplateAdaptorProdukPromo(ActivityListDetailPromoProduk.this, viewproduk);
         homeProduk.setAdapter(adepterproduk);
         loadMoreScrollListener = new LoadMoreScrollListener() {
             @Override
@@ -285,15 +286,17 @@ public class ActivityListDetailPromoProduk extends AppCompatActivity {
                                             , objt.getString("namabrg")
                                             , objt.getString("harga")
                                             , objt.getString("stok")
-                                            ,objt.getString("flag_promo"));
+                                            ,objt.getString("harga_asli")
+                                            ,objt.getString("status_stok_promo")
+                                            ,objt.getString("kdpromo")
+                                    );
 
-                                    if (objt.getString("flag_promo").equals("1")){
+                                    /*if (objt.getString("flag_promo").equals("1")){
                                         modelProduk.setItem7(objt.getString("harga_asli"));
                                     } else{
                                         modelProduk.setItem6("0");
-                                    }
+                                    }*/
                                     viewproduk.add(modelProduk);
-
                                 }
                                 loadMoreScrollListener.finishLoad(meal.length());
                                 adepterproduk.notifyDataSetChanged();

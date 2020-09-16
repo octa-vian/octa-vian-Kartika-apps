@@ -70,7 +70,6 @@ public class FragmentInfo extends Fragment {
                 }
             };
             info.addOnScrollListener(loadMoreScrollListener);
-            //LoadCountNotif();
             loadNotif(true);
         }
        return v;
@@ -106,27 +105,29 @@ public class FragmentInfo extends Fragment {
         });
     }*/
 
-    private void loadNotif(boolean init) {
+    private void loadNotif(final boolean init) {
         loading.setVisibility(View.VISIBLE);
         if (init){
             loadMoreScrollListener.initLoad();
         }
-        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d",loadMoreScrollListener.getLoaded(),10);
+        String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d",loadMoreScrollListener.getLoaded(), 15);
         new APIvolley(context, new JSONObject(), "GET", Constant.URL_GET_NOTIF + parameter, new APIvolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
                 loading.setVisibility(View.GONE);
-                    if (init){
-                        listnotif.clear();
-                    }
+
+                if (init){
+                    listnotif.clear();
+                }
                 try {
                     JSONObject object = new JSONObject(result);
                     String message = object.getJSONObject("metadata").getString("message");
                     String status = object.getJSONObject("metadata").getString("status");
 
-                    if (status.equals("200")){
+                    if (Integer.parseInt(status) == 200){
+
                         JSONArray ob = object.getJSONArray("response");
-                        for (int i=0; i < ob.length(); i++){
+                        for (int i = 0; i < ob.length(); i++){
                             JSONObject obj = ob.getJSONObject(i);
                             listnotif.add(new ModelProduk(
                                     obj.getString("id")
@@ -135,10 +136,9 @@ public class FragmentInfo extends Fragment {
                                     ,obj.getString("date")
                                     ,obj.getString("hour")
                             ));
-
-                            loadMoreScrollListener.finishLoad(ob.length());
-                            adapterNotif.notifyDataSetChanged();
                         }
+                        loadMoreScrollListener.finishLoad(ob.length());
+                        adapterNotif.notifyDataSetChanged();
                         MainActivity.LoadCountNotif();
                     } else {
                         loading.setVisibility(View.GONE);
@@ -155,9 +155,9 @@ public class FragmentInfo extends Fragment {
             public void onError(String result) {
                 loading.setVisibility(View.GONE);
                 adapterNotif.notifyDataSetChanged();
+                listnotif.clear();
                 Toast.makeText(context, "Kesalahan jaringan", Toast.LENGTH_LONG).show();
                 loadMoreScrollListener.finishLoad(0);
-
             }
         });
     }

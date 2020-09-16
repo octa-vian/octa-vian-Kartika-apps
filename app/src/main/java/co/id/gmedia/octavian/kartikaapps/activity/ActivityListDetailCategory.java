@@ -43,6 +43,7 @@ import java.util.Locale;
 import co.id.gmedia.octavian.kartikaapps.FragmentProduk;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
+import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukCategory;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
@@ -52,7 +53,7 @@ import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 public class ActivityListDetailCategory extends AppCompatActivity {
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
-    private TemplateAdaptorProduk adepterproduk;
+    private TemplateAdaptorProdukCategory adepterproduk;
     private static String TAG = "Produk";
     private TextView txt_judul;
     private EditText txt_search;
@@ -84,7 +85,7 @@ public class ActivityListDetailCategory extends AppCompatActivity {
         homeProduk.setItemAnimator(new DefaultItemAnimator());
         homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailCategory.this,2));
         //homeProduk.setLayoutManager(new LinearLayoutManager(ActivityListDetailProduk.this, LinearLayoutManager.VERTICAL,false));
-        adepterproduk = new TemplateAdaptorProduk(ActivityListDetailCategory.this, viewproduk) ;
+        adepterproduk = new TemplateAdaptorProdukCategory(ActivityListDetailCategory.this, viewproduk) ;
         homeProduk.setAdapter(adepterproduk);
         loadMoreScrollListener = new LoadMoreScrollListener() {
             @Override

@@ -42,6 +42,21 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/gambarpromo" />
 
+                <RelativeLayout
+                    android:id="@+id/rv_watrmark"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/border_corner_grey_light"
+                    android:layout_alignParentTop="true">
+                    <ImageView
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:src="@drawable/habiscircle"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
 
 
                 <me.relex.circleindicator.CircleIndicator2
@@ -120,6 +135,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/title_id"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_medium"
@@ -226,6 +242,23 @@
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"
             android:text="beli Sekarang"
+            android:textColor="#fff"
+            android:textSize="@dimen/size_12dp" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_beritahuSaya"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:layout_marginBottom="@dimen/size_10dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_red_btn"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="Beritau Saya"
             android:textColor="#fff"
             android:textSize="@dimen/size_12dp" />
 

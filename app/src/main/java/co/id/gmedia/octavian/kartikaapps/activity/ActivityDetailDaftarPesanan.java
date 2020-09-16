@@ -85,7 +85,7 @@ public class ActivityDetailDaftarPesanan extends AppCompatActivity {
                 Intent intent = new Intent(ActivityDetailDaftarPesanan.this, ActivityCekPesanan.class);
                 intent.putExtra(Constant.EXTRA_NOBUKTI, noPesanan.getText().toString());
                 startActivity(intent);
-                finish();
+
                 //Toast.makeText(ActivityCheckOutPesanan.this, "Terimakasih. Pesanan Anda akan diproses", Toast.LENGTH_LONG).show();
             }
         });
@@ -146,6 +146,7 @@ public class ActivityDetailDaftarPesanan extends AppCompatActivity {
                                 for (int i = 0; i < grab.length(); i++) {
                                     JSONObject grabFood = grab.getJSONObject(i);
                                     JSONObject food = grabFood.getJSONObject("barang_tersedia");
+
                                     JSONArray sate = food.getJSONArray("list");
                                     for (int l = 0; l < sate.length(); l++){
                                         JSONObject bakso = sate.getJSONObject(l);

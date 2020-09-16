@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.util.Log;
@@ -113,6 +114,8 @@ public class ActivityChat extends AppCompatActivity {
     private File saveDirectory;
     private String TAG = "Chat";
     private ImageView img_back;
+    public static boolean isChatActive = false;
+    public static boolean isFromNotif = false;
     private static Activity activity;
 
 
@@ -148,6 +151,23 @@ public class ActivityChat extends AppCompatActivity {
         //pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
         LayoutInflater li = (LayoutInflater) ActivityChat.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         footerList = li.inflate(R.layout.footer_list, null);
+
+        isChatActive = true;
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null){
+            String s = bundle.getString("key");
+            if (s.equals("succses")){
+                getChat();
+            }
+           /*for (String s : bundle.keySet()){
+               String st = s;
+               if (st.equals("pesan")){
+                   getChat();
+               }
+           }*/
+        }
 
         iv_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,7 +214,6 @@ public class ActivityChat extends AppCompatActivity {
         btnBukaGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 openAttachDialog(false);
                 showFileChooser();
             }
@@ -210,7 +229,29 @@ public class ActivityChat extends AppCompatActivity {
             }
         });
 
-        getChat();
+       // getChat();
+    }
+
+    public static void refresh() {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                getChat();
+                //loadCount();
+            }
+        };
+        handler.postDelayed(runnable, 12000);
+    }
+
+    public static void refresh1() {
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                getChat();
+                //loadCount();
+            }
+        };
     }
 
     private void openAttachDialog(boolean isOpen){
@@ -300,7 +341,6 @@ public class ActivityChat extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Pilih Gambar"), PICK_IMAGE_REQUEST);
-
     }
 
     private void openCamera(){
@@ -340,7 +380,6 @@ public class ActivityChat extends AppCompatActivity {
                     .setPositiveButton("Buka Ijin", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
                             Intent intent = new Intent();
                             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                             Uri uri = Uri.fromParts("package", getPackageName(), null);
@@ -717,8 +756,8 @@ public class ActivityChat extends AppCompatActivity {
             String fileName = sourceFile.getName();
             //Log.d(TAG, "filename upload: " +fileName);
             String result = "";
-            try {
 
+            try {
                 connection = (HttpURLConnection) new URL(Constant.URL_POST_FILE).openConnection();
                 connection.setRequestMethod("POST");
                 String boundary = "---------------------------boundary";
@@ -828,6 +867,7 @@ public class ActivityChat extends AppCompatActivity {
 
 
     public static void getChat() {
+        listChat = new ArrayList<>();
         JSONObject object = new JSONObject();
         try {
             object.put("start",String.valueOf(start));
@@ -844,8 +884,9 @@ public class ActivityChat extends AppCompatActivity {
                     ob = new JSONObject(result);
                     String message = ob.getJSONObject("metadata").getString("message");
                     String status = ob.getJSONObject("metadata").getString("status");
+
                     listChat = new ArrayList<>();
-                    if (status.equals("200")){
+                    if (Integer.parseInt(status) == 200){
 
                         JSONArray array = ob.getJSONArray("response");
                         for (int i = 0; i < array.length(); i++){
@@ -910,6 +951,7 @@ public class ActivityChat extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 setChatRoom(listChat);
+                //refresh();
             }
 
             @Override
@@ -927,7 +969,7 @@ public class ActivityChat extends AppCompatActivity {
             lvChat.setAdapter(adapter);
             lvChat.setSelection(listItem.size() - 1);
 
-            lvChat.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            /*lvChat.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
                 @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -956,7 +998,7 @@ public class ActivityChat extends AppCompatActivity {
 
                     return false;
                 }
-            });
+            });*/
 
             if (adapter.getCount() > 0) lvChat.setSelection(adapter.getCount() - 1);
             edt_chat.setText("");
@@ -979,8 +1021,10 @@ public class ActivityChat extends AppCompatActivity {
 
                 @Override
                 public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
                 }
             });
+            adapter.notifyDataSetChanged();
         }
 
     }
@@ -1003,11 +1047,12 @@ public class ActivityChat extends AppCompatActivity {
                 JSONObject ob;
                 lvChat.removeHeaderView(footerList);
                 try {
+
                     ob = new JSONObject(result);
                     String message = ob.getJSONObject("metadata").getString("message");
                     String status = ob.getJSONObject("metadata").getString("status");
                     listChat = new ArrayList<>();
-                    if (status.equals("200")){
+                    if (Integer.parseInt(status)==200){
 
                         JSONArray array = ob.getJSONArray("response");
                         for (int i = 0; i < array.length(); i++){
@@ -1034,15 +1079,16 @@ public class ActivityChat extends AppCompatActivity {
                             if (obj.getString("file").equals("[]")){
                                 isFile = "0";
                             }else{
+
                                 isFile = "1";
                                 JSONObject fileData = obj.getJSONObject("file");
-
                                 fileName = fileData.getString("file_name");
                                 fileAddress = fileData.getString("file_address");
                                 fileSize = fileData.getString("file_size");
                                 isImage = fileData.getString("is_image");
                                 isDocument = fileData.getString("is_document");
                                 isFileType = fileData.getString("file_type");
+
                             }
 
                             listChat.add(new CustomItem(
@@ -1097,9 +1143,49 @@ public class ActivityChat extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        isChatActive = true;
         start = 0;
         isLoading = false;
         getChat();
+
+    }
+
+    @Override
+    protected void onStart() {
+        start = 0;
+        isChatActive = true;
+        getChat();
+        isLoading = false;
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        isChatActive = true;
+        start = 0;
+        getChat();
+        isLoading = true;
+        super.onRestart();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isChatActive = false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        isChatActive = false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //refresh();
+        isChatActive = false;
     }
 
     @Override

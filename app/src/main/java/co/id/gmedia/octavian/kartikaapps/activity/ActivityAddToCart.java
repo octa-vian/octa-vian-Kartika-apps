@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class ActivityAddToCart extends AppCompatActivity {
     private TemplateAdaptorCart adaptorCart;
     private static String TAG = "CartLis";
     private TextView txt_total;
-    private double total =0;
+    public static double total =0;
     private Button btn_beli, btn_tambah;
     private ModelOneForAll nota;
     private ItemValidation iv = new ItemValidation();
@@ -57,6 +59,7 @@ public class ActivityAddToCart extends AppCompatActivity {
     private LinearLayout item_kosong, ln_btn;
     private ImageView back;
     private String Idbrg="";
+    public static Activity activity;
 
 
     @Override
@@ -123,7 +126,7 @@ public class ActivityAddToCart extends AppCompatActivity {
                 }
                 else{
                     Intent intent = new Intent(ActivityAddToCart.this, ActivityListDetailProduk.class);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
                     finish();
                 }
@@ -142,33 +145,88 @@ public class ActivityAddToCart extends AppCompatActivity {
         btn_beli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = new Dialog(ActivityAddToCart.this);
-                dialog.setContentView(R.layout.pop_up_confirmasi);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                Button btnYa, btnNo;
-                btnYa = dialog.findViewById(R.id.btn_ya);
-                btnNo = dialog.findViewById(R.id.btn_tidak);
-                btnYa.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        PesanBarang();
-                    }
-                });
-
-                btnNo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-
+                CekDenda();
             }
         });
 
         LoadData();
 
+    }
+
+    private void CekDenda(){
+
+        new APIvolley(ActivityAddToCart.this, new JSONObject(), "POST", Constant.URL_POST_CEK_DENDA, new APIvolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    JSONObject object = new JSONObject(result);
+                    String message = object.getJSONObject("metadata").getString("message");
+                    String status = object.getJSONObject("metadata").getString("status");
+
+                    if (Integer.parseInt(status) == 200){
+                        Dialog dialog = new Dialog(ActivityAddToCart.this);
+                        dialog.setContentView(R.layout.pop_up_confirmasi);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        Button btnYa, btnNo;
+                        btnYa = dialog.findViewById(R.id.btn_ya);
+                        btnNo = dialog.findViewById(R.id.btn_tidak);
+                        btnYa.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                PesanBarang();
+                                dialog.dismiss();
+                            }
+                        });
+
+                        btnNo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
+
+                    } else if (Integer.parseInt(status) == 400){
+                        Dialog dialog = new Dialog(ActivityAddToCart.this);
+                        dialog.setContentView(R.layout.popup_dialog_cek_denda);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        TextView txt_msg;
+                        Button btn_cekDenda, btn_bayarDenda;
+                        btn_cekDenda = dialog.findViewById(R.id.btn_cekDenda);
+                        btn_bayarDenda = dialog.findViewById(R.id.btn_bayarDenda);
+                        txt_msg = dialog.findViewById(R.id.txt_message);
+                        txt_msg.setText(message);
+
+                        btn_cekDenda.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(ActivityAddToCart.this, ActivityDenda.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        btn_bayarDenda.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(ActivityAddToCart.this, ActivityInputNominalPiutang.class);
+                                startActivity(intent);
+                            }
+                        });
+                        dialog.show();
+
+                    } else {
+                        Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(ActivityAddToCart.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void PesanBarang() {
@@ -203,15 +261,39 @@ public class ActivityAddToCart extends AppCompatActivity {
                     String message = kirim.getJSONObject("metadata").getString("message");
                     String status = kirim.getJSONObject("metadata").getString("status");
 
-                    if (status.equals("200")){
-                        String nobukti = kirim.getJSONObject("response").getString("nobukti");
+                    if (Integer.parseInt(status) == 200){
+                        JSONArray nobukti = kirim.getJSONObject("response").getJSONArray("nobukti");
+                        List <String>ListBuk = new ArrayList<>();
+
+                        for (int i=0; i < nobukti.length(); i++ ){
+                            ListBuk.add(nobukti.get(i).toString());
+                        }
                         Intent i = new Intent(ActivityAddToCart.this, ActivityCheckOutPesanan.class);
-                        i.putExtra(Constant.EXTRA_NOBUKTI, nobukti);
+                        Bundle args = new Bundle();
+                        args.putSerializable("ARRAYLIST",(Serializable)ListBuk);
+                        i.putExtra(Constant.EXTRA_NOBUKTI,args);
                         startActivity(i);
-                        finish();
+                       /* Gson gson = new Gson();
+                        i.putExtra(Constant.EXTRA_NOBUKTI, gson.toJson(ListBuk));
+                        startActivity(i);
+                        finish();*/
                         Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
                     } else {
-                            Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
+                        Dialog dialog = new Dialog(ActivityAddToCart.this);
+                        dialog.setContentView(R.layout.popup_dialog_informasi);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        TextView txtInf = dialog.findViewById(R.id.txt_message);
+                        txtInf.setText(message);
+                        Button btn_ok = dialog.findViewById(R.id.btn_konfirmasi);
+                        btn_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -260,7 +342,15 @@ public class ActivityAddToCart extends AppCompatActivity {
                                             , objt.getString("total_harga")
                                             , objt.getString("stok")
                                             , objt.getString("diskon")
+                                            ,objt.getString("flag_promo")
+                                            ,objt.getString("kode_promo")
+                                            ,objt.getString("status_stok_promo") //15
+                                            ,objt.getString("checkbox") //16
+                                            ,objt.getString("keterangan_stok_promo") //17
+                                            ,objt.getString("status_expired_promo") //18
+                                            ,objt.getString("keterangan_expired_promo") //19
                                             ,false
+
                                     ));
                                 }
 
@@ -334,6 +424,39 @@ public class ActivityAddToCart extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void  MessageItem(String id){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("id", id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        new APIvolley(ActivityAddToCart.this, object, "POST", Constant.URL_POST_MESSAGE_CHEKBOX, new APIvolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    JSONObject ob = new JSONObject(result);
+                    String status = ob.getJSONObject("metadata").getString("status");
+                    String message = ob.getJSONObject("metadata").getString("message");
+
+                    if (status.equals(200)){
+                        Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(ActivityAddToCart.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void updateJumlah(){

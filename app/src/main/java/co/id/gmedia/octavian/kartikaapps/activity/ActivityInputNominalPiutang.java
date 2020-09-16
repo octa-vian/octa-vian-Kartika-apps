@@ -62,12 +62,12 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
                     return;
                 }
 
-                if (txt_inputPiutang.getText().toString().equals("0")){
+                else if (txt_inputPiutang.getText().toString().equals("0")){
                     Toast.makeText(ActivityInputNominalPiutang.this, "Nominal tidak boleh 0", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if (iv.parseNullDouble(txt_inputPiutang.getText().toString()) > iv.parseNullDouble(total) ){
+                else if (iv.parseNullDouble(txt_inputPiutang.getText().toString()) > iv.parseNullDouble(total)){
                     Toast.makeText(ActivityInputNominalPiutang.this, "Nominal tidak boleh lebih dari Total!", Toast.LENGTH_LONG).show();
                 }
 
@@ -76,7 +76,6 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
                     //double init = iv.parseNullDouble(txt_inputPiutang.getText().toString());
                     intent.putExtra(Constant.EXTRA_NILAI_PIUTANG, nom);
                     startActivity(intent);
-                    finish();
                 }
             }
         });
@@ -116,7 +115,13 @@ public class ActivityInputNominalPiutang extends AppCompatActivity {
     }
 
     private void LoadPiutang() {
-        new APIvolley(ActivityInputNominalPiutang.this, new JSONObject(), "POST", Constant.URL_POST_TOTAL_PIUTANG,
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("flag", "all");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new APIvolley(ActivityInputNominalPiutang.this, obj, "POST", Constant.URL_POST_TOTAL_PIUTANG,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {

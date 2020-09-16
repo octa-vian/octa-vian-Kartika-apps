@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -23,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,11 +55,11 @@ import me.relex.circleindicator.CircleIndicator2;
 public class ActivityPesanan extends AppCompatActivity {
 
     private ImageView img_view;
-    private TextView txt_namabrg, txt_harga, txt_tempo, txt_keterangan, txt_total_harga, txt_deskripsi;
+    private TextView txt_namabrg, txt_harga, txt_tempo, txt_keterangan, txt_total_harga, txt_deskripsi, max_stoc;
     private String hg_satuan="";
     private String total;
     private String jml_pcs="";
-    private Button btn_beli;
+    private Button btn_beli, btn_reqq;
     private EditText txt_jumlah, diskon;
     private String Idbrg;
     private static String TAG = "Produk";
@@ -79,10 +82,12 @@ public class ActivityPesanan extends AppCompatActivity {
     private String satuanKC="";
     private String isiSatuanBesar = "";
     private boolean firstLoad = false;
+    private RelativeLayout rv_wtf;
 
     int jmlx =1;
     int disc =0;
     private Timer timerHarga;
+    private String IdPromo="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +111,22 @@ public class ActivityPesanan extends AppCompatActivity {
         txt_deskripsi = findViewById(R.id.txt_deskripsi);
         img_back =findViewById(R.id.back);
         diskon = findViewById(R.id.txt_diskon);
+        rv_wtf = findViewById(R.id.rv_watrmark);
+        btn_reqq = findViewById(R.id.btn_req);
+        max_stoc = findViewById(R.id.orderMax);
+
+        btn_reqq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InfoSaya();
+            }
+        });
+
+        rv_wtf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,8 +151,31 @@ public class ActivityPesanan extends AppCompatActivity {
 
         btn_beli.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                InitKirim();
+                public void onClick(View view) {
+                Dialog dialog = new Dialog(ActivityPesanan.this);
+                dialog.setContentView(R.layout.pop_up_confirmasi_to_keranjang);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                Button btn_ya, btn_tdk;
+
+                btn_ya = dialog.findViewById(R.id.btn_ya);
+                btn_tdk = dialog.findViewById(R.id.btn_tidak);
+
+                btn_ya.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        InitKirim();
+                        dialog.dismiss();
+                    }
+                });
+
+                btn_tdk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
 
@@ -157,9 +201,8 @@ public class ActivityPesanan extends AppCompatActivity {
                 timerHarga.schedule(new TimerTask() {
                     @Override
                     public void run() {
-
                         try {
-                            Thread.sleep(100);
+                            Thread.sleep(0);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -178,10 +221,11 @@ public class ActivityPesanan extends AppCompatActivity {
                                 isloading = false;
                                 TotalHitungDIskon();
                                 InitTotal();
+
                             }
                         });
                     }
-                }, 100);
+                }, 0);
             }
         });
 
@@ -203,13 +247,11 @@ public class ActivityPesanan extends AppCompatActivity {
                 timerHarga.schedule(new TimerTask() {
                     @Override
                     public void run() {
-
                         try {
-                            Thread.sleep(100);
+                            Thread.sleep(0);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -226,7 +268,7 @@ public class ActivityPesanan extends AppCompatActivity {
                             }
                         });
                     }
-                }, 100);
+                }, 0);
 
             }
         });
@@ -249,6 +291,72 @@ public class ActivityPesanan extends AppCompatActivity {
         }
 
     };
+
+    private void InfoSaya(){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("kodebrg", Idbrg);
+            object.put("kode_promo", IdPromo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new APIvolley(ActivityPesanan.this, object, "POST", Constant.URL_POST_NOTIFME, new APIvolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    JSONObject ob = new JSONObject(result);
+                    String message = ob.getJSONObject("metadata").getString("message");
+                    String status = ob.getJSONObject("metadata").getString("status");
+
+                    if(Integer.parseInt(status)== 200){
+                        Dialog dialog = new Dialog(ActivityPesanan.this);
+                        dialog.setContentView(R.layout.popup_dialog_informasi);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        TextView txtInf = dialog.findViewById(R.id.txt_message);
+                        txtInf.setText(message);
+                        Button btn_ok = dialog.findViewById(R.id.btn_konfirmasi);
+                        btn_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
+
+                    } else if (Integer.parseInt(status) == 400){
+                        Dialog dialog = new Dialog(ActivityPesanan.this);
+                        dialog.setContentView(R.layout.popup_dialog_informasi);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        TextView txtInf = dialog.findViewById(R.id.txt_message);
+                        txtInf.setText(message);
+                        Button btn_ok = dialog.findViewById(R.id.btn_konfirmasi);
+                        btn_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+
+            }
+        });
+
+
+    }
 
 
     private void InitDropdown() {
@@ -287,6 +395,7 @@ public class ActivityPesanan extends AppCompatActivity {
                         txt_keterangan.setText(keterangan);
                         adapterSP.notifyDataSetChanged();
                         InitTotal();
+
                     } else {
                        // Toast.makeText(ActivityPesanan.this, message, Toast.LENGTH_SHORT).show();
                     }
@@ -327,6 +436,7 @@ public class ActivityPesanan extends AppCompatActivity {
 
         InitTotal();
         InitDropdown();
+
 
     }
 
@@ -403,7 +513,7 @@ public class ActivityPesanan extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        new APIvolley(ActivityPesanan.this, object, "POST", Constant.URL_DETAIL_ORDER,
+        new APIvolley(ActivityPesanan.this, object, "POST", Constant.URL_DETAIL_ORDER_NORMAL,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
@@ -413,20 +523,34 @@ public class ActivityPesanan extends AppCompatActivity {
                             String message = obj.getJSONObject("metadata").getString("message");
                             String status = obj.getJSONObject("metadata").getString("status");
 
+                            String objek = obj.getJSONObject("response").getString("status_stok_promo");
+                            IdPromo = obj.getJSONObject("response").getString("kode_promo");
+                            Log.d("test", IdPromo);
                             if (Integer.parseInt(status) == 200){
                                 //obj.put("kodebrg",Idbrg);
-                                Idbrg = obj.getJSONObject("response").getString("kodebrg");
-                                txt_namabrg.setText(obj.getJSONObject("response").getString("namabrg"));
-                                txt_keterangan.setText(obj.getJSONObject("response").getString("keterangan"));
-                               // txt_tempo.setText(obj.getJSONObject("response").getString("tempo"));
-                                String tempo = obj.getJSONObject("response").getString("tempo");
-                                flag = obj.getJSONObject("response").getString("flag_promo");
-                                if (flag.equals("1")){
-                                    diskon.setFocusable(false);
-                                    diskon.setEnabled(false);
-                                    diskon.setCursorVisible(false);
-                                    diskon.setKeyListener(null);
-                                    //diskon.setBackgroundColor(Color.TRANSPARENT);
+                                if (objek.equals("0")){
+                                    rv_wtf.setVisibility(View.VISIBLE);
+                                    btn_reqq.setVisibility(View.VISIBLE);
+                                    btn_beli.setVisibility(View.GONE);
+                                    max_stoc.setText(obj.getJSONObject("response").getString("sisa_limit_promo"));
+                                } else{
+                                    rv_wtf.setVisibility(View.GONE);
+                                    btn_reqq.setVisibility(View.GONE);
+                                    btn_beli.setVisibility(View.VISIBLE);
+                                    max_stoc.setText(obj.getJSONObject("response").getString("sisa_limit_promo"));
+                                    Idbrg = obj.getJSONObject("response").getString("kodebrg");
+                                    txt_namabrg.setText(obj.getJSONObject("response").getString("namabrg"));
+                                    txt_keterangan.setText(obj.getJSONObject("response").getString("keterangan"));
+                                    // txt_tempo.setText(obj.getJSONObject("response").getString("tempo"));
+                                    String tempo = obj.getJSONObject("response").getString("tempo");
+                                    flag = obj.getJSONObject("response").getString("flag_promo");
+                                    if (flag.equals("1")) {
+                                        diskon.setFocusable(false);
+                                        diskon.setEnabled(false);
+                                        diskon.setCursorVisible(false);
+                                        diskon.setKeyListener(null);
+                                        //diskon.setBackgroundColor(Color.TRANSPARENT);
+                                    }
                                 }
                                 diskon.setText(obj.getJSONObject("response").getString("diskon_awal"));
                                 JSONArray meal = obj.getJSONObject("response").getJSONArray("images");
@@ -441,6 +565,7 @@ public class ActivityPesanan extends AppCompatActivity {
                                 obj.getJSONObject("response").getString("stok");
 
                             } else if (Integer.parseInt(status) == 201){
+                                max_stoc.setText(obj.getJSONObject("response").getString("sisa_limit_promo"));
                                 Idbrg = obj.getJSONObject("response").getString("kodebrg");
                                 txt_namabrg.setText(obj.getJSONObject("response").getString("namabrg"));
                                 txt_keterangan.setText(obj.getJSONObject("response").getString("keterangan"));
@@ -465,7 +590,21 @@ public class ActivityPesanan extends AppCompatActivity {
                                 }
                                 //Picasso.get().load(obj.getJSONObject("response").getString("img_url")).into(img_view);
                                 obj.getJSONObject("response").getString("stok");
-                                Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
+                                Dialog dialog = new Dialog(ActivityPesanan.this);
+                                dialog.setContentView(R.layout.popup_dialog_informasi);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                                TextView txtInf = dialog.findViewById(R.id.txt_message);
+                                txtInf.setText(message);
+                                Button btn_ok = dialog.findViewById(R.id.btn_konfirmasi);
+                                btn_ok.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                dialog.show();
                             }
                             else {
                                 Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
@@ -493,8 +632,8 @@ public class ActivityPesanan extends AppCompatActivity {
         if (!isloading){
             isloading=true;
             JSONObject object = new JSONObject();
-            try {
 
+            try {
                 object.put("kodebrg",Idbrg);
                 object.put("jml_pesan",txt_jumlah.getText().toString());
                 object.put("satuan",satuan);
@@ -506,14 +645,13 @@ public class ActivityPesanan extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            new APIvolley(ActivityPesanan.this, object, "POST", Constant.URL_GET_HARGA,
+            new APIvolley(ActivityPesanan.this, object, "POST", Constant.URL_GET_HARGA_NORMAL,
                     new APIvolley.VolleyCallback() {
                         @Override
                         public void onSuccess(String result) {
                             isloading=false;
 
                             try {
-
                                 JSONObject obj= new JSONObject(result);
                                 String message = obj.getJSONObject("metadata").getString("message");
                                 String status = obj.getJSONObject("metadata").getString("status");
@@ -536,11 +674,25 @@ public class ActivityPesanan extends AppCompatActivity {
                                     isiSatuanBesar = obj.getJSONObject("response").getString("isi_satuan_besar");
 
                                     /* if (satuan.equals(satuanBR)){
-
                                     }*/
 
                                 }else {
-                                    Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
+                                  // Toast.makeText(ActivityPesanan.this,message, Toast.LENGTH_SHORT).show();
+                                    Dialog dialog = new Dialog(ActivityPesanan.this);
+                                    dialog.setContentView(R.layout.popup_dialog_informasi);
+                                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                                    TextView txtInf = dialog.findViewById(R.id.txt_message);
+                                    txtInf.setText(message);
+                                    Button btn_ok = dialog.findViewById(R.id.btn_konfirmasi);
+                                    btn_ok.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    dialog.show();
                                     //InitTotal();
                                 }
                                 //Picasso.get().load(nota.getItem2()).into(img_gambarProduk);
@@ -554,7 +706,7 @@ public class ActivityPesanan extends AppCompatActivity {
                         @Override
                         public void onError(String result) {
                             //Toast.makeText(ActivityPesanan.this,"kesalahan Jaringan", Toast.LENGTH_SHORT).show();
-                            isloading=false;
+                            isloading = false;
                             Log.e(TAG,result);
                         }
                     });
@@ -564,13 +716,14 @@ public class ActivityPesanan extends AppCompatActivity {
 
     private void InitKirim() {
         JSONObject object = new JSONObject();
-
         try {
-            object.put("kodebrg",Idbrg);
-            object.put("jml_pesan",txt_jumlah.getText().toString());
-            object.put("satuan",satuan);
+            object.put("kodebrg", Idbrg);
+            object.put("kode_promo", IdPromo);
+            Log.d("test", IdPromo);
+            object.put("jml_pesan", txt_jumlah.getText().toString());
+            object.put("satuan", satuan);
             object.put("total_harga", total);
-            object.put("diskon",diskon.getText().toString());
+            object.put("diskon", diskon.getText().toString());
             object.put("harga_diskon", TotalsatuanDiskon);
 
             Log.d("kirim",Idbrg);

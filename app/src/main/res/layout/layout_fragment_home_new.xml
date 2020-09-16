@@ -146,6 +146,7 @@
             android:id="@+id/ll_layout1">
 
             <RelativeLayout
+                android:id="@+id/rv_iklan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -293,6 +294,7 @@
                 layout="@layout/item_shimmer_point"/>
 
             <LinearLayout
+                android:id="@+id/ln_promo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_16dp"

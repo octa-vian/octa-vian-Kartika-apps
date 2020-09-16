@@ -48,13 +48,16 @@ public class TemplateAdaptorListDaftarPesanan extends RecyclerView.Adapter<Templ
         templateViewHolder.txt_tanggal.setText(item.getItem2());
         templateViewHolder.txt_status.setText(item.getItem4());
 
-        /*final ModelProduk itemSelected = listItem.get(i);
-        if(itemSelected.getItem5().toUpperCase().trim().equals("available")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_green_dialog));
+        final ModelProduk itemSelected = listItem.get(i);
+        if(itemSelected.getItem5().toUpperCase().trim().equals("1")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.orange_drak));
         }
-        else if(itemSelected.getItem5().toUpperCase().trim().equals("preorder")){
-            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
-        }*/
+        else if(itemSelected.getItem5().toUpperCase().trim().equals("2")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.grey_dark));
+
+        } else if(itemSelected.getItem5().toUpperCase().trim().equals("9")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_harga));
+        }
 
 
         final Gson gson = new Gson();

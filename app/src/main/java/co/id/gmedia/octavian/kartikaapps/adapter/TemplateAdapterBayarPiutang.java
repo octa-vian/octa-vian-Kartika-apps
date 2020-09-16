@@ -138,12 +138,10 @@ public class TemplateAdapterBayarPiutang extends ArrayAdapter {
                     if(ActivityCeklistBayarPiutang.sisa > 0){
 
                         if(ActivityCeklistBayarPiutang.sisa - iv.parseNullDouble(item.getItem7()) >= 0){
-
                             listItem.get(position).setItem8(item.getItem7());
                             ActivityCeklistBayarPiutang.sisa -= iv.parseNullDouble(item.getItem7());
 
                         }else{ // disisakan
-
                             double sisa = iv.parseNullDouble(item.getItem7()) - ActivityCeklistBayarPiutang.sisa;
                             listItem.get(position).setItem8(iv.doubleToStringFull(iv.parseNullDouble(item.getItem7())-sisa));
                             ActivityCeklistBayarPiutang.sisa = 0;
@@ -152,7 +150,6 @@ public class TemplateAdapterBayarPiutang extends ArrayAdapter {
                         listItem.get(position).setSelected(true);
 
                     }else{
-
                         holder.cb_btn.setChecked(false);
                         listItem.get(position).setSelected(false);
                         Toast.makeText(activity, "Sisa terbayar sudah habis", Toast.LENGTH_LONG).show();

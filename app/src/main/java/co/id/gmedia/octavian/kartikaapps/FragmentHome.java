@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ import java.util.concurrent.TimeUnit;
 import co.id.gmedia.coremodul.ItemValidation;
 import co.id.gmedia.coremodul.SessionManager;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat2;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityListTukarPoint;
 import co.id.gmedia.octavian.kartikaapps.adapter.MerchantHotProduk;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorHotProduk;
@@ -82,6 +84,7 @@ public class FragmentHome extends Fragment {
     CountDownTimer countDownTimer;
     private TextView time;
     private RecyclerView homeview, homeProduk, rvIklan;
+    private RelativeLayout rv_iklan;
 
     private List<ModelProduk> listIklan = new ArrayList<>();
     private TemplateAdaptorIklan adapterIklan;
@@ -93,7 +96,7 @@ public class FragmentHome extends Fragment {
     private MerchantHotProduk adepterproduk;
     private TextView txt_search, tukar_poin;
     private CardView point, sim_point, sim_iklan;
-    private LinearLayout sim_produk, ln_point, sim_promo;
+    private LinearLayout sim_produk, ln_point, sim_promo, lnPromo;
     private static String TAG = "Home";
     private ImageView back;
     private SessionManager session;
@@ -139,6 +142,8 @@ public class FragmentHome extends Fragment {
             point = v.findViewById(R.id.cr_point);
             tukar_poin = v.findViewById(R.id.tukar_point);
             shimmerFrameLayout = v.findViewById(R.id.shimmer_layout);
+            lnPromo = v.findViewById(R.id.ln_promo);
+            rv_iklan = v.findViewById(R.id.rv_iklan);
 
             rvIklan = v.findViewById(R.id.rviklan);
             rvIklan.setItemAnimator(new DefaultItemAnimator());
@@ -670,16 +675,22 @@ public class FragmentHome extends Fragment {
                         listIklan.clear();
                         try {
                             JSONObject obj= new JSONObject(result);
-                            JSONArray meal= obj.getJSONArray("response");
-                            for (int i=0; i < meal.length(); i++){
-                                JSONObject objt = meal.getJSONObject(i);
-                                //input data
-                                listIklan.add(new ModelProduk(
-                                        objt.getString("id")
-                                        ,objt.getString("kode_promo")
-                                        ,objt.getString("title")
-                                        ,objt.getString("img_url")));
+                            String status = obj.getJSONObject("metadata").getString("status");
+                            if (Integer.parseInt(status) == 200){
+                                JSONArray meal= obj.getJSONArray("response");
+                                for (int i=0; i < meal.length(); i++){
+                                    JSONObject objt = meal.getJSONObject(i);
+                                    //input data
+                                    listIklan.add(new ModelProduk(
+                                            objt.getString("id")
+                                            ,objt.getString("kode_promo")
+                                            ,objt.getString("title")
+                                            ,objt.getString("img_url")));
+                                }
+                            }else{
+                                rv_iklan.setVisibility(GONE);
                             }
+
 
                         } catch (JSONException e) {
                             Toast.makeText(context,"Kesalahan jaringan", Toast.LENGTH_SHORT).show();
@@ -714,21 +725,27 @@ public class FragmentHome extends Fragment {
                         viewmenubaru.clear();
                         try {
                             JSONObject obj= new JSONObject(result);
-                            JSONArray meal= obj.getJSONArray("response");
-                            for (int i=0; i < meal.length(); i++){
-                                JSONObject objt = meal.getJSONObject(i);
-                                //input data
-                                viewmenubaru.add(new ModelOneForAll(
-                                         objt.getString("id")
-                                        ,objt.getString("kode_promo")
-                                        ,objt.getString("title")
-                                        ,objt.getString("img_url")
-                                        ,objt.getString("start_date")
-                                        ,objt.getString("start_time")
-                                        ,objt.getString("end_date")
-                                        ,objt.getString("end_time")
-                                ));
+                            String status = obj.getJSONObject("metadata").getString("status");
+                            if (Integer.parseInt(status) == 200){
+                                JSONArray meal= obj.getJSONArray("response");
+                                for (int i=0; i < meal.length(); i++){
+                                    JSONObject objt = meal.getJSONObject(i);
+                                    //input data
+                                    viewmenubaru.add(new ModelOneForAll(
+                                            objt.getString("id")
+                                            ,objt.getString("kode_promo")
+                                            ,objt.getString("title")
+                                            ,objt.getString("img_url")
+                                            ,objt.getString("start_date")
+                                            ,objt.getString("start_time")
+                                            ,objt.getString("end_date")
+                                            ,objt.getString("end_time")
+                                    ));
+                                }
+                            }else {
+                                lnPromo.setVisibility(GONE);
                             }
+
 
                         } catch (JSONException e) {
                             Toast.makeText(context,"Kesalahan jaringan", Toast.LENGTH_SHORT).show();
@@ -790,8 +807,8 @@ public class FragmentHome extends Fragment {
                     JSONObject response = new JSONObject(result);
                     String message = response.getJSONObject("metadata").getString("message");
                     String status = response.getJSONObject("metadata").getString("status");
-                    if(status.equals("200")){
 
+                    if(status.equals("200")){
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(context, MainActivity.class);
                         context.startActivity(intent);
@@ -808,7 +825,6 @@ public class FragmentHome extends Fragment {
             @Override
             public void onError(String result) {
                 Toast.makeText(context,"Kesalahan Jaringan", Toast.LENGTH_SHORT).show();
-
             }
         });
 

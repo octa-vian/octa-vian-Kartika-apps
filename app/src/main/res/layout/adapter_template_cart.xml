@@ -17,29 +17,77 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txt_promo"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right"
+                android:textSize="10sp"
+                android:background="@drawable/border_orange"
+                android:fontFamily="@font/rubik_reguler"
+                android:textStyle="bold"
+                android:textColor="@color/color_white"
+                android:gravity="center"
+                android:text="Promo"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:layout_height="wrap_content">
+
                 <CheckBox
                     android:id="@+id/cb_box"
-                    android:layout_marginTop="@dimen/size_10dp"
-                    android:layout_marginRight="@dimen/size_4dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
 
+                <RelativeLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content">
+
                 <ImageView
                     android:id="@+id/img_produk"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_alignParentRight="true"
                     android:layout_gravity="center"
-                    android:src="@drawable/lampu2"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/lampu2" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/img_wtf"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/habiscircle"/>
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/label_promo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/labelpromo"/>
+                </RelativeLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginTop="@dimen/size_10dp"
                     android:layout_marginLeft="@dimen/size_10dp"
                     android:layout_marginRight="@dimen/size_10dp"
@@ -50,8 +98,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/rubik_reguler"
                         android:textStyle="bold"
-                        android:textSize="@dimen/size_12dp"
+                        android:textSize="14sp"
                         android:text="Nama Barang/Item"/>
 
                     <TextView
@@ -60,10 +109,11 @@
                         android:layout_height="wrap_content"
                         android:text="Rp. xxx xxx"
                         android:textColor="@color/orange_drak"
-                        android:textSize="@dimen/size_12dp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:layout_marginTop="@dimen/size_10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -73,8 +123,48 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/size_12dp"
-                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/rubik_reguler"
+                        android:text="Harga Satuan"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/txt_harga_satuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_reguler"
+                        android:gravity="right"
+                        android:text="Rp. xxx xxx"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_2dp"
+                        android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_12dp"
+                        android:fontFamily="@font/rubik_reguler"
                         android:text="Jumlah Pesanan"/>
+
+                        <TextView
+                            android:id="@+id/txt_jumlah"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rubik_reguler"
+                            android:textSize="@dimen/size_12dp"
+                            android:gravity="right"
+                            android:textColor="@color/black"
+                            android:text="80"/>
 
                     </LinearLayout>
 
@@ -85,36 +175,29 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/txt_jumlah"
+                            android:layout_weight="1"
+                            android:text="Status"
+                            android:fontFamily="@font/rubik_reguler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/txt_status"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/grey_dark"
+                            android:fontFamily="@font/rubik_reguler"
+                            android:layout_gravity="center"
+                            android:gravity="right"
                             android:textSize="@dimen/size_12dp"
-                            android:textStyle="bold"
-                            android:gravity="left"
-                            android:textColor="@color/black"
-                            android:text="80"/>
+                            android:text="status"/>
+
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:text="Status"
-                        android:textStyle="bold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/txt_status"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/grey"
-                        android:fontFamily="@font/rubik_reguler"
-                        android:gravity="left"
-                        android:textSize="@dimen/size_12dp"
-                        android:text="status"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -122,54 +205,61 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_4dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_weight="0.6"
                     android:layout_marginRight="@dimen/size_4dp"
                     android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/img_hapus"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="@dimen/size_4dp"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/ic_delete_red"/>
 
                 </LinearLayout>
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="80dp"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:src="@drawable/lampu2"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"/>-->
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/size_10dp"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/size_2dp"
+                    android:layout_gravity="top"
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:layout_weight="1.1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Diskon"
-                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/rubik_reguler"
                         android:textSize="@dimen/size_12dp"/>
 
-                <TextView
-                    android:id="@+id/txt_tempo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text=""
-                    android:textSize="@dimen/size_12dp" />
+                    <TextView
+                        android:id="@+id/txt_tempo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/size_10dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:fontFamily="@font/rubik_reguler"
+                        android:textColor="@color/black"
+                        android:text=""
+                        android:textSize="@dimen/size_12dp" />
 
                 </LinearLayout>
 

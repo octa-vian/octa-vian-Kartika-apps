@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/color_harga"
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/size_4dp"
                     android:text=""/>

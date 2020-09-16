@@ -23,6 +23,7 @@ import java.util.Set;
 
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityDetailPiutang;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityJump;
 import co.id.gmedia.octavian.kartikaapps.util.AppSharedPreferences;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
@@ -44,8 +45,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String body = "anda mendapat notifikasi";
         String type = "";
         String jenis = "";
-        Intent intent = new Intent(this,NotificationActivity.class);
 
+        Intent intent = new Intent(this,NotificationActivity.class);
         Log.d(TAG, "onMessageReceived: " + remoteMessage.getFrom());
 
         Map<String, String> extra = new HashMap<>();
@@ -54,7 +55,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             extra = remoteMessage.getData();
         }
 
-
         Map <String, String> map = remoteMessage.getData();
         Log.d(TAG, "Message data payload: " + map);
         title = remoteMessage.getData().get("title");
@@ -62,15 +62,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Set<String> data = extra.keySet();
         int typeContent = 0;
-        for (String key:data){
-            intent.putExtra(key, extra.get(key));
 
-            /*if (key.trim().toLowerCase().equals("jenis")){
-                if (extra.get(key).trim().toUpperCase().equals("pesan")){
-                    typeContent = 1;
-                }
-            }*/
+        for (String key:data){
+            if (key !=null) {
+                intent.putExtra(key, extra.get(key));
+                if (key.trim().equals("jenis")) {
+                    if (extra.get(key).trim().equals("pesan")) {
+                        /*Intent u = new Intent(this, ActivityChat.class);
+                        u.putExtra("key", "succses");
+                        ActivityChat.isChatActive = true;
+                        u.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        u.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(u);*/
+                    }
+                }/* else {
+                    intent.putExtra(key, extra.get(key));
+                }*/
+            }
         }
+
+        /*for (String key:data){
+            if (key != null){
+                intent.putExtra(key, extra.get(key));
+            }
+        }*/
 
         /*if(typeContent != 9){
             switch (typeContent){
@@ -130,7 +145,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //notificationBuilder.setContentIntent(pendingIntent);
         notificationManager.notify(1, notificationBuilder.build());
         MainActivity.LoadCountNotif();
-        ActivityChat.getChat();
+        //                                                                                                                                                                              ActivityChat.getChat();
+
+
+        /*if (data.equals("chat")){
+            Intent in = new Intent(this, ActivityChat.class);
+            ActivityChat.getChat();
+            startActivity(in);
+        }*/
+
 
 
     }

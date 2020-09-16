@@ -43,7 +43,6 @@ public class TemplateAdaptorListPreOrder extends RecyclerView.Adapter<TemplateAd
         templateViewHolder.txt_nama.setText(item.getItem2());
         templateViewHolder.harga.setText(item.getItem5());
         templateViewHolder.txt_jumlah.setText(item.getItem3());
-        templateViewHolder.keterangan.setText(item.getItem6());
         templateViewHolder.total.setText(item.getItem7());
         templateViewHolder.total_asli.setText(item.getItem9());
         templateViewHolder.diskon.setText(item.getItem8());
@@ -87,7 +86,6 @@ public class TemplateAdaptorListPreOrder extends RecyclerView.Adapter<TemplateAd
             super(itemView);
             txt_nama = (TextView) itemView.findViewById(R.id.txt_nama_brg);
             txt_jumlah =  (TextView) itemView.findViewById(R.id.txt_jumlah);
-            keterangan = (TextView) itemView.findViewById(R.id.txt_keterangan);
             harga = (TextView) itemView.findViewById(R.id.txt_harga);
             total = (TextView) itemView.findViewById(R.id.txt_total_harga);
             diskon = (TextView) itemView.findViewById(R.id.txt_diskon);

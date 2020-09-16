@@ -16,11 +16,18 @@
         android:roundIcon="@mipmap/ic_launcher_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".util.ActivityLompat"></activity>
+
+        <activity android:name=".activity.ActivityChat2"></activity>
+        <activity android:name=".util.ActivityLompat" />
         <activity android:name=".NotificationActivity">
+
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="ACT_PESANAN" />
+            </intent-filter>
+
             <intent-filter>
                 <action android:name="ACT_NOTIF" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -77,27 +84,21 @@
         <activity
             android:name=".activity.ActivityCekPesanan"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.ActivityDetailDaftarPesanan"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.ActivityDaftarPemesanan"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.ActivityInputNominalPiutang"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.ActivityCeklistBayarPiutang"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.ActivityBayarPiutang"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.ActivityDetailPiutang"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -115,6 +116,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ActivityPesanan"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.ActivityPesananPromo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.DetailActivityBarangPromo"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activity.DetailActivityBarang"

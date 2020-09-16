@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Jumlah Pesanan"
+                    android:text="Jumlah Terkirim"
                     android:textSize="@dimen/size_12dp" />
 
                 <TextView

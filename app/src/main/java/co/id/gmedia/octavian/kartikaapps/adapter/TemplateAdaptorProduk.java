@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,8 +51,14 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
         templateViewHolder.txt_harga.setText(item.getItem4());
         templateViewHolder.txt_status.setText(item.getItem5());
 
+        if (item.getItem7().equals("1")){
+            templateViewHolder.iv_watermark.setVisibility(View.GONE);
+        } else if (item.getItem7().equals("0")){
+            templateViewHolder.iv_watermark.setVisibility(View.VISIBLE);
+        }
+
         if (item.getItem6().equals("1")){
-            templateViewHolder.txt_harga_asli.setText(item.getItem7());
+            templateViewHolder.txt_harga_asli.setText(item.getItem8());
             templateViewHolder.txt_harga_asli.setVisibility(View.VISIBLE);
         }else{
             templateViewHolder.txt_harga_asli.setVisibility(View.GONE);
@@ -65,14 +72,6 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
         else{
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_preorder));
         }
-
-        /*if (item.getItem6().equals("1")){
-            templateViewHolder.txt_harga_asli.setText(item.getItem7());
-            templateViewHolder.txt_harga_asli.setVisibility(View.VISIBLE);
-        } else{
-            templateViewHolder.txt_harga_asli.setText(item.getItem7());
-            templateViewHolder.txt_harga_asli.setVisibility(View.GONE);
-        }*/
 
         final Gson gson = new Gson();
         templateViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +95,7 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
         private ImageView iv_cardview;
         private TextView txt_nama, txt_harga, txt_status, txt_harga_asli;
         private CardView cardView;
+        private RelativeLayout iv_watermark;
 
         public TemplateViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -105,6 +105,7 @@ public class TemplateAdaptorProduk extends RecyclerView.Adapter<TemplateAdaptorP
            txt_status =  (TextView) itemView.findViewById(R.id.status);
            cardView = (CardView) itemView.findViewById(R.id.layout_category);
            txt_harga_asli = (TextView) itemView.findViewById(R.id.txt_harga_asli);
+           iv_watermark = (RelativeLayout) itemView.findViewById(R.id.iv_wtf);
         }
     }
 }

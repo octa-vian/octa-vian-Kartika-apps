@@ -41,15 +41,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
 
-                        <ImageView
-                            android:id="@+id/back"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginTop="@dimen/size_8dp"
-                            android:layout_marginLeft="@dimen/size_8dp"
-                            android:src="@drawable/ic_arrow_back_black"/>
 
                         <me.relex.circleindicator.CircleIndicator2
                             android:id="@+id/sc_indicator"
@@ -375,7 +366,9 @@
                 </LinearLayout>-->
 
             </LinearLayout>
+
         </RelativeLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <View
@@ -431,6 +424,15 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/orderMax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_reguler"
+            android:gravity="right"
+            android:textSize="12sp"
+            android:textColor="@color/red_Dark" />
+
         <Button
             android:id="@+id/btn_beli"
             android:layout_width="match_parent"
@@ -446,7 +448,50 @@
             android:textColor="#fff"
             android:textSize="@dimen/size_12dp" />
 
+        <Button
+            android:id="@+id/btn_req"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginBottom="@dimen/size_10dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_red_btn"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="Beritau Saya"
+            android:textColor="#fff"
+            android:textSize="@dimen/size_12dp" />
+
     </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:layout_marginLeft="@dimen/size_8dp"
+        android:src="@drawable/ic_arrow_back_black"/>
+
+    <RelativeLayout
+        android:id="@+id/rv_watrmark"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_corner_grey_light"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/ln_btn">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:src="@drawable/loldout"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

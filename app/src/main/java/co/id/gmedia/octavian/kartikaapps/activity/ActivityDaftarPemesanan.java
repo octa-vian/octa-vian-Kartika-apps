@@ -98,6 +98,7 @@ public class ActivityDaftarPemesanan extends AppCompatActivity {
                                             ,cs.getString("tanggal")
                                             ,cs.getString("total")
                                             ,cs.getString("status")
+                                            ,cs.getString("status_number")
                                     ));
                                 }
                                 loadMoreScrollListener.finishLoad(js.length());

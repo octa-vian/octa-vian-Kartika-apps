@@ -41,6 +41,7 @@ import java.util.Locale;
 import co.id.gmedia.octavian.kartikaapps.MainActivity;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
+import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
@@ -50,7 +51,7 @@ import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 public class ActivityListDetailProduk extends AppCompatActivity {
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
-    private TemplateAdaptorProduk adepterproduk;
+    private TemplateAdaptorProdukAll adepterproduk;
     private static String TAG = "Produk";
     private ModelOneForAll nota;
     private TextView txt_judul;
@@ -83,7 +84,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
         homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailProduk.this, 2));
-        adepterproduk = new TemplateAdaptorProduk(ActivityListDetailProduk.this, viewproduk);
+        adepterproduk = new TemplateAdaptorProdukAll(ActivityListDetailProduk.this, viewproduk);
         homeProduk.setAdapter(adepterproduk);
         loadMoreScrollListener = new LoadMoreScrollListener() {
             @Override

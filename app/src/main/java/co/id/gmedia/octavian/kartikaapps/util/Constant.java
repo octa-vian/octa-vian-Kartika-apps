@@ -63,11 +63,14 @@ public class Constant {
     public static final String URL_CATEGORY = baseURL + "category/list_category";
     public static final String URL_SEARCH_CATEGORY = baseURL + "category/search_category";
     public static final String URL_DETAIL_PRODUK = baseURL + "product/detail_product";
+    public static final String URL_DETAIL_PRODUK_NORMAL = baseURL + "product/detail_product_normal";
     public static final String URL_TOTAL_POINT = baseURL + "poin/total_poin";
     public static final String URL_LIST_PRODUK = baseURL + "product/filter_product";
     public static final String URL_DETAIL_PROMO = baseURL + "promo/list_promo";
     public static final String URL_DETAIL_ORDER = baseURL + "shop/detail_order_product";
+    public static final String URL_DETAIL_ORDER_NORMAL = baseURL + "shop/detail_order_product_normal";
     public static final String URL_GET_HARGA = baseURL + "shop/get_harga_barang";
+    public static final String URL_GET_HARGA_NORMAL = baseURL + "shop/get_harga_barang_normal";
     public static final String URL_GET_AKUN = baseURL + "account/profile";
     public static final String URL_GET_DENDA = baseURL + "denda/list_denda";
     public static final String URL_GET_DROPDOWN = baseURL + "shop/list_satuan_barang";
@@ -109,6 +112,9 @@ public class Constant {
     public static final String URL_POST_CONFRIM= baseURL + "poin/konfirmasi_poin";
     public static final String URL_POST_IKLAN= baseURL + "promo/slider_iklan";
     public static final String URL_GET_PROMO_PRODUK= baseURL + "promo/filter_product";
+    public static final String URL_POST_NOTIFME= baseURL + "promo/notify_me";
+    public static final String URL_POST_CEK_DENDA= baseURL + "shop/confirm_denda";
+    public static final String URL_POST_MESSAGE_CHEKBOX= baseURL + "shop/get_message_checkbox_cart";
 
 
 
