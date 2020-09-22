@@ -80,9 +80,13 @@ public class TemplateAdaptorCart extends RecyclerView.Adapter<TemplateAdaptorCar
         if(itemSelected.getItem11().toLowerCase().trim().equals("available")  || itemSelected.getItem11().toLowerCase().trim().equals("tersedia")){
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_tersedia));
         }
+        else if (itemSelected.getItem18().toLowerCase().trim().equals("1")){
+            templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_preorder));
+        }
         else{
             templateViewHolder.txt_status.setTextColor(activity.getResources().getColor(R.color.color_preorder));
         }
+
 
        /* if (item.getItem15().equals("0")){
             templateViewHolder.img_wtf.setVisibility(View.VISIBLE);

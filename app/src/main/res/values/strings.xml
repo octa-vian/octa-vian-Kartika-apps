@@ -13,4 +13,12 @@
     <string name="api_unauthorized">You don\'t have permission to access this app</string>
 
     <string name="notification_channel_id">"channel_id_01"</string>
+    <string name="title_activity_main__pembayaran">MainActivity_Pembayaran</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_main_pembayaran_new">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_main2">MainActivity2</string>
 </resources>

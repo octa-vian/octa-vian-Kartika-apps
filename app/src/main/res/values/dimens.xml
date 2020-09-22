@@ -33,4 +33,5 @@
     <dimen name="default_line">0.7dp</dimen>
     <dimen name="default_line_medium">1.3dp</dimen>
     <dimen name="default_line_big">3dp</dimen>
+    <dimen name="appbar_padding">16dp</dimen>
 </resources>

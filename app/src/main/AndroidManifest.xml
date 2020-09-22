@@ -16,21 +16,27 @@
         android:roundIcon="@mipmap/ic_launcher_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".activity.ActivityChat2"></activity>
+        <activity
+            android:name=".activity.MainActivity2"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.ActivityChat2" />
         <activity android:name=".util.ActivityLompat" />
         <activity android:name=".NotificationActivity">
-
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="ACT_PESANAN" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="ACT_NOTIF" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.ActivityPanduan"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.pembayaran.ActivityDetailPembayaranPiutang"
             android:theme="@style/AppTheme.NoActionBar" />

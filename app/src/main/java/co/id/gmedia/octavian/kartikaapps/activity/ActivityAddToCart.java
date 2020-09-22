@@ -443,9 +443,36 @@ public class ActivityAddToCart extends AppCompatActivity {
                     String message = ob.getJSONObject("metadata").getString("message");
 
                     if (status.equals(200)){
-                        Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
+                        Dialog dialog = new Dialog(ActivityAddToCart.this);
+                        dialog.setContentView(R.layout.popup_dialog_informasi);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        TextView txtInf = dialog.findViewById(R.id.txt_message);
+                        txtInf.setText(message);
+                        Button btn_ok = dialog.findViewById(R.id.btn_konfirmasi);
+                        btn_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
                     }else {
-                        Toast.makeText(ActivityAddToCart.this, message, Toast.LENGTH_LONG).show();
+                        Dialog dialog = new Dialog(ActivityAddToCart.this);
+                        dialog.setContentView(R.layout.popup_dialog_informasi);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        TextView txtInf = dialog.findViewById(R.id.txt_message);
+                        txtInf.setText(message);
+                        Button btn_ok = dialog.findViewById(R.id.btn_konfirmasi);
+                        btn_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

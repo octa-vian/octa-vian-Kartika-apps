@@ -71,6 +71,7 @@ import co.id.gmedia.octavian.kartikaapps.activity.ActivityBayarPiutang;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityChat;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityDaftarPemesanan;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityDenda;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityPanduan;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityPiutang;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityReturn;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
@@ -89,7 +90,7 @@ public class FragmentAkun extends Fragment {
 private View v;
 private Context activity;
 private static Activity context;
-private CardView btn_denda, btn_piutang, btn_bayarPiutang, btn_Return, cardDaftar;
+private CardView btn_denda, btn_piutang, btn_bayarPiutang, btn_Return, cardDaftar, btn_Panduan;
 private static TextView txt_namaOtlet, txt_nama, txt_no, btn_lihat;
 private static ImageView img_profile;
 private EditText txt_inputPin;
@@ -134,6 +135,7 @@ private View view;
         btn_bayarPiutang = v.findViewById(R.id.btn_bayar);
         btn_lihat = v.findViewById(R.id.btn_lihat);
         btn_Return = v.findViewById(R.id.btn_return);
+        btn_Panduan = v.findViewById(R.id.btn_panduan);
         cardDaftar = v.findViewById(R.id.card_daftar);
         img_profile = v.findViewById(R.id.iv_cardview);
         view = v.findViewById(R.id.viewView);
@@ -251,6 +253,14 @@ private View view;
                 });
                 dialog.show();
 
+            }
+        });
+
+        btn_Panduan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityPanduan.class);
+                context.startActivity(intent);
             }
         });
 
@@ -394,7 +404,7 @@ private View view;
                     String status = object.getJSONObject("metadata").getString("status");
 
                     if (status.equals("200")){
-                        Intent intent = new Intent(context, ActivityPiutang.class);
+                        Intent intent = new Intent(context, ActivityBayarPiutang.class);
                         context.startActivity(intent);
                         Toast.makeText(context, message,Toast.LENGTH_LONG).show();
                     }else{

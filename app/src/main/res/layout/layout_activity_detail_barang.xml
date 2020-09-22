@@ -258,7 +258,7 @@
             android:background="@drawable/border_red_btn"
             android:fontFamily="@font/rubik_medium"
             android:gravity="center"
-            android:text="Beritau Saya"
+            android:text="Beritahu Saya"
             android:textColor="#fff"
             android:textSize="@dimen/size_12dp" />
 

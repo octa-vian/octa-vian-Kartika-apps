@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 popup.setCanceledOnTouchOutside(false);
                 txt_notelp = popup.findViewById(R.id.txt_notelp);
+
                 Button btnNext;
                 btnNext = popup.findViewById(R.id.btn_next);
                 btnNext.setOnClickListener(new View.OnClickListener() {
