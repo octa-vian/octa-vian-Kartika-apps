@@ -71,6 +71,7 @@ public class ActivityDetailPembayaranPiutang extends AppCompatActivity {
         });
 
         LoadDetailPembayaran();
+
     }
 
     private void LoadDetailPembayaran() {
