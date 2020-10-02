@@ -233,7 +233,7 @@
                         android:layout_height="2dp"
                         android:layout_marginTop="@dimen/size_8dp"
                         android:layout_marginBottom="@dimen/size_4dp"
-                        android:background="@color/black" />
+                        android:background="@drawable/border_line_putus_putus" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

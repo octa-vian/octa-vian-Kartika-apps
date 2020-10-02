@@ -11,6 +11,7 @@ import android.webkit.WebView;
 
 import co.id.gmedia.octavian.kartikaapps.FragmentHome;
 import co.id.gmedia.octavian.kartikaapps.MainActivity;
+import co.id.gmedia.octavian.kartikaapps.MainActivity2;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityAddToCart;
 
@@ -46,7 +47,7 @@ public class  HalamanDoku extends AppCompatActivity {
                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
-                       Intent intent = new Intent(HalamanDoku.this, MainActivity.class);
+                       Intent intent = new Intent(HalamanDoku.this, MainActivity2.class);
                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                        startActivity(intent);
                        finish();

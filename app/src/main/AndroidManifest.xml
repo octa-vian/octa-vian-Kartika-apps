@@ -35,6 +35,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.pembayaran.ActivityDetailPiutangBelumTerbayar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.pembayaran.ActivityDetailBelumTerbayarPiutangNota"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.ActivityPanduan"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -154,6 +160,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"

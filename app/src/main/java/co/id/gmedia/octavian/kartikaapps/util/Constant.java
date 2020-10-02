@@ -46,7 +46,7 @@ public class Constant {
 
     //URL
     //private static final String baseURL = "http://gmedia.bz/kartikars/api/reseller/";
-    private static final String baseURL = "http://kartikaelectric.com/LampuKu/api/reseller/";
+    private static final String baseURL = "https://kartikaelectric.com/LampuKu/api/reseller/";
 
     public static final String URL_LOGIN = baseURL + "auth/login/";
     public static final String URL_REGISTER = baseURL + "auth/register/";
@@ -114,7 +114,13 @@ public class Constant {
     public static final String URL_GET_PROMO_PRODUK= baseURL + "promo/filter_product";
     public static final String URL_POST_NOTIFME= baseURL + "promo/notify_me";
     public static final String URL_POST_CEK_DENDA= baseURL + "shop/confirm_denda";
-    public static final String URL_POST_MESSAGE_CHEKBOX= baseURL + "shop/get_message_checkbox_cart";
+    public static final String URL_POST_MESSAGE_CHEKBOX = baseURL + "shop/get_message_checkbox_cart";
+    public static final String URL_GET_BELUM_TERBAYAR = baseURL + "piutang/list_pembayaran_piutang_belum_terbayar";
+    public static final String URL_POST_NOBUKTI_NEW = baseURL + "piutang/restart_piutang_belum_terbayar";
+    public static final String URL_GET_STATUS_BTN = baseURL + "piutang/get_status_tombol_bayar";
+    public static final String URL_GET_DETAIL_PIUTANG_BELUMTERBAYAR = baseURL + "piutang/detail_pembayaran_piutang_belum_terbayar";
+    public static final String URL_GET_DETAIL_NOTA_PIUTANG_BELUMTERBAYAR = baseURL + "piutang/detail_barang_nota_belum_terbayar";
+    public static final String URL_POST_HAPUS_ITEM = baseURL + "piutang/delete_piutang_belum_terbayar";
 
 
 

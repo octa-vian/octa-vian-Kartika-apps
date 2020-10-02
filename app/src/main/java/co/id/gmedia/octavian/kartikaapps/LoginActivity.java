@@ -194,6 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                                 InitOtp();
                             }
                         });
+
                         startTimer(120000);
 
                         btn_kirim.setOnClickListener(new View.OnClickListener() {

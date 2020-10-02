@@ -404,9 +404,8 @@ private View view;
                     String status = object.getJSONObject("metadata").getString("status");
 
                     if (status.equals("200")){
-                        Intent intent = new Intent(context, ActivityBayarPiutang.class);
+                        Intent intent = new Intent(context, ActivityPiutang.class);
                         context.startActivity(intent);
-                        Toast.makeText(context, message,Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(context, message,Toast.LENGTH_LONG).show();
                     }
@@ -439,9 +438,8 @@ private View view;
                     String status = object.getJSONObject("metadata").getString("status");
 
                     if (status.equals("200")){
-                        Intent intent = new Intent(context, ActivityBayarPiutang.class);
+                        Intent intent = new Intent(context, MainActivity2.class);
                         context.startActivity(intent);
-                        Toast.makeText(context, message,Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(context, message,Toast.LENGTH_LONG).show();
                     }

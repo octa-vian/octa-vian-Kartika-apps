@@ -12,24 +12,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 
 import java.util.List;
 
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.activity.pembayaran.ActivityDetailBelumTerbayarPiutangNota;
-import co.id.gmedia.octavian.kartikaapps.activity.pembayaran.ActivityDetailPembayaranNota;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 
 
-public class TemplateAdaptorListDetailPembayaranPiutang extends RecyclerView.Adapter<TemplateAdaptorListDetailPembayaranPiutang.TemplateViewHolder> {
+public class AdaptorListDetailPembayaranPiutangBelumTerbayar extends RecyclerView.Adapter<AdaptorListDetailPembayaranPiutangBelumTerbayar.TemplateViewHolder> {
 
     private Activity activity;
     private List<ModelProduk> listItem;
 
-    public TemplateAdaptorListDetailPembayaranPiutang(Activity activity, List<ModelProduk> listItem){
+    public AdaptorListDetailPembayaranPiutangBelumTerbayar(Activity activity, List<ModelProduk> listItem){
         this.activity = activity;
         this.listItem = listItem ;
     }
@@ -61,7 +59,7 @@ public class TemplateAdaptorListDetailPembayaranPiutang extends RecyclerView.Ada
         templateViewHolder.btn_detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(activity, ActivityDetailPembayaranNota.class);
+                Intent i = new Intent(activity, ActivityDetailBelumTerbayarPiutangNota.class);
                 i.putExtra(Constant.EXTRA_BARANG, gson.toJson(item));
                 activity.startActivity(i);
 

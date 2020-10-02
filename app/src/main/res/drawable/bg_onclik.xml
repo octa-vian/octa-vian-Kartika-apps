@@ -2,9 +2,9 @@
 
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:drawable="@drawable/homeorange"/>
-    <item android:state_checked="false" android:drawable="@drawable/homegrey" />
-    <item android:state_selected="true" android:drawable="@drawable/homeorange"/>
-    <item android:state_focused="true" android:drawable="@drawable/homeorange"/>
-    <item  android:drawable="@drawable/homegrey" />
+    <item android:state_checked="true" android:drawable="@drawable/border_red_setengah"/>
+    <item android:state_checked="false" android:drawable="@drawable/border_transparant_setengah" />
+    <item android:state_selected="true" android:drawable="@drawable/border_red_setengah"/>
+    <item android:state_focused="true" android:drawable="@drawable/border_red_setengah"/>
+    <item  android:drawable="@drawable/border_transparant_setengah" />
 </selector>

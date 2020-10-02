@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F6FA"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.pembayaran.FragmentPembayaran">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cs1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F5F6FA"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/nilaiPiutang"
+            android:layout_width="330dp"
+            android:layout_height="160dp"
+            app:layout_constraintLeft_toRightOf="@id/cs1"
+            app:layout_constraintRight_toLeftOf="@id/cs1"
+            app:layout_constraintTop_toTopOf="@id/guideline3"
+            app:layout_constraintBottom_toBottomOf="@id/guideline3"
+            app:cardCornerRadius="@dimen/size_20dp"
+            android:layout_margin="@dimen/size_10dp"
+            android:elevation="@dimen/size_12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bgpiutang2">
+
+               <!-- <ImageView
+                    android:id="@+id/img_icon"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="18sp"
+                    android:layout_marginLeft="38dp"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/denda" />-->
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/gambar_piutang"
+                    app:civ_border_color="#fff"
+                    app:civ_border_width="2dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="18sp"
+                    android:layout_marginLeft="38dp"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
+                    android:layout_toRightOf="@id/profile_image"
+                    android:gravity="center"
+                    android:text="Total Piutang"
+                    android:textColor="@color/color_white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                 <TextView
+                     android:id="@+id/txt_total"
+                     android:layout_centerInParent="true"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/color_white"
+                     android:text="Rp 0"
+                     android:textSize="28sp"
+                     android:textStyle="bold"
+                     android:layout_gravity="center"
+                     android:gravity="center"/>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+        <TextView
+            android:id="@+id/pitutang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/guideline4"
+            android:layout_marginBottom="@dimen/size_12dp"
+            android:text="Input Nominal Pembayaran"
+            android:layout_above="@+id/InputPiutang"
+            android:fontFamily="@font/rubik_reguler"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/InputPiutang"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/pitutang"
+            android:layout_height="45dp"
+            android:background="@drawable/border_white_black_new"
+            android:inputType="number"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="@dimen/size_12dp"
+            android:hint="Rp 0"
+            android:textSize="@dimen/size_16dp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="110dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="220dp" />
+
+        <!--<Button
+            android:id="@+id/btn_proses"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toBottomOf="@id/InputPiutang"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:textSize="@dimen/size_12dp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:background="@drawable/border_red_btn"
+            android:layout_below="@id/InputPiutang"
+            android:text="Proses"
+            android:textColor="@color/color_white"/>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_below="@id/cs1"
+        android:layout_marginTop="@dimen/size_12dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_box"
+            android:layout_weight="0.1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/txt_ketentuan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:layout_gravity="center"
+            android:text=""/>
+
+        <!--Saya Setuju dengan Syarat dan Ketentuan yang berlaku-->
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_proses"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:layout_marginBottom="@dimen/size_20dp"
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/size_12dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:background="@drawable/border_red_btn"
+        android:text="Proses"
+        android:textColor="@color/color_white"/>
+
+    <Button
+        android:id="@+id/btn_proses_hide"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:layout_marginBottom="@dimen/size_20dp"
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/size_12dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:background="@drawable/border_grey_btn"
+        android:text="Proses"
+        android:textColor="@color/color_white"/>
+
+</RelativeLayout>
