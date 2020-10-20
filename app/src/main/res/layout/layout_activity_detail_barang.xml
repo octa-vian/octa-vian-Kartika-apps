@@ -24,7 +24,6 @@
             android:id="@+id/layout_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/size_10dp"
             app:layout_constraintDimensionRatio="4:4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,2 +1,3 @@
+include ':zoomage'
 include ':app', ':octavianmodul', 'circleindicator'
 rootProject.name='KartikaApps'

@@ -1,11 +1,13 @@
 package co.id.gmedia.octavian.kartikaapps.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -53,6 +55,11 @@ public class DetailActivityBarang extends AppCompatActivity {
     private ImageView img_back;
     private RelativeLayout watermark_layout;
     private Button btn_beriTau;
+    private int posisi= 0;
+    private String kodeBarang="";
+    private RecyclerView homeProduk;
+    private int LAUNCH_SECOND_ACTIVITY = 1;
+    private int result= 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +70,7 @@ public class DetailActivityBarang extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.layout_activity_detail_barang);
 
-        RecyclerView homeProduk = findViewById(R.id.rv_gambar_detail);
+        homeProduk = findViewById(R.id.rv_gambar_detail);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
        // homeProduk.setLayoutManager(new GridLayoutManager(DetailActivityBarang.this,2));
         homeProduk.setLayoutManager(new LinearLayoutManager(DetailActivityBarang.this, LinearLayoutManager.HORIZONTAL,false));
@@ -101,6 +108,14 @@ public class DetailActivityBarang extends AppCompatActivity {
             nota = gson.fromJson(getIntent().getStringExtra(Constant.EXTRA_BARANG), ModelProduk.class);
         }
 
+       /* Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            posisi = bundle.getInt("posisi",0);
+            kodeBarang = bundle.getString(Constant.EXTRA_BARANG);
+           // kodeBarang = bundle.getString("kode");
+        }*/
+
+
         btn_beriTau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,8 +145,8 @@ public class DetailActivityBarang extends AppCompatActivity {
     }
 
     private void InitData() {
-    txt_nama_brg.setText(nota.getItem3());
-    txt_harga.setText(nota.getItem4());
+    //txt_nama_brg.setText(nota.getItem3());
+   // txt_harga.setText(nota.getItem4());
 
         String parameter = String.format(Locale.getDefault(), "?kodebrg=%s", nota.getItem1());
         new APIvolley(DetailActivityBarang.this, new JSONObject(), "GET", Constant.URL_DETAIL_PRODUK_NORMAL+parameter,
@@ -175,7 +190,10 @@ public class DetailActivityBarang extends AppCompatActivity {
                             for (int i=0; i < meal.length(); i++){
                                 JSONObject objt = meal.getJSONObject(i);
                                 //input data
-                                viewproduk.add(new ModelProduk(objt.getString("img_url")));
+                                viewproduk.add(new ModelProduk(
+                                        objt.getString("img_url")
+                                        ,Idbrg
+                                ));
                                 //Picasso.get().load(nota.getItem2()).into(img_gambarProduk);
                                 //Picasso.get().load(objt.getString("img_url")).into(img_gambarProduk);
 
@@ -188,6 +206,7 @@ public class DetailActivityBarang extends AppCompatActivity {
                         }
                         // Refresh Adapter
                         adepterproduk.notifyDataSetChanged();
+                        homeProduk.getLayoutManager().scrollToPosition(posisi);
                     }
 
                     @Override
@@ -248,7 +267,6 @@ public class DetailActivityBarang extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-
                         dialog.show();
                     }
 
@@ -263,8 +281,21 @@ public class DetailActivityBarang extends AppCompatActivity {
 
             }
         });
+    }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //Mendevinisikan data yang didapat dari  ActivityZoomImage
+        //Jika berhasil set Posisi yg diupdate dari ActivityZoomImage
+        if (requestCode == LAUNCH_SECOND_ACTIVITY) {
+            if(resultCode == Activity.RESULT_OK){
+                posisi = data.getIntExtra("posisi", 0);
+                homeProduk.getLayoutManager().scrollToPosition(posisi);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+            }
+        }
     }
 
 }
