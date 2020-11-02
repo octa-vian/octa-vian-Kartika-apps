@@ -1,11 +1,13 @@
 package co.id.gmedia.octavian.kartikaapps.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Notification;
 import android.content.Intent;
@@ -83,11 +85,14 @@ public class ActivityPesanan extends AppCompatActivity {
     private String isiSatuanBesar = "";
     private boolean firstLoad = false;
     private RelativeLayout rv_wtf;
+    private RecyclerView homeProduk;
+    private int LAUNCH_SECOND_ACTIVITY = 1;
 
     int jmlx =1;
     int disc =0;
     private Timer timerHarga;
     private String IdPromo="";
+    private int posisi=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +141,7 @@ public class ActivityPesanan extends AppCompatActivity {
         });
 
 
-        RecyclerView homeProduk = findViewById(R.id.rv_gambar_detail);
+        homeProduk = findViewById(R.id.rv_gambar_detail);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
         homeProduk.setLayoutManager(new LinearLayoutManager(ActivityPesanan.this, LinearLayoutManager.HORIZONTAL,false));
         adepterproduk = new TemplateAdaptorProdukDetail(ActivityPesanan.this, viewproduk) ;
@@ -557,7 +562,10 @@ public class ActivityPesanan extends AppCompatActivity {
                                 for (int i=0; i < meal.length(); i++){
                                     JSONObject objt = meal.getJSONObject(i);
                                     //input data
-                                    viewproduk.add(new ModelProduk(objt.getString("img_url")));
+                                    viewproduk.add(new ModelProduk(
+                                            objt.getString("img_url")
+                                            ,Idbrg
+                                    ));
                                     //Picasso.get().load(nota.getItem2()).into(img_gambarProduk);
                                     //Picasso.get().load(objt.getString("img_url")).into(img_gambarProduk);
                                 }
@@ -774,5 +782,18 @@ public class ActivityPesanan extends AppCompatActivity {
                 });
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //Mendevinisikan data yang didapat dari  ActivityZoomImage
+        //Jika berhasil set Posisi yg diupdate dari ActivityZoomImage
+        if (requestCode == LAUNCH_SECOND_ACTIVITY) {
+            if(resultCode == Activity.RESULT_OK){
+                posisi = data.getIntExtra("posisi", 0);
+                homeProduk.getLayoutManager().scrollToPosition(posisi);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+            }
+        }
+    }
 }
