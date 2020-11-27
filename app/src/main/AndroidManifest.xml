@@ -21,6 +21,10 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <activity
+            android:name=".ActivityListDetailHotProduk"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity android:name=".activity.ActivityChat2" />
         <activity android:name=".activity.ImageZoom.ActivityZoomImage"
                 android:theme="@style/AppTheme.NoActionBar"/>

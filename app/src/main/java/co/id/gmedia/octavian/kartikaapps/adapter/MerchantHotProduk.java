@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import co.id.gmedia.octavian.kartikaapps.ActivityListDetailHotProduk;
 import co.id.gmedia.octavian.kartikaapps.R;
 import co.id.gmedia.octavian.kartikaapps.activity.ActivityListDetailProduk;
 import co.id.gmedia.octavian.kartikaapps.activity.DetailActivityBarang;
@@ -107,7 +108,7 @@ public class MerchantHotProduk extends RecyclerView.Adapter<RecyclerView.ViewHol
             head.LihatSemua.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityListDetailProduk.class);
+                    Intent intent = new Intent(activity, ActivityListDetailHotProduk.class);
                     activity.startActivity(intent);
                 }
             });

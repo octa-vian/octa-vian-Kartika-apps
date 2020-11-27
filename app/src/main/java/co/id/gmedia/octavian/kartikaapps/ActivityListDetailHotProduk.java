@@ -1,4 +1,4 @@
-package co.id.gmedia.octavian.kartikaapps.activity;
+package co.id.gmedia.octavian.kartikaapps;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -38,9 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import co.id.gmedia.octavian.kartikaapps.MainActivity;
-import co.id.gmedia.octavian.kartikaapps.R;
-import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProduk;
+import co.id.gmedia.octavian.kartikaapps.activity.ActivityJump;
 import co.id.gmedia.octavian.kartikaapps.adapter.TemplateAdaptorProdukAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelOneForAll;
 import co.id.gmedia.octavian.kartikaapps.model.ModelProduk;
@@ -48,7 +46,7 @@ import co.id.gmedia.octavian.kartikaapps.util.APIvolley;
 import co.id.gmedia.octavian.kartikaapps.util.Constant;
 import co.id.gmedia.octavian.kartikaapps.util.LoadMoreScrollListener;
 
-public class ActivityListDetailProduk extends AppCompatActivity {
+public class ActivityListDetailHotProduk extends AppCompatActivity {
 
     private List<ModelProduk> viewproduk = new ArrayList<>();
     private TemplateAdaptorProdukAll adepterproduk;
@@ -79,12 +77,10 @@ public class ActivityListDetailProduk extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_list_detail_produk_no_title);
 
-        ActivityJump.positon=0;
-
         RecyclerView homeProduk = findViewById(R.id.rv_list_detail_produk);
         homeProduk.setItemAnimator(new DefaultItemAnimator());
-        homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailProduk.this, 2));
-        adepterproduk = new TemplateAdaptorProdukAll(ActivityListDetailProduk.this, viewproduk);
+        homeProduk.setLayoutManager(new GridLayoutManager(ActivityListDetailHotProduk.this, 2));
+        adepterproduk = new TemplateAdaptorProdukAll(ActivityListDetailHotProduk.this, viewproduk);
         homeProduk.setAdapter(adepterproduk);
         loadMoreScrollListener = new LoadMoreScrollListener() {
             @Override
@@ -150,7 +146,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
         img_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(ActivityListDetailProduk.this);
+                final Dialog dialog = new Dialog(ActivityListDetailHotProduk.this);
                 dialog.setContentView(R.layout.popup_filter);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 final RadioButton btn_terlaris, btn_termahal, btn_termurah, btn_tersedia, btn_preorder;
@@ -226,7 +222,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
             }
         });
 
-        LoadProduk(true);
+        LoadHotProduk(true);
         //LoadProduk(true);
     }
 
@@ -245,7 +241,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
             loadMoreScrollListener.initLoad();
         }
         String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=%s&stock_status=%s", loadMoreScrollListener.getLoaded(), 20, search, Filter, Status);
-        new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK + parameter,
+        new APIvolley(ActivityListDetailHotProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK + parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
@@ -293,7 +289,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             loadMoreScrollListener.finishLoad(0);
-                            Toast.makeText(ActivityListDetailProduk.this, "Terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityListDetailHotProduk.this, "Terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -320,7 +316,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
             loadMoreScrollListener.initLoad();
         }
         String parameter = String.format(Locale.getDefault(), "?start=%d&limit=%d&keyword=%s&sort_by=terlaris", loadMoreScrollListener.getLoaded(), 20, search);
-        new APIvolley(ActivityListDetailProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK + parameter,
+        new APIvolley(ActivityListDetailHotProduk.this, new JSONObject(), "GET", Constant.URL_HOT_PRODUK + parameter,
                 new APIvolley.VolleyCallback() {
                     @Override
                     public void onSuccess(String result) {
@@ -353,7 +349,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             loadMoreScrollListener.finishLoad(0);
-                            Toast.makeText(ActivityListDetailProduk.this, "terjadi kesalahan ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityListDetailHotProduk.this, "terjadi kesalahan ", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, e.getMessage());
                             e.printStackTrace();
                         }
@@ -375,7 +371,7 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ActivityListDetailProduk.this, MainActivity.class);
+        Intent intent = new Intent(ActivityListDetailHotProduk.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         super.onBackPressed();
