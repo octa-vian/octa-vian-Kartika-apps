@@ -398,7 +398,6 @@ public class ActivityPesanan extends AppCompatActivity {
 
                         String keterangan = object.getJSONObject("response").getString("keterangan");
                         txt_keterangan.setText(keterangan);
-                        adapterSP.notifyDataSetChanged();
                         InitTotal();
 
                     } else {
@@ -408,6 +407,7 @@ public class ActivityPesanan extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                adapterSP.notifyDataSetChanged();
                 TotalHitungDIskon();
             }
 

@@ -278,16 +278,6 @@ public class ActivityListDetailProduk extends AppCompatActivity {
 
                             }
 
-
-                           /* {
-                                "img_url": "http://gmedia.bz/kartikars/assets/img/barang/logo/comingsoon.png",
-                                    "kodebrg": "003551",
-                                    "namabrg": "MUG LISTRIK STAINLES 13CM Q2",
-                                    "harga": "Rp 3.000",
-                                    "stok": "Tersedia",
-                                    "flag_promo": "1",
-                                    "harga_asli": "Rp 37.636"
-                            }*/
                             loadMoreScrollListener.finishLoad(meal.length());
                             adepterproduk.notifyDataSetChanged();
 

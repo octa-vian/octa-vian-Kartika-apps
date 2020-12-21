@@ -45,7 +45,7 @@ public class DetailActivityBarang extends AppCompatActivity {
 
     private ModelProduk nota;
     private ImageView img_gambar,img_gambarProduk;
-    private TextView txt_nama_brg, txt_harga, txt_status, txt_deskripsi, harga_promo;
+    private TextView txt_nama_brg, txt_harga, txt_status, txt_deskripsi, harga_promo, txt_ket;
     private String Idbrg= "", IdPromo="";
     private List<ModelProduk> viewproduk = new ArrayList<>();
     private TemplateAdaptorProdukDetail adepterproduk;
@@ -95,6 +95,7 @@ public class DetailActivityBarang extends AppCompatActivity {
         harga_promo = findViewById(R.id.harga_promo);
         watermark_layout = findViewById(R.id.rv_watrmark);
         btn_beriTau = findViewById(R.id.btn_beritahuSaya);
+        txt_ket = findViewById(R.id.txt_ket);
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +164,7 @@ public class DetailActivityBarang extends AppCompatActivity {
                             txt_harga.setText(obj.getString("harga"));
                             txt_deskripsi.setText(obj.getString("deskripsi"));
                             txt_status.setText(obj.getString("stok"));
+                            txt_ket.setText(obj.getString("keterangan"));
                             String Status_stok = obj.getString("status_stok_promo");
                             String flag = obj.getString("flag_promo");
 

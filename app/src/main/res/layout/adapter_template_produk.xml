@@ -107,7 +107,7 @@
             android:gravity="left"
             android:text=""
             android:layout_marginBottom="@dimen/size_10dp"
-            android:textColor="@color/grey"
+            android:textColor="@color/grey_dark"
             android:textSize="10sp" />
 
     </LinearLayout>
@@ -121,6 +121,7 @@
         android:background="@drawable/border_corner_grey_light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

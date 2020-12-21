@@ -50,17 +50,17 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
-                    android:layout_width="45dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/gambar_piutang"
-                    app:civ_border_color="#fff"
-                    app:civ_border_width="2dp"
+                    android:layout_width="32dp"
+                    android:layout_height="26dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="18sp"
-                    android:layout_marginLeft="38dp"
+                    android:layout_marginLeft="31dp"
                     android:layout_marginTop="@dimen/size_20dp"
                     android:layout_marginEnd="50dp"
-                    android:layout_centerHorizontal="true" />
+                    android:src="@drawable/gambar_piutang"
+                    app:civ_border_color="#fff"
+                    app:civ_border_width="2dp" />
 
                 <TextView
                     android:layout_width="100dp"

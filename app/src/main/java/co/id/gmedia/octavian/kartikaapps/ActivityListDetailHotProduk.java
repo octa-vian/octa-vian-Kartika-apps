@@ -61,7 +61,7 @@ public class ActivityListDetailHotProduk extends AppCompatActivity {
     private String termahal = "termahal";
     private String terlaris = "terlaris";
     private String priorder = "preorder";
-    private String available = "available ";
+    private String available = "available";
     private String Status = "";
     private String Filter = "";
     private ProgressBar loading;
