@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private static String kondisi="";
     public static Activity activity;
     private static ItemValidation iv = new ItemValidation();
+
     //private Runnable refresh;
 
     @Override

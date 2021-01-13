@@ -115,7 +115,7 @@
                         android:textStyle="bold"
                         android:layout_margin="@dimen/size_4dp"
                         android:textSize="14sp"
-                        android:text="Preorder"/>
+                        android:text="Dipesankan"/>
                 </RadioGroup>
 
             </LinearLayout>

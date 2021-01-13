@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -29,6 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -281,8 +283,117 @@ public class FragmentHome extends Fragment {
                 }
             });*/
 
-
             v.findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Membuat Instance/Objek dari PopupMenu
+                    PopupMenu popupMenu = new PopupMenu(getActivity(), v);
+                    popupMenu.getMenuInflater().inflate(R.menu.menu_item, popupMenu.getMenu());
+
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            switch (item.getItemId()) {
+                                case R.id.menu_pass:
+                                    final Dialog dialog = new Dialog(context);
+                                    dialog.setContentView(R.layout.popup_ganti_pass);
+                                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    ImageView img_exit;
+                                    img_exit = dialog.findViewById(R.id.exit);
+                                    old_pass = dialog.findViewById(R.id.txt_pass_lama);
+                                    new_pass = dialog.findViewById(R.id.txt_pass);
+                                    re_pass = dialog.findViewById(R.id.txt_ulang_pass);
+
+                                    img_exit.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    dialog.findViewById(R.id.btn_simpan).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            iniFormRegis();
+                                        }
+                                    });
+                                    dialog.show();
+                                    break;
+
+                                case R.id.menu_pin:
+                                    final Dialog dl = new Dialog(context);
+                                    dl.setContentView(R.layout.popup_ganti_pin);
+                                    dl.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    ImageView exit;
+                                    img_exit = dl.findViewById(R.id.exit);
+                                    old_pin = dl.findViewById(R.id.txt_pin_lama);
+                                    new_pin  = dl.findViewById(R.id.txt_pin_baru);
+                                    re_pin = dl.findViewById(R.id.txt_ulang_pin);
+
+                                    img_exit.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dl.dismiss();
+                                        }
+                                    });
+
+                                    dl.findViewById(R.id.btn_simpan).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            initPin();
+                                        }
+                                    });
+
+                                    dl.show();
+                                    break;
+
+                                case R.id.menu_ressetPin:
+                                    final Dialog dlog = new Dialog(context);
+                                    dlog.setContentView(R.layout.popup_reset_pin);
+                                    dlog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    ImageView exit_wae;
+                                    exit_wae = dlog.findViewById(R.id.exit);
+                                    txt_phone = dlog.findViewById(R.id.txt_notelp);
+
+                                    exit_wae.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dlog.dismiss();
+                                        }
+                                    });
+
+                                    dlog.findViewById(R.id.btn_proses).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            InitOtp();
+                                            dlog.dismiss();
+                                        }
+                                    });
+                                    dlog.show();
+                                    break;
+
+                                case R.id.menu_logout:
+                                    AppSharedPreferences.Logout(context);
+                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    context.startActivity(intent);
+                                    break;
+
+                                default:
+                                    break;
+
+                            }
+
+                            return true;
+                        }
+                    });
+                    popupMenu.show();
+                }
+            });
+
+
+           /* v.findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final Dialog dialog = new Dialog(context, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
@@ -402,7 +513,7 @@ public class FragmentHome extends Fragment {
 
                     dialog.show();
                 }
-            });
+            });*/
 
             /*v.findViewById(R.id.pesan).setOnClickListener(new View.OnClickListener() {
                 @Override
