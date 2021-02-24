@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -75,19 +76,18 @@ public class ActivityDetailPiutang extends AppCompatActivity {
     }
 
     private void LoadData() {
-        String parameter = String.format(Locale.getDefault(), "?nobukti=%s", piutang.getItem1());
+        String parameter = String.format(Locale.getDefault(), "?nobukti=GBN2104373");
         new APIvolley(ActivityDetailPiutang.this, new JSONObject(), "GET", Constant.URL_GET_DETAIL_PIUTANG+parameter,
                 new APIvolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
-
+                listItem.clear();
                 try {
-                    listItem.clear();
                     JSONObject objec = new JSONObject(result);
                     String message = objec.getJSONObject("metadata").getString("message");
                     String status = objec.getJSONObject("metadata").getString("status");
 
-                    if (status.equals("200")){
+                    if (Integer.parseInt(status) == 200){
                        JSONObject ob =  objec.getJSONObject("response").getJSONObject("header");
                         txt_noBukti.setText(ob.getString("nobukti"));
                         txt_total.setText(ob.getString("nominal"));
@@ -98,7 +98,7 @@ public class ActivityDetailPiutang extends AppCompatActivity {
                         txt_sisa_piutang.setText(ob.getString("sisa_piutang"));
 
                         JSONArray objt = objec.getJSONObject("response").getJSONArray("detail");
-                        for (int i =0; i < objec.length(); i++){
+                        for (int i =0; i < objt.length(); i++){
                             JSONObject data = objt.getJSONObject(i);
                             listItem.add(new ModelProduk(
                                     data.getString("kodebrg")
@@ -110,20 +110,23 @@ public class ActivityDetailPiutang extends AppCompatActivity {
                                     ,data.getString("diskon")
                             ));
                         }
-
+                        Log.d("jum", String.valueOf(objec.length()));
+                        //adapterPiutang.notifyDataSetChanged();
                     }else{
                         Toast.makeText(ActivityDetailPiutang.this, message, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
+                    adapterPiutang.notifyDataSetChanged();
                     e.printStackTrace();
                 }
+
                 adapterPiutang.notifyDataSetChanged();
+
             }
 
             @Override
             public void onError(String result) {
                 Toast.makeText(ActivityDetailPiutang.this, "Kesalahan Jaringan", Toast.LENGTH_LONG).show();
-
             }
         });
     }

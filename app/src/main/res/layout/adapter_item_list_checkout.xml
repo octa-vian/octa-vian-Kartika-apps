@@ -185,7 +185,7 @@
                 android:layout_marginTop="@dimen/size_4dp"
                 android:layout_marginRight="@dimen/size_4dp"
                 android:layout_marginLeft="@dimen/size_4dp"
-                android:text="Total Harga Diskon"
+                android:text="Total Harga Setelah Diskon"
                 android:textSize="@dimen/size_12dp" />
 
             <TextView

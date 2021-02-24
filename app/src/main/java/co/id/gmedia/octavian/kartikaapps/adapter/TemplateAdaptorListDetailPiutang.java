@@ -1,6 +1,7 @@
 package co.id.gmedia.octavian.kartikaapps.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +63,11 @@ public class TemplateAdaptorListDetailPiutang extends RecyclerView.Adapter<Templ
 
     @Override
     public int getItemCount() {
+        Log.d("jumlahItem", String.valueOf(listItem.size()));
         return listItem.size();
+
     }
+
 
     public static class TemplateViewHolder extends RecyclerView.ViewHolder{
 

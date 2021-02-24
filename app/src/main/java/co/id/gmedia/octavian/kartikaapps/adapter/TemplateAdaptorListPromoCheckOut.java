@@ -44,8 +44,8 @@ public class TemplateAdaptorListPromoCheckOut extends RecyclerView.Adapter<Templ
         templateViewHolder.txt_nama.setText(item.getItem3());
         templateViewHolder.txt_jumlah.setText(item.getItem4());
         templateViewHolder.harga.setText(item.getItem6());
-        templateViewHolder.total.setText(item.getItem9());
-        templateViewHolder.total_disc.setText(item.getItem8());
+        templateViewHolder.total.setText(item.getItem8());
+        templateViewHolder.total_disc.setText(item.getItem9());
         templateViewHolder.diskon.setText(item.getItem10());
         templateViewHolder.txt_noBuk.setText(item.getItem1());
 
