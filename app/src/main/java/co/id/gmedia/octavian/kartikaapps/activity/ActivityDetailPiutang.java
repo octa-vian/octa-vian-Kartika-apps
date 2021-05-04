@@ -76,7 +76,7 @@ public class ActivityDetailPiutang extends AppCompatActivity {
     }
 
     private void LoadData() {
-        String parameter = String.format(Locale.getDefault(), "?nobukti=GBN2104373");
+        String parameter = String.format(Locale.getDefault(), "?nobukti=%s",piutang.getItem1());
         new APIvolley(ActivityDetailPiutang.this, new JSONObject(), "GET", Constant.URL_GET_DETAIL_PIUTANG+parameter,
                 new APIvolley.VolleyCallback() {
             @Override
